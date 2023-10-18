@@ -2,30 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Aboreto&family=Bitter:wght@572&family=DM+Sans&family=Fraunces:opsz@9..144&family=Kanit:wght@500&family=Lato&family=Poppins:wght@600&family=Raleway&family=Roboto&family=Rokkitt&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Manrope&family=Plus+Jakarta+Sans&family=Poppins&family=Raleway&family=Work+Sans&display=swap');
 
 html {
-  background-color: rgb(38, 41, 45);
-}
-
-/* Navbar */
-.nav-item .inner {
-  color: white;
-  font-size: 1rem;
-  position: relative;
-}
-
-.nav-item:hover .inner::after {
-  content: "";
-  height: 1px;
-  background-color: #ff3c78;
-  position: absolute;
-  width: 0%;
-  left: 0;
-  bottom: -10px;
-  transition: 0.4s ease-in-out;
-}
-
-.nav-item .inner:hover::after {
-  width: 100%;
+  background-color: #2A2A2A;
+  font-family: 'IBM Plex Mono', monospace;
 }
