@@ -4,6 +4,7 @@ import ActiveLeftArrow from "../../assets/activelefticon.svg";
 import InActiveLeftArrow from "../../assets/inactivelefticon.svg";
 import illustration from "../../assets/illustration.png";
 import cardImg from "../../assets/CardImg.png";
+import Ufo from "../../assets/Ufo.svg";
 import Image from "next/image";
 
 const LandingSection = () => {
@@ -16,23 +17,41 @@ const LandingSection = () => {
     setCurBtn(2);
   };
 
-    const announcementData = [
-      {
-        img: cardImg,
-        head: "Module Name ",
-        desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
-      },
-      {
-        img: cardImg,
-        head: "Module Name",
-        desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
-      },
-      {
-        img: cardImg,
-        head: "Module Name",
-        desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
-      },
-    ];
+  const whySolidityData = [
+    {
+      img: Ufo,
+      head: "Learn anything ",
+      desc: "Whether you want to develop as a professional or discover a new hobby, there's an online course for that. You can even take your learning further with online micro credentials and degrees.",
+    },
+    {
+      img: Ufo,
+      head: "Learn anything",
+      desc: "Whether you want to develop as a professional or discover a new hobby, there's an online course for that. You can even take your learning further with online micro credentials and degrees.",
+    },
+    {
+      img: Ufo,
+      head: "Learn anything",
+      desc: "Whether you want to develop as a professional or discover a new hobby, there's an online course for that. You can even take your learning further with online micro credentials and degrees.",
+    },
+  ];
+
+  const announcementData = [
+    {
+      img: cardImg,
+      head: "Module Name ",
+      desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
+    },
+    {
+      img: cardImg,
+      head: "Module Name",
+      desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
+    },
+    {
+      img: cardImg,
+      head: "Module Name",
+      desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
+    },
+  ];
 
   const moduleCard = (
     <div className='flex justify-evenly rounded-full mx-8 text-white'>
@@ -49,12 +68,35 @@ const LandingSection = () => {
             </div>
             <div className='mb-2'>
               <Button className='w-full bg-white'>
-                <div className='text-center text-black text-xl'>Start Module</div>
+                <div className='text-center text-black text-xl'>
+                  Start Module
+                </div>
               </Button>
             </div>
           </div>
         </div>
       ))}
+    </div>
+  );
+
+  const whySoliditySection = (
+    <div className='bg-[#0000005C] text-white py-6 px-4 rounded-2xl'>
+      <div className='text-center text-4xl mb-10'>Why Solidity for Solana?</div>
+      <div className="flex justify-between">
+        {whySolidityData.map((data, idx) => (
+          <div className='w-[30%]' key={idx}>
+            <div className='mb-5'>
+              <Ufo />
+            </div>
+            <div className='mb-4'>{data.head}</div>
+            <div className='text-gray-400'>
+              Whether you want to develop as a professional or discover a new
+              hobby, there's an online course for that. You can even take your
+              learning further with online micro credentials and degrees.
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 
@@ -120,7 +162,8 @@ const LandingSection = () => {
       </div>
 
       {/*  */}
-      <div className="mt-20">{moduleCard}</div>
+      <div className='mt-20'>{moduleCard}</div>
+      <div className='mt-20'>{whySoliditySection}</div>
     </div>
   );
 };
