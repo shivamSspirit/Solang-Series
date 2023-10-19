@@ -6,6 +6,7 @@ import illustration from "../../assets/illustration.png";
 import cardImg from "../../assets/CardImg.png";
 import Ufo from "../../assets/Ufo.svg";
 import Image from "next/image";
+import FooterComp from "../../shared/Footer";
 
 const LandingSection = () => {
   const [curBtn, setCurBtn] = useState(0);
@@ -164,6 +165,7 @@ const LandingSection = () => {
       {/*  */}
       <div className='mt-20'>{moduleCard}</div>
       <div className='mt-20'>{whySoliditySection}</div>
+      <div className='mt-20'><FooterComp /></div>
     </div>
   );
 };
