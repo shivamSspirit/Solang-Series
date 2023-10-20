@@ -1,11 +1,13 @@
 import React from "react";
 import { Navbar } from "flowbite-react";
 import SearchIcon from "@mui/icons-material/Search";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 function AppBar() {
   return (
     <Navbar
-      className='rounded-lg text-white bg-[#201F1F] shadow-lg shadow-black p-4'
+      className='rounded-lg text-white bg-[#201F1F] shadow-lg shadow-black p-4 '
       style={{ border: ".1px solid grey" }}
       fluid={true}
       rounded={true}
@@ -26,10 +28,13 @@ function AppBar() {
         <a href='/' className='hover:text-gray-300 text-lg'>
           Course content
         </a>
-        <a href='/' className='hover:text-gray-300 text-lg'>
+        <Link
+          href='/comingSoon/ComingSoon'
+          className='hover:text-gray-300 text-lg'
+        >
           FAQs
-        </a>
-        <SearchIcon className="h-8"/>
+        </Link>
+        <SearchIcon className='h-8' />
       </Navbar.Collapse>
     </Navbar>
   );

@@ -11,7 +11,7 @@ const FooterComp = () => {
   return (
     <Footer
       container
-      className='bg-[#0000005C] border border-[rgba(255, 255, 255, 0.36)] rounded-2xl text-white'
+      className='bg-[#0000005C] border border-[rgba(255, 255, 255, 0.36)] mb-5 rounded-2xl text-white'
     >
       <div className='w-1/3'>
         <div className='mb-4 text-2xl'>Solidity for Solana</div>

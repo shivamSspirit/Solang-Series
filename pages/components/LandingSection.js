@@ -83,7 +83,7 @@ const LandingSection = () => {
   const whySoliditySection = (
     <div className='bg-[#0000005C] text-white py-6 px-4 rounded-2xl'>
       <div className='text-center text-4xl mb-10'>Why Solidity for Solana?</div>
-      <div className="flex justify-between">
+      <div className='flex justify-between'>
         {whySolidityData.map((data, idx) => (
           <div className='w-[30%]' key={idx}>
             <div className='mb-5'>
@@ -102,7 +102,7 @@ const LandingSection = () => {
   );
 
   return (
-    <div className='mt-20'>
+    <div className='mt-10'>
       <div>
         <div className='flex justify-between '>
           <div className='w-1/2 text-white'>
@@ -165,7 +165,6 @@ const LandingSection = () => {
       {/*  */}
       <div className='mt-20'>{moduleCard}</div>
       <div className='mt-20'>{whySoliditySection}</div>
-      <div className='mt-20'><FooterComp /></div>
     </div>
   );
 };

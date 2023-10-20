@@ -12,7 +12,6 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <div className='px-16 py-10'>
-        <AppBar />
         <LandingSection />
       </div>
     </>
