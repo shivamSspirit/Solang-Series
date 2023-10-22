@@ -1,5 +1,4 @@
 import React, { ReactNode } from "react";
-
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -11,6 +10,7 @@ const NextBreadcrumb = ({
   capitalizeLinks,
 }) => {
   const paths = usePathname();
+
   const trimmedPath = paths.split("/").slice(2);
   trimmedPath.unshift("Module 1");
   const pathNames = trimmedPath.filter((path) => path);

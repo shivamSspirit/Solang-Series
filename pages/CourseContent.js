@@ -75,10 +75,15 @@ const CourseContent = () => {
                 </div>
                 <div className='mb-2'>
                   <Button
-                    className='w-full bg-white'
-                    href={`/CourseContent/Course${index + 1}`}
-                  >
-                    <div className='text-center font-bold text-black text-xl'>
+                   className='w-full bg-white'>
+                    <div
+                      onClick={() => {
+                        router.push({
+                          pathname: `/CourseContent/Course${index + 1}`,
+                        });
+                      }}
+                      className='text-center font-bold text-black text-xl'
+                    >
                       Start Module
                     </div>
                   </Button>

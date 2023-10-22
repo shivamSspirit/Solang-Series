@@ -3,8 +3,14 @@ import illustration from "../../assets/illustration.png";
 import Image from "next/image";
 import { Button } from "flowbite-react";
 import NextBreadcrumb from "../components/NextBreadcrumb";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
-const Course1 = () => {
+const Course2 = () => {
+  const router = useRouter();
+  const currentRoute = router.pathname;
+  const nextPg = Number(currentRoute[currentRoute.length - 1]) + 1;
+
   return (
     <div className='my-20'>
       <div className='flex justify-between '>
@@ -24,7 +30,20 @@ const Course1 = () => {
             decentralized applications. Join us on a journey of learning that
             empowers you to shape the future of blockchain technology
           </div>
-          <div className='mt-10'></div>
+          <div className='mt-10'>
+            <div>
+              <div id='breadcrumbs-one' className='mb-3'>
+                <li>
+                  <Link href=''>a. General info</Link>
+                </li>
+              </div>
+              <div id='breadcrumbs-one'>
+                <li>
+                  <Link href=''>b. Fundamentals fo Solidity</Link>
+                </li>
+              </div>
+            </div>
+          </div>
         </div>
         <div className='w-1/2 '>
           <div className='flex justify-end'>
@@ -36,8 +55,17 @@ const Course1 = () => {
           </div>
         </div>
       </div>
+      <Link
+        className='mt-20 flex justify-center text-white'
+        href={`/CourseContent/Course${nextPg}`}
+      >
+        <div className='flex flex-col'>
+          <span>Part {nextPg}</span>
+          <span>Next Part</span>
+        </div>
+      </Link>
     </div>
   );
 };
 
-export default Course1;
+export default Course2;

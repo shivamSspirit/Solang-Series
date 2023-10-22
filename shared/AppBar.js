@@ -21,22 +21,39 @@ function AppBar() {
         </span>
       </Navbar.Brand>
       <Navbar.Toggle />
-      <Navbar.Collapse className="text-[gray]">
-        <Link href='/' className={`hover:text-gray-300 text-lg ${currentRoute === "/" ? "text-white" : ""}`}>
+      <Navbar.Collapse className='text-[gray]'>
+        <a
+          onClick={() => router.push(`/`)}
+          className={`cursor-pointer hover:text-gray-300 text-lg ${
+            currentRoute === "/" ? "text-white" : ""
+          }`}
+        >
           Home
-        </Link>
-        <Link href='/About' className={`hover:text-gray-300 text-lg ${currentRoute === "/About" ? "text-white" : ""}`}>
+        </a>
+        <a
+          onClick={() => router.push(`About`)}
+          className={`cursor-pointer hover:text-gray-300 text-lg ${
+            currentRoute === "/About" ? "text-white" : ""
+          }`}
+        >
           About
-        </Link>
-        <Link href='/CourseContent' className={`hover:text-gray-300 text-lg ${currentRoute === "/CourseContent" ? "text-white" : ""}`}>
+        </a>
+        <a
+          onClick={() => router.push(`CourseContent`)}
+          className={`cursor-pointer hover:text-gray-300 text-lg ${
+            currentRoute === "/CourseContent" ? "text-white" : ""
+          }`}
+        >
           Course content
-        </Link>
-        <Link
-          href='/comingSoon/ComingSoon'
-          className={`hover:text-gray-300 text-lg ${currentRoute === "/FAQs" ? "text-white" : ""}`}
+        </a>
+        <a
+          onClick={() => router.push(`About`)}
+          className={`cursor-pointer hover:text-gray-300 text-lg ${
+            currentRoute === "/FAQs" ? "text-white" : ""
+          }`}
         >
           FAQs
-        </Link>
+        </a>
         <SearchIcon className='h-8' />
       </Navbar.Collapse>
     </Navbar>
