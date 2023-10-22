@@ -1,10 +1,15 @@
 import React from "react";
 import { Navbar } from "flowbite-react";
 import SearchIcon from "@mui/icons-material/Search";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
 function AppBar() {
+    const router = useRouter();
+    const currentRoute = router.pathname;
+
+    console.log(currentRoute + " Path");
+
   return (
     <Navbar
       className='rounded-lg text-white bg-[#201F1F] shadow-lg shadow-black p-4 '
@@ -18,19 +23,19 @@ function AppBar() {
         </span>
       </Navbar.Brand>
       <Navbar.Toggle />
-      <Navbar.Collapse>
-        <a href='/' className='hover:text-gray-300 text-lg'>
+      <Navbar.Collapse className="text-[gray]">
+        <Link href='/' className={`hover:text-gray-300 text-lg ${currentRoute === "/" ? "text-white" : ""}`}>
           Home
-        </a>
-        <a href='/' className='hover:text-gray-300 text-lg'>
+        </Link>
+        <Link href='/About' className={`hover:text-gray-300 text-lg ${currentRoute === "/About" ? "text-white" : ""}`}>
           About
-        </a>
-        <a href='/' className='hover:text-gray-300 text-lg'>
+        </Link>
+        <Link href='/CourseContent' className={`hover:text-gray-300 text-lg ${currentRoute === "/CourseContent" ? "text-white" : ""}`}>
           Course content
-        </a>
+        </Link>
         <Link
           href='/comingSoon/ComingSoon'
-          className='hover:text-gray-300 text-lg'
+          className={`hover:text-gray-300 text-lg ${currentRoute === "/FAQs" ? "text-white" : ""}`}
         >
           FAQs
         </Link>

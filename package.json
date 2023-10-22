@@ -26,7 +26,8 @@
     "react-animated-cursor": "^2.5.2",
     "react-dom": "18.2.0",
     "react-router-dom": "^6.17.0",
-    "react-select-search": "^4.1.7"
+    "react-select-search": "^4.1.7",
+    "react-vertical-timeline-component": "^3.6.0"
   },
   "devDependencies": {
     "@types/node": "18.14.6",
