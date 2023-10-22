@@ -47,7 +47,7 @@ const CourseContent = () => {
     },
   ];
 
-    const router = useRouter();
+  const router = useRouter();
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",

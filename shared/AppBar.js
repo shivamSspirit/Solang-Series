@@ -8,8 +8,6 @@ function AppBar() {
     const router = useRouter();
     const currentRoute = router.pathname;
 
-    console.log(currentRoute + " Path");
-
   return (
     <Navbar
       className='rounded-lg text-white bg-[#201F1F] shadow-lg shadow-black p-4 '
