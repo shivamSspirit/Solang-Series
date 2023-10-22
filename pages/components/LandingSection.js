@@ -1,4 +1,4 @@
-import { Button, Card } from "flowbite-react";
+import { Button } from "flowbite-react";
 import { React, useState } from "react";
 import ActiveLeftArrow from "../../assets/activelefticon.svg";
 import InActiveLeftArrow from "../../assets/inactivelefticon.svg";
