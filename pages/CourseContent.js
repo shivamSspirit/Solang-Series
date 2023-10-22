@@ -11,6 +11,7 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { experimentalStyled as styled } from "@mui/material/styles";
+import { useRouter } from "next/router";
 
 const CourseContent = () => {
   const announcementData = [
@@ -46,6 +47,8 @@ const CourseContent = () => {
     },
   ];
 
+    const router = useRouter();
+
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -71,7 +74,10 @@ const CourseContent = () => {
                   <div className='text-[#CECECE] pb-6'>{announcement.desc}</div>
                 </div>
                 <div className='mb-2'>
-                  <Button className='w-full bg-white'>
+                  <Button
+                    className='w-full bg-white'
+                    href={`/CourseContent/Course${index + 1}`}
+                  >
                     <div className='text-center font-bold text-black text-xl'>
                       Start Module
                     </div>
