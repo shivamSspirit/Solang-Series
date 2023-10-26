@@ -1,7 +1,7 @@
 import Head from "next/head";
 import AppBar from "../shared/AppBar";
 import LandingSection from "./components/LandingSection";
-// import ComingSoon from "./comingSoon/ComingSoon";
+import ComingSoon from "./comingSoon/ComingSoon";
 
 export default function Home() {
   return (
@@ -14,8 +14,8 @@ export default function Home() {
         <link href="/dist/output.css" rel="stylesheet"/>
       </Head>
       <div className='px-16 py-10'>
-        <LandingSection />
-        {/* <ComingSoon/> */}
+        <LandingSection /> 
+        {/* <ComingSoon/>  */}
       </div>
     </>
   );
