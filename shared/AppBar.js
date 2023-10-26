@@ -15,7 +15,7 @@ function AppBar() {
       fluid={true}
       rounded={true}
     >
-      <Navbar.Brand href='https://flowbite.com/'>
+      <Navbar.Brand href='/'>
         <span className='self-center whitespace-nowrap text-xl pl-4 font-semibold dark:text-white'>
           Solidity for Solana
         </span>

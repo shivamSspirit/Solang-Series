@@ -81,26 +81,65 @@ const LandingSection = () => {
     </div>
   );
 
-  const whySoliditySection = (
-    <div className='bg-[#0000005C] text-white py-6 px-4 rounded-2xl'>
-      <div className='text-center text-4xl mb-10'>Why Solidity for Solana?</div>
-      <div className='flex justify-between'>
-        {whySolidityData.map((data, idx) => (
-          <div className='w-[30%]' key={idx}>
-            <div className='mb-5'>
-              <Ufo />
-            </div>
-            <div className='mb-4'>{data.head}</div>
-            <div className='text-gray-400'>
-              Whether you want to develop as a professional or discover a new
-              hobby, there's an online course for that. You can even take your
-              learning further with online micro credentials and degrees.
-            </div>
+  const timelineData = [
+    {
+      heading: "2017",
+      content: "Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam."
+    },
+    {
+      heading: "2016",
+      content: "Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam."
+    },
+    {
+      heading: "2015",
+      content: "Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam."
+    },
+    {
+      heading: "2011",
+      content: "Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam."
+    },
+    {
+      heading: "2012",
+      content: "Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam."
+    },
+    {
+      heading: "2007",
+      content: "Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam."
+    },
+  ]
+  const timeLine = (
+    <div className="timeline">
+      {timelineData.map((data, key) => (
+        <div key={key} className="wrap left">
+          <div className="content bg-[#201F1F] text-white">
+            <h2>{data.heading}</h2>
+            <p className="text-[#CECECE]">{data.content}</p>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
+
+  // const whySoliditySection = (
+  //   <div className='bg-[#0000005C] text-white py-6 px-4 rounded-2xl'>
+  //     <div className='text-center text-4xl mb-10'>Why Solidity for Solana?</div>
+  //     <div className='flex justify-between'>
+  //       {whySolidityData.map((data, idx) => (
+  //         <div className='w-[30%]' key={idx}>
+  //           <div className='mb-5'>
+  //             <Ufo />
+  //           </div>
+  //           <div className='mb-4'>{data.head}</div>
+  //           <div className='text-gray-400'>
+  //             Whether you want to develop as a professional or discover a new
+  //             hobby, there's an online course for that. You can even take your
+  //             learning further with online micro credentials and degrees.
+  //           </div>
+  //         </div>
+  //       ))}
+  //     </div>
+  //   </div>
+  // );
 
   return (
     <div className='mt-10'>
@@ -165,8 +204,13 @@ const LandingSection = () => {
 
       {/*  */}
       <div className='mt-20'>{moduleCard}</div>
+      <div className="text-white text-center mt-20">
+        <h1 className="text-4xl">Course Map</h1>
+        <h5 className="text-xl py-4 text-[#CECECE]">The course map lets you gets all <br /> the information for a better learning</h5>
+      </div>
+      <div className='mt-20'>{timeLine}</div>
       {/* <div className='mt-20'>{<CourseMap />}</div> */}
-      <div className='mt-20'>{whySoliditySection}</div>
+      {/* <div className='mt-20'>{whySoliditySection}</div> */}
     </div>
   );
 };

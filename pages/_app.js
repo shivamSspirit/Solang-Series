@@ -1,6 +1,7 @@
 import Head from "next/head";
 import "../styles/globals.css";
 import Layout from "./components/Layout";
+import "../dist/output.css";
 
 export default function App({ Component, pageProps }) {
   return (
