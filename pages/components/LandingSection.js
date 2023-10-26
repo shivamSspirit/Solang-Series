@@ -8,7 +8,7 @@ import Ufo from "../../assets/Ufo.svg";
 import Image from "next/image";
 import FooterComp from "../../shared/Footer";
 import Test from "../test";
-// import Markdown from "react-markdown";
+import Markdown from "react-markdown";
 // import CourseMap from "./CourseMap";
 
 const LandingSection = () => {
