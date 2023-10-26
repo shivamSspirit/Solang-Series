@@ -7,6 +7,8 @@ import cardImg from "../../assets/CardImg.png";
 import Ufo from "../../assets/Ufo.svg";
 import Image from "next/image";
 import FooterComp from "../../shared/Footer";
+import Test from "../test";
+import Markdown from "react-markdown";
 // import CourseMap from "./CourseMap";
 
 const LandingSection = () => {
@@ -147,7 +149,7 @@ const LandingSection = () => {
         <div className='flex justify-between '>
           <div className='w-1/2 text-white'>
             <div className='text-5xl '>
-              Unlocking the Power of Solana with Solidity Smart Contracts
+              <Test /> Unlocking the Power of Solana with Solidity Smart Contracts
             </div>
             <div className='mt-10 text-gray-400'>
               Dive into the world of blockchain development with our Solidity
