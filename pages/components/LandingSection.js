@@ -1,7 +1,7 @@
 import { Button } from "flowbite-react";
 import { React, useState } from "react";
 import ActiveLeftArrow from "../../assets/activelefticon.svg";
-import InActiveLeftArrow from "../../assets/inactiveLefticon.svg";
+import InActiveLeftArrow from "../../assets/inactiveLeftIcon.svg";
 import illustration from "../../assets/illustration.png";
 import cardImg from "../../assets/CardImg.png";
 import Ufo from "../../assets/Ufo.svg";
