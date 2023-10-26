@@ -20,7 +20,7 @@
     "@svgr/webpack": "^8.1.0",
     "@swc/helpers": "^0.4.14",
     "eslint": "^8.52.0",
-    "eslint-config-next": "^13.2.3",
+    "eslint-config-next": "^13.5.6",
     "eslint-plugin-react": "^7.33.2",
     "flowbite": "^1.8.1",
     "flowbite-react": "^0.6.4",

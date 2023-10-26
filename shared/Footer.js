@@ -3,7 +3,7 @@ import Github from "../assets/Github.svg";
 import Instagram from "../assets/Instagram.svg";
 import Facebook from "../assets/Facebook.svg";
 import Discord from "../assets/Discord.svg";
-import TwitterX from "../assets/TwitterX.svg";
+import TwitterX from "../assets/twitterX.svg";
 import CCFooter from "../assets/CCFooter.svg";
 import Image from "next/image";
 
