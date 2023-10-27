@@ -31,7 +31,7 @@ function AppBar() {
           Home
         </a>
         <a
-          onClick={() => router.push(`About`)}
+          onClick={() => router.push(`/About`)}
           className={`cursor-pointer hover:text-gray-300 text-lg ${
             currentRoute === "/About" ? "text-white" : ""
           }`}
@@ -39,7 +39,7 @@ function AppBar() {
           About
         </a>
         <a
-          onClick={() => router.push(`CourseContent`)}
+          onClick={() => router.push(`/CourseContent`)}
           className={`cursor-pointer hover:text-gray-300 text-lg ${
             currentRoute === "/CourseContent" ? "text-white" : ""
           }`}
@@ -47,7 +47,7 @@ function AppBar() {
           Course content
         </a>
         <a
-          onClick={() => router.push(`About`)}
+          onClick={() => router.push(`/About`)}
           className={`cursor-pointer hover:text-gray-300 text-lg ${
             currentRoute === "/FAQs" ? "text-white" : ""
           }`}
