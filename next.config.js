@@ -1,4 +1,7 @@
-module.exports = {
+require('dotenv').config();
+
+
+module.exports ={
   reactStrictMode: true,
   images: {
     domains: ["reqres.in"],
@@ -37,6 +40,18 @@ module.exports = {
   },
 
   // ...other config
+
+ 
+ 
+
+  // Use the CDN in production and localhost for development.
+  assetPrefix: process.env.PRODUCTION_API_URL ? 'https://cdn.solidityonsolana.one' : undefined,
+
+  env: {
+    LOCAL_API_URL: process.env.LOCAL_API_URL,
+    PRODUCTION_API_URL: process.env.PRODUCTION_API_URL,
+  },
+
 };
 
 // const withMDX = require("@next/mdx")({
