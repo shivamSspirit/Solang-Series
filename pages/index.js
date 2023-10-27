@@ -15,7 +15,6 @@ export default function Home() {
       </Head>
       <div className='px-16 py-10'>
         <LandingSection /> 
-        
         {/* <ComingSoon/>  */}
       </div>
     </>
