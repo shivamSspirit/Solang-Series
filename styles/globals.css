@@ -6,6 +6,7 @@
 
 html {
   background-color: #2A2A2A;
+  color: white;
   font-family: 'IBM Plex Mono', monospace;
 }
 
@@ -217,3 +218,6 @@ html {
   }
 }
 
+.bg-gray-50{
+  background-color: #201F1F;
+}

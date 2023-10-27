@@ -8,8 +8,16 @@ import { useRouter } from "next/router";
 
 const Course1 = () => {
   const router = useRouter();
-  const currentRoute = router.pathname;
-  const nextPg = Number(currentRoute[currentRoute.length - 1]) + 1;
+  let currentRoute = router.pathname;
+
+  // Splitting the url to convert in array.
+  currentRoute = currentRoute.split("/");
+  
+  // Extracting the Course1 number, and returning its last index.
+  const nextPg = Number(currentRoute[2][currentRoute[2].length - 1]) + 1;
+
+  console.log(currentRoute[2], " Course1 index.js");
+  console.log(nextPg);
 
   return (
     <div className='my-20'>

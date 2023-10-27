@@ -15,7 +15,7 @@ const NextBreadcrumb = ({
   trimmedPath.unshift("Module 1");
   const pathNames = trimmedPath.filter((path) => path);
 
-  console.log(pathNames);
+  console.log(pathNames, " BreadCrumb");
 
   return (
     <div>

@@ -4,7 +4,7 @@ import FooterComp from "../../shared/Footer";
 import ComingSoon from "../comingSoon/ComingSoon";
 
 const Layout = ({ children }) => {
-  console.log(children?.type?.name);
+  console.log(children?.type?.name, " Layout");
   
   return (
     <>
