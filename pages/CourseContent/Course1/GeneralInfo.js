@@ -66,12 +66,6 @@ const GeneralInfo = () => {
           </div>
         </div>
       </div>
-      <div className='mt-20 flex justify-center text-white'>
-        <div className='flex flex-col'>
-          <span>Part {nextPg}</span>
-          <span>Next Part</span>
-        </div>
-      </div>
     </div>
   );
 };

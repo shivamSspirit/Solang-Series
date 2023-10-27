@@ -1,52 +1,37 @@
-module.exports = {
+const withNextra = require("nextra")({
+  theme: "nextra-theme-docs",
+  themeConfig: "./theme.config.jsx",
+});
+
+module.exports = withNextra({
   reactStrictMode: true,
   images: {
     domains: ["reqres.in"],
   },
   eslint: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
   webpack(config) {
-    // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg")
     );
 
     config.module.rules.push(
-      // Reapply the existing rule, but only for svg imports ending in ?url
       {
         ...fileLoaderRule,
         test: /\.svg$/i,
-        resourceQuery: /url/, // *.svg?url
+        resourceQuery: /url/,
       },
-      // Convert all other *.svg imports to React components
       {
         test: /\.svg$/i,
         issuer: /\.[jt]sx?$/,
-        resourceQuery: { not: /url/ }, // exclude if *.svg?url
+        resourceQuery: { not: /url/ },
         use: ["@svgr/webpack"],
       }
     );
 
-    // Modify the file loader rule to ignore *.svg, since we have it handled now.
     fileLoaderRule.exclude = /\.svg$/i;
 
     return config;
   },
-
-  // ...other config
-};
-
-// const withMDX = require("@next/mdx")({
-//   options: {
-//     remarkPlugins: [],
-//     rehypePlugins: [],
-//   },
-//   extension: /\.(md|mdx)$/,
-// });
-
-// module.exports = withMDX({
-//   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
-// });
+});

@@ -7,7 +7,7 @@ import cardImg from "../../assets/CardImg.png";
 import Ufo from "../../assets/Ufo.svg";
 import Image from "next/image";
 import FooterComp from "../../shared/Footer";
-import Test from "../test";
+import Test from "../test.mdx";
 import Markdown from "react-markdown";
 // import CourseMap from "./CourseMap";
 
