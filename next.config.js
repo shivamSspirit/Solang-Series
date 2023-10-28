@@ -45,7 +45,7 @@ module.exports ={
  
 
   // Use the CDN in production and localhost for development.
-  assetPrefix: process.env.PRODUCTION_API_URL ? 'https://cdn.solidityonsolana.one' : undefined,
+  // assetPrefix: process.env.PRODUCTION_API_URL ? 'https://cdn.solidityonsolana.one' : undefined,
 
   env: {
     LOCAL_API_URL: process.env.LOCAL_API_URL,
