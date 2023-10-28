@@ -52,7 +52,7 @@ const GeneralInfo = () => {
             </div>
             <div>General Info</div>
           </div>
-          <p>
+          <div>
             This course is an introduction to modern web development with
             JavaScript. The main focus is on single-page applications
             implemented with React and supporting them with RESTful and GraphQL
@@ -93,7 +93,7 @@ const GeneralInfo = () => {
               going to start small — and have some fun in the process! In fact,
               I have a nice little project to start you off:
             </p>
-          </p>
+          </div>
         </div>
       </div>
       <div className={`mt-20 flex ${prevPg > 0 ? 'justify-between' : 'justify-end'} text-white`}>
