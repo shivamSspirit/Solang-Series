@@ -14,7 +14,7 @@ export default function Home() {
         {/* <link href="/dist/output.css" rel="stylesheet"/> */}
       </Head>
       <div className='px-16 py-10'>
-        <LandingSection /> 
+      <LandingSection /> 
         {/* <ComingSoon/>  */}
       </div>
     </>

@@ -4,13 +4,12 @@ import Image from "next/image";
 import NextBreadcrumb from "../../components/NextBreadcrumb";
 import { useRouter } from "next/router";
 import SideBar from "../../components/Sidebar";
+import curPageNumber from "../../../shared/pageNumber";
 
 const GeneralInfo = () => {
   const router = useRouter();
-  const currentRoute = router.pathname;
-  const nextPg = Number(currentRoute[0]);
-
-  console.log(currentRoute, " na");
+  console.log(router.pathname, " Pathname");
+  const [prevPg, nextPg] = curPageNumber({pathname: router.pathname});
 
   return (
     <div className='my-12'>
@@ -97,11 +96,19 @@ const GeneralInfo = () => {
           </p>
         </div>
       </div>
-      <div className='mt-20 flex justify-center text-white'>
-        <div className='flex flex-col'>
-          <span>Part {nextPg}</span>
-          <span>Next Part</span>
-        </div>
+      <div className={`mt-20 flex ${prevPg > 0 ? 'justify-between' : 'justify-end'} text-white`}>
+        {prevPg > 0 && (
+          <div className='flex flex-col'>
+            <span>Part {prevPg}</span>
+            <span>Previous Part</span>
+          </div>
+        )}
+        {nextPg < 9 && (
+          <div className='flex flex-col'>
+            <span>Part {nextPg}</span>
+            <span>Next Part</span>
+          </div>
+        )}
       </div>
     </div>
   );

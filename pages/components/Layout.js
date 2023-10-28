@@ -2,6 +2,7 @@ import React, { PropsWithChildren } from "react";
 import Navbar from "../../shared/AppBar";
 import FooterComp from "../../shared/Footer";
 import ComingSoon from "../comingSoon/ComingSoon";
+import curPageNumber from "../../shared/pageNumber";
 
 const Layout = ({ children }) => {
   console.log(children?.type?.name, " Layout");
