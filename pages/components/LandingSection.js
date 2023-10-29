@@ -21,23 +21,23 @@ const LandingSection = () => {
     setCurBtn(2);
   };
 
-  const whySolidityData = [
-    {
-      img: Ufo,
-      head: "Learn anything ",
-      desc: "Whether you want to develop as a professional or discover a new hobby, there's an online course for that. You can even take your learning further with online micro credentials and degrees.",
-    },
-    {
-      img: Ufo,
-      head: "Learn anything",
-      desc: "Whether you want to develop as a professional or discover a new hobby, there's an online course for that. You can even take your learning further with online micro credentials and degrees.",
-    },
-    {
-      img: Ufo,
-      head: "Learn anything",
-      desc: "Whether you want to develop as a professional or discover a new hobby, there's an online course for that. You can even take your learning further with online micro credentials and degrees.",
-    },
-  ];
+  // const whySolidityData = [
+  //   {
+  //     img: Ufo,
+  //     head: "Learn anything ",
+  //     desc: "Whether you want to develop as a professional or discover a new hobby, there's an online course for that. You can even take your learning further with online micro credentials and degrees.",
+  //   },
+  //   {
+  //     img: Ufo,
+  //     head: "Learn anything",
+  //     desc: "Whether you want to develop as a professional or discover a new hobby, there's an online course for that. You can even take your learning further with online micro credentials and degrees.",
+  //   },
+  //   {
+  //     img: Ufo,
+  //     head: "Learn anything",
+  //     desc: "Whether you want to develop as a professional or discover a new hobby, there's an online course for that. You can even take your learning further with online micro credentials and degrees.",
+  //   },
+  // ];
 
   const announcementData = [
     {
@@ -101,31 +101,31 @@ const LandingSection = () => {
     </Box>
   );
 
-  const moduleCard = (
-    <div className='flex justify-evenly rounded-full mx-8 '>
-      {announcementData.map((announcement, index) => (
-        <div
-          className='bg-[rgba(0, 0, 0, 0.16)] border border-[rgba(255, 255, 255, 0.36)] rounded-2xl w-[30%] flex-wrap ease-in-out my-5 mx-2 duration-200'
-          key={index}
-        >
-          <div className='m-1'>
-            <Image src={announcement.img} alt='med' />
-            <div className='px-3 rounded-b-2xl'>
-              <div className='text-2xl pt-6 pb-1'>{announcement.head}</div>
-              <div className='text-[#CECECE] pb-6'>{announcement.desc}</div>
-            </div>
-            <div className='mb-2'>
-              <Button className='w-full bg-white'>
-                <div className='text-center text-black text-xl'>
-                  Start Module
-                </div>
-              </Button>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
+  // const moduleCard = (
+  //   <div className='flex justify-evenly rounded-full mx-8 '>
+  //     {announcementData.map((announcement, index) => (
+  //       <div
+  //         className='bg-[rgba(0, 0, 0, 0.16)] border border-[rgba(255, 255, 255, 0.36)] rounded-2xl w-[30%] flex-wrap ease-in-out my-5 mx-2 duration-200'
+  //         key={index}
+  //       >
+  //         <div className='m-1'>
+  //           <Image src={announcement.img} alt='med' />
+  //           <div className='px-3 rounded-b-2xl'>
+  //             <div className='text-2xl pt-6 pb-1'>{announcement.head}</div>
+  //             <div className='text-[#CECECE] pb-6'>{announcement.desc}</div>
+  //           </div>
+  //           <div className='mb-2'>
+  //             <Button className='w-full bg-white'>
+  //               <div className='text-center text-black text-xl'>
+  //                 Start Module
+  //               </div>
+  //             </Button>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     ))}
+  //   </div>
+  // );
 
   const timelineData = [
     {
