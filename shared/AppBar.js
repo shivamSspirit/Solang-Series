@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 function AppBar() {
-    const router = useRouter();
-    const currentRoute = router.pathname;
+  const router = useRouter();
+  const currentRoute = router.pathname;
 
   return (
     <Navbar
@@ -16,46 +16,48 @@ function AppBar() {
       rounded={true}
     >
       <Navbar.Brand href='/'>
-        <span className='self-center whitespace-nowrap text-xl pl-4 font-semibold dark:text-white'>
+        <span className='self-center whitespace-nowrap text-sm md:text-xl pl-4 font-semibold dark:text-white'>
           Solidity for Solana
         </span>
       </Navbar.Brand>
-      <Navbar.Toggle />
-      <Navbar.Collapse className='text-[gray]'>
-        <a
-          onClick={() => router.push(`/`)}
-          className={`cursor-pointer hover:text-gray-300 text-lg ${
-            currentRoute === "/" ? "text-white" : ""
-          }`}
-        >
-          Home
-        </a>
-        <a
-          onClick={() => router.push(`/About`)}
-          className={`cursor-pointer hover:text-gray-300 text-lg ${
-            currentRoute === "/About" ? "text-white" : ""
-          }`}
-        >
-          About
-        </a>
-        <a
-          onClick={() => router.push(`/CourseContent`)}
-          className={`cursor-pointer hover:text-gray-300 text-lg ${
-            currentRoute === "/CourseContent" ? "text-white" : ""
-          }`}
-        >
-          Course content
-        </a>
-        <a
-          onClick={() => router.push(`/About`)}
-          className={`cursor-pointer hover:text-gray-300 text-lg ${
-            currentRoute === "/FAQs" ? "text-white" : ""
-          }`}
-        >
-          FAQs
-        </a>
-        <SearchIcon className='h-8' />
-      </Navbar.Collapse>
+      <div className='flex justify-center items-center'>
+        <Navbar.Collapse className='text-[gray]'>
+          <a
+            onClick={() => router.push(`/`)}
+            className={`cursor-pointer hover:text-gray-300 text-lg ${
+              currentRoute === "/" ? "text-white" : ""
+            }`}
+          >
+            Home
+          </a>
+          <a
+            onClick={() => router.push(`/About`)}
+            className={`cursor-pointer hover:text-gray-300 text-lg ${
+              currentRoute === "/About" ? "text-white" : ""
+            }`}
+          >
+            About
+          </a>
+          <a
+            onClick={() => router.push(`/CourseContent`)}
+            className={`cursor-pointer hover:text-gray-300 text-lg ${
+              currentRoute === "/CourseContent" ? "text-white" : ""
+            }`}
+          >
+            Course content
+          </a>
+          <a
+            onClick={() => router.push(`/About`)}
+            className={`cursor-pointer hover:text-gray-300 text-lg ${
+              currentRoute === "/FAQs" ? "text-white" : ""
+            }`}
+          >
+            FAQs
+          </a>
+        </Navbar.Collapse>
+        <Navbar.Toggle />
+        <SearchIcon className='h-8 md:ml-8' />
+      </div>
     </Navbar>
   );
 }

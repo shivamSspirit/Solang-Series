@@ -13,8 +13,8 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
         {/* <link href="/dist/output.css" rel="stylesheet"/> */}
       </Head>
-      <div className='px-16 py-10'>
-      <LandingSection /> 
+      <div className='w-full'>
+        <LandingSection />
         {/* <ComingSoon/>  */}
       </div>
     </>
