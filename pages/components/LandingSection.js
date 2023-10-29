@@ -191,7 +191,7 @@ const LandingSection = () => {
   return (
     <div className='mt-20 sm:px-12'>
       <div>
-        <div className='flex lg:flex-row flex-col-reverse justify-between '>
+        <div className='flex lg:flex-row flex-col-reverse justify-between'>
           <div className='lg:w-1/2 text-white'>
             <div className='text-2xl md:text-5xl'>
               Unlocking the Power of Solana with Solidity Smart Contracts
