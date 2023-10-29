@@ -6,9 +6,14 @@ import illustration from "../../assets/illustration.png";
 import cardImg from "../../assets/CardImg.png";
 import Ufo from "../../assets/Ufo.svg";
 import Image from "next/image";
+
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+import FooterComp from "../../shared/Footer";
+// import Markdown from "react-markdown";
+// import CourseMap from "./CourseMap";
+
 
 const LandingSection = () => {
   const [curBtn, setCurBtn] = useState(1);
