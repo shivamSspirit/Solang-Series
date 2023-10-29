@@ -153,6 +153,7 @@ const LandingSection = () => {
       content: "Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam."
     },
   ]
+
   const timeLine = (
     <div className="timeline">
       {timelineData.map((data, key) => (
@@ -251,7 +252,7 @@ const LandingSection = () => {
       <div className='mt-20'>{module}</div>
       <div className='text-white text-center mt-20'>
         <h1 className='text-4xl'>Course Map</h1>
-        <h5 className='text-xl py-4 text-[#CECECE]'>
+        <h5 className='text-base md:text-xl py-4 text-[#CECECE]'>
           The course map lets you gets all <br /> the information for a better
           learning
         </h5>
