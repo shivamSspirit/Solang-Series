@@ -63,10 +63,11 @@ const CourseContent = () => {
         <Grid
           container
           spacing={{ xs: 2, md: 3 }}
+          className='flex justify-evenly items-center'
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
           {announcementData.map((announcement, index) => (
-            <Grid item xs={2} sm={4} md={4} key={index}>
+            <Grid item xs={3} sm={4} md={4} key={index}>
               <div className='m-1'>
                 <Image src={announcement.img} alt='med' />
                 <div className='px-3 rounded-b-2xl'>
@@ -74,8 +75,7 @@ const CourseContent = () => {
                   <div className='text-[#CECECE] pb-6'>{announcement.desc}</div>
                 </div>
                 <div className='mb-2'>
-                  <Button
-                   className='w-full bg-white'>
+                  <Button className='w-full bg-white'>
                     <div
                       onClick={() => {
                         router.push({
@@ -99,8 +99,10 @@ const CourseContent = () => {
   return (
     <div className='my-20 text-white'>
       <div>
-        <div className='text-5xl mb-2'>Title of course content</div>
-        <div className='mb-10'>
+        <div className='text-3xl md:text-5xl mb-2'>
+          Title of course content
+        </div>
+        <div className='mb-10 text-sm md:text-base'>
           Description of course content, If you make changes to the material and
           want to distribute the modified version, it must be licensed under the
           same license. Using the material for commercial purposes is forbidden

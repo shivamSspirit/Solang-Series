@@ -83,11 +83,11 @@ const LandingSection = () => {
               <div className='mb-2'>
                 <Button className='w-full bg-white'>
                   <div
-                    onClick={() => {
-                      router.push({
-                        pathname: `/CourseContent/Course${index + 1}`,
-                      });
-                    }}
+                    // onClick={() => {
+                    //   router.push({
+                    //     pathname: `/CourseContent/Course${index + 1}`,
+                    //   });
+                    // }}
                     className='text-center font-bold text-black text-xl'
                   >
                     Start Module
