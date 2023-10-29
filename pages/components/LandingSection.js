@@ -6,13 +6,17 @@ import illustration from "../../assets/illustration.png";
 import cardImg from "../../assets/CardImg.png";
 import Ufo from "../../assets/Ufo.svg";
 import Image from "next/image";
+
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
 import FooterComp from "../../shared/Footer";
-import Test from "../test";
 // import Markdown from "react-markdown";
 // import CourseMap from "./CourseMap";
 
+
 const LandingSection = () => {
-  const [curBtn, setCurBtn] = useState(0);
+  const [curBtn, setCurBtn] = useState(1);
 
   const startBtnOnClick = () => {
     setCurBtn(1);
@@ -21,23 +25,6 @@ const LandingSection = () => {
     setCurBtn(2);
   };
 
-  const whySolidityData = [
-    {
-      img: Ufo,
-      head: "Learn anything ",
-      desc: "Whether you want to develop as a professional or discover a new hobby, there's an online course for that. You can even take your learning further with online micro credentials and degrees.",
-    },
-    {
-      img: Ufo,
-      head: "Learn anything",
-      desc: "Whether you want to develop as a professional or discover a new hobby, there's an online course for that. You can even take your learning further with online micro credentials and degrees.",
-    },
-    {
-      img: Ufo,
-      head: "Learn anything",
-      desc: "Whether you want to develop as a professional or discover a new hobby, there's an online course for that. You can even take your learning further with online micro credentials and degrees.",
-    },
-  ];
 
   const announcementData = [
     {
@@ -57,31 +44,75 @@ const LandingSection = () => {
     },
   ];
 
-  const moduleCard = (
-    <div className='flex justify-evenly rounded-full mx-8 text-white'>
-      {announcementData.map((announcement, index) => (
-        <div
-          className='bg-[rgba(0, 0, 0, 0.16)] border border-[rgba(255, 255, 255, 0.36)] rounded-2xl w-[30%] ease-in-out my-5 mx-2 duration-200'
-          key={index}
-        >
-          <div className='m-1'>
-            <Image src={announcement.img} alt='med' />
-            <div className='px-3 rounded-b-2xl'>
-              <div className='text-2xl pt-6 pb-1'>{announcement.head}</div>
-              <div className='text-[#CECECE] pb-6'>{announcement.desc}</div>
+  const module = (
+    <Box sx={{ flexGrow: 1, color: "white"}}>
+      <Grid
+        container
+        className='flex justify-evenly items-center'
+        columns={{ xs: 4, sm: 10, md: 14, lg: 14 }}
+      >
+        {announcementData.map((announcement, index) => (
+          <Grid
+            className='bg-[rgba(0, 0, 0, 0.16)] my-2 border border-[rgba(255, 255, 255, 0.36)] rounded-2xl'
+            item
+            xs={3}
+            sm={4}
+            md={4}
+            lg={4}
+            key={index}
+          >
+            <div className='m-1'>
+              <Image src={announcement.img} alt='med' />
+              <div className='px-3 rounded-b-2xl'>
+                <div className='text-2xl pt-6 pb-1'>{announcement.head}</div>
+                <div className='text-[#CECECE] pb-6'>{announcement.desc}</div>
+              </div>
+              <div className='mb-2'>
+                <Button className='w-full bg-white'>
+                  <div
+                    // onClick={() => {
+                    //   router.push({
+                    //     pathname: `/CourseContent/Course${index + 1}`,
+                    //   });
+                    // }}
+                    className='text-center font-bold text-black text-xl'
+                  >
+                    Start Module
+                  </div>
+                </Button>
+              </div>
             </div>
-            <div className='mb-2'>
-              <Button className='w-full bg-white'>
-                <div className='text-center text-black text-xl'>
-                  Start Module
-                </div>
-              </Button>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
   );
+
+  // const moduleCard = (
+  //   <div className='flex justify-evenly rounded-full mx-8 '>
+  //     {announcementData.map((announcement, index) => (
+  //       <div
+  //         className='bg-[rgba(0, 0, 0, 0.16)] border border-[rgba(255, 255, 255, 0.36)] rounded-2xl w-[30%] flex-wrap ease-in-out my-5 mx-2 duration-200'
+  //         key={index}
+  //       >
+  //         <div className='m-1'>
+  //           <Image src={announcement.img} alt='med' />
+  //           <div className='px-3 rounded-b-2xl'>
+  //             <div className='text-2xl pt-6 pb-1'>{announcement.head}</div>
+  //             <div className='text-[#CECECE] pb-6'>{announcement.desc}</div>
+  //           </div>
+  //           <div className='mb-2'>
+  //             <Button className='w-full bg-white'>
+  //               <div className='text-center text-black text-xl'>
+  //                 Start Module
+  //               </div>
+  //             </Button>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     ))}
+  //   </div>
+  // );
 
   const timelineData = [
     {
@@ -109,6 +140,7 @@ const LandingSection = () => {
       content: "Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam."
     },
   ]
+
   const timeLine = (
     <div className="timeline">
       {timelineData.map((data, key) => (
@@ -144,14 +176,14 @@ const LandingSection = () => {
   // );
 
   return (
-    <div className='mt-10'>
+    <div className='mt-20 sm:px-12'>
       <div>
-        <div className='flex justify-between '>
-          <div className='w-1/2 text-white'>
-            <div className='text-5xl '>
+        <div className='flex lg:flex-row flex-col-reverse justify-between'>
+          <div className='lg:w-1/2 text-white'>
+            <div className='text-2xl md:text-5xl'>
               Unlocking the Power of Solana with Solidity Smart Contracts
             </div>
-            <div className='mt-10 text-gray-400'>
+            <div className='mt-10 text-gray-400 text-sm md:text-base'>
               Dive into the world of blockchain development with our Solidity
               for Solana courses. Master the art of creating smart contracts on
               the Solana network, opening the door to high-speed, secure, and
@@ -162,10 +194,10 @@ const LandingSection = () => {
             <div className='mt-10'>
               <div className='flex'>
                 <div className='pr-6'>
-                  <Button
+                  <button
                     color='transparent'
                     onClick={startBtnOnClick}
-                    className={`border border-white ${
+                    className={`border border-white flex justify-center items-center py-2 px-2 rounded-md ${
                       curBtn === 1 && "bg-white text-black"
                     }`}
                   >
@@ -174,26 +206,25 @@ const LandingSection = () => {
                     ) : (
                       <InActiveLeftArrow className='mr-3' />
                     )}
-
-                    <span>Start Course</span>
-                  </Button>
+                    <span className='text-xs md:text-base'>Start Course</span>
+                  </button>
                 </div>
                 <div>
-                  <Button
+                  <button
                     color='transparent'
                     onClick={resumeBtnOnClick}
-                    className={`border border-white ${
+                    className={`border border-white text-xs md:text-base flex py-2 px-2 rounded-md ${
                       curBtn === 2 && "bg-white text-black"
                     }`}
                   >
                     Resume Course
-                  </Button>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-          <div className='w-1/2 '>
-            <div className='flex justify-end'>
+          <div className='mb-16 lg:w-1/2 lg:m-0'>
+            <div className='flex justify-center lg:justify-end'>
               <Image
                 src={illustration}
                 alt='illustration'
@@ -205,12 +236,15 @@ const LandingSection = () => {
       </div>
 
       {/*  */}
-      <div className='mt-20'>{moduleCard}</div>
-      <div className="text-white text-center mt-20">
-        <h1 className="text-4xl">Course Map</h1>
-        <h5 className="text-xl py-4 text-[#CECECE]">The course map lets you gets all <br /> the information for a better learning</h5>
+      <div className='mt-20'>{module}</div>
+      <div className='text-white text-center mt-20'>
+        <h1 className='text-4xl'>Course Map</h1>
+        <h5 className='text-base md:text-xl py-4 text-[#CECECE]'>
+          The course map lets you gets all <br /> the information for a better
+          learning
+        </h5>
       </div>
-      <div className='mt-20'>{timeLine}</div>
+      <div className='mt-20 mb-20'>{timeLine}</div>
       {/* <div className='mt-20'>{<CourseMap />}</div> */}
       {/* <div className='mt-20'>{whySoliditySection}</div> */}
     </div>

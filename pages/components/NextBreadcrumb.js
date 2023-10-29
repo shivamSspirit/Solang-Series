@@ -15,11 +15,11 @@ const NextBreadcrumb = ({
   trimmedPath.unshift("Module 1");
   const pathNames = trimmedPath.filter((path) => path);
 
-  console.log(pathNames);
+  console.log(pathNames, " BreadCrumb");
 
   return (
     <div>
-      <ul id='breadcrumbs-one' className='flex'>
+      <ul id='breadcrumbs-one' className='hidden sm:flex'>
         {pathNames.map((link, index) => {
           let href =
             link === "Module 1"

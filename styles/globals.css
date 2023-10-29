@@ -2,87 +2,87 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Manrope&family=Plus+Jakarta+Sans&family=Poppins&family=Raleway&family=Work+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Manrope&family=Plus+Jakarta+Sans&family=Poppins&family=Raleway&family=Work+Sans&display=swap");
 
 html {
-  background-color: #2A2A2A;
-  font-family: 'IBM Plex Mono', monospace;
+  background-color: #2a2a2a;
+  color: white;
+  font-family: "IBM Plex Mono", monospace;
 }
 
-#breadcrumbs-one{
-    background: transparent;
-    border-style: solid;
-    border-color: #f5f5f5 #e5e5e5 #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 2px rgba(0,0,0,.2);
-    overflow: hidden;
-    width: 100%;
-  }
+#breadcrumbs-one {
+  background: transparent;
+  border-style: solid;
+  border-color: #f5f5f5 #e5e5e5 #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  width: 100%;
+}
 
-  #breadcrumbs-one li{
-    float: left;
-  }
+#breadcrumbs-one li {
+  float: left;
+}
 
-  #breadcrumbs-one a{
-    padding: .7em 1em .7em 2em;
-    float: left;
-    text-decoration: none;
-    color: #444;
-    position: relative;
-    text-shadow: 0 1px 0 rgba(255,255,255,.5);
-    background-color: #ddd;
-    background-image: linear-gradient(to right, #ddd, #f5f5f5);
-  }
+#breadcrumbs-one a {
+  padding: 0.7em 1em 0.7em 2em;
+  float: left;
+  text-decoration: none;
+  color: #444;
+  position: relative;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  background-color: #ddd;
+  background-image: linear-gradient(to right, #ddd, #f5f5f5);
+}
 
-  #breadcrumbs-one li:first-child a{
-    padding-left: 1em;
-    border-radius: 5px 0 0 5px;
-  }
+#breadcrumbs-one li:first-child a {
+  padding-left: 1em;
+  border-radius: 5px 0 0 5px;
+}
 
-  #breadcrumbs-one a:hover{
-    background: #fff;
-  }
+#breadcrumbs-one a:hover {
+  background: #fff;
+}
 
-  #breadcrumbs-one a::after,
-  #breadcrumbs-one a::before{
-    content: "";
-    position: absolute;
-    top: 50%;
-    margin-top: -1.5em;
-    border-top: 1.5em solid transparent;
-    border-bottom: 1.5em solid transparent;
-    border-left: 1em solid;
-    right: -1em;
-  }
+#breadcrumbs-one a::after,
+#breadcrumbs-one a::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  margin-top: -1.5em;
+  border-top: 1.5em solid transparent;
+  border-bottom: 1.5em solid transparent;
+  border-left: 1em solid;
+  right: -1em;
+}
 
-  #breadcrumbs-one a::after{
-    z-index: 2;
-    border-left-color: #f5f5f5;
-  }
+#breadcrumbs-one a::after {
+  z-index: 2;
+  border-left-color: #f5f5f5;
+}
 
-  #breadcrumbs-one a::before{
-    border-left-color: #ccc;
-    right: -1.1em;
-    z-index: 1;
-  }
+#breadcrumbs-one a::before {
+  border-left-color: #ccc;
+  right: -1.1em;
+  z-index: 1;
+}
 
-  #breadcrumbs-one a:hover::after{
-    border-left-color: #fff;
-  }
+#breadcrumbs-one a:hover::after {
+  border-left-color: #fff;
+}
 
-  #breadcrumbs-one .current,
-  #breadcrumbs-one .current:hover{
-    font-weight: bold;
-    background: none;
-  }
+#breadcrumbs-one .current,
+#breadcrumbs-one .current:hover {
+  font-weight: bold;
+  background: none;
+}
 
-  #breadcrumbs-one .current::after,
-  #breadcrumbs-one .current::before{
-    content: normal;
-  }
+#breadcrumbs-one .current::after,
+#breadcrumbs-one .current::before {
+  content: normal;
+}
 
 /* Timeline Css*/
-
 
 /* The actual timeline (the vertical ruler) */
 .timeline {
@@ -93,10 +93,10 @@ html {
 
 /* The actual timeline (the vertical ruler) */
 .timeline::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 4px;
-  background-color: #CECECE ;
+  background-color: #cecece;
   top: 0;
   bottom: 0;
   left: 50%;
@@ -113,7 +113,7 @@ html {
 
 /* The circles on the timeline */
 .wrap::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 25px;
   height: 25px;
@@ -144,9 +144,9 @@ html {
   width: 0;
   z-index: 1;
   right: 30px;
-  border: medium solid #201F1F;
+  border: medium solid #201f1f;
   border-width: 10px 0 10px 10px;
-  border-color: transparent transparent transparent #201F1F;
+  border-color: transparent transparent transparent #201f1f;
 }
 
 /* Add arrows to the right container (pointing left) */
@@ -158,9 +158,9 @@ html {
   width: 0;
   z-index: 1;
   left: 30px;
-  border: medium solid #201F1F;
+  border: medium solid #201f1f;
   border-width: 10px 10px 10px 0;
-  border-color: transparent #201F1F transparent transparent;
+  border-color: transparent #201f1f transparent transparent;
 }
 
 /* Fix the circle for containers on the right side */
@@ -171,7 +171,6 @@ html {
 /* The actual content */
 .content {
   padding: 20px 30px;
- 
   position: relative;
   border-radius: 6px;
 }
@@ -181,39 +180,47 @@ html {
   .wrap:nth-child(odd) {
     padding: 0px 40px 10px 0;
   }
-  .wrap:nth-child(even){padding: 0px 0px 10px 40px;}
+  .wrap:nth-child(even) {
+    padding: 0px 0px 10px 40px;
+  }
 }
 @media screen and (max-width: 600px) {
-  .wrap:nth-child(even), .wrap:nth-child(odd) {
+  .wrap:nth-child(even),
+  .wrap:nth-child(odd) {
     padding: 0px 0 15px 60px;
-}
+  }
 
   /* Place the timelime to the left */
   .timeline::after {
-  left: 31px;
+    left: 31px;
   }
-  
+
   /* Full-width containers */
   .wrap {
-      width: 100%;
+    width: 100%;
   }
-  
+
   /* Make sure that all arrows are pointing leftwards */
-  .wrap:nth-child(even):before, .wrap:nth-child(odd):before {
-  left: 50px;
-  border: medium solid white;
-  border-width: 10px 10px 10px 0;
-  border-color: transparent white transparent transparent;
+  .wrap:nth-child(even):before,
+  .wrap:nth-child(odd):before {
+    left: 50px;
+    border: medium solid white;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent white transparent transparent;
   }
 
   /* Make sure all circles are at the same spot */
-  .wrap:nth-child(odd)::after, .wrap:nth-child(even):after {
-  left: 18px;
+  .wrap:nth-child(odd)::after,
+  .wrap:nth-child(even):after {
+    left: 18px;
   }
-  
+
   /* Make all right containers behave like the left ones */
   .wrap:nth-child(even) {
-  left: 0%;
+    left: 0%;
   }
 }
 
+.bg-gray-50 {
+  background-color: #201f1f;
+}

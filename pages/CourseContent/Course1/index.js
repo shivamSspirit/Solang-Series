@@ -8,22 +8,29 @@ import { useRouter } from "next/router";
 
 const Course1 = () => {
   const router = useRouter();
-  const currentRoute = router.pathname;
-  const nextPg = Number(currentRoute[currentRoute.length - 1]) + 1;
+  let currentRoute = router.pathname;
+
+  // Splitting the url to convert in array.
+  currentRoute = currentRoute.split("/");
+  
+  // Extracting the Course1 number, and returning its last index.
+  const nextPg = Number(currentRoute[2][currentRoute[2].length - 1]) + 1;
+
+  console.log(currentRoute[2], " Course1 index.js");
+  console.log(nextPg);
 
   return (
     <div className='my-20'>
-      <div className='flex justify-between '>
-        <div className='w-1/2 text-white'>
+      <div className='flex sm:flex-row flex-col-reverse justify-between'>
+        <div className='sm:w-1/2 text-white'>
           <NextBreadcrumb
             homeElement={"Home"}
             separator={<span> | </span>}
             activeClasses='text-amber-500'
-            containerClasses='flex py-5 bg-gradient-to-r from-purple-600 to-blue-600'
             listClasses='hover:underline mx-2 font-bold'
             capitalizeLinks
           />
-          <div className='mt-10 text-gray-400'>
+          <div className='sm:mt-10 text-gray-400'>
             Dive into the world of blockchain development with our Solidity for
             Solana courses. Master the art of creating smart contracts on the
             Solana network, opening the door to high-speed, secure, and scalable
@@ -36,7 +43,7 @@ const Course1 = () => {
                 <li>
                   <a>
                     <div
-                    className="cursor-pointer"
+                      className='cursor-pointer'
                       onClick={() => {
                         router.push({
                           pathname: `Course1/GeneralInfo`,
@@ -56,8 +63,8 @@ const Course1 = () => {
             </div>
           </div>
         </div>
-        <div className='w-1/2 '>
-          <div className='flex justify-end'>
+        <div className='mb-16 sm:w-1/2 lg:m-0'>
+          <div className='flex justify-center lg:justify-end'>
             <Image
               src={illustration}
               alt='illustration'
