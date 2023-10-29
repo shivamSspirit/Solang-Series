@@ -9,7 +9,6 @@ import Image from "next/image";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-// import CourseMap from "./CourseMap";
 
 const LandingSection = () => {
   const [curBtn, setCurBtn] = useState(1);
@@ -21,23 +20,6 @@ const LandingSection = () => {
     setCurBtn(2);
   };
 
-  // const whySolidityData = [
-  //   {
-  //     img: Ufo,
-  //     head: "Learn anything ",
-  //     desc: "Whether you want to develop as a professional or discover a new hobby, there's an online course for that. You can even take your learning further with online micro credentials and degrees.",
-  //   },
-  //   {
-  //     img: Ufo,
-  //     head: "Learn anything",
-  //     desc: "Whether you want to develop as a professional or discover a new hobby, there's an online course for that. You can even take your learning further with online micro credentials and degrees.",
-  //   },
-  //   {
-  //     img: Ufo,
-  //     head: "Learn anything",
-  //     desc: "Whether you want to develop as a professional or discover a new hobby, there's an online course for that. You can even take your learning further with online micro credentials and degrees.",
-  //   },
-  // ];
 
   const announcementData = [
     {
@@ -257,7 +239,7 @@ const LandingSection = () => {
           learning
         </h5>
       </div>
-      <div className='mt-20'>{timeLine}</div>
+      <div className='mt-20 mb-20'>{timeLine}</div>
       {/* <div className='mt-20'>{<CourseMap />}</div> */}
       {/* <div className='mt-20'>{whySoliditySection}</div> */}
     </div>
