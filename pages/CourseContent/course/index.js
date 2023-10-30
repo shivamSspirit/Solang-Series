@@ -22,14 +22,20 @@ export async function getStaticProps() {
   };
 }
 
-const Course1 = ({ allPostsData }) => {
+
+
+ 
+
+
+
+
+
+const Course1 = ({allPostsData}) => {
   const router = useRouter();
   let currentRoute = router.pathname;
-  console.log("allpostssssssssss", allPostsData);
   // Splitting the url to convert in array.
   currentRoute = currentRoute.split("/");
 
-  // Navigating to category/webdevelopment will return category = webdevelopment
   const { course } = router.query;
 
   console.log("course", course);

@@ -9,9 +9,8 @@ import curPageNumber from "../../../shared/pageNumber";
 import { getAllPostIds, getPostData } from "../../../utils/module-lession";
 
 export async function getStaticProps({ params }) {
-  console.log("pasrams", params);
+  console.log("params", params);
   const postData = await getPostData(params.Id);
-  console.log("singlepost", postData);
   return {
     props: {
       postData,
@@ -27,19 +26,6 @@ export async function getStaticPaths() {
     fallback: false,
   };
 }
-
-// export async function getStaticPaths() {
-//   const moduleids = await getAllPostIds();
-
-//   const paths = moduleids.map((moduleId) => ({
-//     params: { moduleId },
-//   }));
-
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
 
 const GeneralInfo = ({ postData }) => {
   console.log("postData:", postData);
@@ -77,6 +63,7 @@ const GeneralInfo = ({ postData }) => {
             />
           </div>
         </div>
+
       </div>
       <div className='mt-20 hidden sm:flex'>
         <div className='mr-10'>
@@ -99,51 +86,9 @@ const GeneralInfo = ({ postData }) => {
             <br />
             <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
           </div>
-          {/* 
-          <div>
-            This course is an introduction to modern web development with
-            JavaScript. The main focus is on single-page applications
-            implemented with React and supporting them with RESTful and GraphQL
-            web services implemented with Node.js. The course also has parts on
-            TypeScript, React Native, and Continuous integration. Other topics
-            include debugging applications, container technology, configuration,
-            managing runtime environments, and databases. The course is totally
-            free of charge. You can get a certificate and even the University of
-            Helsinki ECTS (European Credit Transfer and Accumulation System)
-            credits for free. Participants are expected to have good programming
-            skills, basic knowledge of web programming and databases, and know
-            the basics of the Git version control system. You are also expected
-            to have perseverance and a capacity for solving problems and seeking
-            information independently. Previous knowledge of JavaScript or other
-            course topics is not required. How much programming experience is
-            needed? It is hard to say, but you should be pretty fluent with your
-            language. This level of fluency takes usually at least 100-200 hours
-            of practice to develop.
-            <h1 className='my-3 text-2xl'>Prerequisites</h1>
-            <p>
-              Participants are expected to have good programming skills, basic
-              knowledge of web programming and databases, and know the basics of
-              the Git version control system. You are also expected to have
-              perseverance and a capacity for solving problems and seeking
-              information independently. Previous knowledge of JavaScript or
-              other course topics is not required. How much programming
-              experience is needed? It is hard to say, but you should be pretty
-              fluent with your language. This level of fluency takes usually at
-              least 100-200 hours of practice to develop. 
-             </p>
-            <h1 className='my-3 text-2xl'>Start small</h1>
-            <p>
-              Okay, so you want to build a bacon-making app. The thing is,
-              before even thinking about payments, you’re first going to need: A
-              build system Form handling Some sort of styles Routing
-              Authentication A backend And *then* payments If you try and tackle
-              all this in one go, you’re gonna get pummeled. So instead, we’re
-              going to start small — and have some fun in the process! In fact,
-              I have a nice little project to start you off:
-            </p>
-          </div>  */}
         </div>
       </div>
+
       <div
         className={`mt-20 flex ${
           prevPg > 0 ? "justify-between" : "justify-end"
