@@ -3,6 +3,8 @@ title: 'Course Guide'
 author: 'spirit'
 ---
 
+<h1>Lesson 2: What We Will Cover In This Course</h1>
+
 # course guide
 
 # **Course Guide**
