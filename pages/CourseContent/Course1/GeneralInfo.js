@@ -42,7 +42,7 @@ const GeneralInfo = () => {
         </div>
       </div>
       <div className='mt-20 flex'>
-        <div className='mr-10'>
+        <div className='mr-10 hidden sm:flex'>
           <SideBar />
         </div>
         <div className='flex flex-col text-white'>

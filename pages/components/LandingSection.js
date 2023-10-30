@@ -222,17 +222,6 @@ const LandingSection = () => {
                     <span className='text-xs md:text-base'>Start Course</span>
                   </button>
                 </div>
-                <div>
-                  <button
-                    color='transparent'
-                    onClick={resumeBtnOnClick}
-                    className={`border border-white text-xs md:text-base flex py-2 px-2 rounded-md ${
-                      curBtn === 2 && "bg-white text-black"
-                    }`}
-                  >
-                    Resume Course
-                  </button>
-                </div>
               </div>
             </div>
           </div>
