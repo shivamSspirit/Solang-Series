@@ -2,6 +2,9 @@ import React from "react";
 import { Navbar } from "flowbite-react";
 import SearchIcon from "@mui/icons-material/Search";
 import { useRouter } from "next/router";
+import SiteLogo from "../assets/site-logo.svg";
+import MobileSiteLogo from "../assets/mob-nav-logo.png";
+import Image from "next/image";
 import Link from "next/link";
 
 function AppBar() {
@@ -10,15 +13,20 @@ function AppBar() {
 
   return (
     <Navbar
-      className='rounded-lg text-white bg-[#201F1F] shadow-lg shadow-black p-4 '
+      className='rounded-lg text-white bg-[#201F1F] shadow-lg shadow-black p-6'
       style={{ border: ".1px solid grey" }}
       fluid={true}
       rounded={true}
     >
       <Navbar.Brand href='/'>
-        <span className='self-center whitespace-nowrap text-sm md:text-xl pl-4 font-semibold dark:text-white'>
-          Solidity for Solana
-        </span>
+        <div>
+          <div className='w-16 sm:hidden'>
+            <Image src={MobileSiteLogo} alt='mob-logo' />
+          </div>
+          <div className='hidden sm:flex'>
+            <SiteLogo />
+          </div>
+        </div>
       </Navbar.Brand>
       <div className='flex justify-center items-center'>
         <Navbar.Collapse className='text-[gray]'>
