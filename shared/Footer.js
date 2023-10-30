@@ -26,8 +26,6 @@ const FooterComp = () => {
           <Discord className='mr-3' />
           <Github className='mr-3' />
           <TwitterX className='mr-3' />
-          <Facebook className='mr-3' />
-          <Instagram className='mr-3' />
         </div>
         <div className='mb-4'>
           <CCFooter />

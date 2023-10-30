@@ -16,7 +16,7 @@ export default function SideBar() {
     <Sidebar aria-label='Sidebar with multi-level dropdown example'>
       <Sidebar.Items>
         <Sidebar.ItemGroup className='text-white'>
-          <Sidebar.Collapse className='text-white hover:bg-gray-700' label='E-commerce'>
+        <Sidebar.Collapse className='text-white hover:bg-gray-700' label='E-commerce'>
             <Sidebar.Item className='text-white hover:bg-gray-700' href='#'>Products</Sidebar.Item>
             <Sidebar.Item className='text-white hover:bg-gray-700' href='#'>Sales</Sidebar.Item>
             <Sidebar.Item className='text-white hover:bg-gray-700' href='#'>Refunds</Sidebar.Item>

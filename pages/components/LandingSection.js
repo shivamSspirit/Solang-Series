@@ -3,7 +3,9 @@ import { React, useState } from "react";
 import ActiveLeftArrow from "../../assets/activelefticon.svg";
 import InActiveLeftArrow from "../../assets/inactiveLeftIcon.svg";
 import illustration from "../../assets/illustration.png";
-import cardImg from "../../assets/CardImg.png";
+import landingPg1 from "../../assets/landingPg1.png";
+import landingPg2 from "../../assets/landingPg2.png";
+import landingPg3 from "../../assets/landingPg1.png";
 import Ufo from "../../assets/Ufo.svg";
 import Image from "next/image";
 
@@ -28,17 +30,17 @@ const LandingSection = () => {
 
   const announcementData = [
     {
-      img: cardImg,
+      img: landingPg1,
       head: "Module Name ",
       desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
     },
     {
-      img: cardImg,
+      img: landingPg2,
       head: "Module Name",
       desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
     },
     {
-      img: cardImg,
+      img: landingPg3,
       head: "Module Name",
       desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
     },

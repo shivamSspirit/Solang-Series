@@ -5,14 +5,16 @@ import { Button } from "flowbite-react";
 import NextBreadcrumb from "../../components/NextBreadcrumb";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { getSortedPostsData,getAllPostIds } from "../../../utils/module-lession";
-
-
+import {
+  getSortedPostsData,
+  getAllPostIds,
+} from "../../../utils/module-lession";
+import curPageNumber from "../../../shared/pageNumber";
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
-  console.log("app",allPostsData);
-  
+  console.log("app", allPostsData);
+
   return {
     props: {
       allPostsData,
@@ -20,27 +22,18 @@ export async function getStaticProps() {
   };
 }
 
-
-
- 
-
-
-
-
-
-const Course1 = ({allPostsData}) => {
+const Course1 = ({ allPostsData }) => {
   const router = useRouter();
   let currentRoute = router.pathname;
-console.log("allpostssssssssss",allPostsData)
+  console.log("allpostssssssssss", allPostsData);
   // Splitting the url to convert in array.
   currentRoute = currentRoute.split("/");
 
   // Navigating to category/webdevelopment will return category = webdevelopment
   const { course } = router.query;
 
-  console.log("course",course)
-  // Extracting the Course1 number, and returning its last index.
-  const nextPg = Number(currentRoute[2][currentRoute[2].length - 1]) + 1;
+  console.log("course", course);
+  const [prevPg, nextPg] = curPageNumber({ pathname: router.pathname });
 
   console.log(currentRoute[2], " Course1 index.js");
   console.log(nextPg);
@@ -65,13 +58,15 @@ console.log("allpostssssssssss",allPostsData)
           </div>
           <div className='mt-10'>
             <div>
-            {allPostsData?.map((lesson,idx)=>(
-              <div key={lesson.id} id='breadcrumbs-one' className='mb-1'>
-                <li>
-                  <Link href={`/CourseContent/course/${lesson.id}`}>{lesson.id}</Link>
-                </li>
-              </div>
-            ))}
+              {allPostsData?.map((lesson, idx) => (
+                <div key={lesson.id} id='breadcrumbs-one' className='mb-1'>
+                  <li>
+                    <Link href={`/CourseContent/course/${lesson.id}`}>
+                      {lesson.id}
+                    </Link>
+                  </li>
+                </div>
+              ))}
               {/* <div id='breadcrumbs-one' className='mb-3'>
                 <li>
                   <a>
@@ -94,7 +89,6 @@ console.log("allpostssssssssss",allPostsData)
                   <Link href=''>b. Fundamentals fo Solidity</Link>
                 </li>
               </div> */}
-
             </div>
           </div>
         </div>
@@ -109,10 +103,18 @@ console.log("allpostssssssssss",allPostsData)
         </div>
       </div>
       <div className='mt-20 flex justify-center text-white'>
-        <div className='flex flex-col'>
-          <span>Part {nextPg}</span>
-          <span>Next Part</span>
-        </div>
+        {prevPg > 0 && (
+          <div className='flex flex-col'>
+            <span>Part {prevPg}</span>
+            <span>Previous Part</span>
+          </div>
+        )}
+        {nextPg < 9 && (
+          <div className='flex flex-col'>
+            <span>Part {nextPg}</span>
+            <span>Next Part</span>
+          </div>
+        )}
       </div>
     </div>
   );
