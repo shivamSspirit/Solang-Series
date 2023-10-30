@@ -9,18 +9,21 @@ import { usePathname } from "next/navigation";
 let coursePage = "";
 
 const Layout = ({ children }) => {
-  console.log(children?.type?.name, " Layout");
+  console.log(children?.type?.name, "Layout");
   const paths = usePathname();
 
-  const pathNames = paths.split("/");
-  if (pathNames[1] !== "404") {
-    coursePage = pathNames[2];
+  console.log("pathssssssss",paths)
+  const pathNames = paths?.split("/");
+  if (pathNames?.[1] !== "404") {
+    coursePage = pathNames?.[2];
   }
 
   return (
     <>
       <div className='mt-12 mx-4 md:mx-10 lg:mx-20'>
-        {children?.type?.name === "ComingSoon" ? (
+      <Navbar/>
+      {children}
+        {/* {children?.type?.name === "ComingSoon" ? (
           children
         ) : (
           <>
@@ -28,7 +31,7 @@ const Layout = ({ children }) => {
             {children}
             {!coursePage?.includes("Course") && <FooterComp />}
           </>
-        )}
+        )} */}
       </div>
     </>
   );

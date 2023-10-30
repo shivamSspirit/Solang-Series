@@ -5,14 +5,40 @@ import { Button } from "flowbite-react";
 import NextBreadcrumb from "../../components/NextBreadcrumb";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { getSortedPostsData,getAllPostIds } from "../../../utils/module-lession";
 
-const Course1 = () => {
+
+
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData();
+  console.log("app",allPostsData);
+  
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+}
+
+
+
+ 
+
+
+
+
+
+const Course1 = ({allPostsData}) => {
   const router = useRouter();
   let currentRoute = router.pathname;
-
+console.log("allpostssssssssss",allPostsData)
   // Splitting the url to convert in array.
   currentRoute = currentRoute.split("/");
-  
+
+  // Navigating to category/webdevelopment will return category = webdevelopment
+  const { course } = router.query;
+
+  console.log("course",course)
   // Extracting the Course1 number, and returning its last index.
   const nextPg = Number(currentRoute[2][currentRoute[2].length - 1]) + 1;
 
@@ -39,7 +65,14 @@ const Course1 = () => {
           </div>
           <div className='mt-10'>
             <div>
-              <div id='breadcrumbs-one' className='mb-3'>
+            {allPostsData?.map((lesson,idx)=>(
+              <div key={lesson.id} id='breadcrumbs-one' className='mb-1'>
+                <li>
+                  <Link href={`/CourseContent/course/${lesson.id}`}>{lesson.id}</Link>
+                </li>
+              </div>
+            ))}
+              {/* <div id='breadcrumbs-one' className='mb-3'>
                 <li>
                   <a>
                     <div
@@ -54,12 +87,14 @@ const Course1 = () => {
                     </div>
                   </a>
                 </li>
-              </div>
-              <div id='breadcrumbs-one'>
+              </div> */}
+
+              {/* <div id='breadcrumbs-one'>
                 <li>
                   <Link href=''>b. Fundamentals fo Solidity</Link>
                 </li>
-              </div>
+              </div> */}
+
             </div>
           </div>
         </div>
