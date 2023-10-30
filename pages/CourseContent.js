@@ -79,7 +79,7 @@ const CourseContent = () => {
                     <div
                       onClick={() => {
                         router.push({
-                          pathname: `/CourseContent/Course${index + 1}`,
+                          pathname: `/CourseContent/course`,
                         });
                       }}
                       className='text-center font-bold text-black text-xl'
