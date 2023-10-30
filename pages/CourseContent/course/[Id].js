@@ -68,13 +68,8 @@ const GeneralInfo = ({ postData }) => {
         </div>
 
       </div>
-<<<<<<< HEAD:pages/CourseContent/Course1/GeneralInfo.js
       <div className='mt-20 flex'>
         <div className='mr-10 hidden sm:flex'>
-=======
-      <div className="mt-20 flex">
-        <div className="mr-10">
->>>>>>> e5a1bddef74989561e231a606a2b72ec943dc6e5:pages/CourseContent/course/[Id].js
           <SideBar />
         </div>
         <div className="flex flex-col text-white">
@@ -96,7 +91,7 @@ const GeneralInfo = ({ postData }) => {
           </div>
         </div>
       </div>
-      
+
       <div
         className={`mt-20 flex ${
           prevPg > 0 ? "justify-between" : "justify-end"
