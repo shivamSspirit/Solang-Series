@@ -3,11 +3,15 @@ title: 'Course Guide'
 author: 'spirit'
 ---
 
-<h1>Lesson 2: What We Will Cover In This Course</h1>
 
 # course guide
 
 # **Course Guide**
+
+<div style="background-color: #f0f0f0; padding: 10px;">
+  <p>This is a <strong>custom HTML</strong> element.</p>
+  <a href="https://example.com">Click here</a>
+</div>
 
 **Objective:**
 
