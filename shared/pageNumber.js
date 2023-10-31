@@ -1,7 +1,7 @@
 export default function curPageNumber({ pathname }) {
   let currentRoute = pathname;
 
-  console.log(pathname, " curPage");
+ // console.log(pathname, " curPage");
 
   // Splitting the url.
   currentRoute = currentRoute.split("/");

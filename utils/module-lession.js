@@ -14,6 +14,7 @@ export async function getSortedPostsData() {
 
 const modules = await fs.readdir(basePath);
 let filesofmodules=[];
+let filepathname = [];
 
 for (const module of modules) {
   const modulePath = path.join(basePath, module);
@@ -25,25 +26,27 @@ for (const module of modules) {
     for (const docFolder of docFolders) {
       const docFolderPath = path.join(docPath, docFolder);
       const filePathnames = path.join(process.cwd(), docFolderPath);
+      filepathname=[...filepathname,filePathnames]
       const filenamessss  = await fs.readdir(filePathnames);
       filesofmodules=[...filesofmodules,filenamessss]
     }
   }
 }
 
-console.log("filesofmodules",filesofmodules)
+//console.log("filesofmodules",filesofmodules)
+//console.log("filepathanme",filepathname)
 
 
 
 
-  const fileNames = await fs.readdir(postsDirectory);
- // console.log("dfild",fileNames)
-  const allPostsData =  fileNames?.map(async(fileName) => {
+ // const fileNames = await fs.readdir(postsDirectory);
+  
+  const allPostsData =  filesofmodules[0]?.map(async(fileName) => {
     // Remove ".md" from file name to get id
     const id = fileName.replace(/\.md$/, '');
 
     // Read markdown file as string
-    const fullPath = path.join(postsDirectory, fileName);
+    const fullPath = path.join(filepathname[0], fileName);
     const fileContents =await  fs.readFile(fullPath, 'utf8');
     const matterResult = matter(fileContents);
     if(matterResult.data){

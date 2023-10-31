@@ -9,10 +9,10 @@ import { usePathname } from "next/navigation";
 let coursePage = "";
 
 const Layout = ({ children }) => {
-  console.log(children?.type?.name, "Layout");
+//  console.log(children?.type?.name, "Layout");
   const paths = usePathname();
 
-  console.log("pathssssssss",paths)
+ // console.log("pathssssssss",paths)
   const pathNames = paths?.split("/");
   if (pathNames?.[1] !== "404") {
     coursePage = pathNames?.[2];

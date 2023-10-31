@@ -9,7 +9,7 @@ import curPageNumber from "../../../shared/pageNumber";
 import { getAllPostIds, getPostData } from "../../../utils/module-lession";
 
 export async function getStaticProps({ params }) {
-  console.log("params", params);
+ // console.log("params", params);
   const postData = await getPostData(params.Id);
   return {
     props: {
@@ -20,7 +20,7 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   const paths = await getAllPostIds();
-  console.log("paths", paths);
+ // console.log("paths", paths);
   return {
     paths,
     fallback: false,
@@ -28,10 +28,10 @@ export async function getStaticPaths() {
 }
 
 const GeneralInfo = ({ postData }) => {
-  console.log("postData:", postData);
+ // console.log("postData:", postData);
 
   const router = useRouter();
-  console.log(router.pathname, " Pathname");
+ // console.log(router.pathname, " Pathname");
   const [prevPg, nextPg] = curPageNumber({ pathname: router.pathname });
 
   return (
