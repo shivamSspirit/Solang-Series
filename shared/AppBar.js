@@ -12,7 +12,7 @@ function AppBar() {
 
   return (
     <Navbar
-      className='rounded-lg text-white bg-[#201F1F] shadow-lg shadow-black p-5'
+      className='rounded-lg text-white bg-[#201F1F] shadow-lg shadow-black p-4'
       style={{ border: ".1px solid grey" }}
       fluid={true}
       rounded={true}
@@ -31,7 +31,7 @@ function AppBar() {
         <Navbar.Collapse className='text-[#e4e3e3] absolute right-20 top-28 bg-[#201F1F] p-2 md:bg-transparent lg:bg-transparent xl:bg-transparent md:static lg:static xl:static w-[190px] rounded'>
           <a
             onClick={() => router.push(`/`)}
-            className={`cursor-pointer mb-2 text-start hover:text-gray-300 text-lg mx-3 ${
+            className={`cursor-pointer mb-2 md:mb-0 text-start hover:text-gray-300 text-lg mx-3 ${
               currentRoute === "/" ? "text-white" : ""
             }`}
           >
@@ -39,7 +39,7 @@ function AppBar() {
           </a>
           <a
             onClick={() => router.push(`/About`)}
-            className={`cursor-pointer mb-2 text-start hover:text-gray-300 text-lg mx-3 ${
+            className={`cursor-pointer mb-2 md:mb-0 text-start hover:text-gray-300 text-lg mx-3 ${
               currentRoute === "/About" ? "text-white" : ""
             }`}
           >
@@ -47,7 +47,7 @@ function AppBar() {
           </a>
           <a
             onClick={() => router.push(`/CourseContent`)}
-            className={`cursor-pointer mb-2 text-start hover:text-gray-300 text-lg mx-3 ${
+            className={`cursor-pointer mb-2 md:mb-0 text-start hover:text-gray-300 text-lg mx-3 ${
               currentRoute === "/CourseContent" ? "text-white" : ""
             }`}
           >
@@ -55,7 +55,7 @@ function AppBar() {
           </a>
           <a
             onClick={() => router.push(`/About`)}
-            className={`cursor-pointer mb-2 text-start hover:text-gray-300 text-lg mx-3 ${
+            className={`cursor-pointer mb-2 md:mb-0 text-start hover:text-gray-300 text-lg mx-3 ${
               currentRoute === "/FAQs" ? "text-white" : ""
             }`}
           >
@@ -63,7 +63,7 @@ function AppBar() {
           </a>
         </Navbar.Collapse>
         <Navbar.Toggle />
-        <SearchIcon onClick={() => router.push('/Search')} className=' h-8 md:ml-8 ml-4 mt-1 cursor-pointer md:mb-2' />
+        <SearchIcon onClick={() => router.push('/Search')} className='h-8 md:ml-8 ml-4 mt-1 cursor-pointer' />
       </div>
     </Navbar>
   );
