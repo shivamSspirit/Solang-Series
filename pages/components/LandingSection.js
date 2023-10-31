@@ -190,7 +190,7 @@ const LandingSection = () => {
                   onMouseEnter={() => setSvgHoverColor("black")}
                   onMouseLeave={() => setSvgHoverColor("white")}
                   // onClick={startBtnOnClick}
-                  className={`border border-white flex justify-center items-center py-2 px-2 rounded-sm hover:bg-white hover:text-black`}
+                  className={`border border-white flex justify-center items-center py-4 px-4 rounded-sm hover:bg-white hover:text-black`}
                   style={{ boxShadow: "-5px 5px 2px white" }}
                 >
                   <svg
@@ -209,7 +209,7 @@ const LandingSection = () => {
                       />
                     </g>
                   </svg>
-                  <span className='text-xs md:text-base'>Start Course</span>
+                  <span className='md:text-xl'>Start Course</span>
                 </button>
               </div>
               {/* <div className='bg-blue-500 h-2 z-1 top-[-2] relative right-1'></div> */}
