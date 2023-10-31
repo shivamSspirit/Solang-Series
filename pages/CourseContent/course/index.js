@@ -7,30 +7,56 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import {
   getSortedPostsData,
-  getAllPostIds,
 } from "../../../utils/module-lession";
 import curPageNumber from "../../../shared/pageNumber";
 
-// export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
+import { useEffect } from "react";
+
+ export async function getStaticProps() {
+  const allPostsData = await getSortedPostsData();
   console.log("app", allPostsData);
 
-//   return {
-//     props: {
-//       allPostsData,
-//     },
-//   };
-// }
-
-
-
- 
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+}
 
 
 
 
+const Course1 = ({allPostsData}) => {
 
-const Course1 = ({}) => {
+
+
+
+
+  async function fetchData() {
+    try {
+      const response = await fetch('/api/markdown'); // Replace with your actual API route URL
+      if (response.ok) {
+        const data = await response.json();
+        console.log("data",data);
+        // Update your state or component with the retrieved data
+      } else {
+        throw new Error('Network response was not ok.');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(()=>{
+    fetchData()
+  },[])
+
+
+
+
+
+
+
   const router = useRouter();
   let currentRoute = router.pathname;
   // Splitting the url to convert in array.
@@ -64,7 +90,7 @@ const Course1 = ({}) => {
           </div>
           <div className='mt-10'>
             <div>
-              {/* {allPostsData?.map((lesson, idx) => (
+              {allPostsData?.map((lesson, idx) => (
                 <div key={lesson.id} id='breadcrumbs-one' className='mb-1'>
                   <li>
                     <Link href={`/CourseContent/course/${lesson.id}`}>
@@ -72,7 +98,7 @@ const Course1 = ({}) => {
                     </Link>
                   </li>
                 </div>
-              ))} */}
+              ))}
               {/* <div id='breadcrumbs-one' className='mb-3'>
                 <li>
                   <a>
