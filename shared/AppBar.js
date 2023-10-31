@@ -12,14 +12,14 @@ function AppBar() {
 
   return (
     <Navbar
-      className='rounded-lg text-white bg-[#201F1F] shadow-lg shadow-black p-6'
+      className='rounded-lg text-white bg-[#201F1F] shadow-lg shadow-black p-5'
       style={{ border: ".1px solid grey" }}
       fluid={true}
       rounded={true}
     >
       <Navbar.Brand href='/'>
         <div>
-          <div className='w-16 sm:hidden'>
+          <div className='w-14 sm:hidden'>
             <Image src={MobileSiteLogo} alt="logo" />
           </div>
           <div className='hidden sm:flex'>
