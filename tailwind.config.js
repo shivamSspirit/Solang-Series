@@ -10,5 +10,4 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   plugins: [require("flowbite/plugin"),require('@tailwindcss/typography')],
-  
 };
