@@ -4,6 +4,8 @@ import Instagram from "../assets/Instagram.svg";
 import Facebook from "../assets/Facebook.svg";
 import Discord from "../assets/Discord.svg";
 import TwitterX from "../assets/twitterX.svg";
+import MobileSiteLogo from "../assets/mob-nav-logo.png";
+import SiteLogo from "../assets/site-logo.svg";
 import CCFooter from "../assets/CCFooter.svg";
 import Image from "next/image";
 
@@ -14,7 +16,11 @@ const FooterComp = () => {
       className='bg-[#0000005C] border border-[rgba(255, 255, 255, 0.36)] mb-5 rounded-2xl text-white'
     >
       <div className='md:w-1/3'>
-        <div className='mb-4 text-2xl'>Solidity for Solana</div>
+        <div>
+          <div className='mb-4'>
+            <SiteLogo />
+          </div>
+        </div>
         <div className='mb-10 text-gray-400'>
           Dive into the world of blockchain development with our Solidity for
           Solana courses.
