@@ -54,16 +54,16 @@ function AppBar() {
             Course content
           </a>
           <a
-            onClick={() => router.push(`/About`)}
+            onClick={() => router.push(`/FAQ`)}
             className={`cursor-pointer mb-2 md:mb-0 text-start hover:text-gray-300 text-lg mx-3 ${
-              currentRoute === "/FAQs" ? "text-white" : ""
+              currentRoute === "/FAQ" ? "text-white" : ""
             }`}
           >
             FAQs
           </a>
         </Navbar.Collapse>
         <Navbar.Toggle />
-        <SearchIcon onClick={() => router.push('/Search')} className='h-8 md:ml-8 ml-4 mt-1 cursor-pointer' />
+        <SearchIcon onClick={() => router.push('/Search')} className='h-8 md:ml-8 ml-4 mt-2 md:mt-0 cursor-pointer' />
       </div>
     </Navbar>
   );
