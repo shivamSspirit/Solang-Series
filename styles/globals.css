@@ -224,3 +224,11 @@ html {
 .bg-gray-50 {
   background-color: #201f1f;
 }
+
+#flowbite-navbar-toggle{
+  background-color: aqua;
+}
+
+.shrink-0{
+  fill: darkgray;
+}

@@ -21,7 +21,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <div className='mt-12 mx-4 md:mx-10 lg:mx-20'>
-      {/* <Navbar/>
+        {/* <Navbar/>
       {children} */}
         {children?.type?.name === "ComingSoon" ? (
           children
@@ -29,7 +29,8 @@ const Layout = ({ children }) => {
           <>
             <Navbar />
             {children}
-            {!coursePage?.includes("Course") && <FooterComp />}
+            {!coursePage?.includes("Course") ||
+              (children?.type?.name === "Search" && <FooterComp />)}
           </>
         )}
       </div>
