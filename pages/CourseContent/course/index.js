@@ -11,16 +11,16 @@ import {
 } from "../../../utils/module-lession";
 import curPageNumber from "../../../shared/pageNumber";
 
-export async function getStaticProps() {
+// export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
   console.log("app", allPostsData);
 
-  return {
-    props: {
-      allPostsData,
-    },
-  };
-}
+//   return {
+//     props: {
+//       allPostsData,
+//     },
+//   };
+// }
 
 
 
@@ -30,7 +30,7 @@ export async function getStaticProps() {
 
 
 
-const Course1 = ({allPostsData}) => {
+const Course1 = ({}) => {
   const router = useRouter();
   let currentRoute = router.pathname;
   // Splitting the url to convert in array.
@@ -64,7 +64,7 @@ const Course1 = ({allPostsData}) => {
           </div>
           <div className='mt-10'>
             <div>
-              {allPostsData?.map((lesson, idx) => (
+              {/* {allPostsData?.map((lesson, idx) => (
                 <div key={lesson.id} id='breadcrumbs-one' className='mb-1'>
                   <li>
                     <Link href={`/CourseContent/course/${lesson.id}`}>
@@ -72,7 +72,7 @@ const Course1 = ({allPostsData}) => {
                     </Link>
                   </li>
                 </div>
-              ))}
+              ))} */}
               {/* <div id='breadcrumbs-one' className='mb-3'>
                 <li>
                   <a>
