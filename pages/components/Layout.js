@@ -30,6 +30,7 @@ const Layout = ({ children }) => {
             <Navbar />
             {children}
             {children?.type?.name !== "Search" &&
+              children?.type?.name !== "FAQ" &&
               !coursePage?.includes("Course") && <FooterComp />}
           </>
         )}
