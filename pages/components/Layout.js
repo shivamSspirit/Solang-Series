@@ -29,8 +29,8 @@ const Layout = ({ children }) => {
           <>
             <Navbar />
             {children}
-            {!coursePage?.includes("Course") ||
-              (children?.type?.name === "Search" && <FooterComp />)}
+            {children?.type?.name !== "Search" &&
+              !coursePage?.includes("Course") && <FooterComp />}
           </>
         )}
       </div>
