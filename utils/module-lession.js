@@ -3,50 +3,60 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 import { useRouter } from "next/router";
-let fs;
-if (typeof window === 'undefined') {
-  fs = require('fs');
-}
-//import fs from 'fs/promises';
+import fs from 'fs/promises';
 
 const postsDirectory = path.join(process.cwd(), 'modules/module-0/docs/module-0-a');
-console.log("postsdrectory:",postsDirectory);
 
 
- const basePath = path.join(process.cwd(), 'modules');
-// // const basePath = path.join(process.cwd(), 'modules');
- //console.log("basepath",basePath);
+const basePath = path.join('modules');
 
 export async function getSortedPostsData() {
-  // Get file names under /posts
-const modules = fs.readdirSync(basePath)
-  console.log("hellossss",modules)
- 
-  
-  // const modf = await readAndParseFiles(basePath);
-  // console.log("modf",modf)
 
-  const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames.map((fileName) => {
+const modules = await fs.readdir(basePath);
+let filesofmodules=[];
+
+for (const module of modules) {
+  const modulePath = path.join(basePath, module);
+ 
+  if ((await fs.stat(modulePath)).isDirectory()) {
+    const docPath = path.join(modulePath, 'docs');
+    const docFolders = await fs.readdir(docPath);
+
+    for (const docFolder of docFolders) {
+      const docFolderPath = path.join(docPath, docFolder);
+      const filePathnames = path.join(process.cwd(), docFolderPath);
+      const filenamessss  = await fs.readdir(filePathnames);
+      filesofmodules=[...filesofmodules,filenamessss]
+    }
+  }
+}
+
+console.log("filesofmodules",filesofmodules)
+
+
+
+
+  const fileNames = await fs.readdir(postsDirectory);
+ // console.log("dfild",fileNames)
+  const allPostsData =  fileNames?.map(async(fileName) => {
     // Remove ".md" from file name to get id
     const id = fileName.replace(/\.md$/, '');
 
     // Read markdown file as string
     const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-
-    // Use gray-matter to parse the post metadata section
+    const fileContents =await  fs.readFile(fullPath, 'utf8');
     const matterResult = matter(fileContents);
-
-    // Combine the data with the id
-    return {
-      id,
-      ...matterResult.data,
-    };
+    if(matterResult.data){
+      return {
+        id,
+        ...matterResult.data,
+      };
+    }
   });
-
+  const allPosts = await Promise.all(allPostsData);
+ // console.log("allpost data",allPosts)
   // Sort posts by date
-  return allPostsData.sort((a, b) => {
+  return allPosts.sort((a, b) => {
     if (a.author < b.author) {
       return 1;
     } else {
@@ -58,8 +68,8 @@ const modules = fs.readdirSync(basePath)
 
 
 export async function getAllPostIds() {
-    const fileNames = fs.readdirSync(postsDirectory);
-    console.log("filenames",fileNames)
+    const fileNames = await fs.readdir(postsDirectory);
+    //console.log("filenames",fileNames)
   
     // Returns an array that looks like this:
     // [
@@ -87,7 +97,7 @@ export async function getAllPostIds() {
 
   export async function getPostData(id) {
     const fullPath = path.join(postsDirectory, `${id}.md`);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const fileContents = await fs.readFile(fullPath, 'utf8');
   
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);
@@ -98,11 +108,6 @@ export async function getAllPostIds() {
       .process(matterResult.content);
     const contentHtml = processedContent.toString();
   
-
-    console.log("perpostData",{ id,
-        contentHtml,
-        ...matterResult.data})
-    // Combine the data with the id and contentHtml
     return {
       id,
       contentHtml,

@@ -32,30 +32,6 @@ const Course1 = ({allPostsData}) => {
 
 
 
-  async function fetchData() {
-    try {
-      const response = await fetch('/api/markdown'); // Replace with your actual API route URL
-      if (response.ok) {
-        const data = await response.json();
-        console.log("data",data);
-        // Update your state or component with the retrieved data
-      } else {
-        throw new Error('Network response was not ok.');
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  useEffect(()=>{
-    fetchData()
-  },[])
-
-
-
-
-
-
 
   const router = useRouter();
   let currentRoute = router.pathname;
