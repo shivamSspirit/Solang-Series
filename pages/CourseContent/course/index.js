@@ -7,12 +7,13 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import {
   getSortedPostsData,
-  getAllPostIds,
 } from "../../../utils/module-lession";
 import curPageNumber from "../../../shared/pageNumber";
 
-export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
+import { useEffect } from "react";
+
+ export async function getStaticProps() {
+  const allPostsData = await getSortedPostsData();
   console.log("app", allPostsData);
 
   return {
@@ -24,13 +25,14 @@ export async function getStaticProps() {
 
 
 
- 
-
-
-
-
 
 const Course1 = ({allPostsData}) => {
+
+
+
+
+
+
   const router = useRouter();
   let currentRoute = router.pathname;
   // Splitting the url to convert in array.
