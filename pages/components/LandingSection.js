@@ -17,7 +17,7 @@ import FooterComp from "../../shared/Footer";
 
 const LandingSection = () => {
   // const [curBtn, setCurBtn] = useState(0);
-  const [svgHoverColor, setSvgHoverColor] = useState('white')
+  const [svgHoverColor, setSvgHoverColor] = useState("white");
 
   // const startBtnOnClick = () => {
   //   setCurBtn(1);
@@ -184,36 +184,35 @@ const LandingSection = () => {
               technology
             </div>
             <div className='mt-10'>
-              <div className='flex'>
-                <div className='pr-6'>
-                  <button
-                    color='transparent'
-                    onMouseEnter={() => setSvgHoverColor("black")}
-                    onMouseLeave={() => setSvgHoverColor("white")}
-                    // onClick={startBtnOnClick}
-                    className={`border border-white flex justify-center items-center py-2 px-2 rounded-md hover:bg-white hover:text-black`}
+              <div className='flex pr-6'>
+                <button
+                  color='transparent'
+                  onMouseEnter={() => setSvgHoverColor("black")}
+                  onMouseLeave={() => setSvgHoverColor("white")}
+                  // onClick={startBtnOnClick}
+                  className={`border border-white flex justify-center items-center py-2 px-2 rounded-sm hover:bg-white hover:text-black`}
+                  style={{ boxShadow: "-5px 5px 2px white" }}
+                >
+                  <svg
+                    width='16'
+                    height='17'
+                    viewBox='0 0 16 17'
+                    className='mr-3'
+                    fill='none'
+                    xmlns='http://www.w3.org/2000/svg'
                   >
-                    <svg
-                      width='16'
-                      height='17'
-                      viewBox='0 0 16 17'
-                      className='mr-3'
-                      fill='none'
-                      xmlns='http://www.w3.org/2000/svg'
-                    >
-                      <g id='.left-icon'>
-                        <path
-                          id='Vector'
-                          d='M5.06187 12.9259L0 8.5L5.06187 4.07406L5.92594 5.06187L2 8.5L5.92594 11.9381L5.06187 12.9259ZM10.9381 12.9259L10.0741 11.9381L14 8.5L10.0741 5.06187L10.9381 4.07406L16 8.5L10.9381 12.9259ZM6.94219 14.3125L5.6875 13.94L9.05781 2.6875L10.3125 3.06L6.94219 14.3125Z'
-                          fill={svgHoverColor}
-                        />
-                      </g>
-                    </svg>
-
-                    <span className='text-xs md:text-base'>Start Course</span>
-                  </button>
-                </div>
+                    <g id='.left-icon'>
+                      <path
+                        id='Vector'
+                        d='M5.06187 12.9259L0 8.5L5.06187 4.07406L5.92594 5.06187L2 8.5L5.92594 11.9381L5.06187 12.9259ZM10.9381 12.9259L10.0741 11.9381L14 8.5L10.0741 5.06187L10.9381 4.07406L16 8.5L10.9381 12.9259ZM6.94219 14.3125L5.6875 13.94L9.05781 2.6875L10.3125 3.06L6.94219 14.3125Z'
+                        fill={svgHoverColor}
+                      />
+                    </g>
+                  </svg>
+                  <span className='text-xs md:text-base'>Start Course</span>
+                </button>
               </div>
+              {/* <div className='bg-blue-500 h-2 z-1 top-[-2] relative right-1'></div> */}
             </div>
           </div>
           <div className='mb-16 lg:w-1/2 lg:m-0'>
