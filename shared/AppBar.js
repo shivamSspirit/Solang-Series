@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import SiteLogo from "../assets/site-logo.svg";
 import MobileSiteLogo from "../assets/mob-nav-logo.png";
 import Image from "next/image";
-import Link from "next/link";
 
 function AppBar() {
   const router = useRouter();
@@ -21,7 +20,7 @@ function AppBar() {
       <Navbar.Brand href='/'>
         <div>
           <div className='w-16 sm:hidden'>
-            <Image src={MobileSiteLogo} alt='mob-logo' />
+            <Image src={MobileSiteLogo} alt="logo" />
           </div>
           <div className='hidden sm:flex'>
             <SiteLogo />
