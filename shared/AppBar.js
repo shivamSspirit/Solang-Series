@@ -27,11 +27,11 @@ function AppBar() {
           </div>
         </div>
       </Navbar.Brand>
-      <div className='flex justify-center items-center'>
-        <Navbar.Collapse className='text-[gray]'>
+      <div className='flex justify-center items-start md:items-center lg:items-center xl:items-center'>
+        <Navbar.Collapse className='text-[#e4e3e3] absolute right-[117.6px] bg-orange-400 p-2 md:bg-transparent lg:bg-transparent xl:bg-transparent md:static lg:static xl:static w-[190px] rounded'>
           <a
             onClick={() => router.push(`/`)}
-            className={`cursor-pointer hover:text-gray-300 text-lg ${
+            className={`cursor-pointer hover:text-gray-300 text-lg text-right ${
               currentRoute === "/" ? "text-white" : ""
             }`}
           >
@@ -39,7 +39,7 @@ function AppBar() {
           </a>
           <a
             onClick={() => router.push(`/About`)}
-            className={`cursor-pointer hover:text-gray-300 text-lg ${
+            className={`cursor-pointer hover:text-gray-300 text-lg text-right${
               currentRoute === "/About" ? "text-white" : ""
             }`}
           >
@@ -47,7 +47,7 @@ function AppBar() {
           </a>
           <a
             onClick={() => router.push(`/CourseContent`)}
-            className={`cursor-pointer hover:text-gray-300 text-lg ${
+            className={`cursor-pointer hover:text-gray-300 text-lg text-right ${
               currentRoute === "/CourseContent" ? "text-white" : ""
             }`}
           >
@@ -55,7 +55,7 @@ function AppBar() {
           </a>
           <a
             onClick={() => router.push(`/About`)}
-            className={`cursor-pointer hover:text-gray-300 text-lg ${
+            className={`cursor-pointer hover:text-gray-300 text-lg text-right${
               currentRoute === "/FAQs" ? "text-white" : ""
             }`}
           >
@@ -63,7 +63,7 @@ function AppBar() {
           </a>
         </Navbar.Collapse>
         <Navbar.Toggle />
-        <SearchIcon className='h-8 md:ml-8' />
+        <SearchIcon className='h-8 md:ml-8 ml-4 mt-2' />
       </div>
     </Navbar>
   );
