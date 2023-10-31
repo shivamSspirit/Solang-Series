@@ -14,7 +14,7 @@ import { useEffect } from "react";
 
  export async function getStaticProps() {
   const allPostsData = await getSortedPostsData();
-  console.log("app", allPostsData);
+ // console.log("app", allPostsData);
 
   return {
     props: {
@@ -40,11 +40,11 @@ const Course1 = ({allPostsData}) => {
 
   const { course } = router.query;
 
-  console.log("course", course);
+ // console.log("course", course);
   const [prevPg, nextPg] = curPageNumber({ pathname: router.pathname });
 
-  console.log(currentRoute[2], " Course1 index.js");
-  console.log(nextPg);
+ // console.log(currentRoute[2], " Course1 index.js");
+ // console.log(nextPg);
 
   return (
     <div className='my-20'>
