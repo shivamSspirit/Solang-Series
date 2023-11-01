@@ -65,10 +65,10 @@ const About = () => {
   );
 
   return (
-    <div className='mt-20 sm:px-12'>
+    <div className='mt-5 sm:px-12'>
       <div>
         <div className='flex flex-col-reverse justify-between'>
-          <div className='text-white my-20 sm:my-28'>
+          <div className='text-white my-5 sm:mb-10'>
             <div className='text-5xl'>About</div>
             <div className='mt-10 text-sm sm:text-base'>
               <p>
