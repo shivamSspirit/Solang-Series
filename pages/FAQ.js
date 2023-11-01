@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -9,12 +9,6 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
 const FAQ = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleAccordion = () => {
-    setIsExpanded(!isExpanded);
-  };
-
   const accData = [
     {
       title: "What are the prerequisites of the course?",
@@ -34,6 +28,16 @@ const FAQ = () => {
     },
   ];
 
+  const [expanded, setExpanded] = useState(
+    new Array(accData.length).fill(false)
+  );
+
+  const toggleAccordion = (index) => {
+    const newExpanded = [...expanded];
+    newExpanded[index] = !newExpanded[index];
+    setExpanded(newExpanded);
+  };
+
   return (
     <div>
       <div className='text-5xl my-20'>Frequently asked questions</div>
@@ -42,11 +46,12 @@ const FAQ = () => {
           <Accordion
             key={idx}
             className='bg-transparent border border-white my-2 text-white'
+            expanded={expanded[idx]}
           >
             <AccordionSummary
-              onClick={toggleAccordion}
+              onClick={() => toggleAccordion(idx)}
               expandIcon={
-                isExpanded ? (
+                expanded[idx] ? (
                   <RemoveIcon style={{ color: "white" }} />
                 ) : (
                   <AddIcon style={{ color: "white" }} />
@@ -56,9 +61,7 @@ const FAQ = () => {
               <Typography>{data.title}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>
-                {data.ans}
-              </Typography>
+              <Typography>{data.ans}</Typography>
             </AccordionDetails>
           </Accordion>
         ))}
