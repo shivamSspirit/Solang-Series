@@ -15,7 +15,7 @@ const NextBreadcrumb = ({
   trimmedPath.unshift("Module 1");
   const pathNames = trimmedPath.filter((path) => path);
 
- // console.log(pathNames, " BreadCrumb");
+ console.log(pathNames, " BreadCrumb");
 
   return (
     <div>
@@ -24,9 +24,7 @@ const NextBreadcrumb = ({
           let href =
             link === "Module 1"
               ? `/CourseContent`
-              : `/CourseContent/Course${index}`;
-          let itemClasses =
-            paths === href ? `${listClasses} ${activeClasses}` : listClasses;
+              : `/CourseContent/${trimmedPath[index]}`;
           let itemLink = capitalizeLinks
             ? link[0].toUpperCase() + link.slice(1, link.length)
             : link;
@@ -36,7 +34,6 @@ const NextBreadcrumb = ({
               <li>
                 <Link href={href}>{itemLink}</Link>
               </li>
-              {pathNames.length !== index + 1}
             </React.Fragment>
           );
         })}

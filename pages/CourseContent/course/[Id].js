@@ -28,7 +28,7 @@ export async function getStaticPaths() {
 }
 
 const GeneralInfo = ({ postData }) => {
-  // console.log("postData:", postData);
+  console.log("postData:", postData);
 
   const router = useRouter();
   console.log(router.pathname, " Pathname");

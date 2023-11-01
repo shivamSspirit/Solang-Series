@@ -26,7 +26,6 @@ console.log("alltg",alltg)
   };
 }
 
-
 const CourseContent = ({alltg}) => {
   console.log("fsddfjindsfnsddfnj",alltg)
   const announcementData = [
