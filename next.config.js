@@ -5,6 +5,15 @@ module.exports ={
   reactStrictMode: true,
   images: {
     domains: ["reqres.in"],
+
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        port: '',
+        pathname: '/ddwkxn8ak/image/upload/t_sol/v1698823073/solangsol/**',
+      },
+    ],
   },
   eslint: {
     // Warning: This allows production builds to successfully complete even if

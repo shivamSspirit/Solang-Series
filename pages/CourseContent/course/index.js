@@ -10,7 +10,6 @@ import {
 } from "../../../utils/module-lession";
 import curPageNumber from "../../../shared/pageNumber";
 
-import { useEffect } from "react";
 
  export async function getStaticProps() {
   const allPostsData = await getSortedPostsData();

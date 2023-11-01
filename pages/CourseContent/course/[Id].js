@@ -31,7 +31,7 @@ const GeneralInfo = ({ postData }) => {
  // console.log("postData:", postData);
 
   const router = useRouter();
- // console.log(router.pathname, " Pathname");
+  console.log(router.pathname, " Pathname");
   const [prevPg, nextPg] = curPageNumber({ pathname: router.pathname });
 
   return (
@@ -69,26 +69,31 @@ const GeneralInfo = ({ postData }) => {
           <SideBar />
         </div>
 
-        <article className='prose lg:prose-slate md:prose-lg lg:prose-xl'>
-          <div className='flex flex-col text-white'>
-            <div className='flex justify-content items-center text-2xl mb-6'>
-              <div className='bg-white px-2 py-2 rounded-[2.5rem] mr-6 w-[3rem]'>
-                <div className='text-black text-center font-bold'>a</div>
-              </div>
-              <div>General Info</div>
-            </div>
-
-            <div>
-              {postData.title}
-              <br />
-              {postData.id}
-              <br />
-              {postData.author}
-              <br />
-              <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-            </div>
+       
+        <div className='flex flex-col text-white'>
+        
+        <div className='flex justify-content items-center text-2xl mb-6'>
+          <div className='bg-white px-2 py-2 rounded-[2.5rem] mr-6 w-[3rem]'>
+            <div className='text-black text-center font-bold'>a</div>
           </div>
+          <div>General Info</div>
+        </div>
+        <article class="prose prose-stone">
+        <div>
+          {postData.title}
+          <br />
+          {postData.id}
+          <br />
+          {postData.author}
+          <br />
+          <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+        </div>
         </article>
+      </div>
+
+      
+        
+
       </div>
 
       <div
