@@ -20,6 +20,7 @@ module.exports = {
     },
     colors: {
       primary: "blue",
+      transparentBg: "transparent",
       blue: "#1fb6ff",
       mod1Color: "#6B7280",
     },

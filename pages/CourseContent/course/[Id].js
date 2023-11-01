@@ -9,7 +9,7 @@ import curPageNumber from "../../../shared/pageNumber";
 import { getAllPostIds, getPostData } from "../../../utils/module-lession";
 
 export async function getStaticProps({ params }) {
- // console.log("params", params);
+  // console.log("params", params);
   const postData = await getPostData(params.Id);
   return {
     props: {
@@ -20,7 +20,7 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   const paths = await getAllPostIds();
- // console.log("paths", paths);
+  // console.log("paths", paths);
   return {
     paths,
     fallback: false,
@@ -28,7 +28,7 @@ export async function getStaticPaths() {
 }
 
 const GeneralInfo = ({ postData }) => {
- // console.log("postData:", postData);
+  // console.log("postData:", postData);
 
   const router = useRouter();
   console.log(router.pathname, " Pathname");
@@ -69,33 +69,26 @@ const GeneralInfo = ({ postData }) => {
           <SideBar />
         </div>
 
-       
         <div className='flex flex-col text-white'>
-        
-        <div className='flex justify-content items-center text-2xl mb-6'>
-          <div className='bg-white px-2 py-2 rounded-[2.5rem] mr-6 w-[3rem]'>
-            <div className='text-black text-center font-bold'>a</div>
+          <div className='flex justify-content items-center text-2xl mb-6'>
+            <div className='bg-transparentBg border-[5px] border-mod1Color px-3 py-2 rounded-[2.5rem] mr-6 h-16 w-16'>
+              <div className='text-white text-3xl text-center font-bold'>a</div>
+            </div>
+            <div className='text-4xl'>General Info</div>
           </div>
-          <div>General Info</div>
+          <article className='text-white prose ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer'>
+            <div>
+              {postData.title}
+              <br />
+              {postData.id}
+              <br />
+              {postData.author}
+              <br />
+              <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+            </div>
+          </article>
         </div>
-        <article class="prose prose-stone">
-        <div>
-          {postData.title}
-          <br />
-          {postData.id}
-          <br />
-          {postData.author}
-          <br />
-          <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-        </div>
-        </article>
       </div>
-
-      
-        
-
-      </div>
-
       <div
         className={`mt-20 flex ${
           prevPg > 0 ? "justify-between" : "justify-end"
