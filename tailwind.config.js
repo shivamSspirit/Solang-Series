@@ -19,21 +19,9 @@ module.exports = {
       xl: "1440px",
     },
     colors: {
-      // header modules
-      "header-bg-color": "#201F1F",
-      "header-link-text-color": "white",
-      "header-border-color": "",
-      "header-text-hover-color": "",
-
+      primary: "blue",
       blue: "#1fb6ff",
-      purple: "#7e5bef",
-      pink: "#ff49db",
-      orange: "#ff7849",
-      green: "#13ce66",
-      yellow: "#ffc82c",
-      "gray-dark": "#273444",
-      gray: "#8492a6",
-      "gray-light": "#d3dce6",
+      mod1Color: "#6B7280",
     },
     fontFamily: {
       sans: ["Graphik", "sans-serif"],
