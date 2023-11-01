@@ -12,8 +12,23 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import { useRouter } from "next/router";
+import { getModules } from "../utils/module-lession";
 
-const CourseContent = () => {
+export async function getStaticProps() {
+  const allPostsData = await getModules();
+  console.log("app", allPostsData);
+ const alltg =allPostsData.map(post=>post.match(/module-\d+/));
+console.log("alltg",alltg)
+  return {
+    props: {
+      alltg,
+    },
+  };
+}
+
+
+const CourseContent = ({alltg}) => {
+  console.log("fsddfjindsfnsddfnj",alltg)
   const announcementData = [
     {
       img: Course1,
@@ -78,6 +93,7 @@ const CourseContent = () => {
                   <Button className='w-full bg-white'>
                     <div
                       onClick={() => {
+                        
                         router.push({
                           pathname: `/CourseContent/course`,
                         });

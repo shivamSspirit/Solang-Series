@@ -2,8 +2,24 @@ import Head from "next/head";
 import AppBar from "../shared/AppBar";
 import LandingSection from "./components/LandingSection";
 import ComingSoon from "./comingSoon/ComingSoon";
+import { getSortedPostsData } from "../utils/module-lession";
+
+export async function getStaticProps() {
+  const allPostsData = await getSortedPostsData();
+  console.log("app from index", allPostsData);
+
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+}
+
 
 export default function Home() {
+
+
+
   return (
     <>
       <Head>
