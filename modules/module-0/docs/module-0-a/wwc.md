@@ -3,7 +3,6 @@ title: 'What we will cover'
 author: 'solsa'
 ---
 
-
 # what we will cover
 
 ## Objectives

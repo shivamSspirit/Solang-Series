@@ -36,8 +36,8 @@ const GeneralInfo = ({ postData }) => {
 
   return (
     <div className='my-12'>
-      <div className='flex justify-between p-8 rounded-3xl bg-[#201F1F]'>
-        <div className='w-1/2 text-white'>
+      <div className='flex md:flex-row flex-col-reverse justify-between p-8 rounded-3xl bg-[#201F1F]'>
+        <div className='md:w-1/2 text-white'>
           <NextBreadcrumb
             homeElement={"Home"}
             separator={<span> | </span>}
@@ -54,7 +54,7 @@ const GeneralInfo = ({ postData }) => {
             empowers you to shape the future of blockchain technology
           </div>
         </div>
-        <div className='w-1/2 '>
+        <div className='md:w-1/2 '>
           <div className='flex justify-end'>
             <Image
               src={illustration}
@@ -63,36 +63,32 @@ const GeneralInfo = ({ postData }) => {
             />
           </div>
         </div>
-
       </div>
-      <div className='mt-20 hidden sm:flex'>
-        <div className='mr-10'>
+      <div className='mt-20 sm:flex'>
+        <div className='mr-10 hidden md:flex'>
           <SideBar />
         </div>
 
-        <article class="prose lg:prose-slate md:prose-lg lg:prose-xl">
-        <div className='flex flex-col text-white'>
-        
-        <div className='flex justify-content items-center text-2xl mb-6'>
-          <div className='bg-white px-2 py-2 rounded-[2.5rem] mr-6 w-[3rem]'>
-            <div className='text-black text-center font-bold'>a</div>
+        <article className='prose lg:prose-slate md:prose-lg lg:prose-xl'>
+          <div className='flex flex-col text-white'>
+            <div className='flex justify-content items-center text-2xl mb-6'>
+              <div className='bg-white px-2 py-2 rounded-[2.5rem] mr-6 w-[3rem]'>
+                <div className='text-black text-center font-bold'>a</div>
+              </div>
+              <div>General Info</div>
+            </div>
+
+            <div>
+              {postData.title}
+              <br />
+              {postData.id}
+              <br />
+              {postData.author}
+              <br />
+              <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+            </div>
           </div>
-          <div>General Info</div>
-        </div>
-
-        <div>
-          {postData.title}
-          <br />
-          {postData.id}
-          <br />
-          {postData.author}
-          <br />
-          <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-        </div>
-      </div>
         </article>
-        
-
       </div>
 
       <div

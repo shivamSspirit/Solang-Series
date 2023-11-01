@@ -19,7 +19,7 @@ const NextBreadcrumb = ({
 
   return (
     <div>
-      <ul id='breadcrumbs-one' className='hidden sm:flex'>
+      <ul id='breadcrumbs-one' className='hidden md:flex'>
         {pathNames.map((link, index) => {
           let href =
             link === "Module 1"

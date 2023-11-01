@@ -7,7 +7,6 @@ import fs from 'fs/promises';
 
 const postsDirectory = path.join(process.cwd(), 'modules/module-0/docs/module-0-a');
 
-
 const basePath = path.join('modules');
 
 export async function getSortedPostsData() {
