@@ -4,10 +4,16 @@
 
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Manrope&family=Plus+Jakarta+Sans&family=Poppins&family=Raleway&family=Work+Sans&display=swap");
 
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
 html {
   background-color: #2a2a2a;
   color: white;
   font-family: "IBM Plex Mono", monospace;
+}
+
+.interss{
+  font-family: 'Inter', sans-serif !important;
 }
 
 #breadcrumbs-one {

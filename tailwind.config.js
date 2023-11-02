@@ -31,7 +31,7 @@ module.exports = {
       sans: ["Graphik", "sans-serif"],
       serif: ["Merriweather", "serif"],
       headingFamily: ["IBM Plex Mono"],
-      bodyFamily: ["Inter"],
+      bodyFamily: ['Inter', 'sans-serif'],
     },
     extend: {
       spacing: {

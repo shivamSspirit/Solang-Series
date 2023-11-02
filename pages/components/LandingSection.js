@@ -179,7 +179,7 @@ const LandingSection = () => {
             <div className='text-xl md:text-2xl mt-3 font-bold'>
              Solidity on solana
             </div>
-            <div className='mt-10 font-bodyFamily text-secondaryGrey text-sm md:text-base'>
+            <div className='mt-10 font-bodyFamily text-secondaryGrey text-sm md:text-base interss'>
               Dive into the world of blockchain development with our Solidity
               on Solana course. Master the art of creating smart contracts on
               the Solana network using Solidity, opening the door to high-speed, secure, and
