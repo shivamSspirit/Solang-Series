@@ -26,42 +26,6 @@ export async function getStaticProps() {
   };
 }
 
-<<<<<<< HEAD
-const CourseContent = ({alltg}) => {
-  console.log("fsddfjindsfnsddfnj",alltg)
-  const announcementData = [
-    {
-      img: Course1,
-      head: "Module Name ",
-      desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
-    },
-    {
-      img: Course2,
-      head: "Module Name",
-      desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
-    },
-    {
-      img: Course3,
-      head: "Module Name",
-      desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
-    },
-    {
-      img: Course4,
-      head: "Module Name ",
-      desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
-    },
-    {
-      img: Course5,
-      head: "Module Name",
-      desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
-    },
-    {
-      img: Course6,
-      head: "Module Name",
-      desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
-    },
-  ];
-=======
 const announcementData = [
   {
     img: Course1,
@@ -114,7 +78,6 @@ const CourseContent = ({ alltg }) => {
   }));
 
   console.log("mergedArray",mergedArray);
->>>>>>> bca2ef2 (refactoring data flow)
 
   const router = useRouter();
 
