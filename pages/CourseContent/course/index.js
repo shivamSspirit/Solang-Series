@@ -5,33 +5,39 @@ import { Button } from "flowbite-react";
 import NextBreadcrumb from "../../components/NextBreadcrumb";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { getSortedPostsData } from "../../../utils/module-lession";
+import {
+  getAllPostIds,
+  getSortedPostsData,
+} from "../../../utils/module-lession";
 import curPageNumber from "../../../shared/pageNumber";
 
 export async function getStaticProps() {
-  const allPostsData = await getSortedPostsData();
+  const allPostIds = await getAllPostIds();
+
+  const allPostsData = await getSortedPostsData(1);
   // console.log("app", allPostsData);
 
   return {
     props: {
       allPostsData,
+      allPostIds,
     },
   };
 }
 
-const Course1 = ({ allPostsData }) => {
+const Course1 = ({ allPostsData, allPostIds }) => {
   const router = useRouter();
   let currentRoute = router.pathname;
+
   // Splitting the url to convert in array.
   currentRoute = currentRoute.split("/");
 
   const { course } = router.query;
 
-  // console.log("course", course);
   const [prevPg, nextPg] = curPageNumber({ pathname: router.pathname });
 
-  // console.log(currentRoute[2], " Course1 index.js");
-  // console.log(nextPg);
+  console.log(allPostsData, " Data");
+  console.log(allPostIds, " ids");
 
   return (
     <div className='my-20'>
@@ -61,7 +67,9 @@ const Course1 = ({ allPostsData }) => {
                 {allPostsData?.map((lesson, idx) => (
                   <div key={lesson.id} id='breadcrumbs-one' className='mb-1'>
                     <li>
-                      <Link href={`/CourseContent/course/${lesson.id}`}>
+                      <Link
+                        href={`/CourseContent/course/module-0/${allPostIds[1].params.Id}/${lesson.id}`}
+                      >
                         {lesson.id}
                       </Link>
                     </li>

@@ -7,12 +7,13 @@ import fs from "fs/promises";
 
 const postsDirectory = path.join(
   process.cwd(),
-  "modules/module-0/docs/module-0-a"
+  // "modules/module-0/docs/module-0-a"
+  "modules/module-0"
 );
 
 const basePath = path.join("modules");
 
-export async function getSortedPostsData() {
+export async function getSortedPostsData(modNum=0) {
   const modules = await fs.readdir(basePath);
   let filesofmodules = [];
   let filepathname = [];
@@ -23,7 +24,8 @@ export async function getSortedPostsData() {
     allmodules = [...allmodules, modulePath];
 
     if ((await fs.stat(modulePath)).isDirectory()) {
-      const docPath = path.join(modulePath, "docs");
+      // const docPath = path.join(modulePath, "docs");
+      const docPath = path.join(modulePath);
       const docFolders = await fs.readdir(docPath);
 
       for (const docFolder of docFolders) {
@@ -43,12 +45,12 @@ export async function getSortedPostsData() {
 
   // const fileNames = await fs.readdir(postsDirectory);
 
-  const allPostsData = filesofmodules[0]?.map(async (fileName) => {
+  const allPostsData = filesofmodules[modNum]?.map(async (fileName) => {
     // Remove ".md" from file name to get id
     const id = fileName.replace(/\.md$/, "");
 
     // Read markdown file as string
-    const fullPath = path.join(filepathname[0], fileName);
+    const fullPath = path.join(filepathname[modNum], fileName);
     const fileContents = await fs.readFile(fullPath, "utf8");
     const matterResult = matter(fileContents);
     if (matterResult.data) {
@@ -131,7 +133,8 @@ export async function getSingleModuleInfo(ModuleNumber) {
   let allFilesofSingleModule = [];
   const pathOfModuleNumber = path.join( "modules", ModuleNumber)
   if ((await fs.stat(pathOfModuleNumber)).isDirectory()) {
-    const docPath = path.join(pathOfModuleNumber, "docs");
+    // const docPath = path.join(pathOfModuleNumber, "docs");
+    const docPath = path.join(pathOfModuleNumber);
     const docFolders = await fs.readdir(docPath);
 
     for (const docFolder of docFolders) {
@@ -165,7 +168,7 @@ export async function getCourseDataForSingleModulePart(
     const fullPath = path.join(
       "modules",
       moduleNumber,
-      "docs",
+      // "docs",
       modulepart,
       fileName
     );

@@ -36,7 +36,7 @@ const GeneralInfo = ({ postData }) => {
 
   return (
     <div className='my-12'>
-      <div className='flex sm:flex-col justify-between p-8 rounded-3xl bg-[#201F1F]'>
+      <div className='flex sm:flex-col justify-between p-8 rounded-3xl bg-primaryDark'>
         <div>
           <NextBreadcrumb
             homeElement={"Home"}

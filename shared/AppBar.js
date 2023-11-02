@@ -12,7 +12,7 @@ function AppBar() {
 
   return (
     <Navbar
-      className='rounded-lg text-white bg-[#201F1F] shadow-lg shadow-black p-4'
+      className='rounded-lg text-white bg-primaryDark shadow-lg shadow-black p-4'
       style={{ border: ".1px solid grey" }}
       fluid={true}
       rounded={true}
@@ -28,7 +28,7 @@ function AppBar() {
         </div>
       </Navbar.Brand>
       <div className='flex justify-center items-start md:items-center lg:items-center xl:items-center'>
-        <Navbar.Collapse className='text-[#e4e3e3] absolute right-20 top-28 bg-[#201F1F] p-2 md:bg-transparent lg:bg-transparent xl:bg-transparent md:static lg:static xl:static w-[190px] rounded'>
+        <Navbar.Collapse className='text-[#e4e3e3] absolute right-20 top-28 bg-primaryDark p-2 md:bg-transparent lg:bg-transparent xl:bg-transparent md:static lg:static xl:static w-[190px] rounded'>
           <a
             onClick={() => router.push(`/`)}
             className={`cursor-pointer mb-2 md:mb-0 text-start hover:text-gray-300 text-lg mx-3 ${
@@ -63,7 +63,10 @@ function AppBar() {
           </a>
         </Navbar.Collapse>
         <Navbar.Toggle />
-        <SearchIcon onClick={() => router.push('/Search')} className='h-8 md:ml-8 ml-4 mt-1 cursor-pointer' />
+        <SearchIcon
+          onClick={() => router.push("/Search")}
+          className='h-8 md:ml-8 ml-4 mt-1 cursor-pointer'
+        />
       </div>
     </Navbar>
   );

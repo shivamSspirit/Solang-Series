@@ -23,10 +23,15 @@ module.exports = {
       transparentBg: "transparent",
       blue: "#1fb6ff",
       mod1Color: "#6B7280",
+      primaryDark: "#201F1F",
+      primaryGrey: "#2A2A2A",
+      secondaryGrey: "#858383",
     },
     fontFamily: {
       sans: ["Graphik", "sans-serif"],
       serif: ["Merriweather", "serif"],
+      headingFamily: ["IBM Plex Mono"],
+      bodyFamily: ["Inter"],
     },
     extend: {
       spacing: {
