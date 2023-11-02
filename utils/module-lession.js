@@ -72,6 +72,8 @@ export async function getSortedPostsData(modNum=0) {
   });
 }
 
+
+
 export async function getAllPostIds() {
   const fileNames = await fs.readdir(postsDirectory);
   //console.log("filenames",fileNames)
@@ -129,9 +131,42 @@ export async function getModules() {
   return allmodules;
 }
 
+export async function getAllfilesIds(modulenumber) {
+
+  const allFilesrelatedtomodulenumber = getSingleModuleInfo(modulenumber);
+  console.log("allFilesrelatedtomodulenumber",allFilesrelatedtomodulenumber)
+
+  const fileNames = await fs.readdir(postsDirectory);
+  //console.log("filenames",fileNames)
+
+
+
+  // Returns an array that looks like this:
+  // [
+  //   {
+  //     params: {
+  //       id: 'ssg-ssr'
+  //     }
+  //   },
+  //   {
+  //     params: {
+  //       id: 'pre-rendering'
+  //     }
+  //   }
+  // ]
+
+  return fileNames.map((fileName) => {
+    return {
+      params: {
+        Id: fileName.replace(/\.md$/, ""),
+      },
+    };
+  });
+}
+
 export async function getSingleModuleInfo(ModuleNumber) {
   let allFilesofSingleModule = [];
-  const pathOfModuleNumber = path.join( "modules", ModuleNumber)
+  const pathOfModuleNumber = path.join("modules", ModuleNumber)
   if ((await fs.stat(pathOfModuleNumber)).isDirectory()) {
     // const docPath = path.join(pathOfModuleNumber, "docs");
     const docPath = path.join(pathOfModuleNumber);
@@ -149,7 +184,7 @@ export async function getSingleModuleInfo(ModuleNumber) {
     }
   }
 
-  return allFilesofSingleModule;
+  return {'modulepart-a':allFilesofSingleModule[0],'modulepart-b':allFilesofSingleModule[1]}
 }
 
 // mdfiletoberead (this is all files of like this  (module-0-part-a)
