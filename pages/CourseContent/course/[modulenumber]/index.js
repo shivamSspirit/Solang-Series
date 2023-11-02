@@ -6,16 +6,9 @@ import NextBreadcrumb from "../../../components/NextBreadcrumb";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
-<<<<<<< HEAD:pages/CourseContent/course/index.js
-  getAllPostIds,
-  getSortedPostsData,
-} from "../../../utils/module-lession";
-import curPageNumber from "../../../shared/pageNumber";
-=======
   getSortedPostsData,getAllfilesIds
 } from "../../../../utils/module-lession";
 import curPageNumber from "../../../../shared/pageNumber";
->>>>>>> bca2ef2 (refactoring data flow):pages/CourseContent/course/[modulenumber]/index.js
 
 export async function getStaticProps() {
   const allPostIds = await getAllPostIds();
@@ -31,9 +24,6 @@ export async function getStaticProps() {
   };
 }
 
-<<<<<<< HEAD:pages/CourseContent/course/index.js
-const Course1 = ({ allPostsData, allPostIds }) => {
-=======
 // export async function getStaticProps({ params }) {
 //   console.log("params", params);
 //    const moduleInfo = await getSingleModuleInfo(params.modulenumber);
@@ -67,7 +57,6 @@ console.log("moduleInfo",moduleInfo)
 
 
 
->>>>>>> bca2ef2 (refactoring data flow):pages/CourseContent/course/[modulenumber]/index.js
   const router = useRouter();
   let currentRoute = router.pathname;
 
