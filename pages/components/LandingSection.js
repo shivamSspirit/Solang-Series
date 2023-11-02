@@ -65,8 +65,8 @@ const LandingSection = () => {
             <div className='m-1'>
               <Image src={announcement.img} alt='med' />
               <div className='px-3 rounded-b-2xl'>
-                <div className='text-xl font-semibold pt-6 pb-1'>{announcement.head}</div>
-                <div className='text-[#CECECE] pb-6 text-md'>{announcement.desc}</div>
+                <div className='text-2xl font-semibold pt-6 pb-1'>{announcement.head}</div>
+                <div className='text-secondaryGrey pb-6 font-bodyFamily'>{announcement.desc}</div>
               </div>
             </div>
           </Grid>
@@ -140,7 +140,7 @@ const LandingSection = () => {
         <div key={key} className='wrap left'>
           <div className='content bg-primaryDark text-white'>
             <h2 className="font-semibold text-xl">{data.heading}</h2>
-            <p className='text-[#CECECE]'>{data.content}</p>
+            <p className='text-[#CECECE]  font-bodyFamily'>{data.content}</p>
           </div>
         </div>
       ))}

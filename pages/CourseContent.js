@@ -97,7 +97,7 @@ const CourseContent = ({ allModules }) => {
               <div className="m-1">
                 <Image src={announcement.img.src} alt="med" width={400} height={220} />
                 <div className="px-3 rounded-b-2xl">
-                  <div className="text-2xl pt-6 pb-1">{announcement.module}</div>
+                  <div className="text-2xl capitalize pt-6 pb-1">{announcement.module}</div>
                   <div className="text-secondaryGrey pb-6">{announcement.desc}</div>
                 </div>
                 <div className='mb-2'>
