@@ -1,19 +1,26 @@
-import path from "path";
-import matter from "gray-matter";
-import { remark } from "remark";
-import html from "remark-html";
-import { useRouter } from "next/router";
-import fs from "fs/promises";
+// import path from "path";
+// import matter from "gray-matter";
+// import { remark } from "remark";
+// import html from "remark-html";
+// import { useRouter } from "next/router";
+ import fs from "fs/promises";
 
-const postsDirectory = path.join(
-  process.cwd(),
-  // "modules/module-0/docs/module-0-a"
-  "modules/module-0"
-);
+//import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import { remark } from 'remark';
+import html from 'remark-html';
 
-const basePath = path.join("modules");
 
-export async function getSortedPostsData(modNum=0) {
+// const postsDirectory = path.join(
+//   process.cwd(),
+//   // "modules/module-0/docs/module-0-a"
+//   "modules/module-0"
+// );
+
+const basePath = path.join('modules');
+console.log("basepath",basePath)
+export async function getSortedPostsData(modNum='module-0') {
   const modules = await fs.readdir(basePath);
   let filesofmodules = [];
   let filepathname = [];
@@ -123,23 +130,42 @@ export async function getPostData(id) {
 
 export async function getModules() {
   const modules = await fs.readdir(basePath);
-  let allmodules = [];
+  let allmodulespath = [];
   for (const module of modules) {
     const modulePath = path.join(basePath, module);
-    allmodules = [...allmodules, modulePath];
+    allmodulespath = [...allmodulespath, modulePath];
   }
-  return allmodules;
+  return allmodulespath;
 }
+
+
 
 export async function getAllfilesIds(modulenumber) {
 
-  const allFilesrelatedtomodulenumber = getSingleModuleInfo(modulenumber);
+  const allFilesrelatedtomodulenumber = await getSingleModuleInfo(modulenumber);
   console.log("allFilesrelatedtomodulenumber",allFilesrelatedtomodulenumber)
 
-  const fileNames = await fs.readdir(postsDirectory);
+ // const fileNames = await fs.readdir(postsDirectory);
   //console.log("filenames",fileNames)
 
+  // for (const module of modules) {
+  //   const modulePath = path.join(basePath, module);
+  //   allmodules = [...allmodules, modulePath];
 
+  //   if ((await fs.stat(modulePath)).isDirectory()) {
+  //     // const docPath = path.join(modulePath, "docs");
+  //     const docPath = path.join(modulePath);
+  //     const docFolders = await fs.readdir(docPath);
+
+  //     for (const docFolder of docFolders) {
+  //       const docFolderPath = path.join(docPath, docFolder);
+  //       const filePathnames = path.join(process.cwd(), docFolderPath);
+  //       filepathname = [...filepathname, filePathnames];
+  //       const filenamessss = await fs.readdir(filePathnames);
+  //       filesofmodules = [...filesofmodules, filenamessss];
+  //     }
+  //   }
+  // }
 
   // Returns an array that looks like this:
   // [
@@ -155,13 +181,13 @@ export async function getAllfilesIds(modulenumber) {
   //   }
   // ]
 
-  return fileNames.map((fileName) => {
-    return {
-      params: {
-        Id: fileName.replace(/\.md$/, ""),
-      },
-    };
-  });
+  // return allFilesrelatedtomodulenumber['modulepart-a'].map((fileName) => {
+  //   return {
+  //     params: {
+  //     idasfilename  : fileName.replace(/\.md$/, ""),
+  //     },
+  //   };
+  // });
 }
 
 export async function getSingleModuleInfo(ModuleNumber) {
@@ -189,6 +215,25 @@ export async function getSingleModuleInfo(ModuleNumber) {
 
 // mdfiletoberead (this is all files of like this  (module-0-part-a)
 // full path of file where it is located
+
+
+
+export async function generateDynamicModules(){
+  const allmodulepath = await getModules();
+  const allmodulenum  =  allmodulepath.map((post) => post.substring("modules/".length));
+
+  return allmodulenum.map((fileName) => {
+    return {
+      params: {
+      modulenumber  : fileName
+      },
+    };
+  });
+
+}
+
+
+
 
 export async function getCourseDataForSingleModulePart(
   mdfiletoberead,

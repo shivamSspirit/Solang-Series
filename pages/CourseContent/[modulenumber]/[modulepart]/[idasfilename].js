@@ -1,12 +1,12 @@
 import React from "react";
 import illustration from "../../../assets/illustration.png";
 import Image from "next/image";
-import NextBreadcrumb from "../../../components/NextBreadcrumb";
+import NextBreadcrumb from "../../components/NextBreadcrumb";
 import { useRouter } from "next/router";
-import SideBar from "../../../components/Sidebar";
-import curPageNumber from "../../../../shared/pageNumber";
+import SideBar from "../../components/Sidebar";
+import curPageNumber from "../../../shared/pageNumber";
 
-import { getAllPostIds, getPostData } from "../../../../utils/module-lession";
+import { getAllPostIds, getPostData } from "../../../utils/module-lession";
 
 export async function getStaticProps({ params }) {
   // console.log("params", params);

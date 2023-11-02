@@ -1,27 +1,23 @@
 import React from "react";
-import illustration from "../../../../assets/illustration.png";
+import illustration from '../../../assets/illustration.png'
 import Image from "next/image";
 import { Button } from "flowbite-react";
-import NextBreadcrumb from "../../../components/NextBreadcrumb";
+import NextBreadcrumb from "../../components/NextBreadcrumb";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
-  getSortedPostsData,
-  getAllfilesIds,
-  getAllPostIds,
-} from "../../../../utils/module-lession";
-import curPageNumber from "../../../../shared/pageNumber";
+  getSortedPostsData,getAllfilesIds,generateDynamicModules
+} from "../../../utils/module-lession";
+import curPageNumber from "../../../shared/pageNumber";
 
-export async function getStaticProps() {
-  // const allPostIds = await getAllPostIds();
-
-  const allPostsData = await getSortedPostsData(1);
-  // console.log("app", allPostsData);
+export async function getStaticProps({params}) {
+    console.log("params",params)
+  const getAllFilesForSingleModule = await getSortedPostsData();
+  console.log("getAllFilesForSingleModule", getAllFilesForSingleModule);
 
   return {
     props: {
-      allPostsData,
-      // allPostIds,
+        getAllFilesForSingleModule
     },
   };
 }
@@ -36,22 +32,27 @@ export async function getStaticProps() {
 //    };
 //  }
 
-export async function generateStaticParams({ params }) {
-  console.log("paramsa", params);
-}
+// export async function generateStaticParams({params}){
+// console.log("paramsa",params)
+// }
 
 export async function getStaticPaths() {
-  // const paths = await getAllfilesIds(params?.modulenumber);
-  const paths = ["module-0", "module-0-a"];
-  // console.log("paths", paths);
+  const paths = await generateDynamicModules();
+  console.log("paths",paths)
   return {
     paths,
     fallback: false,
   };
 }
 
-const Course1 = ({ allPostsData }) => {
-  console.log("moduleInfo", allPostsData);
+
+
+const Course1 = ({getAllFilesForSingleModule}) => {
+
+console.log("moduleInfo",getAllFilesForSingleModule)
+
+
+
 
   const router = useRouter();
   let currentRoute = router.pathname;
@@ -59,7 +60,7 @@ const Course1 = ({ allPostsData }) => {
   // Splitting the url to convert in array.
   currentRoute = currentRoute.split("/");
 
-  // const { course } = router.query;
+  const { modulenumber } = router.query;
 
   const [prevPg, nextPg] = curPageNumber({ pathname: router.pathname });
 
@@ -91,11 +92,11 @@ const Course1 = ({ allPostsData }) => {
             </div>
             <div className='mt-10'>
               <div>
-                {allPostsData?.map((lesson, idx) => (
+                {getAllFilesForSingleModule?.map((lesson, idx) => (
                   <div key={lesson.id} id='breadcrumbs-one' className='mb-1'>
                     <li>
                       <Link
-                        href={`/CourseContent/course/module-0/${lesson.id}`}
+                        href={`/CourseContent/${modulenumber}/${allPostIds[1].params.Id}/${lesson.id}`}
                       >
                         {lesson.id}
                       </Link>

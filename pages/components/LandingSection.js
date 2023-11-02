@@ -29,18 +29,18 @@ const LandingSection = () => {
   const announcementData = [
     {
       img: landingPg1,
-      head: "Module Name ",
-      desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
+      head: "Mint Gold(spl) Tokens",
+      desc: "In this module, we will develop a Solana program that will mint gold tokens (spl tokens). The program should be able to set up and execute the token-minting process.",
     },
     {
       img: landingPg2,
-      head: "Module Name",
-      desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
+      head: "Transfer minted gold tokens to another account(Ata)",
+      desc: "In this module, we will develop a program on Solana that allows for the transfer of spl-tokens(minted in Module 2) to other accounts.",
     },
     {
       img: landingPg1,
-      head: "Module Name",
-      desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
+      head: "Mint NFT, Dive into composability",
+      desc: "In this module, we will develop a program on Solana that allows for the mint a nft which have pda as authority.",
     },
   ];
 
@@ -48,7 +48,7 @@ const LandingSection = () => {
     <Box sx={{ flexGrow: 1, color: "white" }}>
       <Grid
         container
-        className='flex justify-evenly items-center'
+        className='flex justify-evenly items-start'
         columns={{ xs: 4, sm: 10, md: 14, lg: 14 }}
       >
         {announcementData.map((announcement, index) => (
@@ -60,14 +60,13 @@ const LandingSection = () => {
             md={4}
             lg={4}
             key={index}
+            
           >
             <div className='m-1'>
               <Image src={announcement.img} alt='med' />
               <div className='px-3 rounded-b-2xl'>
-                <div className='text-2xl pt-6 pb-1'>{announcement.head}</div>
-                <div className='text-secondaryGrey pb-6 font-bodyFamily'>
-                  {announcement.desc}
-                </div>
+                <div className='text-xl font-semibold pt-6 pb-1'>{announcement.head}</div>
+                <div className='text-[#CECECE] pb-6 text-md'>{announcement.desc}</div>
               </div>
             </div>
           </Grid>
@@ -104,34 +103,34 @@ const LandingSection = () => {
 
   const timelineData = [
     {
-      heading: "2017",
+      heading: "Module 0: Introduction",
       content:
-        "Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.",
+        "Here, you will learn the aims and objectives of Solidity for Solana. you, also learn about the structure of the course and the prerequisites required.",
     },
     {
-      heading: "2016",
+      heading: "Module 1: Overview of Building Solana Programs using Solidity",
       content:
-        "Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.",
+        "In this module of Solana with Solidity, you will learn the differences between Solana and EVM and develop an SPL token minter project using Solidity on Solana.",
     },
     {
-      heading: "2015",
+      heading: "Module 2: Minting Fungible Tokens on Solana with Solidity",
       content:
-        "Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.",
+        "In this module, we will develop a Solana program that will mint gold tokens (spl tokens). The program should be able to set up and execute the token-minting process.",
     },
     {
-      heading: "2011",
+      heading: "Module 3: Building a CPI-Enabled Flip Program with Solidity on Solana",
       content:
-        "Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.",
+        "In this module, we dive you into the concepts of composability and CPI in Solana. We will also develop a hands-on solidity contract: a CPI Enabled Flip program on solana using Solidity.",
     },
     {
-      heading: "2012",
+      heading: "Module 4: How to Transfer Solana Tokens with Solidity",
       content:
-        "Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.",
+        "In this module, we will develop a program on Solana that allows for the transfer of spl-tokens(minted in Module 2) to other accounts.",
     },
     {
-      heading: "2007",
+      heading: "Module 5: How to Mint NFT who have Mint Authority as PDA",
       content:
-        "Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.",
+        "Coming Soon",
     },
   ];
 
@@ -140,8 +139,8 @@ const LandingSection = () => {
       {timelineData.map((data, key) => (
         <div key={key} className='wrap left'>
           <div className='content bg-primaryDark text-white'>
-            <h2>{data.heading}</h2>
-            <p className='text-[#CECECE] font-bodyFamily'>{data.content}</p>
+            <h2 className="font-semibold text-xl">{data.heading}</h2>
+            <p className='text-[#CECECE]'>{data.content}</p>
           </div>
         </div>
       ))}
@@ -175,12 +174,15 @@ const LandingSection = () => {
         <div className='flex lg:flex-row flex-col-reverse justify-between'>
           <div className='lg:w-1/2 text-white'>
             <div className='text-2xl md:text-5xl'>
-              Unlocking the Power of Solana with Solidity Smart Contracts
+             Deep Dive Into Solidity On Solana
+            </div>
+            <div className='text-xl md:text-2xl mt-3 font-bold'>
+             Solidity on solana
             </div>
             <div className='mt-10 font-bodyFamily text-secondaryGrey text-sm md:text-base'>
               Dive into the world of blockchain development with our Solidity
-              for Solana courses. Master the art of creating smart contracts on
-              the Solana network, opening the door to high-speed, secure, and
+              on Solana course. Master the art of creating smart contracts on
+              the Solana network using Solidity, opening the door to high-speed, secure, and
               scalable decentralized applications. Join us on a journey of
               learning that empowers you to shape the future of blockchain
               technology

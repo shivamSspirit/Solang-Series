@@ -15,13 +15,12 @@ import { useRouter } from "next/router";
 import { getModules } from "../utils/module-lession";
 
 export async function getStaticProps() {
-  const allPostsData = await getModules();
-  console.log("app", allPostsData);
-  const alltg = allPostsData.map((post) => post.substring("modules/".length));
-  console.log("alltg", alltg);
+  const allModuleNumbers = await getModules();
+  console.log("allModuleNumbers", allModuleNumbers);
+  const allModules = allModuleNumbers.map((post) => post.substring("modules/".length));
   return {
     props: {
-      alltg,
+      allModules,
     },
   };
 }
@@ -69,16 +68,11 @@ const announcementData = [
   },
 ];
 
-const CourseContent = ({ alltg }) => {
-  console.log("fsddfjindsfnsddfnj", alltg);
-
-  const mergedArray = alltg.map((moduleName, index) => ({
+const CourseContent = ({ allModules }) => {
+  const mergedArray = allModules.map((moduleName, index) => ({
     module: moduleName,
     ...announcementData[index],
   }));
-
-  console.log("mergedArray",mergedArray);
-
   const router = useRouter();
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -100,31 +94,18 @@ const CourseContent = ({ alltg }) => {
         >
           {mergedArray.map((announcement, index) => (
             <Grid item xs={3} sm={4} md={4} key={index}>
-              <div className='m-1'>
-                <Image
-                  src={announcement.img.src}
-                  alt='med'
-                  width={400}
-                  height={220}
-                />
-                <div className='px-3 rounded-b-2xl'>
-                  {console.log(
-                    "sfnsjddsnjkjncsdkjdskjncsdfknj",
-                    announcement.module
-                  )}
-                  <div className='text-2xl capitalize pt-6 pb-1'>
-                    {announcement.module}
-                  </div>
-                  <div className='text-secondaryGrey pb-6'>
-                    {announcement.desc}
-                  </div>
+              <div className="m-1">
+                <Image src={announcement.img.src} alt="med" width={400} height={220} />
+                <div className="px-3 rounded-b-2xl">
+                  <div className="text-2xl pt-6 pb-1">{announcement.module}</div>
+                  <div className="text-secondaryGrey pb-6">{announcement.desc}</div>
                 </div>
                 <div className='mb-2'>
                   <Button className='w-full bg-white'>
                     <div
                       onClick={() => {
                         router.push({
-                          pathname: `/CourseContent/course/${announcement.module}`,
+                          pathname: `/CourseContent/${announcement.module}`,
                         });
                       }}
                       className='text-center font-bold text-black text-xl'

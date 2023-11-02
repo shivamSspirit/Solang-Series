@@ -11,21 +11,22 @@ import RemoveIcon from "@mui/icons-material/Remove";
 const FAQ = () => {
   const accData = [
     {
-      title: "What are the prerequisites of the course?",
-      ans: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.",
+      title: "What are the prerequisites of this course?",
+      ans: " Basic programming knowledge in any general language like Python, C++ is required. Knowledge of basic Solidity and JavaScript will be very beneficial and will make the course easier.",
     },
     {
-      title: "What does this course cost?",
-      ans: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.",
+      title: "Is this course paid?",
+      ans: "The Solidity On Solana course is free of cost.",
     },
     {
-      title: "What are the prerequisites of the course?",
-      ans: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.",
+      title: "How long does the course take to complete?",
+      ans: "The course contains nine parts, the first of which is numbered 0 for consistency with past iterations. One part corresponds loosely half to one week (averaging 9-12 hours) of studying, but the speed of completing the course is flexible.",
     },
     {
-      title: "What are the prerequisites of the course?",
-      ans: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.",
+      title: "What software/tools do I need for this course?",
+      ans: "You will need a code editor like Visual Studio Code, along with Solana Devtools and Anchor framework for development. Detailed steps for the setup of the requirements is given in the Setting up Development Workspace lesson",
     },
+
   ];
 
   const [expanded, setExpanded] = useState(
