@@ -36,8 +36,8 @@ const GeneralInfo = ({ postData }) => {
 
   return (
     <div className='my-12'>
-      <div className='flex md:flex-row flex-col-reverse justify-between p-8 rounded-3xl bg-[#201F1F]'>
-        <div className='md:w-1/2 text-white'>
+      <div className='flex sm:flex-col justify-between p-8 rounded-3xl bg-[#201F1F]'>
+        <div>
           <NextBreadcrumb
             homeElement={"Home"}
             separator={<span> | </span>}
@@ -46,21 +46,26 @@ const GeneralInfo = ({ postData }) => {
             listClasses='hover:underline mx-2 font-bold'
             capitalizeLinks
           />
-          <div className='mt-10 text-gray-400'>
-            Dive into the world of blockchain development with our Solidity for
-            Solana courses. Master the art of creating smart contracts on the
-            Solana network, opening the door to high-speed, secure, and scalable
-            decentralized applications. Join us on a journey of learning that
-            empowers you to shape the future of blockchain technology
-          </div>
         </div>
-        <div className='md:w-1/2 '>
-          <div className='flex justify-end'>
-            <Image
-              src={illustration}
-              alt='illustration'
-              className='fill-white'
-            />
+        <div className='flex flex-col-reverse md:flex-row'>
+          <div className='md:w-1/2 text-white'>
+            <div className='mt-10 text-gray-400'>
+              Dive into the world of blockchain development with our Solidity
+              for Solana courses. Master the art of creating smart contracts on
+              the Solana network, opening the door to high-speed, secure, and
+              scalable decentralized applications. Join us on a journey of
+              learning that empowers you to shape the future of blockchain
+              technology
+            </div>
+          </div>
+          <div className='md:w-1/2 '>
+            <div className='flex justify-end'>
+              <Image
+                src={illustration}
+                alt='illustration'
+                className='fill-white'
+              />
+            </div>
           </div>
         </div>
       </div>
