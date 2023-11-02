@@ -1,17 +1,19 @@
 import React from "react";
-import illustration from '../../../../assets/illustration.png'
+import illustration from "../../../../assets/illustration.png";
 import Image from "next/image";
 import { Button } from "flowbite-react";
 import NextBreadcrumb from "../../../components/NextBreadcrumb";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
-  getSortedPostsData,getAllfilesIds
+  getSortedPostsData,
+  getAllfilesIds,
+  getAllPostIds,
 } from "../../../../utils/module-lession";
 import curPageNumber from "../../../../shared/pageNumber";
 
 export async function getStaticProps() {
-  const allPostIds = await getAllPostIds();
+  // const allPostIds = await getAllPostIds();
 
   const allPostsData = await getSortedPostsData(1);
   // console.log("app", allPostsData);
@@ -19,7 +21,7 @@ export async function getStaticProps() {
   return {
     props: {
       allPostsData,
-      allPostIds,
+      // allPostIds,
     },
   };
 }
@@ -34,28 +36,22 @@ export async function getStaticProps() {
 //    };
 //  }
 
-export async function generateStaticParams({params}){
-console.log("paramsa",params)
+export async function generateStaticParams({ params }) {
+  console.log("paramsa", params);
 }
 
-export async function getStaticPaths({params}) {
-  console.log("patamss",params)
-  const paths = await getAllfilesIds(params?.modulenumber);
- // console.log("paths", paths);
+export async function getStaticPaths() {
+  // const paths = await getAllfilesIds(params?.modulenumber);
+  const paths = ["module-0", "module-0-a"];
+  // console.log("paths", paths);
   return {
     paths,
     fallback: false,
   };
 }
 
-
-
-const Course1 = ({moduleInfo}) => {
-
-console.log("moduleInfo",moduleInfo)
-
-
-
+const Course1 = ({ allPostsData }) => {
+  console.log("moduleInfo", allPostsData);
 
   const router = useRouter();
   let currentRoute = router.pathname;
@@ -68,7 +64,7 @@ console.log("moduleInfo",moduleInfo)
   const [prevPg, nextPg] = curPageNumber({ pathname: router.pathname });
 
   console.log(allPostsData, " Data");
-  console.log(allPostIds, " ids");
+  // console.log(allPostIds, " ids");
 
   return (
     <div className='my-20'>
@@ -99,7 +95,7 @@ console.log("moduleInfo",moduleInfo)
                   <div key={lesson.id} id='breadcrumbs-one' className='mb-1'>
                     <li>
                       <Link
-                        href={`/CourseContent/course/module-0/${allPostIds[1].params.Id}/${lesson.id}`}
+                        href={`/CourseContent/course/module-0/${lesson.id}`}
                       >
                         {lesson.id}
                       </Link>
