@@ -90,32 +90,44 @@ const CourseContent = ({ alltg }) => {
   }));
 
   const moduleCard = (
-    <div className="text-white">
+    <div className='text-white'>
       <Box sx={{ flexGrow: 1 }}>
         <Grid
           container
           spacing={{ xs: 2, md: 3 }}
-          className="flex justify-evenly items-center"
+          className='flex justify-evenly items-center'
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
           {mergedArray.map((announcement, index) => (
             <Grid item xs={3} sm={4} md={4} key={index}>
-              <div className="m-1">
-                <Image src={announcement.img.src} alt="med" width={400} height={220} />
-                <div className="px-3 rounded-b-2xl">
-                {console.log("sfnsjddsnjkjncsdkjdskjncsdfknj",announcement.module)}
-                  <div className="text-2xl pt-6 pb-1">{announcement.module}</div>
-                  <div className="text-[#CECECE] pb-6">{announcement.desc}</div>
+              <div className='m-1'>
+                <Image
+                  src={announcement.img.src}
+                  alt='med'
+                  width={400}
+                  height={220}
+                />
+                <div className='px-3 rounded-b-2xl'>
+                  {console.log(
+                    "sfnsjddsnjkjncsdkjdskjncsdfknj",
+                    announcement.module
+                  )}
+                  <div className='text-2xl capitalize pt-6 pb-1'>
+                    {announcement.module}
+                  </div>
+                  <div className='text-secondaryGrey pb-6'>
+                    {announcement.desc}
+                  </div>
                 </div>
-                <div className="mb-2">
-                  <Button className="w-full bg-white">
+                <div className='mb-2'>
+                  <Button className='w-full bg-white'>
                     <div
                       onClick={() => {
                         router.push({
                           pathname: `/CourseContent/course/${announcement.module}`,
                         });
                       }}
-                      className="text-center font-bold text-black text-xl"
+                      className='text-center font-bold text-black text-xl'
                     >
                       Start Module
                     </div>

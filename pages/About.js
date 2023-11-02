@@ -70,7 +70,7 @@ const About = () => {
         <div className='flex flex-col-reverse justify-between'>
           <div className='text-white my-5 sm:mb-10'>
             <div className='text-5xl'>About</div>
-            <div className='mt-10 text-sm sm:text-base'>
+            <div className='mt-10 text-secondaryGrey text-sm sm:text-base'>
               <p>
                 Welcome to Solidity for Solana, where innovation meets
                 blockchain. Our mission is to be at the forefront of the

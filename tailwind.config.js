@@ -25,7 +25,7 @@ module.exports = {
       mod1Color: "#6B7280",
       primaryDark: "#201F1F",
       primaryGrey: "#2A2A2A",
-      secondaryGrey: "#858383",
+      secondaryGrey: "#CECECE",
     },
     fontFamily: {
       sans: ["Graphik", "sans-serif"],

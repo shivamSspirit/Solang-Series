@@ -65,7 +65,9 @@ const LandingSection = () => {
               <Image src={announcement.img} alt='med' />
               <div className='px-3 rounded-b-2xl'>
                 <div className='text-2xl pt-6 pb-1'>{announcement.head}</div>
-                <div className='text-[#CECECE] pb-6'>{announcement.desc}</div>
+                <div className='text-secondaryGrey pb-6 font-bodyFamily'>
+                  {announcement.desc}
+                </div>
               </div>
             </div>
           </Grid>
@@ -139,7 +141,7 @@ const LandingSection = () => {
         <div key={key} className='wrap left'>
           <div className='content bg-primaryDark text-white'>
             <h2>{data.heading}</h2>
-            <p className='text-[#CECECE]'>{data.content}</p>
+            <p className='text-[#CECECE] font-bodyFamily'>{data.content}</p>
           </div>
         </div>
       ))}
@@ -175,7 +177,7 @@ const LandingSection = () => {
             <div className='text-2xl md:text-5xl'>
               Unlocking the Power of Solana with Solidity Smart Contracts
             </div>
-            <div className='mt-10 text-gray-400 text-sm md:text-base'>
+            <div className='mt-10 font-bodyFamily text-secondaryGrey text-sm md:text-base'>
               Dive into the world of blockchain development with our Solidity
               for Solana courses. Master the art of creating smart contracts on
               the Solana network, opening the door to high-speed, secure, and
