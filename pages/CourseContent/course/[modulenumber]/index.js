@@ -1,15 +1,21 @@
 import React from "react";
-import illustration from "../../../assets/illustration.png";
+import illustration from '../../../../assets/illustration.png'
 import Image from "next/image";
 import { Button } from "flowbite-react";
-import NextBreadcrumb from "../../components/NextBreadcrumb";
+import NextBreadcrumb from "../../../components/NextBreadcrumb";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
+<<<<<<< HEAD:pages/CourseContent/course/index.js
   getAllPostIds,
   getSortedPostsData,
 } from "../../../utils/module-lession";
 import curPageNumber from "../../../shared/pageNumber";
+=======
+  getSortedPostsData,getAllfilesIds
+} from "../../../../utils/module-lession";
+import curPageNumber from "../../../../shared/pageNumber";
+>>>>>>> bca2ef2 (refactoring data flow):pages/CourseContent/course/[modulenumber]/index.js
 
 export async function getStaticProps() {
   const allPostIds = await getAllPostIds();
@@ -25,7 +31,43 @@ export async function getStaticProps() {
   };
 }
 
+<<<<<<< HEAD:pages/CourseContent/course/index.js
 const Course1 = ({ allPostsData, allPostIds }) => {
+=======
+// export async function getStaticProps({ params }) {
+//   console.log("params", params);
+//    const moduleInfo = await getSingleModuleInfo(params.modulenumber);
+//    return {
+//      props: {
+//        moduleInfo,
+//      },
+//    };
+//  }
+
+export async function generateStaticParams({params}){
+console.log("paramsa",params)
+}
+
+export async function getStaticPaths({params}) {
+  console.log("patamss",params)
+  const paths = await getAllfilesIds(params?.modulenumber);
+ // console.log("paths", paths);
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+
+
+const Course1 = ({moduleInfo}) => {
+
+console.log("moduleInfo",moduleInfo)
+
+
+
+
+>>>>>>> bca2ef2 (refactoring data flow):pages/CourseContent/course/[modulenumber]/index.js
   const router = useRouter();
   let currentRoute = router.pathname;
 
