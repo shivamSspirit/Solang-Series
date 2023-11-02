@@ -41,7 +41,7 @@ export async function getSortedPostsData(modNum=0) {
   console.log("filesofmodules", filesofmodules);
   console.log("filepathanme", filepathname);
 
-  console.log("allmodule", allmodules);
+  // console.log("allmodule", allmodules);
 
   // const fileNames = await fs.readdir(postsDirectory);
 

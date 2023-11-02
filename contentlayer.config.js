@@ -15,7 +15,7 @@ const computedFields = {
     resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
   },
 };
-
+// h
 export const Doc = defineDocumentType(() => ({
   name: "Doc",
   filePathPattern: `modules/*/*/*.md`,

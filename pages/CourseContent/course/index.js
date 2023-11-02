@@ -32,7 +32,7 @@ const Course1 = ({ allPostsData, allPostIds }) => {
   // Splitting the url to convert in array.
   currentRoute = currentRoute.split("/");
 
-  const { course } = router.query;
+  // const { course } = router.query;
 
   const [prevPg, nextPg] = curPageNumber({ pathname: router.pathname });
 
