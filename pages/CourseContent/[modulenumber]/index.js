@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 // } from "../../../utils/module-lession";
 import curPageNumber from "../../../shared/pageNumber";
 
-import { allDocument } from "../../../.contentlayer/generated";
+import { allDocuments } from "../../../.contentlayer/generated";
 
 import { usePathname } from "next/navigation";
 
@@ -52,7 +52,7 @@ import { usePathname } from "next/navigation";
 const Course1 = () => {
   //console.log("moduleInfo",getAllFilesForSingleModule)
 
-  console.log("allDocument", allDocument);
+  console.log("allDocument", allDocuments);
   const paths = usePathname();
 
   const router = useRouter();
@@ -63,7 +63,7 @@ const Course1 = () => {
   // Splitting the url to convert in array.
   currentRoute = currentRoute.split("/");
 
-  const { modulenumber } = router.query;
+  // const { modulenumber } = router.query;
 
   const [prevPg, nextPg] = curPageNumber({ pathname: router.pathname });
 
@@ -94,19 +94,19 @@ const Course1 = () => {
               technology
             </div>
             <div className="mt-10">
-              {/* <div>
-                {getAllFilesForSingleModule?.map((lesson, idx) => (
-                  <div key={lesson.id} id='breadcrumbs-one' className='mb-1'>
+               <div>
+                {allDocuments?.map((lession, idx) => (
+                  <div key={lession.title} id='breadcrumbs-one' className='mb-1'>
                     <li>
                       <Link
-                        href={`/CourseContent/${modulenumber}/${allPostIds[1].params.Id}/${lesson.id}`}
+                        href={`/CourseContent/${lession.slug}`}
                       >
-                        {lesson.id}
+                        {lession._id}
                       </Link>
                     </li>
                   </div>
                 ))}
-              </div> */}
+              </div> 
             </div>
           </div>
           <div className="md:mb-16 md:w-1/2 lg:m-0">

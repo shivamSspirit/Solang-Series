@@ -1,34 +1,34 @@
 import React from "react";
-import illustration from "../../../assets/illustration.png";
+import illustration from "../../../../assets/illustration.png";
 import Image from "next/image";
-import NextBreadcrumb from "../../components/NextBreadcrumb";
+import NextBreadcrumb from "../../../components/NextBreadcrumb";
 import { useRouter } from "next/router";
-import SideBar from "../../components/Sidebar";
-import curPageNumber from "../../../shared/pageNumber";
+import SideBar from "../../../components/Sidebar";
+import curPageNumber from "../../../../shared/pageNumber";
 
-import { getAllPostIds, getPostData } from "../../../utils/module-lession";
+// import { getAllPostIds, getPostData } from "../../../../utils/module-lession";
 
-export async function getStaticProps({ params }) {
-  // console.log("params", params);
-  const postData = await getPostData(params.Id);
-  return {
-    props: {
-      postData,
-    },
-  };
-}
+// export async function getStaticProps({ params }) {
+//   // console.log("params", params);
+//   const postData = await getPostData(params.Id);
+//   return {
+//     props: {
+//       postData,
+//     },
+//   };
+// }
 // h
-export async function getStaticPaths() {
-  const paths = await getAllPostIds();
-  // console.log("paths", paths);
-  return {
-    paths,
-    fallback: false,
-  };
-}
+// export async function getStaticPaths() {
+//   const paths = await getAllPostIds();
+//   // console.log("paths", paths);
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }
 
-const GeneralInfo = ({ postData }) => {
-  console.log("postData:", postData);
+const GeneralInfo = ({  }) => {
+ // console.log("postData:", postData);
 
   const router = useRouter();
   console.log(router.pathname, " Pathname");
@@ -81,7 +81,7 @@ const GeneralInfo = ({ postData }) => {
             </div>
             <div className='text-4xl'>General Info</div>
           </div>
-          <article className='text-white prose ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer'>
+          {/* <article className='text-white prose ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer'>
             <div>
               {postData.title}
               <br />
@@ -91,7 +91,7 @@ const GeneralInfo = ({ postData }) => {
               <br />
               <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
             </div>
-          </article>
+          </article> */}
         </div>
       </div>
       <div
