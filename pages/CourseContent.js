@@ -100,7 +100,7 @@ const CourseContent = () => {
                     {announcement.desc}
                   </div>
                 </div>
-                <div className='mb-2'>
+                <div>
                   <Button className='w-full bg-white'>
                     <div
                       onClick={() => {
