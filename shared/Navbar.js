@@ -70,7 +70,7 @@ function NavBar() {
                     currentRoute === "/" ? "text-white" : ""
                   }`}
                 >
-                  <Link href='#about' onClick={() => setNavbar(!navbar)}>
+                  <Link href='/' onClick={() => setNavbar(!navbar)}>
                     Home
                   </Link>
                 </li>
@@ -79,7 +79,7 @@ function NavBar() {
                     currentRoute === "/About" ? "text-white" : ""
                   }`}
                 >
-                  <Link href='#blog' onClick={() => setNavbar(!navbar)}>
+                  <Link href='/About' onClick={() => setNavbar(!navbar)}>
                     About
                   </Link>
                 </li>
@@ -88,7 +88,10 @@ function NavBar() {
                     currentRoute === "/CourseContent" ? "text-white" : ""
                   }`}
                 >
-                  <Link href='#contact' onClick={() => setNavbar(!navbar)}>
+                  <Link
+                    href='/CourseContent'
+                    onClick={() => setNavbar(!navbar)}
+                  >
                     Course content
                   </Link>
                 </li>
@@ -97,7 +100,7 @@ function NavBar() {
                     currentRoute === "/FAQs" ? "text-white" : ""
                   }`}
                 >
-                  <Link href='#projects' onClick={() => setNavbar(!navbar)}>
+                  <Link href='/FAQ' onClick={() => setNavbar(!navbar)}>
                     FAQs
                   </Link>
                 </li>
