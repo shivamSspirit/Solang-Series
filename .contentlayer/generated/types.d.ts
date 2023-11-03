@@ -15,6 +15,11 @@ export type Doc = {
   type: 'Doc'
   title: string
   author?: string | undefined
+  moduleNumber?: string | undefined
+  modulePart?: string | undefined
+  thisFilename?: string | undefined
+  /** MDX file body */
+  body: MDX
   slug: string
   slugAsParams: string
 }  

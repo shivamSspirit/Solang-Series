@@ -18,8 +18,8 @@ const computedFields = {
 // h
 export const Doc = defineDocumentType(() => ({
   name: "Doc",
-  filePathPattern: `**/**/*.md`,
-  contentType: "md",
+  filePathPattern: `**/**/*.mdx`,
+  contentType: "mdx",
   fields: {
     title: {
       type: "string",
@@ -28,6 +28,15 @@ export const Doc = defineDocumentType(() => ({
     author: {
       type: "string",
     },
+    moduleNumber:{
+      type: "string"
+    },
+    modulePart:{
+      type: "string"
+    },
+    thisFilename:{
+      type: "string"
+    }
   },
   computedFields,
 }));

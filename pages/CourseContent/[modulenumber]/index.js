@@ -96,10 +96,10 @@ const Course1 = () => {
             <div className="mt-10">
                <div>
                 {allDocuments?.map((lession, idx) => (
-                  <div key={lession.title} id='breadcrumbs-one' className='mb-1'>
+                  <div key={idx} id='breadcrumbs-one' className='mb-1'>
                     <li>
                       <Link
-                        href={`/CourseContent/${lession.slug}`}
+                        href={`/CourseContent${lession.slug}`}
                       >
                         {lession._id}
                       </Link>

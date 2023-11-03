@@ -16,14 +16,23 @@ var computedFields = {
 };
 var Doc = defineDocumentType(() => ({
   name: "Doc",
-  filePathPattern: `**/**/*.md`,
-  contentType: "md",
+  filePathPattern: `**/**/*.mdx`,
+  contentType: "mdx",
   fields: {
     title: {
       type: "string",
       required: true
     },
     author: {
+      type: "string"
+    },
+    moduleNumber: {
+      type: "string"
+    },
+    modulePart: {
+      type: "string"
+    },
+    thisFilename: {
       type: "string"
     }
   },
@@ -69,4 +78,4 @@ export {
   Doc,
   contentlayer_config_default as default
 };
-//# sourceMappingURL=compiled-contentlayer-config-OWZQZXBP.mjs.map
+//# sourceMappingURL=compiled-contentlayer-config-H6QUJIQK.mjs.map

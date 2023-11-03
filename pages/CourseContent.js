@@ -113,6 +113,7 @@ const CourseContent = ({ allModules }) => {
                 </div>
                 <div className='mb-2'>
                   <Button className='w-full bg-white'>
+                  {console.log("announcement.module",announcement.module)}
                     <div
                       onClick={() => {
                         router.push({

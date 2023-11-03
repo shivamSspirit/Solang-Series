@@ -5,33 +5,81 @@ import NextBreadcrumb from "../../../components/NextBreadcrumb";
 import { useRouter } from "next/router";
 import SideBar from "../../../components/Sidebar";
 import curPageNumber from "../../../../shared/pageNumber";
-
+import {allDocuments} from '../../../../.contentlayer/generated'
 // import { getAllPostIds, getPostData } from "../../../../utils/module-lession";
+//import { allDocuments, type Post } from 'contentlayer/generated'
+import { useMDXComponent } from 'next-contentlayer/hooks'
 
-// export async function getStaticProps({ params }) {
-//   // console.log("params", params);
-//   const postData = await getPostData(params.Id);
-//   return {
-//     props: {
-//       postData,
-//     },
-//   };
+
+
+export async function getStaticPaths() {
+  // Get a list of valid post paths.
+  const paths = allDocuments.map((lession) => {
+   // console.log("lessions",lession)
+   return { params: {
+      modulenumber:lession?.moduleNumber,
+      modulepart:lession?.modulePart,
+      idasfilename:lession?._raw?.sourceFileName?.replace(/\.mdx$/, "")},
+  }}
+   )
+
+  return { paths, fallback: false }
+}
+
+
+
+
+
+export async function getStaticProps(context) {
+  console.log("context",context)
+
+//  console.log("vvvvv",`${context.params.modulenumber}/${context.params.modulepart}/${context.params.idasfilename}`)
+  // Find the post for the current page.
+const lession =  allDocuments.find((lession) => lession?._raw?.flattenedPath === `${context.params.modulenumber}/${context.params.modulepart}/${context.params.idasfilename}`)
+
+console.log("lession",lession)
+  // Return notFound if the post does not exist.
+  if (!lession) return { notFound: true }
+
+  // Return the post as page props.
+ return { props: { lession } }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const ifSlugEqual=(currentroute,allDocuments)=>{
+//   const currentPathmodules = currentroute.replace(/^\/CourseContent/, '');
+//   //console.log("currentPathmodules",currentPathmodules)
+//   const findFile = allDocuments.find(lession=>lession.slug===currentPathmodules)
+//   //console.log("findFile",findFile)
+//   if(findFile){
+//     return true;
+//   }
+//   return false;
 // }
-// h
-// export async function getStaticPaths() {
-//   const paths = await getAllPostIds();
-//   // console.log("paths", paths);
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
 
-const GeneralInfo = ({  }) => {
- // console.log("postData:", postData);
+const GeneralInfo = ({ lession }) => {
+  console.log("postData:", lession);
 
+  const MDXContent = useMDXComponent(lession.body.code)
   const router = useRouter();
-  console.log(router.pathname, " Pathname");
+  console.log(router.asPath, " Pathname");
+ // /CourseContent/module-0/module-0-a/course-guide
+ //const ifSlugequates = ifSlugEqual(router.asPath,allDocuments)
+ ///console.log("ifSlugequates",ifSlugequates)
   const [prevPg, nextPg] = curPageNumber({ pathname: router.pathname });
 
   return (
@@ -45,6 +93,7 @@ const GeneralInfo = ({  }) => {
             containerClasses='flex py-5 bg-gradient-to-r from-purple-600 to-blue-600'
             listClasses='hover:underline mx-2 font-bold'
             capitalizeLinks
+            currentpath={router.pathname}
           />
         </div>
         <div className='flex flex-col-reverse md:flex-row'>
@@ -81,8 +130,10 @@ const GeneralInfo = ({  }) => {
             </div>
             <div className='text-4xl'>General Info</div>
           </div>
-          {/* <article className='text-white prose ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer'>
-            <div>
+
+
+           <article className='text-white prose ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer'>
+            {/* <div>
               {postData.title}
               <br />
               {postData.id}
@@ -90,8 +141,10 @@ const GeneralInfo = ({  }) => {
               {postData.author}
               <br />
               <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-            </div>
-          </article> */}
+            </div> */}
+
+            <MDXContent/>
+          </article> 
         </div>
       </div>
       <div
