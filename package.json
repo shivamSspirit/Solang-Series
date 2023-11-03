@@ -29,6 +29,7 @@
     "fs": "^0.0.1-security",
     "gray-matter": "^4.0.3",
     "next": "13.2.3",
+    "next-contentlayer": "^0.3.4",
     "react": "18.2.0",
     "react-animated-cursor": "^2.5.2",
     "react-dom": "18.2.0",
@@ -59,5 +60,4 @@
   "engines": {
     "node": ">=18.0.0"
   }
-  
 }
