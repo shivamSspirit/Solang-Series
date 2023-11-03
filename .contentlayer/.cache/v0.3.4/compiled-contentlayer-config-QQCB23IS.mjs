@@ -78,4 +78,8 @@ export {
   Doc,
   contentlayer_config_default as default
 };
+<<<<<<<< HEAD:.contentlayer/.cache/v0.3.4/compiled-contentlayer-config-RJ6OASMQ.mjs
 //# sourceMappingURL=compiled-contentlayer-config-RJ6OASMQ.mjs.map
+========
+//# sourceMappingURL=compiled-contentlayer-config-QQCB23IS.mjs.map
+>>>>>>>> 5f2b3a98baab7d091ebfbdd0db148e9392ff6e8e:.contentlayer/.cache/v0.3.4/compiled-contentlayer-config-QQCB23IS.mjs

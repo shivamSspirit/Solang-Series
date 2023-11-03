@@ -14,6 +14,7 @@ import { experimentalStyled as styled } from "@mui/material/styles";
 import { useRouter } from "next/router";
 import { getModules } from "../utils/module-lession";
 
+
 export async function getStaticProps() {
   const allModuleNumbers = await getModules();
   //console.log("allModuleNumbers", allModuleNumbers);
@@ -24,6 +25,8 @@ export async function getStaticProps() {
     },
   };
 }
+
+
 
 const announcementData = [
   {

@@ -1,32 +1,30 @@
+// contentlayer.config.js
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
-
-/** @type {import('contentlayer/source-files').ComputedFields} */
-const computedFields = {
+var computedFields = {
   slug: {
     type: "string",
-    resolve: (doc) => `/${doc._raw.flattenedPath}`,
+    resolve: (doc) => `/${doc._raw.flattenedPath}`
   },
   slugAsParams: {
     type: "string",
-    resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
-  },
+    resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/")
+  }
 };
-// h
-export const Doc = defineDocumentType(() => ({
+var Doc = defineDocumentType(() => ({
   name: "Doc",
   filePathPattern: `**/**/*.mdx`,
   contentType: "mdx",
   fields: {
     title: {
       type: "string",
-      required: true,
+      required: true
     },
     author: {
-      type: "string",
+      type: "string"
     },
     moduleNumber: {
       type: "string"
@@ -38,10 +36,9 @@ export const Doc = defineDocumentType(() => ({
       type: "string"
     }
   },
-  computedFields,
+  computedFields
 }));
-
-export default makeSource({
+var contentlayer_config_default = makeSource({
   contentDirPath: "modules",
   documentTypes: [Doc],
   md: {
@@ -53,8 +50,6 @@ export default makeSource({
         {
           theme: "github-dark",
           onVisitLine(node) {
-            // Prevent lines from collapsing in `display: grid` mode, and allow empty
-            // lines to be copy/pasted
             if (node.children.length === 0) {
               node.children = [{ type: "text", value: " " }];
             }
@@ -64,18 +59,23 @@ export default makeSource({
           },
           onVisitHighlightedWord(node) {
             node.properties.className = ["word--highlighted"];
-          },
-        },
+          }
+        }
       ],
       [
         rehypeAutolinkHeadings,
         {
           properties: {
             className: ["subheading-anchor"],
-            ariaLabel: "Link to section",
-          },
-        },
-      ],
-    ],
-  },
+            ariaLabel: "Link to section"
+          }
+        }
+      ]
+    ]
+  }
 });
+export {
+  Doc,
+  contentlayer_config_default as default
+};
+//# sourceMappingURL=compiled-contentlayer-config-KTN2ER3O.mjs.map
