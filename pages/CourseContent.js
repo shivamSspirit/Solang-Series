@@ -94,7 +94,7 @@ const CourseContent = () => {
                 </div>
                 <div className='px-3 rounded-b-2xl'>
                   <div className='text-2xl capitalize pt-6 pb-1'>
-                    {announcement.module}
+                    {announcement.head}
                   </div>
                   <div className='text-secondaryGrey pb-6'>
                     {announcement.desc}
