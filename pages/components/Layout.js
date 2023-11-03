@@ -1,10 +1,10 @@
 import React, { PropsWithChildren } from "react";
-import Navbar from "../../shared/AppBar";
 import FooterComp from "../../shared/Footer";
 import ComingSoon from "../comingSoon/ComingSoon";
 import curPageNumber from "../../shared/pageNumber";
 import { useRouter } from "next/router";
 import { usePathname } from "next/navigation";
+import NavBar from "../../shared/Navbar";
 
 let coursePage = "";
 
@@ -27,7 +27,7 @@ const Layout = ({ children }) => {
           children
         ) : (
           <>
-            <Navbar />
+            <NavBar />
             {children}
             {children?.type?.name !== "Search" &&
               children?.type?.name !== "FAQ" &&
