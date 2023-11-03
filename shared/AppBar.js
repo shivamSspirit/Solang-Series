@@ -63,7 +63,7 @@ function AppBar() {
           </a>
         </Navbar.Collapse>
         <Navbar.Toggle />
-        <SearchIcon onClick={() => router.push('/Search')} className='h-8 md:ml-8 ml-4 mt-2 md:mt-1 lg:mt-1 xl:mt-1 cursor-pointer' />
+        <SearchIcon onClick={() => router.push('/Search')} className='h-8 ml-4 mt-1 lg:mt-1 xl:mt-1 cursor-pointer' />
       </div>
     </Navbar>
   );
