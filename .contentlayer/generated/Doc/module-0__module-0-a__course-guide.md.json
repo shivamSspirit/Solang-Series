@@ -1,0 +1,15 @@
+{
+  "title": "Course Guide",
+  "author": "spirit\r",
+  "_id": "module-0/module-0-a/course-guide.md",
+  "_raw": {
+    "sourceFilePath": "module-0/module-0-a/course-guide.md",
+    "sourceFileName": "course-guide.md",
+    "sourceFileDir": "module-0/module-0-a",
+    "contentType": "markdown",
+    "flattenedPath": "module-0/module-0-a/course-guide"
+  },
+  "type": "Doc",
+  "slug": "/module-0/module-0-a/course-guide",
+  "slugAsParams": "module-0-a/course-guide"
+}

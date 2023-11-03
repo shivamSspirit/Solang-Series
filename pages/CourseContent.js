@@ -12,24 +12,25 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import { useRouter } from "next/router";
-import { getModules } from "../utils/module-lession";
+// import { getModules } from "../utils/module-lession";
 
-export async function getStaticProps() {
-  const allModuleNumbers = await getModules();
-  console.log("allModuleNumbers", allModuleNumbers);
-  const allModules = allModuleNumbers.map((post) => post.substring("modules/".length));
-  return {
-    props: {
-      allModules,
-    },
-  };
-}
+// export async function getStaticProps() {
+//   const allModuleNumbers = await getModules();
+//   console.log("allModuleNumbers", allModuleNumbers);
+//   const allModules = allModuleNumbers.map((post) => post.substring("modules/".length));
+//   return {
+//     props: {
+//       allModules,
+//     },
+//   };
+// }
 
 const announcementData = [
   {
     img: Course1,
-    head: "Module Name ",
+    head: "Module 1",
     desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
+    module: " "
   },
   {
     img: Course2,
@@ -68,20 +69,8 @@ const announcementData = [
   },
 ];
 
-const CourseContent = ({ allModules }) => {
-  const mergedArray = allModules.map((moduleName, index) => ({
-    module: moduleName,
-    ...announcementData[index],
-  }));
+const CourseContent = () => {
   const router = useRouter();
-
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
 
   const moduleCard = (
     <div className='text-white'>
@@ -92,7 +81,7 @@ const CourseContent = ({ allModules }) => {
           className='flex justify-evenly items-center'
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
-          {mergedArray.map((announcement, index) => (
+          {announcementData.map((announcement, index) => (
             <Grid item xs={3} sm={4} md={4} key={index}>
               <div className='m-1 p-2 bg-primaryDark rounded-2xl border border-white'>
                 <div>

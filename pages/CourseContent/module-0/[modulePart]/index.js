@@ -1,26 +1,22 @@
 import React from "react";
-import illustration from '../../../assets/illustration.png'
+import illustration from "../../../assets/illustration.png";
 import Image from "next/image";
-import { Button } from "flowbite-react";
-import NextBreadcrumb from "../../components/NextBreadcrumb";
+import NextBreadcrumb from "../../../components/NextBreadcrumb";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import {
-  getSortedPostsData,getAllfilesIds,generateDynamicModules
-} from "../../../utils/module-lession";
-import curPageNumber from "../../../shared/pageNumber";
+import curPageNumber from "../../../../shared/pageNumber";
 
-export async function getStaticProps({params}) {
-    console.log("params",params)
-  const getAllFilesForSingleModule = await getSortedPostsData();
-  console.log("getAllFilesForSingleModule", getAllFilesForSingleModule);
+// export async function getStaticProps({ params }) {
+//   console.log("params", params);
+//   // const getAllFilesForSingleModule = await getSortedPostsData();
+//   // console.log("getAllFilesForSingleModule", getAllFilesForSingleModule);
 
-  return {
-    props: {
-        getAllFilesForSingleModule
-    },
-  };
-}
+//   return {
+//     props: {
+//       getAllFilesForSingleModule,
+//     },
+//   };
+// }
 
 // export async function getStaticProps({ params }) {
 //   console.log("params", params);
@@ -36,24 +32,30 @@ export async function getStaticProps({params}) {
 // console.log("paramsa",params)
 // }
 
-export async function getStaticPaths() {
-  const paths = await generateDynamicModules();
-  console.log("paths",paths)
-  return {
-    paths,
-    fallback: false,
-  };
-}
+// export async function getStaticPaths() {
+//   const paths = await generateDynamicModules();
+//   console.log("paths", paths);
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }
 
+const Course1 = ({  }) => {
+  // console.log("moduleInfo", getAllFilesForSingleModule);
 
-
-const Course1 = ({getAllFilesForSingleModule}) => {
-
-console.log("moduleInfo",getAllFilesForSingleModule)
-
-
-
-
+  const getAllFilesForSingleModule = [
+    {
+      id: "beforeyoustart",
+    },
+    {
+      id: "course-guide",
+    },
+    {
+      id: "wwc",
+    },
+  ];
+  
   const router = useRouter();
   let currentRoute = router.pathname;
 
@@ -64,7 +66,7 @@ console.log("moduleInfo",getAllFilesForSingleModule)
 
   const [prevPg, nextPg] = curPageNumber({ pathname: router.pathname });
 
-  console.log(allPostsData, " Data");
+  // console.log(allPostsData, " Data");
   // console.log(allPostIds, " ids");
 
   return (
@@ -92,17 +94,18 @@ console.log("moduleInfo",getAllFilesForSingleModule)
             </div>
             <div className='mt-10'>
               <div>
-                {getAllFilesForSingleModule?.map((lesson, idx) => (
+                {/* {getAllFilesForSingleModule?.map((lesson, idx) => (
                   <div key={lesson.id} id='breadcrumbs-one' className='mb-1'>
                     <li>
                       <Link
-                        href={`/CourseContent/${modulenumber}/${allPostIds[1].params.Id}/${lesson.id}`}
+                        // href={`/CourseContent/${modulenumber}/${allPostIds[1].params.Id}/${lesson.id}`}
+                        href={`/CourseContent/module-0/module-0-a/${lesson.id}`}
                       >
                         {lesson.id}
                       </Link>
                     </li>
                   </div>
-                ))}
+                ))} */}
               </div>
             </div>
           </div>

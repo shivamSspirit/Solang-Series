@@ -1,0 +1,460 @@
+{
+  "cacheItemsMap": {
+    "module-0/module-0-a/beforeyoustart.md": {
+      "document": {
+        "title": "Before you start",
+        "author": "shivam\r",
+        "_id": "module-0/module-0-a/beforeyoustart.md",
+        "_raw": {
+          "sourceFilePath": "module-0/module-0-a/beforeyoustart.md",
+          "sourceFileName": "beforeyoustart.md",
+          "sourceFileDir": "module-0/module-0-a",
+          "contentType": "markdown",
+          "flattenedPath": "module-0/module-0-a/beforeyoustart"
+        },
+        "type": "Doc",
+        "slug": "/module-0/module-0-a/beforeyoustart",
+        "slugAsParams": "module-0-a/beforeyoustart"
+      },
+      "documentHash": "1698991321855",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-0/module-0-a/course-guide.md": {
+      "document": {
+        "title": "Course Guide",
+        "author": "spirit\r",
+        "_id": "module-0/module-0-a/course-guide.md",
+        "_raw": {
+          "sourceFilePath": "module-0/module-0-a/course-guide.md",
+          "sourceFileName": "course-guide.md",
+          "sourceFileDir": "module-0/module-0-a",
+          "contentType": "markdown",
+          "flattenedPath": "module-0/module-0-a/course-guide"
+        },
+        "type": "Doc",
+        "slug": "/module-0/module-0-a/course-guide",
+        "slugAsParams": "module-0-a/course-guide"
+      },
+      "documentHash": "1698991287469",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-0/module-0-a/system-setup.md": {
+      "document": {
+        "_id": "module-0/module-0-a/system-setup.md",
+        "_raw": {
+          "sourceFilePath": "module-0/module-0-a/system-setup.md",
+          "sourceFileName": "system-setup.md",
+          "sourceFileDir": "module-0/module-0-a",
+          "contentType": "markdown",
+          "flattenedPath": "module-0/module-0-a/system-setup"
+        },
+        "type": "Doc",
+        "slug": "/module-0/module-0-a/system-setup",
+        "slugAsParams": "module-0-a/system-setup"
+      },
+      "documentHash": "1698916129905",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-0/module-0-a/wwc.md": {
+      "document": {
+        "title": "What we will cover",
+        "author": "solsa\r",
+        "_id": "module-0/module-0-a/wwc.md",
+        "_raw": {
+          "sourceFilePath": "module-0/module-0-a/wwc.md",
+          "sourceFileName": "wwc.md",
+          "sourceFileDir": "module-0/module-0-a",
+          "contentType": "markdown",
+          "flattenedPath": "module-0/module-0-a/wwc"
+        },
+        "type": "Doc",
+        "slug": "/module-0/module-0-a/wwc",
+        "slugAsParams": "module-0-a/wwc"
+      },
+      "documentHash": "1698991303393",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-0/module-0-b/intro-to-solana.md": {
+      "document": {
+        "_id": "module-0/module-0-b/intro-to-solana.md",
+        "_raw": {
+          "sourceFilePath": "module-0/module-0-b/intro-to-solana.md",
+          "sourceFileName": "intro-to-solana.md",
+          "sourceFileDir": "module-0/module-0-b",
+          "contentType": "markdown",
+          "flattenedPath": "module-0/module-0-b/intro-to-solana"
+        },
+        "type": "Doc",
+        "slug": "/module-0/module-0-b/intro-to-solana",
+        "slugAsParams": "module-0-b/intro-to-solana"
+      },
+      "documentHash": "1698916134268",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-0/module-0-b/whatis-web3.md": {
+      "document": {
+        "_id": "module-0/module-0-b/whatis-web3.md",
+        "_raw": {
+          "sourceFilePath": "module-0/module-0-b/whatis-web3.md",
+          "sourceFileName": "whatis-web3.md",
+          "sourceFileDir": "module-0/module-0-b",
+          "contentType": "markdown",
+          "flattenedPath": "module-0/module-0-b/whatis-web3"
+        },
+        "type": "Doc",
+        "slug": "/module-0/module-0-b/whatis-web3",
+        "slugAsParams": "module-0-b/whatis-web3"
+      },
+      "documentHash": "1698916136356",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-0/module-0-b/why-buildon-solana.md": {
+      "document": {
+        "_id": "module-0/module-0-b/why-buildon-solana.md",
+        "_raw": {
+          "sourceFilePath": "module-0/module-0-b/why-buildon-solana.md",
+          "sourceFileName": "why-buildon-solana.md",
+          "sourceFileDir": "module-0/module-0-b",
+          "contentType": "markdown",
+          "flattenedPath": "module-0/module-0-b/why-buildon-solana"
+        },
+        "type": "Doc",
+        "slug": "/module-0/module-0-b/why-buildon-solana",
+        "slugAsParams": "module-0-b/why-buildon-solana"
+      },
+      "documentHash": "1698916138261",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-1/module-1-a/account-comparision.md": {
+      "document": {
+        "_id": "module-1/module-1-a/account-comparision.md",
+        "_raw": {
+          "sourceFilePath": "module-1/module-1-a/account-comparision.md",
+          "sourceFileName": "account-comparision.md",
+          "sourceFileDir": "module-1/module-1-a",
+          "contentType": "markdown",
+          "flattenedPath": "module-1/module-1-a/account-comparision"
+        },
+        "type": "Doc",
+        "slug": "/module-1/module-1-a/account-comparision",
+        "slugAsParams": "module-1-a/account-comparision"
+      },
+      "documentHash": "1698763396919",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-1/module-1-a/exploring-solang.md": {
+      "document": {
+        "_id": "module-1/module-1-a/exploring-solang.md",
+        "_raw": {
+          "sourceFilePath": "module-1/module-1-a/exploring-solang.md",
+          "sourceFileName": "exploring-solang.md",
+          "sourceFileDir": "module-1/module-1-a",
+          "contentType": "markdown",
+          "flattenedPath": "module-1/module-1-a/exploring-solang"
+        },
+        "type": "Doc",
+        "slug": "/module-1/module-1-a/exploring-solang",
+        "slugAsParams": "module-1-a/exploring-solang"
+      },
+      "documentHash": "1698763396919",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-1/module-1-a/smart-contracton-solvseth.md": {
+      "document": {
+        "_id": "module-1/module-1-a/smart-contracton-solvseth.md",
+        "_raw": {
+          "sourceFilePath": "module-1/module-1-a/smart-contracton-solvseth.md",
+          "sourceFileName": "smart-contracton-solvseth.md",
+          "sourceFileDir": "module-1/module-1-a",
+          "contentType": "markdown",
+          "flattenedPath": "module-1/module-1-a/smart-contracton-solvseth"
+        },
+        "type": "Doc",
+        "slug": "/module-1/module-1-a/smart-contracton-solvseth",
+        "slugAsParams": "module-1-a/smart-contracton-solvseth"
+      },
+      "documentHash": "1698763396920",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-1/module-1-a/solidity-for-solvseth.md": {
+      "document": {
+        "_id": "module-1/module-1-a/solidity-for-solvseth.md",
+        "_raw": {
+          "sourceFilePath": "module-1/module-1-a/solidity-for-solvseth.md",
+          "sourceFileName": "solidity-for-solvseth.md",
+          "sourceFileDir": "module-1/module-1-a",
+          "contentType": "markdown",
+          "flattenedPath": "module-1/module-1-a/solidity-for-solvseth"
+        },
+        "type": "Doc",
+        "slug": "/module-1/module-1-a/solidity-for-solvseth",
+        "slugAsParams": "module-1-a/solidity-for-solvseth"
+      },
+      "documentHash": "1698763396921",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-1/module-1-a/solidity-program-compilation.md": {
+      "document": {
+        "_id": "module-1/module-1-a/solidity-program-compilation.md",
+        "_raw": {
+          "sourceFilePath": "module-1/module-1-a/solidity-program-compilation.md",
+          "sourceFileName": "solidity-program-compilation.md",
+          "sourceFileDir": "module-1/module-1-a",
+          "contentType": "markdown",
+          "flattenedPath": "module-1/module-1-a/solidity-program-compilation"
+        },
+        "type": "Doc",
+        "slug": "/module-1/module-1-a/solidity-program-compilation",
+        "slugAsParams": "module-1-a/solidity-program-compilation"
+      },
+      "documentHash": "1698763396921",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-1/module-1-b/constrctor.md": {
+      "document": {
+        "_id": "module-1/module-1-b/constrctor.md",
+        "_raw": {
+          "sourceFilePath": "module-1/module-1-b/constrctor.md",
+          "sourceFileName": "constrctor.md",
+          "sourceFileDir": "module-1/module-1-b",
+          "contentType": "markdown",
+          "flattenedPath": "module-1/module-1-b/constrctor"
+        },
+        "type": "Doc",
+        "slug": "/module-1/module-1-b/constrctor",
+        "slugAsParams": "module-1-b/constrctor"
+      },
+      "documentHash": "1698763396922",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-1/module-1-b/datatype.md": {
+      "document": {
+        "_id": "module-1/module-1-b/datatype.md",
+        "_raw": {
+          "sourceFilePath": "module-1/module-1-b/datatype.md",
+          "sourceFileName": "datatype.md",
+          "sourceFileDir": "module-1/module-1-b",
+          "contentType": "markdown",
+          "flattenedPath": "module-1/module-1-b/datatype"
+        },
+        "type": "Doc",
+        "slug": "/module-1/module-1-b/datatype",
+        "slugAsParams": "module-1-b/datatype"
+      },
+      "documentHash": "1698763396923",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-1/module-1-b/filestructure.md": {
+      "document": {
+        "_id": "module-1/module-1-b/filestructure.md",
+        "_raw": {
+          "sourceFilePath": "module-1/module-1-b/filestructure.md",
+          "sourceFileName": "filestructure.md",
+          "sourceFileDir": "module-1/module-1-b",
+          "contentType": "markdown",
+          "flattenedPath": "module-1/module-1-b/filestructure"
+        },
+        "type": "Doc",
+        "slug": "/module-1/module-1-b/filestructure",
+        "slugAsParams": "module-1-b/filestructure"
+      },
+      "documentHash": "1698763396923",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-1/module-1-b/function.md": {
+      "document": {
+        "_id": "module-1/module-1-b/function.md",
+        "_raw": {
+          "sourceFilePath": "module-1/module-1-b/function.md",
+          "sourceFileName": "function.md",
+          "sourceFileDir": "module-1/module-1-b",
+          "contentType": "markdown",
+          "flattenedPath": "module-1/module-1-b/function"
+        },
+        "type": "Doc",
+        "slug": "/module-1/module-1-b/function",
+        "slugAsParams": "module-1-b/function"
+      },
+      "documentHash": "1698763396924",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-1/module-1-b/imports.md": {
+      "document": {
+        "_id": "module-1/module-1-b/imports.md",
+        "_raw": {
+          "sourceFilePath": "module-1/module-1-b/imports.md",
+          "sourceFileName": "imports.md",
+          "sourceFileDir": "module-1/module-1-b",
+          "contentType": "markdown",
+          "flattenedPath": "module-1/module-1-b/imports"
+        },
+        "type": "Doc",
+        "slug": "/module-1/module-1-b/imports",
+        "slugAsParams": "module-1-b/imports"
+      },
+      "documentHash": "1698763396925",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-1/module-1-b/intro-solidityon-sol.md": {
+      "document": {
+        "_id": "module-1/module-1-b/intro-solidityon-sol.md",
+        "_raw": {
+          "sourceFilePath": "module-1/module-1-b/intro-solidityon-sol.md",
+          "sourceFileName": "intro-solidityon-sol.md",
+          "sourceFileDir": "module-1/module-1-b",
+          "contentType": "markdown",
+          "flattenedPath": "module-1/module-1-b/intro-solidityon-sol"
+        },
+        "type": "Doc",
+        "slug": "/module-1/module-1-b/intro-solidityon-sol",
+        "slugAsParams": "module-1-b/intro-solidityon-sol"
+      },
+      "documentHash": "1698763396925",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-1/module-1-b/pragmas.md": {
+      "document": {
+        "_id": "module-1/module-1-b/pragmas.md",
+        "_raw": {
+          "sourceFilePath": "module-1/module-1-b/pragmas.md",
+          "sourceFileName": "pragmas.md",
+          "sourceFileDir": "module-1/module-1-b",
+          "contentType": "markdown",
+          "flattenedPath": "module-1/module-1-b/pragmas"
+        },
+        "type": "Doc",
+        "slug": "/module-1/module-1-b/pragmas",
+        "slugAsParams": "module-1-b/pragmas"
+      },
+      "documentHash": "1698763396926",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-2/module-2-a/create-dev-space.md": {
+      "document": {
+        "_id": "module-2/module-2-a/create-dev-space.md",
+        "_raw": {
+          "sourceFilePath": "module-2/module-2-a/create-dev-space.md",
+          "sourceFileName": "create-dev-space.md",
+          "sourceFileDir": "module-2/module-2-a",
+          "contentType": "markdown",
+          "flattenedPath": "module-2/module-2-a/create-dev-space"
+        },
+        "type": "Doc",
+        "slug": "/module-2/module-2-a/create-dev-space",
+        "slugAsParams": "module-2-a/create-dev-space"
+      },
+      "documentHash": "1698763396928",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-2/module-2-a/introduction.md": {
+      "document": {
+        "_id": "module-2/module-2-a/introduction.md",
+        "_raw": {
+          "sourceFilePath": "module-2/module-2-a/introduction.md",
+          "sourceFileName": "introduction.md",
+          "sourceFileDir": "module-2/module-2-a",
+          "contentType": "markdown",
+          "flattenedPath": "module-2/module-2-a/introduction"
+        },
+        "type": "Doc",
+        "slug": "/module-2/module-2-a/introduction",
+        "slugAsParams": "module-2-a/introduction"
+      },
+      "documentHash": "1698763396928",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-2/module-2-b/build-deploy-test.md": {
+      "document": {
+        "_id": "module-2/module-2-b/build-deploy-test.md",
+        "_raw": {
+          "sourceFilePath": "module-2/module-2-b/build-deploy-test.md",
+          "sourceFileName": "build-deploy-test.md",
+          "sourceFileDir": "module-2/module-2-b",
+          "contentType": "markdown",
+          "flattenedPath": "module-2/module-2-b/build-deploy-test"
+        },
+        "type": "Doc",
+        "slug": "/module-2/module-2-b/build-deploy-test",
+        "slugAsParams": "module-2-b/build-deploy-test"
+      },
+      "documentHash": "1698763396929",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-2/module-2-b/conclusion.md": {
+      "document": {
+        "_id": "module-2/module-2-b/conclusion.md",
+        "_raw": {
+          "sourceFilePath": "module-2/module-2-b/conclusion.md",
+          "sourceFileName": "conclusion.md",
+          "sourceFileDir": "module-2/module-2-b",
+          "contentType": "markdown",
+          "flattenedPath": "module-2/module-2-b/conclusion"
+        },
+        "type": "Doc",
+        "slug": "/module-2/module-2-b/conclusion",
+        "slugAsParams": "module-2-b/conclusion"
+      },
+      "documentHash": "1698763396929",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-2/module-2-b/create-solidity-program.md": {
+      "document": {
+        "_id": "module-2/module-2-b/create-solidity-program.md",
+        "_raw": {
+          "sourceFilePath": "module-2/module-2-b/create-solidity-program.md",
+          "sourceFileName": "create-solidity-program.md",
+          "sourceFileDir": "module-2/module-2-b",
+          "contentType": "markdown",
+          "flattenedPath": "module-2/module-2-b/create-solidity-program"
+        },
+        "type": "Doc",
+        "slug": "/module-2/module-2-b/create-solidity-program",
+        "slugAsParams": "module-2-b/create-solidity-program"
+      },
+      "documentHash": "1698763396929",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    },
+    "module-2/module-2-b/setup-for-depandtest.md": {
+      "document": {
+        "_id": "module-2/module-2-b/setup-for-depandtest.md",
+        "_raw": {
+          "sourceFilePath": "module-2/module-2-b/setup-for-depandtest.md",
+          "sourceFileName": "setup-for-depandtest.md",
+          "sourceFileDir": "module-2/module-2-b",
+          "contentType": "markdown",
+          "flattenedPath": "module-2/module-2-b/setup-for-depandtest"
+        },
+        "type": "Doc",
+        "slug": "/module-2/module-2-b/setup-for-depandtest",
+        "slugAsParams": "module-2-b/setup-for-depandtest"
+      },
+      "documentHash": "1698763396931",
+      "hasWarnings": false,
+      "documentTypeName": "Doc"
+    }
+  }
+}

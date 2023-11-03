@@ -1,8 +1,7 @@
 ---
-title: 'Before you start'
-author: 'shivam'
+title: Before you start
+author: shivam
 ---
-
 
 # **Lesson 3: Before You Start**
 

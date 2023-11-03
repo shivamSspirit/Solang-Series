@@ -11,6 +11,8 @@ const NextBreadcrumb = ({
 }) => {
   const paths = usePathname();
 
+  console.log(paths, " This is the path");
+
   const trimmedPath = paths.split("/").slice(2);
   trimmedPath.unshift("Module 1");
   const pathNames = trimmedPath.filter((path) => path);

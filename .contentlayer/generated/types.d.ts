@@ -13,7 +13,7 @@ export type Doc = {
   _id: string
   _raw: Local.RawDocumentData
   type: 'Doc'
-  title: string
+  title?: string | undefined
   author?: string | undefined
   slug: string
   slugAsParams: string

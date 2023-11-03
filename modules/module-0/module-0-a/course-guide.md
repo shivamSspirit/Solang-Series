@@ -1,6 +1,6 @@
 ---
-title: 'Course Guide'
-author: 'spirit'
+title: Course Guide
+author: spirit
 ---
 
 # **Course Guide**

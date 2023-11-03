@@ -26,8 +26,9 @@ const FAQ = () => {
       title: "What software/tools do I need for this course?",
       ans: "You will need a code editor like Visual Studio Code, along with Solana Devtools and Anchor framework for development. Detailed steps for the setup of the requirements is given in the Setting up Development Workspace lesson",
     },
-
   ];
+
+  // h
 
   const [expanded, setExpanded] = useState(
     new Array(accData.length).fill(false)
