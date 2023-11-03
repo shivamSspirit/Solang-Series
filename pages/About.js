@@ -72,33 +72,30 @@ const About = () => {
             <div className='text-5xl'>About</div>
             <div className='mt-10 text-secondaryGrey font-bodyFamily text-sm sm:text-base'>
               <p>
-                Welcome to Solidity for Solana, where innovation meets
-                blockchain. Our mission is to be at the forefront of the
-                ever-evolving world of decentralized applications and smart
-                contracts. We are passionate about the potential of blockchain
-                technology to transform industries and empower individuals. With
-                a focus on the Solana ecosystem and the Solidity programming
-                language, we're bridging the gap between security, scalability,
-                and simplicity.
+              We welcome you to Solidity for Solana. Here, we provide educational
+              resources and content for budding developers and enthusiasts to
+              learn blockchain technology, focusing mainly on Solana development
+              using Solidity, and focusing on those wanting to transition from
+              EVM to Solana.  We aim to equip users with the knowledge of developing
+              dApps on Solana with ease while focusing on simplicity, security and scalability.
               </p>
               <br />
               <p>
-                At Solidity for Solana, we envision a future where blockchain is
-                accessible to all. We believe in democratizing the technology
-                and making it easy for developers and entrepreneurs to harness
-                the power of Solana's high-performance blockchain. Our vision is
-                to be the catalyst that enables the creation of innovative,
-                efficient, and secure decentralized solutions.
+              Our team is composed of experienced developers who themselves have
+              years of experience in web development, blockchain development and
+              everything in between. They bring in their wealth of knowledge and
+              resources for budding enthusiasts willing to gain deep knowledge
+              about the ins and outs of Solana. We are dedicated to providing
+              resources, education, and tools to help users succeed in Solana development.
               </p>
               <br />
               <p>
-                Our team is composed of passionate blockchain enthusiasts and
-                experienced developers who are committed to driving innovation.
-                We bring a wealth of knowledge in Solidity, Solana, and
-                blockchain technology to the table. With a shared vision of
-                transforming the digital landscape, we're dedicated to providing
-                the resources, education, and tools you need to succeed in the
-                world of Solana development.
+              Our goal is to be the hub for users who want to learn about blockchain.
+              We aim to be the premier hub for educational content on Solana and EVM development.
+              Our courses provide ample knowledge of the deep technical concepts to know for
+              development on Solana. By utilising Solidity, we also provide a familiar
+              framework whose knowledge can be applied to other blockchains too. Join us to
+              learn more about blockchain and start your journey of Solana development.
               </p>
               <br />
               <p>
@@ -124,9 +121,6 @@ const About = () => {
           </div>
         </div>
       </div>
-
-      {/*  */}
-      {/* <div className='mb-20'>{module}</div> */}
     </div>
   );
 };

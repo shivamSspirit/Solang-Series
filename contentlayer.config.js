@@ -28,13 +28,13 @@ export const Doc = defineDocumentType(() => ({
     author: {
       type: "string",
     },
-    moduleNumber:{
+    moduleNumber: {
       type: "string"
     },
-    modulePart:{
+    modulePart: {
       type: "string"
     },
-    thisFilename:{
+    thisFilename: {
       type: "string"
     }
   },
