@@ -9,7 +9,6 @@ import curPageNumber from "../../../shared/pageNumber";
 import { allDocuments } from "../../../.contentlayer/generated";
 import { usePathname } from "next/navigation";
 
-
 export async function getStaticProps(context) {
   console.log("context", context);
   const lession = allDocuments.filter(
@@ -41,8 +40,6 @@ export async function getStaticPaths() {
 }
 
 const Course1 = () => {
- 
-
   const paths = usePathname();
   const router = useRouter();
   let currentRoute = router.pathname;

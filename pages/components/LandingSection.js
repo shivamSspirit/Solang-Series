@@ -173,19 +173,19 @@ const LandingSection = () => {
       <div>
         <div className='flex lg:flex-row flex-col-reverse justify-between'>
           <div className='lg:w-1/2 text-white'>
-            <div className='text-2xl md:text-5xl'>
-             Deep Dive Into Solidity On Solana
+            <div className='text-3xl sm:text-4xl md:text-5xl'>
+              Deep Dive Into Solidity On Solana
             </div>
             <div className='text-xl md:text-2xl mt-3 font-bold'>
-             Solidity on solana
+              Solidity on solana
             </div>
             <div className='mt-10 font-bodyFamily text-secondaryGrey text-sm md:text-base'>
-              Dive into the world of blockchain development with our Solidity
-              on Solana course. Master the art of creating smart contracts on
-              the Solana network using Solidity, opening the door to high-speed, secure, and
-              scalable decentralized applications. Join us on a journey of
-              learning that empowers you to shape the future of blockchain
-              technology
+              Dive into the world of blockchain development with our Solidity on
+              Solana course. Master the art of creating smart contracts on the
+              Solana network using Solidity, opening the door to high-speed,
+              secure, and scalable decentralized applications. Join us on a
+              journey of learning that empowers you to shape the future of
+              blockchain technology
             </div>
             <div className='mt-10'>
               <div className='flex pr-6'>
