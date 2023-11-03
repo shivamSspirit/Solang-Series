@@ -16,7 +16,7 @@ import { getModules } from "../utils/module-lession";
 
 export async function getStaticProps() {
   const allModuleNumbers = await getModules();
-  console.log("allModuleNumbers", allModuleNumbers);
+  //console.log("allModuleNumbers", allModuleNumbers);
   const allModules = allModuleNumbers.map((post) => post.substring("modules/".length));
   return {
     props: {
@@ -111,9 +111,8 @@ const CourseContent = ({ allModules }) => {
                     {announcement.desc}
                   </div>
                 </div>
-                <div className='mb-2'>
+                <div className='mb-[1px]'>
                   <Button className='w-full bg-white'>
-                  {console.log("announcement.module",announcement.module)}
                     <div
                       onClick={() => {
                         router.push({

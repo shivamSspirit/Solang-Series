@@ -6,7 +6,7 @@ import {allDocuments} from '../.contentlayer/generated'
 
 export default function Home() {
 
-  console.log("alldocs",allDocuments)
+  // console.log("alldocs",allDocuments)
 
   return (
     <>

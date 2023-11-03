@@ -1,12 +1,12 @@
 import React from "react";
-import illustration from "../../../assets/illustration.png";
+import illustration from "../../../../assets/illustration.png";
 import Image from "next/image";
 import { Button } from "flowbite-react";
-import NextBreadcrumb from "../../components/NextBreadcrumb";
+import NextBreadcrumb from "../../../components/NextBreadcrumb";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import curPageNumber from "../../../shared/pageNumber";
-import { allDocuments } from "../../../.contentlayer/generated";
+import curPageNumber from "../../../../shared/pageNumber";
+import { allDocuments } from "../../../../.contentlayer/generated";
 import { usePathname } from "next/navigation";
 
 
@@ -14,11 +14,11 @@ export async function getStaticProps(context) {
   console.log("context", context);
   const lession = allDocuments.filter(
     (lession) =>
-      lession?._raw?.sourceFileDir?.split("/")[0] ===
-      `${context.params.modulenumber}`
+      lession?.modulePart ===
+      `${context.params.modulepart}`
   );
 
-  console.log("lession", lession);
+ // console.log("lessions for a part", lession);
   // Return notFound if the post does not exist.
   // if (!lession) return { notFound: true }
 
@@ -32,7 +32,8 @@ export async function getStaticPaths() {
    // console.log("lessions", lession);
     return {
       params: {
-        modulenumber: lession?.moduleNumber,
+        modulenumber :lession?.moduleNumber,
+        modulepart: lession?.modulePart,
       },
     };
   });
@@ -48,7 +49,7 @@ const Course1 = () => {
   let currentRoute = router.pathname;
   currentRoute = currentRoute.split("/");
  
-
+console.log("routert",router)
   const [prevPg, nextPg] = curPageNumber({ pathname: router.pathname });
 
   return (
@@ -87,11 +88,9 @@ const Course1 = () => {
                 ))}
               </div>
 
-              <div className="mt-7">
-                <Link  href={`/CourseContent/${router.query.modulenumber}/${router.query.modulenumber}-b`}>part-b</Link>
-              </div>
-
-
+               <div className="mt-7">
+                <Link  href={`/CourseContent/${router.query.modulenumber}`}>part-a</Link>
+              </div> 
             </div>
           </div>
           <div className="md:mb-16 md:w-1/2 lg:m-0">

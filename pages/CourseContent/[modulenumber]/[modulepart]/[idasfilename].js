@@ -31,13 +31,13 @@ export async function getStaticPaths() {
 
 
 export async function getStaticProps(context) {
-  console.log("context",context)
+ // console.log("context",context)
 
 //  console.log("vvvvv",`${context.params.modulenumber}/${context.params.modulepart}/${context.params.idasfilename}`)
   // Find the post for the current page.
 const lession =  allDocuments.find((lession) => lession?._raw?.flattenedPath === `${context.params.modulenumber}/${context.params.modulepart}/${context.params.idasfilename}`)
 
-console.log("lession",lession)
+//console.log("lession",lession)
   // Return notFound if the post does not exist.
   if (!lession) return { notFound: true }
 
@@ -72,11 +72,11 @@ console.log("lession",lession)
 // }
 
 const GeneralInfo = ({ lession }) => {
-  console.log("postData:", lession);
+ // console.log("postData:", lession);
 
   const MDXContent = useMDXComponent(lession.body.code)
   const router = useRouter();
-  console.log(router.asPath, " Pathname");
+ // console.log(router.asPath, " Pathname");
  // /CourseContent/module-0/module-0-a/course-guide
  //const ifSlugequates = ifSlugEqual(router.asPath,allDocuments)
  ///console.log("ifSlugequates",ifSlugequates)
