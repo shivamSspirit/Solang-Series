@@ -141,10 +141,10 @@ const LandingSection = () => {
   const timeLine = (
     <div className="timeline">
       {timelineData.map((data, key) => (
-        <div key={key} className="wrap left">
+        <div key={key} className={`wrap left ${data.content==="Coming Soon" ? "bg:blue" : ""}`}>
           <div className="content bg-primaryDark text-white">
             <h2 className="font-semibold text-xl">{data.heading}</h2>
-            <p className="text-[#CECECE]  font-bodyFamily">{data.content}</p>
+            <p className={`text-[#CECECE]  font-bodyFamily`}>{data.content}</p>
           </div>
         </div>
       ))}

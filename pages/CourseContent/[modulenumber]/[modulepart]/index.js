@@ -55,6 +55,8 @@ const Course1 = ({ filteredParts }) => {
    console.log(" all docs",router.query);
 
   const modNum = modulenumber.split('-')[1];
+
+  console.log("modNum",modNum)
   
   const [prevPg, nextPg, prevPgNumber, nextPgNumber] = curPageNumber({
     modulenumber,

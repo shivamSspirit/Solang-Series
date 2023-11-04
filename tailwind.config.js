@@ -45,6 +45,22 @@ module.exports = {
         "fun-pink-dark": "#192742",
         "fun-pink-light": "#009ac5",
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            color: '#333',
+            a: {
+              color: '#3182ce',
+              '&:hover': {
+                color: '#2c5282',
+              },
+            },
+            p: {
+              fontFamily: ["Inter", 'sans-serif']
+            }
+          },
+        },
+      },
       rotate: {
         '360': '360deg'
       },
