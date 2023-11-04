@@ -50,9 +50,10 @@ const Course1 = ({ filteredParts }) => {
   const router = useRouter();
   const { modulenumber, modulepart } = router.query;
   const currentpath = `/CourseContent/${modulenumber}/${modulepart}`;
-  // console.log(allDocuments, " all docs");
+   console.log(" all docs",router.query);
 
   const modNum = modulenumber.split('-')[1];
+  
 
   const [prevPg, nextPg, prevPgNumber, nextPgNumber] = curPageNumber({
     modulenumber,

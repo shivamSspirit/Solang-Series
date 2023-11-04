@@ -83,7 +83,7 @@ export async function getStaticProps(context) {
 // }
 
 const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
-  // console.log("postData:", lession);
+ console.log("postData:", lession);
 
   const MDXContent = useMDXComponent(lession.body.code);
   const router = useRouter();
@@ -151,8 +151,8 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
         </div>
       </div>
       <div className='mt-20 sm:flex'>
-        <div className='mr-10 hidden md:flex'>
-          <SideBar />
+        <div className='mr-10 hidden md:flex w-1/4'>
+          <SideBar  headings={lession.headings}/>
         </div>
 
         <div className='flex flex-col text-white'>

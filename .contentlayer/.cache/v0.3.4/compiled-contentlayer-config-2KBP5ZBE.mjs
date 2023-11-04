@@ -4,6 +4,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
+import GithubSlugger from "github-slugger";
 var computedFields = {
   slug: {
     type: "string",
@@ -12,6 +13,25 @@ var computedFields = {
   slugAsParams: {
     type: "string",
     resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/")
+  },
+  headings: {
+    type: "json",
+    resolve: async (doc) => {
+      const regXHeader = /\n(?<flag>#{1,6})\s+(?<content>.+)/g;
+      const slugger = new GithubSlugger();
+      const headings = Array.from(doc.body.raw.matchAll(regXHeader)).map(
+        ({ groups }) => {
+          const flag = groups?.flag;
+          const content = groups?.content;
+          return {
+            level: flag.length,
+            text: content,
+            slug: content ? slugger.slug(content) : void 0
+          };
+        }
+      );
+      return headings;
+    }
   }
 };
 var Doc = defineDocumentType(() => ({
@@ -78,4 +98,4 @@ export {
   Doc,
   contentlayer_config_default as default
 };
-//# sourceMappingURL=compiled-contentlayer-config-KTN2ER3O.mjs.map
+//# sourceMappingURL=compiled-contentlayer-config-2KBP5ZBE.mjs.map

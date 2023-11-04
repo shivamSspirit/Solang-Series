@@ -20,10 +20,14 @@ function NavBar() {
               {/* LOGO */}
               <div>
                 <div className='w-14 sm:hidden'>
-                  <Image src={MobileSiteLogo} alt='logo' />
+                <Link href={'/'}>
+                <Image src={MobileSiteLogo} alt='logo' />
+                </Link>
                 </div>
                 <div className='hidden sm:flex'>
+                <Link href={'/'}>
                   <SiteLogo />
+                  </Link>
                 </div>
               </div>
               {/* HAMBURGER BUTTON FOR MOBILE */}

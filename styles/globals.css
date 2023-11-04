@@ -234,3 +234,8 @@ html {
 .shrink-0{
   fill: darkgray;
 }
+
+/* heading class */
+.hover-mb-3:hover {
+  margin-bottom: 0.75rem !important; /* You can adjust the margin value as needed */
+}
