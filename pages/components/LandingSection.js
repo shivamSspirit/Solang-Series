@@ -178,9 +178,15 @@ const LandingSection = () => {
         <div className="flex lg:flex-row flex-col-reverse justify-between">
           <div className="lg:w-1/2 text-white">
             <div className="text-3xl sm:text-4xl md:text-5xl">
-              Deep Dive Into Solidity On Solana
+            {"Deep Dive Into Solidity On Solana".split("").map((letter, index) => {
+              return (
+                <span key={index} className="hover:text-funPinkDark hover:mb-3 transition-all duration-500 hover:duration-100 click:goodbyeLetterAnim text-3xl md:text-5xl mb-2 leading-relaxed">
+                  {letter}
+                </span>
+              );
+      })}
             </div>
-            <div className="text-xl md:text-2xl mt-3 font-bold">
+            <div className="text-xl md:text-2xl mt-3 font-bold uppercase text-[#ba8b02]">
               Solidity on solana
             </div>
             <div className="mt-10 font-bodyFamily text-secondaryGrey text-sm md:text-base">

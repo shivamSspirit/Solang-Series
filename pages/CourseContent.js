@@ -84,7 +84,7 @@ const CourseContent = ({ allModules }) => {
         <Grid
           container
           spacing={{ xs: 2, md: 3, lg: 8, xl: 14 }}
-          className='flex justify-evenly items-center'
+          className='flex justify-start items-center'
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
           {mergedArray.map((announcement, index) => (
@@ -129,10 +129,18 @@ const CourseContent = ({ allModules }) => {
   );
 
   return (
-    <div className='my-20 text-white'>
+    <div className='my-16 text-white'>
       <NextSeo title='Course Content' />
-      <div>
-        <div className='text-3xl md:text-5xl mb-2'>Solidity On Solana</div>
+      <div className="mb-3">
+      {"Solidity On Solana".split("").map((letter, index) => {
+              return (
+                <span key={index} className="hover:text-funPinkDark hover:mb-3 transition-all duration-500 hover:duration-100 click:goodbyeLetterAnim text-3xl md:text-5xl mb-2 leading-relaxed ">
+                  {letter}
+                </span>
+              );
+      })}
+      </div>
+        {/* <div className='text-3xl md:text-5xl mb-2'>Solidity On Solana</div> */}
         <div className='mb-10 text-sm md:text-base'>
           Description of course content, If you make changes to the material and
           want to distribute the modified version, it must be licensed under the
@@ -140,7 +148,7 @@ const CourseContent = ({ allModules }) => {
           without permission.
         </div>
         <div>{moduleCard}</div>
-      </div>
+      
     </div>
   );
 };
