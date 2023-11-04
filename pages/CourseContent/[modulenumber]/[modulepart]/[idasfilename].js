@@ -163,7 +163,7 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
             <div className='text-4xl'>General Info</div>
           </div>
 
-          <art className='text-white prose-p:bodyFamily prose-base w-full prose ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer prose-zinc'>
+          <art className='text-white prose-p:bodyFamily prose-base w-full prose ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer prose-red prose-strong:text-funPinkDark prose-pre:bg-primaryDark'>
             {/* <div>
               {postData.title}
               <br />
