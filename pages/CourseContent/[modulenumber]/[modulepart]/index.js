@@ -9,48 +9,50 @@ import curPageNumber from "../../../../shared/pageNumber";
 import { allDocuments } from "../../../../.contentlayer/generated";
 import { usePathname } from "next/navigation";
 
-// export async function getStaticProps(context) {
-//   console.log("context", context);
-//   const lession = allDocuments.filter(
-//     (lession) =>
-//       lession?.modulePart ===
-//       `${context.params.modulepart}`
-//   );
+export async function getStaticProps(context) {
+  console.log("Running static props");
 
-//  // console.log("lessions for a part", lession);
-//   // Return notFound if the post does not exist.
-//   // if (!lession) return { notFound: true }
+  const filteredParts = allDocuments.filter((lession) => {
+    return (
+      lession.moduleNumber === `${context.params.modulenumber}` &&
+      lession.modulePart === `${context.params.modulepart}`
+    );
+  });
 
-//   // Return the post as page props.
-//   return { props: { lession } };
-// }
+  // console.log("lessions for a part", lession);
+  // Return notFound if the post does not exist.
+  // if (!lession) return { notFound: true }
 
-// export async function getStaticPaths() {
-//   // Get a list of valid post paths.
-//   const paths = allDocuments.map((lession) => {
-//    // console.log("lessions", lession);
-//     return {
-//       params: {
-//         modulenumber :lession?.moduleNumber,
-//         modulepart: lession?.modulePart,
-//       },
-//     };
-//   });
+  // console.log(lession, " Lession from static props");
 
-//   return { paths, fallback: false };
-// }
+  // Return the post as page props.
+  return { props: { filteredParts } };
+}
 
-const Course1 = () => {
+export async function getStaticPaths() {
+  console.log("Static paths runnning");
+  // Get a list of valid post paths.
+  const paths = allDocuments.map((lession) => {
+    // console.log("lessions", lession);
+    return {
+      params: {
+        modulenumber: lession?.moduleNumber,
+        modulepart: lession?.modulePart,
+      },
+    };
+  });
+
+  return { paths, fallback: false };
+}
+
+const Course1 = ({ filteredParts }) => {
   const router = useRouter();
   const { modulenumber, modulepart } = router.query;
   const currentpath = `/CourseContent/${modulenumber}/${modulepart}`;
+  // console.log(allDocuments, " all docs");
 
-  console.log("joined Path", currentpath);
-
-  // let currentRoute = paths;
-  // currentRoute = currentRoute.split("/");
-
-  const [prevPg, nextPg] = curPageNumber({ pathname: currentpath });
+  const [prevPg, nextPg, prevPgNumber, nextPgNumber] = curPageNumber({ modulenumber });
+  // nextPg = nextPg;
 
   return (
     <div className='my-20'>
@@ -78,7 +80,7 @@ const Course1 = () => {
             </div>
             <div className='mt-10'>
               <div>
-                {allDocuments?.map((lession, idx) => (
+                {filteredParts?.map((lession, idx) => (
                   <div key={idx} id='breadcrumbs-one' className='mb-1'>
                     <li>
                       <Link href={`/CourseContent${lession.slug}`}>
@@ -108,17 +110,17 @@ const Course1 = () => {
         </div>
       </div>
       <div className='mt-20 flex justify-center text-white'>
-        {prevPg > 0 && (
-          <div className='flex flex-col'>
-            <span>Part {prevPg}</span>
+        {prevPg && (
+          <a href={prevPg} className='flex flex-col'>
+            <span>Part {prevPgNumber}</span>
             <span>Previous Part</span>
-          </div>
+          </a>
         )}
-        {nextPg < 9 && (
-          <div className='flex flex-col'>
-            <span>Part {nextPg}</span>
+        {nextPg && (
+          <a href={nextPg} className='flex flex-col'>
+            <span>Part {nextPgNumber}</span>
             <span>Next Part</span>
-          </div>
+          </a>
         )}
       </div>
     </div>

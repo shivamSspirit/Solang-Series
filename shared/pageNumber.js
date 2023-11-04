@@ -1,14 +1,23 @@
-export default function curPageNumber({ pathname }) {
-  let currentRoute = pathname;
+export default function curPageNumber({
+  modulenumber,
+}) {
+  // Extracting the module number (module-1), and returning its last index.
+  const moduleNumberNumeric = parseInt(modulenumber.split("-")[1], 10);
+  const prevPgNumber = moduleNumberNumeric - 1;
+  const nextPgNumber = moduleNumberNumeric + 1;
 
- // console.log(pathname, " curPage");
+  const prevPg =
+    moduleNumberNumeric > 0 &&
+    `/CourseContent/module-${moduleNumberNumeric - 1}/module-${moduleNumberNumeric - 1}-a`;
+  const nextPg =
+    // 8 is the last module
+    moduleNumberNumeric < 8 &&
+    `/CourseContent/module-${moduleNumberNumeric + 1}/module-${
+      moduleNumberNumeric + 1
+    }-a`;
 
-  // Splitting the url.
-  currentRoute = currentRoute.split("/");
+  console.log(prevPg);
+  console.log(nextPg);
 
-  // Extracting the Course1 number, and returning its last index.
-  const nextPg = Number(currentRoute[2][currentRoute[2].length - 1]) + 1;
-  const prevPg = Number(currentRoute[2][currentRoute[2].length - 1]) - 1;
-
-  return [prevPg, nextPg];
+  return [prevPg, nextPg, prevPgNumber, nextPgNumber];
 }

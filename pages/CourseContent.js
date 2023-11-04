@@ -75,6 +75,8 @@ const CourseContent = ({ allModules }) => {
   }));
   const router = useRouter();
 
+  console.log(mergedArray);
+
   const moduleCard = (
     <div className='text-white'>
       <Box sx={{ flexGrow: 1 }}>
@@ -108,7 +110,7 @@ const CourseContent = ({ allModules }) => {
                     <div
                       onClick={() => {
                         router.push({
-                          pathname: `/CourseContent/${announcement.module}`,
+                          pathname: `/CourseContent/${announcement.module}/${announcement.module}-a`,
                         });
                       }}
                       className='text-center font-bold text-black text-xl'
