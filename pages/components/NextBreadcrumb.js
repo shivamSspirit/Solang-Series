@@ -14,7 +14,6 @@ const NextBreadcrumb = ({
  console.log("pathssss", currentpath)
 
   const trimmedPath = currentpath.split("/").slice(2);
-  trimmedPath.unshift("module-0");
   const pathNames = trimmedPath.filter((path) => path);
 
 

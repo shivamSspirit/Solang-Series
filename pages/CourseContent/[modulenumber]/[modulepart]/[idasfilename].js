@@ -5,54 +5,72 @@ import NextBreadcrumb from "../../../components/NextBreadcrumb";
 import { useRouter } from "next/router";
 import SideBar from "../../../components/Sidebar";
 import curPageNumber from "../../../../shared/pageNumber";
-import {allDocuments} from '../../../../.contentlayer/generated'
+import { allDocuments } from "../../../../.contentlayer/generated";
 // import { getAllPostIds, getPostData } from "../../../../utils/module-lession";
 //import { allDocuments, type Post } from 'contentlayer/generated'
-import { useMDXComponent } from 'next-contentlayer/hooks'
+import { useMDXComponent } from "next-contentlayer/hooks";
+import changePartFunction from "../../../../shared/changePartFunction";
+import Link from "next/link";
 
 export async function getStaticPaths() {
   // Get a list of valid post paths.
   const paths = allDocuments.map((lession) => {
-   // console.log("lessions",lession)
-   return { params: {
-      modulenumber:lession?.moduleNumber,
-      modulepart:lession?.modulePart,
-      idasfilename:lession?._raw?.sourceFileName?.replace(/\.mdx$/, "")},
-  }}
-   )
+    // console.log("lessions",lession)
+    return {
+      params: {
+        modulenumber: lession?.moduleNumber,
+        modulepart: lession?.modulePart,
+        idasfilename: lession?._raw?.sourceFileName?.replace(/\.mdx$/, ""),
+      },
+    };
+  });
 
-  return { paths, fallback: false }
+  return { paths, fallback: false };
 }
 
 export async function getStaticProps(context) {
- // console.log("context",context)
+  // console.log("context",context)
 
-//  console.log("vvvvv",`${context.params.modulenumber}/${context.params.modulepart}/${context.params.idasfilename}`)
+  //  console.log("vvvvv",`${context.params.modulenumber}/${context.params.modulepart}/${context.params.idasfilename}`)
   // Find the post for the current page.
-const lession =  allDocuments.find((lession) => lession?._raw?.flattenedPath === `${context.params.modulenumber}/${context.params.modulepart}/${context.params.idasfilename}`)
 
-//console.log("lession",lession)
+ const filteredParts = allDocuments.filter((lession) => {
+   return (
+     lession.moduleNumber === `${context.params.modulenumber}` &&
+     lession.modulePart === `${context.params.modulepart}`
+   );
+ });
+
+
+  // Extracting total files to get its length
+  const totalLessons = allDocuments.filter((lession) => {
+    return lession.moduleNumber === `${context.params.modulenumber}`;
+  });
+
+  // Using modulePart of last file
+  const lastPart = totalLessons[totalLessons.length - 1].modulePart;
+
+  // getting the last letter of the last file of each module
+  const lastLetter = lastPart[lastPart.length - 1];
+
+  // using Ascii, getting the max parts in each module 
+  const totalParts = lastLetter.charCodeAt(0) - "a".charCodeAt(0) + 1;
+
+  // console.log(totalParts, " Total Parts");
+
+  const lession = allDocuments.find(
+    (lession) =>
+      lession?._raw?.flattenedPath ===
+      `${context.params.modulenumber}/${context.params.modulepart}/${context.params.idasfilename}`
+  );
+
+  //console.log("lession",lession)
   // Return notFound if the post does not exist.
-  if (!lession) return { notFound: true }
+  if (!lession) return { notFound: true };
 
   // Return the post as page props.
- return { props: { lession } }
+  return { props: { lession, totalParts, filteredParts } };
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // const ifSlugEqual=(currentroute,allDocuments)=>{
 //   const currentPathmodules = currentroute.replace(/^\/CourseContent/, '');
@@ -65,16 +83,24 @@ const lession =  allDocuments.find((lession) => lession?._raw?.flattenedPath ===
 //   return false;
 // }
 
-const GeneralInfo = ({ lession }) => {
- // console.log("postData:", lession);
+const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
+  // console.log("postData:", lession);
 
-  const MDXContent = useMDXComponent(lession.body.code)
+  const MDXContent = useMDXComponent(lession.body.code);
   const router = useRouter();
- // console.log(router.asPath, " Pathname");
- // /CourseContent/module-0/module-0-a/course-guide
- //const ifSlugequates = ifSlugEqual(router.asPath,allDocuments)
- ///console.log("ifSlugequates",ifSlugequates)
-  const [prevPg, nextPg] = curPageNumber({ pathname: router.pathname });
+  // console.log(router.asPath, " Pathname");
+  // /CourseContent/module-0/module-0-a/course-guide
+  //const ifSlugequates = ifSlugEqual(router.asPath,allDocuments)
+  ///console.log("ifSlugequates",ifSlugequates)
+
+  const { modulenumber, modulepart, idasfilename } = router.query;
+  const currentpath = `/CourseContent/${modulenumber}/${modulepart}/${idasfilename}`;
+
+  const [prevPg, nextPg, prevPgText, nextPgText] = changePartFunction({
+    modulenumber,
+    modulepart,
+    totalParts,
+  });
 
   return (
     <div className='my-12'>
@@ -87,7 +113,7 @@ const GeneralInfo = ({ lession }) => {
             containerClasses='flex py-5 bg-gradient-to-r from-purple-600 to-blue-600'
             listClasses='hover:underline mx-2 font-bold'
             capitalizeLinks
-            currentpath={router.pathname}
+            currentpath={currentpath}
           />
         </div>
         <div className='flex flex-col-reverse md:flex-row'>
@@ -99,6 +125,19 @@ const GeneralInfo = ({ lession }) => {
               scalable decentralized applications. Join us on a journey of
               learning that empowers you to shape the future of blockchain
               technology
+            </div>
+            <div className='mt-10'>
+              <div>
+                {filteredParts?.map((lession, idx) => (
+                  <div key={idx} id='breadcrumbs-one' className='mb-1'>
+                    <li>
+                      <Link href={`/CourseContent${lession.slug}`}>
+                        {lession._id}
+                      </Link>
+                    </li>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
           <div className='md:w-1/2 '>
@@ -125,8 +164,7 @@ const GeneralInfo = ({ lession }) => {
             <div className='text-4xl'>General Info</div>
           </div>
 
-
-           <article className='text-white prose ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer'>
+          <article className='text-white prose ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer'>
             {/* <div>
               {postData.title}
               <br />
@@ -137,8 +175,8 @@ const GeneralInfo = ({ lession }) => {
               <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
             </div> */}
 
-            <MDXContent/>
-          </article> 
+            <MDXContent />
+          </article>
         </div>
       </div>
       <div
@@ -146,17 +184,17 @@ const GeneralInfo = ({ lession }) => {
           prevPg > 0 ? "justify-between" : "justify-end"
         } text-white`}
       >
-        {prevPg > 0 && (
-          <div className='flex flex-col'>
-            <span>Part {prevPg}</span>
+        {prevPg && (
+          <a href={prevPg} className='flex flex-col'>
+            <span>Part {prevPgText}</span>
             <span>Previous Part</span>
-          </div>
+          </a>
         )}
-        {nextPg < 9 && (
-          <div className='flex flex-col'>
-            <span>Part {nextPg}</span>
+        {nextPg && (
+          <a href={nextPg} className='flex flex-col'>
+            <span>Part {nextPgText}</span>
             <span>Next Part</span>
-          </div>
+          </a>
         )}
       </div>
     </div>
