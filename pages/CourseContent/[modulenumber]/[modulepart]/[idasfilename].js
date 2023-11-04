@@ -151,8 +151,8 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
         </div>
       </div>
       <div className='mt-20 sm:flex'>
-        <div className='mr-10 hidden md:flex w-1/4'>
-          <SideBar  headings={lession.headings}/>
+        <div className='mr-10 hidden md:flex w-1/3'>
+          <SideBar headings={lession.headings}/>
         </div>
 
         <div className='flex flex-col text-white'>
@@ -163,7 +163,7 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
             <div className='text-4xl'>General Info</div>
           </div>
 
-          <article className='text-white prose ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer'>
+          <div className='text-white w-full prose ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer'>
             {/* <div>
               {postData.title}
               <br />
@@ -175,7 +175,7 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
             </div> */}
 
             <MDXContent />
-          </article>
+          </div>
         </div>
       </div>
       <div className='mt-20 w-full flex justify-between text-white'>
