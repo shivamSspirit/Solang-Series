@@ -18,7 +18,9 @@ import { NextSeo } from "next-seo";
 export async function getStaticProps() {
   const allModuleNumbers = await getModules();
   //console.log("allModuleNumbers", allModuleNumbers);
-  const allModules = allModuleNumbers.map((post) => post.substring("modules/".length));
+  const allModules = allModuleNumbers.map((post) =>
+    post.substring("modules/".length)
+  );
   return {
     props: {
       allModules,
@@ -107,15 +109,15 @@ const CourseContent = ({ allModules }) => {
                   </div>
                 </div>
                 <div className='mb-[1px]'>
-                  <Button className='w-full bg-white'>
-                    <div
-                      onClick={() => {
-                        router.push({
-                          pathname: `/CourseContent/${announcement.module}/${announcement.module}-a`,
-                        });
-                      }}
-                      className='text-center font-bold text-black text-xl'
-                    >
+                  <Button
+                    className='w-full bg-white'
+                    onClick={() => {
+                      router.push({
+                        pathname: `/CourseContent/${announcement.module}/${announcement.module}-a`,
+                      });
+                    }}
+                  >
+                    <div className='text-center font-bold text-black text-xl'>
                       Start Module
                     </div>
                   </Button>
@@ -131,24 +133,26 @@ const CourseContent = ({ allModules }) => {
   return (
     <div className='my-16 text-white'>
       <NextSeo title='Course Content' />
-      <div className="mb-3">
-      {"Solidity On Solana".split("").map((letter, index) => {
-              return (
-                <span key={index} className="hover:text-funPinkDark hover:mb-3 transition-all duration-500 hover:duration-100 click:goodbyeLetterAnim text-3xl md:text-5xl mb-2 leading-relaxed ">
-                  {letter}
-                </span>
-              );
-      })}
+      <div className='mb-3'>
+        {"Solidity On Solana".split("").map((letter, index) => {
+          return (
+            <span
+              key={index}
+              className='hover:text-funPinkDark hover:mb-3 transition-all duration-500 hover:duration-100 click:goodbyeLetterAnim text-3xl md:text-5xl mb-2 leading-relaxed '
+            >
+              {letter}
+            </span>
+          );
+        })}
       </div>
-        {/* <div className='text-3xl md:text-5xl mb-2'>Solidity On Solana</div> */}
-        <div className='mb-10 text-sm md:text-base'>
-          Description of course content, If you make changes to the material and
-          want to distribute the modified version, it must be licensed under the
-          same license. Using the material for commercial purposes is forbidden
-          without permission.
-        </div>
-        <div>{moduleCard}</div>
-      
+      {/* <div className='text-3xl md:text-5xl mb-2'>Solidity On Solana</div> */}
+      <div className='mb-10 text-sm md:text-base'>
+        Description of course content, If you make changes to the material and
+        want to distribute the modified version, it must be licensed under the
+        same license. Using the material for commercial purposes is forbidden
+        without permission.
+      </div>
+      <div>{moduleCard}</div>
     </div>
   );
 };
