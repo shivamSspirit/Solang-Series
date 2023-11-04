@@ -20,6 +20,8 @@ export async function getStaticProps(context) {
     );
   });
 
+
+  console.log(filteredParts);
   // console.log("lessions for a part", lession);
   // Return notFound if the post does not exist.
   // if (!lession) return { notFound: true }
@@ -54,7 +56,6 @@ const Course1 = ({ filteredParts }) => {
 
   const modNum = modulenumber.split('-')[1];
   
-
   const [prevPg, nextPg, prevPgNumber, nextPgNumber] = curPageNumber({
     modulenumber,
   });
