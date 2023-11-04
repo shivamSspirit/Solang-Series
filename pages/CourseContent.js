@@ -132,7 +132,7 @@ const CourseContent = ({ allModules }) => {
     <div className='my-20 text-white'>
       <NextSeo title='Course Content' />
       <div>
-        <div className='text-3xl md:text-5xl mb-2'>Title of course content</div>
+        <div className='text-3xl md:text-5xl mb-2'>Solidity On Solana</div>
         <div className='mb-10 text-sm md:text-base'>
           Description of course content, If you make changes to the material and
           want to distribute the modified version, it must be licensed under the

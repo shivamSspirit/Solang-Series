@@ -1,6 +1,8 @@
 export default function curPageNumber({
   modulenumber,
 }) {
+
+  if(modulenumber!==undefined&&modulenumber!==null){
   // Extracting the module number (module-1), and returning its last index.
   const moduleNumberNumeric = parseInt(modulenumber?.split("-")[1], 10);
   const prevPgNumber = moduleNumberNumeric - 1;
@@ -20,4 +22,13 @@ export default function curPageNumber({
   console.log(nextPg);
 
   return [prevPg, nextPg, prevPgNumber, nextPgNumber];
+  } else {
+    return(
+      console.error("module number not found",modulenumber)
+    )
+  }
+
+
 }
+  
+
