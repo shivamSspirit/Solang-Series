@@ -34,13 +34,12 @@ export async function getStaticProps(context) {
   //  console.log("vvvvv",`${context.params.modulenumber}/${context.params.modulepart}/${context.params.idasfilename}`)
   // Find the post for the current page.
 
- const filteredParts = allDocuments.filter((lession) => {
-   return (
-     lession.moduleNumber === `${context.params.modulenumber}` &&
-     lession.modulePart === `${context.params.modulepart}`
-   );
- });
-
+  const filteredParts = allDocuments.filter((lession) => {
+    return (
+      lession.moduleNumber === `${context.params.modulenumber}` &&
+      lession.modulePart === `${context.params.modulepart}`
+    );
+  });
 
   // Extracting total files to get its length
   const totalLessons = allDocuments.filter((lession) => {
@@ -53,7 +52,7 @@ export async function getStaticProps(context) {
   // getting the last letter of the last file of each module
   const lastLetter = lastPart[lastPart.length - 1];
 
-  // using Ascii, getting the max parts in each module 
+  // using Ascii, getting the max parts in each module
   const totalParts = lastLetter.charCodeAt(0) - "a".charCodeAt(0) + 1;
 
   // console.log(totalParts, " Total Parts");
@@ -179,23 +178,23 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
           </article>
         </div>
       </div>
-      <div
-        className={`mt-20 flex ${
-          prevPg > 0 ? "justify-between" : "justify-end"
-        } text-white`}
-      >
-        {prevPg && (
-          <a href={prevPg} className='flex flex-col'>
-            <span>Part {prevPgText}</span>
-            <span>Previous Part</span>
-          </a>
-        )}
-        {nextPg && (
-          <a href={nextPg} className='flex flex-col'>
-            <span>Part {nextPgText}</span>
-            <span>Next Part</span>
-          </a>
-        )}
+      <div className='mt-20 w-full flex justify-between text-white'>
+        <div className='justify-start'>
+          {prevPg && (
+            <a href={prevPg} className='flex flex-col'>
+              <span>Part {prevPgText}</span>
+              <span>Previous Part</span>
+            </a>
+          )}
+        </div>
+        <div className='justify-end'>
+          {nextPg && (
+            <a href={nextPg} className='flex flex-col justify-end'>
+              <span>Part {nextPgText}</span>
+              <span>Next Part</span>
+            </a>
+          )}
+        </div>
       </div>
     </div>
   );
