@@ -13,14 +13,19 @@ const NextBreadcrumb = ({
   console.log("pathssss", currentpath);
 
   const trimmedPath = currentpath.split("/");
-  const pathNames = trimmedPath.filter((path) => path);
+  const pathNames = trimmedPath.filter((path) => {
+    return path;
+  });
+
+  // console.log(trimmedPath, " trimmedPath names");
+  // console.log(pathNames, " Path names");
 
   return (
     <div>
       <ul id='breadcrumbs-one' className='hidden md:flex'>
         {pathNames.map((link, index) => {
           let href =
-            link === "module-0"
+            index <= 1
               ? `/CourseContent`
               : `/CourseContent/${trimmedPath.slice(2, index + 2).join("/")}`;
           let itemLink = capitalizeLinks
