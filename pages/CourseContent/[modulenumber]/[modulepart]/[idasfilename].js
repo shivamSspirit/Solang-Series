@@ -83,7 +83,7 @@ export async function getStaticProps(context) {
 // }
 
 const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
- console.log("postData:", lession);
+ //console.log("postData:", lession);
 
   const MDXContent = useMDXComponent(lession.body.code);
   const router = useRouter();

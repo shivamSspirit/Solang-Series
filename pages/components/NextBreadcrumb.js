@@ -10,18 +10,18 @@ const NextBreadcrumb = ({
   capitalizeLinks,
   currentpath,
 }) => {
-  console.log("pathssss", currentpath);
+ // console.log("pathssss", currentpath);
 
   const trimmedPath = currentpath.split("/");
 
 
-  console.log('trimmedPath',trimmedPath)
+ // console.log('trimmedPath',trimmedPath)
   const pathNames = trimmedPath.filter((path) => {
     return path;
   });
 
   // console.log(trimmedPath, " trimmedPath names");
-   console.log(" Path names",pathNames);
+//   console.log(" Path names",pathNames);
 
   return (
     <div>

@@ -78,7 +78,7 @@ const CourseContent = ({ allModules }) => {
   }));
   const router = useRouter();
 
-  console.log(mergedArray);
+ // console.log(mergedArray);
 
   const moduleCard = (
     <div className='text-white'>

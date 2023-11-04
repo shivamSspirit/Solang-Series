@@ -24,8 +24,8 @@ export default function changePartFunction({
     curPartNum < totalParts - 1 &&
     `/CourseContent/${modulenumber}/${modulenumber}-${nextNumToChar}`;
 
-  console.log(totalParts, " Total parts");
-  console.log(curPartNum, " cur parts");
+  // console.log(totalParts, " Total parts");
+  // console.log(curPartNum, " cur parts");
 
   const prevPgText = `${moduleNumberNumeric}${prevNumToChar}`;
   const nextPgText = `${moduleNumberNumeric}${nextNumToChar}`;

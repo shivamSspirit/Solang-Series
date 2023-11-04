@@ -17,8 +17,8 @@ export default function curPageNumber({ modulenumber }) {
         moduleNumberNumeric + 1
       }-a`;
 
-    console.log(prevPg);
-    console.log(nextPg);
+    // console.log(prevPg);
+    // console.log(nextPg);
 
     return [prevPg, nextPg, prevPgNumber, nextPgNumber];
   } else {
