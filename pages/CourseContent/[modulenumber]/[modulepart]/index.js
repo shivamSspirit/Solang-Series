@@ -42,7 +42,7 @@ export async function getStaticPaths() {
     };
   });
 
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 }
 
 const Course1 = ({ filteredParts }) => {
@@ -51,7 +51,9 @@ const Course1 = ({ filteredParts }) => {
   const currentpath = `/CourseContent/${modulenumber}/${modulepart}`;
   // console.log(allDocuments, " all docs");
 
-  const [prevPg, nextPg, prevPgNumber, nextPgNumber] = curPageNumber({ modulenumber });
+  const [prevPg, nextPg, prevPgNumber, nextPgNumber] = curPageNumber({
+    modulenumber,
+  });
   // nextPg = nextPg;
 
   return (
@@ -90,12 +92,6 @@ const Course1 = ({ filteredParts }) => {
                   </div>
                 ))}
               </div>
-
-              <div className='mt-7'>
-                <Link href={`/CourseContent/${router.query.modulenumber}`}>
-                  part-a
-                </Link>
-              </div>
             </div>
           </div>
           <div className='md:mb-16 md:w-1/2 lg:m-0'>
@@ -109,19 +105,23 @@ const Course1 = ({ filteredParts }) => {
           </div>
         </div>
       </div>
-      <div className='mt-20 flex justify-center text-white'>
-        {prevPg && (
-          <a href={prevPg} className='flex flex-col'>
-            <span>Part {prevPgNumber}</span>
-            <span>Previous Part</span>
-          </a>
-        )}
-        {nextPg && (
-          <a href={nextPg} className='flex flex-col'>
-            <span>Part {nextPgNumber}</span>
-            <span>Next Part</span>
-          </a>
-        )}
+      <div className='mt-20 w-full flex justify-between text-white'>
+        <div className='justify-start'>
+          {prevPg && (
+            <a href={prevPg} className='flex flex-col'>
+              <span>Part {prevPgNumber}</span>
+              <span>Previous Part</span>
+            </a>
+          )}
+        </div>
+        <div className='justify-end'>
+          {nextPg && (
+            <a href={nextPg} className='flex flex-col justify-end'>
+              <span>Part {nextPgNumber}</span>
+              <span>Next Part</span>
+            </a>
+          )}
+        </div>
       </div>
     </div>
   );
