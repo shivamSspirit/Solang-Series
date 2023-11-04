@@ -131,7 +131,7 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
                   <div key={idx} id='breadcrumbs-one' className='mb-1'>
                     <li>
                       <Link href={`/CourseContent${lession.slug}`}>
-                        {lession._id}
+                      {lession._raw.sourceFileName.replace(/\.mdx$/, "")}
                       </Link>
                     </li>
                   </div>
@@ -163,7 +163,9 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
             <div className='text-4xl'>General Info</div>
           </div>
 
-          <article className='text-white prose ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer'>
+          {/* text-white prose ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer */}
+
+          <article className='prose lg:prose-xl'>
             {/* <div>
               {postData.title}
               <br />
