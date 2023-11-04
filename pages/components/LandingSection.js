@@ -7,13 +7,13 @@ import landingPg1 from "../../assets/landingPg1.png";
 import landingPg2 from "../../assets/landingPg2.png";
 import Ufo from "../../assets/Ufo.svg";
 import Image from "next/image";
-
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import FooterComp from "../../shared/Footer";
 // import Markdown from "react-markdown";
 // import CourseMap from "./CourseMap";
+import { NextSeo } from "next-seo";
 
 const LandingSection = () => {
   // const [curBtn, setCurBtn] = useState(0);
@@ -60,13 +60,16 @@ const LandingSection = () => {
             md={4}
             lg={4}
             key={index}
-            
           >
             <div className='m-1'>
               <Image src={announcement.img} alt='med' />
               <div className='px-3 rounded-b-2xl'>
-                <div className='text-2xl font-semibold pt-6 pb-1'>{announcement.head}</div>
-                <div className='text-secondaryGrey pb-6 font-bodyFamily'>{announcement.desc}</div>
+                <div className='text-2xl font-semibold pt-6 pb-1'>
+                  {announcement.head}
+                </div>
+                <div className='text-secondaryGrey pb-6 font-bodyFamily'>
+                  {announcement.desc}
+                </div>
               </div>
             </div>
           </Grid>
@@ -118,7 +121,8 @@ const LandingSection = () => {
         "In this module, we will develop a Solana program that will mint gold tokens (spl tokens). The program should be able to set up and execute the token-minting process.",
     },
     {
-      heading: "Module 3: Building a CPI-Enabled Flip Program with Solidity on Solana",
+      heading:
+        "Module 3: Building a CPI-Enabled Flip Program with Solidity on Solana",
       content:
         "In this module, we dive you into the concepts of composability and CPI in Solana. We will also develop a hands-on solidity contract: a CPI Enabled Flip program on solana using Solidity.",
     },
@@ -129,8 +133,7 @@ const LandingSection = () => {
     },
     {
       heading: "Module 5: How to Mint NFT who have Mint Authority as PDA",
-      content:
-        "Coming Soon",
+      content: "Coming Soon",
     },
   ];
 
@@ -139,7 +142,7 @@ const LandingSection = () => {
       {timelineData.map((data, key) => (
         <div key={key} className='wrap left'>
           <div className='content bg-primaryDark text-white'>
-            <h2 className="font-semibold text-xl">{data.heading}</h2>
+            <h2 className='font-semibold text-xl'>{data.heading}</h2>
             <p className='text-[#CECECE]  font-bodyFamily'>{data.content}</p>
           </div>
         </div>

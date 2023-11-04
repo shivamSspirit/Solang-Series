@@ -12,6 +12,7 @@ import Image from "next/image";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+import { NextSeo } from "next-seo";
 
 const About = () => {
   const [svgHoverColor, setSvgHoverColor] = useState("white");
@@ -66,36 +67,41 @@ const About = () => {
 
   return (
     <div className='mt-5 sm:px-12'>
+      <NextSeo title='About it' />
       <div>
         <div className='flex flex-col-reverse justify-between'>
           <div className='text-white my-5 sm:mb-10'>
             <div className='text-5xl'>About</div>
             <div className='mt-10 text-secondaryGrey font-bodyFamily text-sm sm:text-base'>
               <p>
-              We welcome you to Solidity for Solana. Here, we provide educational
-              resources and content for budding developers and enthusiasts to
-              learn blockchain technology, focusing mainly on Solana development
-              using Solidity, and focusing on those wanting to transition from
-              EVM to Solana.  We aim to equip users with the knowledge of developing
-              dApps on Solana with ease while focusing on simplicity, security and scalability.
+                We welcome you to Solidity for Solana. Here, we provide
+                educational resources and content for budding developers and
+                enthusiasts to learn blockchain technology, focusing mainly on
+                Solana development using Solidity, and focusing on those wanting
+                to transition from EVM to Solana. We aim to equip users with the
+                knowledge of developing dApps on Solana with ease while focusing
+                on simplicity, security and scalability.
               </p>
               <br />
               <p>
-              Our team is composed of experienced developers who themselves have
-              years of experience in web development, blockchain development and
-              everything in between. They bring in their wealth of knowledge and
-              resources for budding enthusiasts willing to gain deep knowledge
-              about the ins and outs of Solana. We are dedicated to providing
-              resources, education, and tools to help users succeed in Solana development.
+                Our team is composed of experienced developers who themselves
+                have years of experience in web development, blockchain
+                development and everything in between. They bring in their
+                wealth of knowledge and resources for budding enthusiasts
+                willing to gain deep knowledge about the ins and outs of Solana.
+                We are dedicated to providing resources, education, and tools to
+                help users succeed in Solana development.
               </p>
               <br />
               <p>
-              Our goal is to be the hub for users who want to learn about blockchain.
-              We aim to be the premier hub for educational content on Solana and EVM development.
-              Our courses provide ample knowledge of the deep technical concepts to know for
-              development on Solana. By utilising Solidity, we also provide a familiar
-              framework whose knowledge can be applied to other blockchains too. Join us to
-              learn more about blockchain and start your journey of Solana development.
+                Our goal is to be the hub for users who want to learn about
+                blockchain. We aim to be the premier hub for educational content
+                on Solana and EVM development. Our courses provide ample
+                knowledge of the deep technical concepts to know for development
+                on Solana. By utilising Solidity, we also provide a familiar
+                framework whose knowledge can be applied to other blockchains
+                too. Join us to learn more about blockchain and start your
+                journey of Solana development.
               </p>
               <br />
               <p>

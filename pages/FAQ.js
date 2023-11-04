@@ -7,6 +7,7 @@ import expandIcon from "../assets/expandIcon.png";
 import Image from "next/image";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { NextSeo } from "next-seo";
 
 const FAQ = () => {
   const accData = [
@@ -26,7 +27,6 @@ const FAQ = () => {
       title: "What software/tools do I need for this course?",
       ans: "You will need a code editor like Visual Studio Code, along with Solana Devtools and Anchor framework for development. Detailed steps for the setup of the requirements is given in the Setting up Development Workspace lesson",
     },
-
   ];
 
   const [expanded, setExpanded] = useState(
@@ -41,6 +41,7 @@ const FAQ = () => {
 
   return (
     <div>
+      <NextSeo title='FAQ' />
       <div className='text-5xl my-20'>Frequently asked questions</div>
       <div>
         {accData.map((data, idx) => (

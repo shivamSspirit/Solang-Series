@@ -5,14 +5,15 @@ import curPageNumber from "../../shared/pageNumber";
 import { useRouter } from "next/router";
 import { usePathname } from "next/navigation";
 import NavBar from "../../shared/Navbar";
+import { NextSeo } from "next-seo";
 
 let coursePage = "";
 
 const Layout = ({ children }) => {
-//  console.log(children?.type?.name, "Layout");
+  //  console.log(children?.type?.name, "Layout");
   const paths = usePathname();
 
- // console.log("pathssssssss",paths)
+  // console.log("pathssssssss",paths)
   const pathNames = paths?.split("/");
   if (pathNames?.[1] !== "404") {
     coursePage = pathNames?.[2];
@@ -23,6 +24,11 @@ const Layout = ({ children }) => {
       <div className='mt-12 mx-4 md:mx-10 lg:mx-20'>
         {/* <Navbar/>
       {children} */}
+        {children?.type?.name === "Home" ? (
+          <NextSeo title='Solidy On Solana' />
+        ) : (
+          <NextSeo titleTemplate='%s | Solidy On Solana' />
+        )}
         {children?.type?.name === "ComingSoon" ? (
           children
         ) : (

@@ -13,6 +13,7 @@ import Grid from "@mui/material/Grid";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import { useRouter } from "next/router";
 import { getModules } from "utils/module-lession";
+import { NextSeo } from "next-seo";
 
 export async function getStaticProps() {
   const allModuleNumbers = await getModules();
@@ -128,10 +129,11 @@ const CourseContent = ({ allModules }) => {
   );
 
   return (
-    <div className="my-20 text-white">
+    <div className='my-20 text-white'>
+      <NextSeo title='Course Content' />
       <div>
-        <div className="text-3xl md:text-5xl mb-2">Title of course content</div>
-        <div className="mb-10 text-sm md:text-base">
+        <div className='text-3xl md:text-5xl mb-2'>Title of course content</div>
+        <div className='mb-10 text-sm md:text-base'>
           Description of course content, If you make changes to the material and
           want to distribute the modified version, it must be licensed under the
           same license. Using the material for commercial purposes is forbidden

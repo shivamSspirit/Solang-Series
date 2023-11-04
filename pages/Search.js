@@ -1,3 +1,4 @@
+import { NextSeo } from "next-seo";
 import React from "react";
 
 const Search = () => {
@@ -8,6 +9,7 @@ const Search = () => {
 
   return (
     <div className=''>
+      <NextSeo title={`Search Page`} />
       <div className='text-3xl my-20 font-semibold'>
         Search from the material
       </div>

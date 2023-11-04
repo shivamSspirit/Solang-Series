@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import curPageNumber from "../../../../shared/pageNumber";
 import { allDocuments } from "../../../../.contentlayer/generated";
 import { usePathname } from "next/navigation";
+import { NextSeo } from "next-seo";
 
 export async function getStaticProps(context) {
   console.log("Running static props");
@@ -51,6 +52,8 @@ const Course1 = ({ filteredParts }) => {
   const currentpath = `/CourseContent/${modulenumber}/${modulepart}`;
   // console.log(allDocuments, " all docs");
 
+  const modNum = modulenumber.split('-')[1];
+
   const [prevPg, nextPg, prevPgNumber, nextPgNumber] = curPageNumber({
     modulenumber,
   });
@@ -58,6 +61,7 @@ const Course1 = ({ filteredParts }) => {
 
   return (
     <div className='my-20'>
+      <NextSeo title={`Module ${modNum}`} />
       <div className='flex sm:flex-col justify-between'>
         <div>
           <NextBreadcrumb
