@@ -12,8 +12,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import { useRouter } from "next/router";
-import { getModules } from "../utils/module-lession";
-
+import { getModules } from "utils/module-lession";
 
 export async function getStaticProps() {
   const allModuleNumbers = await getModules();
@@ -25,8 +24,6 @@ export async function getStaticProps() {
     },
   };
 }
-
-
 
 const announcementData = [
   {
@@ -77,14 +74,6 @@ const CourseContent = ({ allModules }) => {
     ...announcementData[index],
   }));
   const router = useRouter();
-
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
 
   const moduleCard = (
     <div className='text-white'>

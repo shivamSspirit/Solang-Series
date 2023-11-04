@@ -10,8 +10,6 @@ import {allDocuments} from '../../../../.contentlayer/generated'
 //import { allDocuments, type Post } from 'contentlayer/generated'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
-
-
 export async function getStaticPaths() {
   // Get a list of valid post paths.
   const paths = allDocuments.map((lession) => {
@@ -25,10 +23,6 @@ export async function getStaticPaths() {
 
   return { paths, fallback: false }
 }
-
-
-
-
 
 export async function getStaticProps(context) {
  // console.log("context",context)

@@ -10,18 +10,17 @@ const NextBreadcrumb = ({
   capitalizeLinks,
   currentpath
 }) => {
- // const paths = usePathname();
 
- // console.log("pathssss",currentpath)
+ console.log("pathssss", currentpath)
 
-  // const trimmedPath = paths.split("/").slice(2);
-  // trimmedPath.unshift("module-0");
-  // const pathNames = trimmedPath.filter((path) => path);
+  const trimmedPath = currentpath.split("/").slice(2);
+  trimmedPath.unshift("module-0");
+  const pathNames = trimmedPath.filter((path) => path);
 
 
   return (
     <div>
-      {/* <ul id='breadcrumbs-one' className='hidden md:flex'>
+      <ul id='breadcrumbs-one' className='hidden md:flex'>
         {pathNames.map((link, index) => {
           let href =
             link === "module-0"
@@ -39,7 +38,7 @@ const NextBreadcrumb = ({
             </React.Fragment>
           );
         })}
-      </ul> */}
+      </ul>
     </div>
   );
 };
