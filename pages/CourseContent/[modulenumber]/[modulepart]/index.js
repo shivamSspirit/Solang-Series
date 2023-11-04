@@ -91,8 +91,9 @@ const Course1 = ({ filteredParts }) => {
                 {filteredParts?.map((lession, idx) => (
                   <div key={idx} id='breadcrumbs-one' className='mb-1'>
                     <li>
+                    {console.log("filename",lession)}
                       <Link href={`/CourseContent${lession.slug}`}>
-                        {lession._id}
+                        {lession._raw.sourceFileName.replace(/\.mdx$/, "")}
                       </Link>
                     </li>
                   </div>
