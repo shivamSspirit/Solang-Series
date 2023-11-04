@@ -12,11 +12,11 @@ const NextBreadcrumb = ({
 }) => {
  // console.log("pathssss", currentpath);
 
-  const trimmedPath = currentpath.split("/");
+  const trimmedPath = currentpath?.split("/");
 
 
  // console.log('trimmedPath',trimmedPath)
-  const pathNames = trimmedPath.filter((path) => {
+  const pathNames = trimmedPath?.filter((path) => {
     return path;
   });
 
