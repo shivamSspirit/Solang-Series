@@ -6,4 +6,102 @@ modulePart: module-1-b
 thisFileName: filestructure
 ---
 
-## filestructure
+# Imports
+
+# Objectives
+
+*************************In this lesson, you will:*************************
+
+- Understand how the import directive in Solidity is different than other languages.
+- Go through the various types of imports in Solidity.
+
+## tl;dr
+
+Solidity's import directive is used to bring code from other files into your file. It is similar to JavaScript imports. You can import specific items, everything, or rename imports. Imported items include constants, structs, enums, events, functions, and contracts. Import paths can be managed using import maps. Renaming and grouping imports are also possible.
+
+# Overview
+
+The import directive is used to import other solidity files in one file, which can used in other files. For example, by importing the Solana library into our solidity contract we can use multiple methods from it to interact with Solana programs.
+
+Solidity imports are somewhat similar to JavaScript ES6 imports, however there is no export statement or default export.
+
+```jsx
+import {foo, bar} from "defines.sol";
+```
+
+Just like with ES6, import is hoisted to the top and both foo and bar are usable even before the import statement.
+
+The following items are always exported, which means they can be imported into another file.
+
+- global constants
+- struct definitions
+- enums definitions
+- event definitions
+- global functions
+- free-standing functions
+- contracts, including abstract contracts, libraries, and interfaces
+
+**Types of imports**
+
+There are different types of imports you can use with Solidity on Solana:
+
+- Import everything from the library.
+- Select a few items from the library.
+- Import maps
+- 
+
+**Import everything from the library-:**
+
+```jsx
+import "defines. sol";
+```
+
+It is also possible to import everything from defines. sol by leaving the list out. Note that this is different from ES6, which would import nothing with this syntax.
+
+**Select a few items from the m library-:**
+
+```jsx
+import {foo, bar} from "defines.sol";
+```
+
+Solang will look for the file definitions. sol in the paths specified with the --importpath command-line option. If the file is relative, e.g. import "./defines.sol"; or import "../defines.sol"; then the directory relative to the parent file is used.
+
+**import maps**➖
+
+Another method for locating files is using import maps. This maps the first directory of an import path to a different location on the file system. Say you add the command line option
+
+ --import map @openzeppelin=/opt/open zeppelin-contracts/contracts, 
+
+then
+
+```jsx
+import "@openzeppelin/interfaces/IERC20.sol";
+```
+
+will automatically map to /opt/open zeppelin-contracts/contracts/interfaces/IERC20.sol.
+
+**Renaming imports**
+
+It is also possible to rename an import.
+
+```jsx
+import {bar as baz,foo} from "defines.sol";
+```
+
+The bar is now renamed as Baz.
+
+Rather than renaming individual imports, it is also possible to make all the items in a file available under a special import object, as shown:
+
+```jsx
+import "defines. sol" as deaths;
+```
+
+There is another syntax, which does the same.
+
+```jsx
+import * as defs from "defines. sol";
+```
+
+In this case, the bar is defined in defines. sol can is now visible as defs.bar, and foo as defs.foo
+
+In the next lesson, you will go through the pragma directives of Solidity.

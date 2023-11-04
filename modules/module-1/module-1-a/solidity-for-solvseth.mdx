@@ -6,4 +6,52 @@ modulePart: module-1-a
 thisFileName: solidity-for-solvseth
 ---
 
-## solidity-for-solvseth
+# Solidity For Solana vs. Solidity For Ethereum
+
+# Objectives
+
+In this lesson, you will able to:
+
+- Explain the adjustments for Solidity on Solana.
+- Understand the technical differences between Ethereum and Solana.
+
+# tl;dr
+
+In this lesson, we take a brief look at the differences in the development environments of Solana and Ethereum. In Solidity contracts on Solana, there are two accounts: a program account for the executable code and a data account for storage variables, different from Ethereum's single-account approach where one account handles both code and data.
+
+# Overview
+
+## Adapting Solidity for Solana's Unique Environment
+
+**When integrating Solidity's mechanics into the Solana environment, certain adjustments are necessary**. Within a Solidity contract on Solana, a distinct structure emerges, comprising two separate accounts: a data account and a program account. The program account stores the contract's executable binary and controls the data account, which encompasses all storage variables. This contrasts with Ethereum's approach, where a single account manages both executable code and data.
+
+Simplifying Technical Concepts in Solana and Ethereum
+
+- In Solana, an account is represented by a 32-byte key, denoted as the **`address`** type, which differs from Ethereum's 20-byte address format. An address is represented using syntax like **`36VtvSbE6jVGGQytYWSaDPG7uZphaxEjpJHUUpuUbq4D`**.
+- It's important to note that Ethereum's address format **`0xE0f5206BBD039e7b0592d8918820024e2a7437b9`** isn't compatible with Solana.
+- Ethereum's wallet addresses generally have 40 characters, including the 0x prefix. , Solana wallet addresses can be around 44 characters in length, without a fixed prefix.
+- The use of Solana's target requires **[Solana](https://www.solana.com/)** version v1.8.1.
+- In Ethereum, setting the gas limit while invoking a smart contract function influences resource consumption. Gas encompasses the on-chain execution expenses and permits the prioritization of execution through the allocation of extra gas. Each instruction within the Ethereum Virtual Machine (EVM) carries a unique gas value, which corresponds to real ETH costs.
+- In Solana, the focus is on reducing delays and increasing transaction processing speed. To achieve this, Solana uses compute units similar to Ethereum's gas. Each smart contract function in Solana is allocated the same number of compute units (currently 200k), and every instruction of a contract consumes exactly one compute unit. Unlike Ethereum, Solana transactions do not require the specification of compute units and are not charged for their usage. However, the charges for execution priority are based on the consumed compute units. Therefore, the concepts of gas in Ethereum do not apply to Solidity on Solana.
+- The **`msg.sender`** function isn't available in Solana.
+- Due to different signature algorithms, Solana lacks the **`ecrecover()`** function. Yet, **`signatureVerify()`** verifies ed25519 signatures. Extracting a signer from a signature isn't workable.
+- On Solana, try-catch statements lack functionality. If a call or contract creation fails, the runtime stops execution and reverts the transaction.
+- Error definitions, reverts, and error messages don't work in Solana.
+- The ERC-20 interface isn't currently compatible with Solana.
+
+Here's a simplified comparison table between Solana and Ethereum various technical incompatibilities:
+
+| Concept | Solana | Ethereum |
+| --- | --- | --- |
+| Account Address Format | 32-byte key (address type) | 20-byte address |
+| Wallet Address Length | Varies (around 44 characters) | 40 characters (with 0x prefix) |
+| Required Solana Version | v1.8.1 | - |
+| Gas and Resource Management | Compute Units (similar to gas) | Gas and EVM instructions |
+| Compute Unit Allocation | 200k per function | Varies per instruction |
+| msg.sender Function | Not Available | Available |
+| Signature Verification | signatureVerify() | ecrecover() |
+| Try-Catch Statements | Not Functional | Available |
+| Error Handling and Reverts | Limited | Available |
+| ERC-20 Compatibility | Not Compatible | Compatible |
+
+In the next lesson, we provide an in-depth technical comparison between Solana and Ethereum, especially with regards to their architectures and their use of Solidity.

@@ -17,7 +17,7 @@ export type Doc = {
   author?: string | undefined
   moduleNumber?: string | undefined
   modulePart?: string | undefined
-  thisFilename?: string | undefined
+  thisFileName?: string | undefined
   /** MDX file body */
   body: MDX
   slug: string

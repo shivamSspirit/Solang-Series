@@ -52,7 +52,7 @@ var Doc = defineDocumentType(() => ({
     modulePart: {
       type: "string"
     },
-    thisFilename: {
+    thisFileName: {
       type: "string"
     }
   },
@@ -98,4 +98,4 @@ export {
   Doc,
   contentlayer_config_default as default
 };
-//# sourceMappingURL=compiled-contentlayer-config-2KBP5ZBE.mjs.map
+//# sourceMappingURL=compiled-contentlayer-config-EVSZ2BH6.mjs.map

@@ -49,14 +49,14 @@ export const Doc = defineDocumentType(() => ({
       type: "string",
     },
     moduleNumber: {
-      type: "string"
+      type: "string",
     },
     modulePart: {
-      type: "string"
+      type: "string",
     },
-    thisFilename: {
-      type: "string"
-    }
+    thisFileName: {
+      type: "string",
+    },
   },
   computedFields,
 }));
