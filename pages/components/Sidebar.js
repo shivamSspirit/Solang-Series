@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function SideBar({headings}) {
   return (
-    <Sidebar className="w-full" aria-label='Sidebar with multi-level dropdown example'>
+    <Sidebar className="w-full h-fit sticky top-10" aria-label='Sidebar with multi-level dropdown example'>
       <Sidebar.Items>
         <Sidebar.ItemGroup className='text-white'>
         <Sidebar.Collapse className='text-white hover:bg-gray-700' label='SideBar'>
