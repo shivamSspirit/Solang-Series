@@ -26,13 +26,13 @@ const NextBreadcrumb = ({
   return (
     <div>
       <ul id='breadcrumbs-one' className='hidden md:flex'>
-        {pathNames.map((link, index) => {
+        {pathNames?.map((link, index) => {
           let href =
             index <= 1
               ? `/CourseContent`
-              : `/CourseContent/${trimmedPath.slice(2, index + 2).join("/")}`;
+              : `/CourseContent/${trimmedPath?.slice(2, index + 2)?.join("/")}`;
           let itemLink = capitalizeLinks
-            ? link[0].toUpperCase() + link.slice(1, link.length)
+            ? link[0]?.toUpperCase() + link?.slice(1, link.length)
             : link;
 
           return (

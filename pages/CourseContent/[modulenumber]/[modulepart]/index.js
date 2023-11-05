@@ -1,13 +1,11 @@
 import React from "react";
 import illustration from "../../../../assets/illustration.png";
 import Image from "next/image";
-import { Button } from "flowbite-react";
 import NextBreadcrumb from "../../../components/NextBreadcrumb";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import curPageNumber from "../../../../shared/pageNumber";
 import { allDocuments } from "../../../../.contentlayer/generated";
-import { usePathname } from "next/navigation";
 import { NextSeo } from "next-seo";
 
 export async function getStaticProps(context) {
@@ -15,8 +13,8 @@ export async function getStaticProps(context) {
 
   const filteredParts = allDocuments.filter((lession) => {
     return (
-      lession.moduleNumber === `${context.params.modulenumber}` &&
-      lession.modulePart === `${context.params.modulepart}`
+      lession?.moduleNumber === `${context?.params?.modulenumber}` &&
+      lession?.modulePart === `${context?.params?.modulepart}`
     );
   });
 
@@ -34,7 +32,7 @@ export async function getStaticProps(context) {
 export async function getStaticPaths() {
   console.log("Static paths runnning");
   // Get a list of valid post paths.
-  const paths = allDocuments.map((lession) => {
+  const paths = allDocuments?.map((lession) => {
     // console.log("lessions", lession);
     return {
       params: {
