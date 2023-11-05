@@ -83,7 +83,7 @@ export async function getStaticProps(context) {
 // }
 
 const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
- //console.log("postData:", lession);
+  //console.log("postData:", lession);
 
   const MDXContent = useMDXComponent(lession.body.code);
   const router = useRouter();
@@ -93,7 +93,7 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
   ///console.log("ifSlugequates",ifSlugequates)
 
   const { modulenumber, modulepart, idasfilename } = router.query;
-  console.log("modulenumber",modulenumber)
+  console.log("modulenumber", modulenumber);
   const currentpath = `/CourseContent/${modulenumber}/${modulepart}/${idasfilename}`;
 
   const [prevPg, nextPg, prevPgText, nextPgText] = changePartFunction({
@@ -129,10 +129,10 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
             <div className='mt-10'>
               <div>
                 {filteredParts?.map((lession, idx) => (
-                  <div key={idx} id='breadcrumbs-one' className='mb-1'>
+                  <div key={idx} className='mb-1' id='breadcrumbs-one'>
                     <li>
                       <Link href={`/CourseContent${lession.slug}`}>
-                      {lession._raw.sourceFileName.replace(/\.mdx$/, "")}
+                        {lession._raw.sourceFileName.replace(/\.mdx$/, "")}
                       </Link>
                     </li>
                   </div>
@@ -153,19 +153,23 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
       </div>
       <div className='mt-20 sm:flex'>
         <div className='mr-10 hidden md:flex w-1/3'>
-          <SideBar headings={lession.headings}/>
+          <SideBar headings={lession.headings} />
         </div>
 
-        <div className='flex flex-col text-white'>
-          <div className='flex justify-content items-center text-2xl mb-6'>
-            <div className='bg-transparentBg border-[5px] border-mod1Color px-3 py-2 rounded-[2.5rem] mr-6 h-16 w-16'>
-              <div className='text-white text-3xl text-center font-bold'>a</div>
+        <div>
+          <div className='flex flex-col text-white'>
+            <div className='flex justify-content items-center text-2xl mb-6'>
+              <div className='bg-transparentBg border-[5px] border-mod1Color px-3 py-2 rounded-[2.5rem] mr-6 h-16 w-16'>
+                <div className='text-white text-3xl text-center font-bold'>
+                  a
+                </div>
+              </div>
+              <div className='text-4xl'>General Info</div>
             </div>
-            <div className='text-4xl'>General Info</div>
           </div>
-
-          <art className='text-white prose-p:bodyFamily prose-base w-full prose ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer prose-red prose-strong:text-funPinkDark prose-pre:bg-primaryDark'>
-            {/* <div>
+          <div className='md:w-[65vw]'>
+            <div className='text-white prose max-w-none prose-p:bodyFamily prose-base w-full ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer prose-red prose-strong:text-funPinkDark prose-pre:bg-primaryDark'>
+              {/* <div>
               {postData.title}
               <br />
               {postData.id}
@@ -175,8 +179,9 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
               <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
             </div> */}
 
-            <MDXContent />
-          </art>
+              <MDXContent />
+            </div>
+          </div>
         </div>
       </div>
       <div className='mt-20 w-full flex justify-between text-white'>
