@@ -1,40 +1,36 @@
-"use client";
-
 import { Sidebar } from "flowbite-react";
 import Link from "next/link";
 
-export default function SideBar({headings}) {
+export default function SideBar({ headings }) {
+  function addEllipsisIfTooLong(text) {
+    if (text.length > 45) {
+      return text.slice(0, 45) + "...";
+    }
+    return text;
+  }
+
   return (
-    <Sidebar className="w-full h-fit sticky top-10" aria-label='Sidebar with multi-level dropdown example'>
-      <Sidebar.Items>
-        <Sidebar.ItemGroup className='text-white'>
-        <Sidebar.Collapse className='text-white hover:bg-gray-700' label='SideBar'>
-        {headings?.map((heading,id)=>(
-          <Sidebar.Item key={id} className='text-white hover:bg-gray-700 text-left' href='#'>
-              <Link href={`#${heading.slug}}`}>
-              {heading.slug}
-              </Link>
-            </Sidebar.Item>
-        ))}
-           
-            {/* <Sidebar.Item className='text-white hover:bg-gray-700' href='#'>Sales</Sidebar.Item>
-            <Sidebar.Item className='text-white hover:bg-gray-700' href='#'>Refunds</Sidebar.Item>
-            <Sidebar.Item className='text-white hover:bg-gray-700' href='#'>Shipping</Sidebar.Item> */}
-          </Sidebar.Collapse>
-          {/* <Sidebar.Collapse className='text-white hover:bg-gray-700' label='E-commerce'>
-            <Sidebar.Item className='text-white hover:bg-gray-700' href='#'>Products</Sidebar.Item>
-            <Sidebar.Item className='text-white hover:bg-gray-700' href='#'>Sales</Sidebar.Item>
-            <Sidebar.Item className='text-white hover:bg-gray-700' href='#'>Refunds</Sidebar.Item>
-            <Sidebar.Item className='text-white hover:bg-gray-700' href='#'>Shipping</Sidebar.Item>
-          </Sidebar.Collapse>
-          <Sidebar.Collapse className='text-white hover:bg-gray-700' label='E-commerce'>
-            <Sidebar.Item className='text-white hover:bg-gray-700' href='#'>Products</Sidebar.Item>
-            <Sidebar.Item className='text-white hover:bg-gray-700' href='#'>Sales</Sidebar.Item>
-            <Sidebar.Item className='text-white hover:bg-gray-700' href='#'>Refunds</Sidebar.Item>
-            <Sidebar.Item className='text-white hover:bg-gray-700' href='#'>Shipping</Sidebar.Item>
-          </Sidebar.Collapse> */}
-        </Sidebar.ItemGroup>
-      </Sidebar.Items>
-    </Sidebar>
+    <div className='w-72 h-[800px] sticky top-10 overflow-y-auto'>
+      <Sidebar>
+        <Sidebar.Items>
+          <Sidebar.ItemGroup className='text-white'>
+            {headings?.map((heading, id) => (
+              <Sidebar.Item
+                key={id}
+                className='whitespace-normal hover:bg-transparentBg'
+                href='#'
+              >
+                <Link
+                  className='whitespace-normal flex-wrap text-white hover:bg-gray-700 text-left w-full'
+                  href={`#${heading.slug}`}
+                >
+                  {addEllipsisIfTooLong(heading.slug)}
+                </Link>
+              </Sidebar.Item>
+            ))}
+          </Sidebar.ItemGroup>
+        </Sidebar.Items>
+      </Sidebar>
+    </div>
   );
 }
