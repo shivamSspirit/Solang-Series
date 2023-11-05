@@ -11,6 +11,7 @@ import { allDocuments } from "../../../../.contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import changePartFunction from "../../../../shared/changePartFunction";
 import Link from "next/link";
+import NewSideBar from "../../../components/NewSideBar";
 
 export async function getStaticPaths() {
   // Get a list of valid post paths.
@@ -160,8 +161,8 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
         </div>
       </div>
       <div className='mt-20 sm:flex'>
-        <div className='mr-10 hidden md:flex w-1/3'>
-          <SideBar headings={lession.headings} />
+        <div className='hidden md:flex w-1/3'>
+          <NewSideBar headings={lession.headings} />
         </div>
 
         <div>
