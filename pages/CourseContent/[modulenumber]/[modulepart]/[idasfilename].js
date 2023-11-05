@@ -150,7 +150,7 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
             </div>
           </div>
           <div className='md:w-1/2 '>
-            <div className='flex justify-end'>
+            <div className='flex justify-center md:justify-end'>
               <Image
                 src={illustration}
                 alt='illustration'
@@ -177,7 +177,7 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
             </div>
           </div>
           <div className='md:w-[65vw]'>
-            <div className='text-white prose max-w-none prose-p:bodyFamily prose-base w-full ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer prose-red prose-strong:text-funPinkDark prose-pre:bg-primaryDark'>
+            <div className='text-white prose max-w-none prose-base w-full ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer prose-red prose-strong:text-funPinkDark prose-pre:bg-primaryDark'>
               {/* <div>
               {postData.title}
               <br />
