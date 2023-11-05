@@ -43,7 +43,7 @@ export async function getStaticProps(context) {
 
   // Extracting total files to get its length
   const totalLessons = allDocuments.filter((lession) => {
-    return lession.moduleNumber === `${context.params.modulenumber}`;
+    return lession?.moduleNumber === `${context?.params?.modulenumber}`;
   });
 
   // Using modulePart of last file
@@ -57,10 +57,10 @@ export async function getStaticProps(context) {
 
   // console.log(totalParts, " Total Parts");
 
-  const lession = allDocuments.find(
+  const lession = allDocuments?.find(
     (lession) =>
       lession?._raw?.flattenedPath ===
-      `${context.params.modulenumber}/${context.params.modulepart}/${context.params.idasfilename}`
+      `${context?.params?.modulenumber}/${context.params.modulepart}/${context.params.idasfilename}`
   );
 
   //console.log("lession",lession)
@@ -93,6 +93,7 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
   ///console.log("ifSlugequates",ifSlugequates)
 
   const { modulenumber, modulepart, idasfilename } = router.query;
+  console.log("modulenumber",modulenumber)
   const currentpath = `/CourseContent/${modulenumber}/${modulepart}/${idasfilename}`;
 
   const [prevPg, nextPg, prevPgText, nextPgText] = changePartFunction({

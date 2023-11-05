@@ -3,6 +3,8 @@ export default function changePartFunction({
   modulepart,
   totalParts,
 }) {
+
+  console.log("modulenumberhere",modulenumber)
   // Extracting the module number (module-1), and returning its last index.
   const modulepartChar = modulepart?.split("-")[2];
   const moduleNumberNumeric = parseInt(modulenumber?.split("-")[1], 10);
