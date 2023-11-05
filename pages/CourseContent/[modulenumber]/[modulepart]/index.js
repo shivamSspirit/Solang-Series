@@ -11,7 +11,7 @@ import { usePathname } from "next/navigation";
 import { NextSeo } from "next-seo";
 
 export async function getStaticProps(context) {
- // console.log("Running static props");
+  // console.log("Running static props");
 
   const filteredParts = allDocuments.filter((lession) => {
     return (
@@ -20,8 +20,7 @@ export async function getStaticProps(context) {
     );
   });
 
-
- // console.log(filteredParts);
+  // console.log(filteredParts);
   // console.log("lessions for a part", lession);
   // Return notFound if the post does not exist.
   // if (!lession) return { notFound: true }
@@ -51,16 +50,21 @@ export async function getStaticPaths() {
 const Course1 = ({ filteredParts }) => {
   const router = useRouter();
   const { modulenumber, modulepart } = router.query;
+
+  if (modulenumber === undefined) {
+    // Return a loading state or handle the case when modulenumber is undefined.
+    return <div>Loading...</div>;
+  }
+
   const currentpath = `/CourseContent/${modulenumber}/${modulepart}`;
   // console.log(" all docs",router.query);
 
-  const modNum = modulenumber.split('-')[1];
+  const modNum = modulenumber?.split("-")[1];
 
- // console.log("modNum",modNum)
-  
-  const [prevPg, nextPg, prevPgNumber, nextPgNumber] = curPageNumber({
-    modulenumber,
-  });
+  // console.log("modNum",modNum)
+  console.log(modulenumber);
+
+  const [prevPg, nextPg, prevPgNumber, nextPgNumber] = curPageNumber({modulenumber});
   // nextPg = nextPg;
 
   return (
@@ -93,7 +97,7 @@ const Course1 = ({ filteredParts }) => {
                 {filteredParts?.map((lession, idx) => (
                   <div key={idx} id='breadcrumbs-one' className='mb-1'>
                     <li>
-                    {/* {console.log("filename",lession)} */}
+                      {/* {console.log("filename",lession)} */}
                       <Link href={`/CourseContent${lession.slug}`}>
                         {lession._raw.sourceFileName.replace(/\.mdx$/, "")}
                       </Link>
