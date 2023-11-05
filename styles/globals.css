@@ -17,7 +17,6 @@ html {
   border-style: solid;
   border-color: #f5f5f5 #e5e5e5 #ccc;
   border-radius: 5px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   width: 100%;
 }
@@ -37,13 +36,20 @@ html {
   background-image: linear-gradient(to right, #ddd, #f5f5f5);
 }
 
+#breadcrumbs-one a.active {
+  padding: 0.7em 1em 0.7em 2em;
+  float: left;
+  text-decoration: none;
+  color: white;
+  position: relative;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  background-color: black;
+  background-image: none;
+}
+
 #breadcrumbs-one li:first-child a {
   padding-left: 1em;
   border-radius: 5px 0 0 5px;
-}
-
-#breadcrumbs-one a:hover {
-  background: #fff;
 }
 
 #breadcrumbs-one a::after,
@@ -69,8 +75,23 @@ html {
   z-index: 1;
 }
 
-#breadcrumbs-one a:hover::after {
-  border-left-color: #fff;
+#breadcrumbs-one a.active::after {
+  z-index: 2;
+  border-left-color: black;
+}
+
+#breadcrumbs-one a.active::before {
+  border-left-color: black;
+  right: -1.1em;
+  z-index: 1;
+}
+
+#breadcrumbs-one a.active:hover {
+  background: black;
+}
+
+#breadcrumbs-one a.active:hover::after {
+  border-left-color: black;
 }
 
 #breadcrumbs-one .current,

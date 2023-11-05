@@ -129,9 +129,17 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
             <div className='mt-10'>
               <div>
                 {filteredParts?.map((lession, idx) => (
-                  <div key={idx} className='mb-1' id='breadcrumbs-one'>
+                  <div key={idx} id='breadcrumbs-one' className='mb-1'>
                     <li>
-                      <Link href={`/CourseContent${lession.slug}`}>
+                      <Link
+                        // className="after:bg-primary"
+                        href={`/CourseContent${lession.slug}`}
+                        className={
+                          idasfilename ===
+                            lession._raw.sourceFileName.replace(/\.mdx$/, "") &&
+                          "active"
+                        }
+                      >
                         {lession._raw.sourceFileName.replace(/\.mdx$/, "")}
                       </Link>
                     </li>
