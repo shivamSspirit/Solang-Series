@@ -1,0 +1,43 @@
+---
+title: Intro to solana
+author: shivam
+moduleNumber: module-1
+modulePart: module-1-b
+thisFileName: datatype
+---
+
+# File Structure
+
+# Objectives:
+
+*************************In this lesson, you will:*************************
+
+- Get to know about the file structure in Solang.
+
+## tl;dr
+
+Solidity files can contain multiple contracts, defined using the "contract" keyword. Best practice is to have one contract per file with the same name as the file. Each contract contains functions and data enclosed in curly braces.
+
+# Overview
+
+A single file may contain multiple contracts. Solidity files end with .sol extension.
+
+A contract is defined with the contract keyword, followed by the contract name and then the definition of the contract in between curly braces {  }.
+
+```solidity
+contract A {
+/// foo simply returns true
+function foo() public returns (bool) {
+return true;
+}
+}
+
+contract B {
+/// bar simply returns false
+function bar() public returns (bool) {
+return false;
+}
+}
+```
+
+For best practices define only a single contract in each file, and keep the contract name the same as the file name.

@@ -2,8 +2,12 @@ import Head from "next/head";
 import AppBar from "../shared/AppBar";
 import LandingSection from "./components/LandingSection";
 import ComingSoon from "./comingSoon/ComingSoon";
+import {allDocuments} from '../.contentlayer/generated'
 
 export default function Home() {
+
+  // console.log("alldocs",allDocuments)
+
   return (
     <>
       <Head>

@@ -1,10 +1,26 @@
-require('dotenv').config();
+/** @type {import('next').NextConfig} */
 
+//require("dotenv").config();
 
-module.exports ={
+// import  pkg  from 'dotenv';
+
+//import { withContentlayer } from 'next-contentlayer'
+// const {dotenv} = pkg;
+const { withContentlayer } = require("next-contentlayer");
+
+const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: ["reqres.in"],
+
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+        pathname: "/ddwkxn8ak/image/upload/t_sol/v1698823073/solangsol/**",
+      },
+    ],
   },
   eslint: {
     // Warning: This allows production builds to successfully complete even if
@@ -41,9 +57,6 @@ module.exports ={
 
   // ...other config
 
- 
- 
-
   // Use the CDN in production and localhost for development.
   // assetPrefix: process.env.PRODUCTION_API_URL ? 'https://cdn.solidityonsolana.one' : undefined,
 
@@ -51,17 +64,6 @@ module.exports ={
     LOCAL_API_URL: process.env.LOCAL_API_URL,
     PRODUCTION_API_URL: process.env.PRODUCTION_API_URL,
   },
-
 };
 
-// const withMDX = require("@next/mdx")({
-//   options: {
-//     remarkPlugins: [],
-//     rehypePlugins: [],
-//   },
-//   extension: /\.(md|mdx)$/,
-// });
-
-// module.exports = withMDX({
-//   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
-// });
+module.exports = withContentlayer({ ...nextConfig });
