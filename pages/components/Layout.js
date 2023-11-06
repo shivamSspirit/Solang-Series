@@ -25,9 +25,9 @@ const Layout = ({ children }) => {
         {/* <Navbar/>
       {children} */}
         {children?.type?.name === "Home" ? (
-          <NextSeo title='Solidy On Solana' />
+          <NextSeo title='Solidity On Solana' />
         ) : (
-          <NextSeo titleTemplate='%s | Solidy On Solana' />
+          <NextSeo titleTemplate='%s | Solidity On Solana' />
         )}
         {children?.type?.name === "ComingSoon" ? (
           children

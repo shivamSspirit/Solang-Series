@@ -12,7 +12,7 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import changePartFunction from "../../../../shared/changePartFunction";
 import Link from "next/link";
 import NewSideBar from "../../../components/NewSideBar";
-
+import { NextSeo } from "next-seo";
 export async function getStaticPaths() {
   // Get a list of valid post paths.
   const paths = allDocuments.map((lession) => {
@@ -105,6 +105,7 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
 
   return (
     <div className='my-12'>
+    <NextSeo titleTemplate='%s | Solidity On Solana' />
       <div className='flex sm:flex-col justify-between p-8 rounded-3xl bg-primaryDark'>
         <div>
           <NextBreadcrumb
