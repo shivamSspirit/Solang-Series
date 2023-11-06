@@ -1,19 +1,22 @@
 import React, { PropsWithChildren } from "react";
-import FooterComp from "../../shared/Footer";
-import ComingSoon from "../comingSoon/ComingSoon";
-import curPageNumber from "../../shared/pageNumber";
+import FooterComp from "../shared/Footer";
+import ComingSoon from "./comingSoon/ComingSoon";
+import curPageNumber from "../shared/pageNumber";
 import { useRouter } from "next/router";
 import { usePathname } from "next/navigation";
-import NavBar from "../../shared/Navbar";
+import NavBar from "../shared/Navbar";
 import { NextSeo } from "next-seo";
+// import { useRouter } from "next/router";
 
 let coursePage = "";
 
 const Layout = ({ children }) => {
   //  console.log(children?.type?.name, "Layout");
   const paths = usePathname();
-
-  // console.log("pathssssssss",paths)
+const router = useRouter();
+  console.log("patfdsekhbdfkhdhkhdshfkhkdsths",router.pathname)
+  console.log(children?.type?.name, "Layout");
+   console.log("pathssssssss",paths)
   const pathNames = paths?.split("/");
   if (pathNames?.[1] !== "404") {
     coursePage = pathNames?.[2];
