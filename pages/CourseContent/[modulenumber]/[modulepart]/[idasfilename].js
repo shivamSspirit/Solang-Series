@@ -114,6 +114,7 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
   return (
     <div className='my-12'>
     <NextSeo titleTemplate='%s | Solidity On Solana' />
+
       <div className='flex sm:flex-col justify-between p-8 rounded-3xl bg-primaryDark'>
         <div>
           <NextBreadcrumb
@@ -126,6 +127,9 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
             currentpath={currentpath}
           />
         </div>
+
+
+
         <div className='flex flex-col-reverse md:flex-row'>
           <div className='md:w-1/2 text-white'>
             <div className='mt-10 text-gray-400'>
@@ -158,7 +162,8 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
               </div>
             </div>
           </div>
-          <div className='md:w-1/2 '>
+
+          <div className='md:w-1/2'>
             <div className='flex justify-center md:justify-end'>
               <Image
                 src={illustration}
@@ -169,12 +174,18 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
           </div>
         </div>
       </div>
-      <div className='mt-20 sm:flex'>
-        <div className='hidden md:flex w-1/3'>
+
+
+
+      <div className='mt-20 sm:flex w-full gap-12'>
+
+
+        <div className='hidden md:flex w-1/4'>
           <NewSideBar headings={lession.headings} />
         </div>
 
-        <div>
+        <div className="w-full md:w-3/4 lg:w-3/4 xl:w-3/4">
+
           <div className='flex flex-col text-white'>
             <div className='flex justify-content items-center text-2xl mb-6'>
               <div className='bg-transparentBg border-[5px] border-mod1Color px-3 py-2 rounded-[2.5rem] mr-6 h-16 w-16'>
@@ -185,8 +196,10 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
               <div className='text-4xl'>General Info</div>
             </div>
           </div>
-          <div className='md:w-[65vw]'>
-            <div className='text-white prose max-w-none prose-base w-full ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer prose-red prose-strong:text-funPinkDark prose-pre:bg-primaryDark'>
+
+
+          <div className='border-collapse w-full text-rose-950 aspect-[4/3] p-4 font-[Inter,sans-serif] subpixel-antialiased tracking-wide font-medium leading-relaxed list-outside text-justify '>
+            <div className='prose-table:border-collapse prose-a:underline	prose-a:decoration-sky-500 prose-p:text-justify prose-p:leading-relaxed prose-p:subpixel-antialiased prose-p:w-full text-white prose max-w-none prose-p:text-base/7 md:ml-12 lg:ml-12 xl:ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer prose-red prose-strong:text-funPinkDark prose-pre:bg-primaryDark'>
               {/* <div>
               {postData.title}
               <br />
@@ -200,9 +213,17 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
               <MDXContent />
             </div>
           </div>
+
+
         </div>
+
+
       </div>
+
+
+
       <div className='mt-20 w-full flex justify-between text-white'>
+
         <div className='justify-start'>
           {prevPg && (
             <a href={prevPg} className='flex flex-col'>
@@ -211,6 +232,9 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
             </a>
           )}
         </div>
+
+
+
         <div className='justify-end'>
           {nextPg && (
             <a href={nextPg} className='flex flex-col justify-end'>
@@ -219,7 +243,16 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
             </a>
           )}
         </div>
+
+
       </div>
+
+
+
+
+
+
+
     </div>
   );
 };

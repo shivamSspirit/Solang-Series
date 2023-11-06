@@ -4,7 +4,7 @@ author: shivam
 moduleNumber: module-1
 modulePart: module-1-a
 thisFileName: account-comparision
-orderNumber: '3'
+orderNumber: "3"
 ---
 
 # Objectives
@@ -37,61 +37,84 @@ Here's a simplified comparison table highlighting the key differences between So
 <table>
     <thead>
       <tr>
-        <th>Concept</th>
-        <th>Solana</th>
-        <th>Ethereum</th>
+        <th className='border border-slate-600 text-center'>Concept</th>
+        <th className='border border-slate-600 text-center'>Solana</th>
+        <th className='border border-slate-600 text-center'>Ethereum</th>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <td>Account Model</td>
-        <td>Uses an account model referred to as accounts, which store data and bytecode.</td>
-        <td>Employs a single account for both storage and smart contract code.</td>
+    <tbody className="border border-slate-600 text-left">
+      <tr className="border border-slate-600">
+        <td className="p-3">Account Model</td>
+        <td className="p-3">Uses an account model referred to as accounts, which store data and bytecode.</td>
+        <td className="p-3">Employs a single account for both storage and smart contract code.</td>
       </tr>
 
-      <tr>
-        <td>Data and Lamports</td>
-        <td>Accounts include Data and use fractional tokens called lamports for lifespan sign.</td>
-        <td>Ethereum uses gas for transaction cost estimation.</td>
+      <tr className="border border-slate-600">
+        <td className="p-3">Data and Lamports</td>
+        <td className="p-3">Accounts include Data and use fractional tokens called lamports for lifespan sign.</td>
+        <td className="p-3">Ethereum uses gas for transaction cost estimation.</td>
       </tr>
 
-      <tr>
-     <td>Executable and Non-executable Accounts</td>
-        <td>Features two account types: executable (bytecode) and non-executable (mutable data).</td>
-        <td>Follows a basic account model for storage and code accounts for smart contracts.</td>
+      <tr className="border border-slate-600">
+     <td className="p-3">Executable and Non-executable Accounts</td>
+        <td className="p-3">Features two account types: executable (bytecode) and non-executable (mutable data).</td>
+        <td className="p-3">Follows a basic account model for storage and code accounts for smart contracts.</td>
       </tr>
 
- <tr>
-     <td>Storage Approach </td>
-        <td>Any account can host state; smart contract storage is confined to bytecode.)</td>
-        <td>Smart contracts manage their storage.</td>
+{" "}
+<tr className="border border-slate-600">
+  <td className="p-3">Storage Approach </td>
+  <td className="p-3">
+    Any account can host state; smart contract storage is confined to bytecode.)
+  </td>
+  <td className="p-3">Smart contracts manage their storage.</td>
+</tr>
+
+ <tr className="border border-slate-600"r>
+     <td className="p-3">Ownership and Security</td>
+        <td className="p-3">Each account has an owner contract to secure data changes and maintain integrity.</td>
+        <td className="p-3">Ownership and control are linked to the Ethereum wallet address. </td>
       </tr>
 
- <tr>
-     <td>Ownership and Security</td>
-        <td>Each account has an owner contract to secure data changes and maintain integrity.</td>
-        <td>Ownership and control are linked to the Ethereum wallet address. </td>
-      </tr>
+{" "}
+<tr className="border border-slate-600">
+  <td className="p-3">Data Access</td>
+  <td className="p-3">
+    {" "}
+    Contracts can read and write data in any account, but changes are limited to
+    the account's "owner".
+  </td>
+  <td className="p-3">
+    Smart contracts access data through the contract itself or external calls.
+  </td>
+</tr>
 
- <tr>
-     <td>Data Access</td>
-        <td> Contracts can read and write data in any account, but changes are limited to the account's "owner".</td>
-        <td>Smart contracts access data through the contract itself or external calls.</td>
-      </tr>
+{" "}
+<tr className="border border-slate-600">
+  <td className="p-3">Storage Flexibility and Encapsulation</td>
+  <td className="p-3">
+    Allows any account to host state, offering flexibility and encapsulation.
+  </td>
+  <td className="p-3">
+    {" "}
+    Offers more controlled storage for contracts, with data storage segregated.
+  </td>
+</tr>
 
- <tr>
-     <td>Storage Flexibility and Encapsulation</td>
-        <td>Allows any account to host state, offering flexibility and encapsulation.</td>
-        <td> Offers more controlled storage for contracts, with data storage segregated.</td>
-      </tr>
-
- <tr>
-     <td>State Modification and Integrity </td>
-        <td>Ensures state changes are secured and validated through ownership contracts.</td>
-        <td>Requires proper coding practices to maintain data integrity and avoid vulnerabilities.</td>
-      </tr>
+{" "}
+<tr className="border border-slate-600">
+  <td className="p-3">State Modification and Integrity </td>
+  <td className="p-3">
+    Ensures state changes are secured and validated through ownership contracts.
+  </td>
+  <td className="p-3">
+    Requires proper coding practices to maintain data integrity and avoid
+    vulnerabilities.
+  </td>
+</tr>
 
     </tbody>
+
   </table>
   </>
 
@@ -104,8 +127,8 @@ mapping (address => uint256) private _balances;
 
 - On Solana, token balances are stored in unique accounts where the storage account address is derived from the address of the owner account.
 
-!https://res.cloudinary.com/practicaldev/image/fetch/s---VrOf4kR--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/gm32bz33sxfb2m1er2dq.jpeg
+![uo](https://res.cloudinary.com/practicaldev/image/fetch/s---VrOf4kR--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/gm32bz33sxfb2m1er2dq.jpeg)
 
-Solang integrates Solidity with the Solana account model by modifying existing code patterns and introducing new ones that are unique to Solana, making this complex undertaking possible. 
+Solang integrates Solidity with the Solana account model by modifying existing code patterns and introducing new ones that are unique to Solana, making this complex undertaking possible.
 
 In the next lesson we take a dive into smart contracts in Ethereum and Solana and develop a smart contract for Solana using Solidity.

@@ -20,7 +20,7 @@ export default function NewSideBar({ headings }) {
   ];
 
   return (
-    <div className='w-72 bg-primaryDark  px-4 h-[700px] sticky top-10 overflow-y-auto'>
+    <div className='w-full bg-primaryDark  px-4 h-[80vw] sticky top-10 overflow-y-auto'>
       <div className='flex flex-col mt-4 md:flex-row flex-1'>
         <nav>
           <ul>
