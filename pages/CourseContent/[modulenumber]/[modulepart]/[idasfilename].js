@@ -214,8 +214,8 @@ const GeneralInfo = ({
             </div>
           </div>
 
-          <div className="border-collapse w-full text-rose-950 aspect-[4/3] p-4 font-[Inter,sans-serif] subpixel-antialiased tracking-wide font-medium leading-relaxed list-outside text-justify ">
-            <div className="prose:pre-text-justify prose-table:border-collapse prose-a:underline	prose-a:decoration-sky-500 prose-p:text-justify prose-p:leading-relaxed prose-p:subpixel-antialiased prose-p:w-full text-white prose max-w-none prose-p:text-base/7 md:ml-12 lg:ml-12 xl:ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer prose-red prose-strong:text-funPinkDark prose-pre:bg-primaryDark">
+          <div className="border-collapse w-full text-rose-950 aspect-[4/3] p-4 font-[Inter,sans-serif] subpixel-antialiased tracking-wide font-medium leading-relaxed list-outside text-left ">
+            <div className="prose-table:border-collapse prose-a:underline	prose-a:decoration-sky-500 prose-p:text-left prose-p:leading-relaxed prose-p:subpixel-antialiased prose-p:w-full text-white prose max-w-none prose-p:text-base/7 md:ml-12 lg:ml-12 xl:ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer prose-red prose-strong:text-funPinkDark prose-pre:bg-primaryDark">
               {/* <div>
               {postData.title}
               <br />
