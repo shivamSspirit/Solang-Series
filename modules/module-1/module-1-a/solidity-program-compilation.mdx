@@ -1,60 +1,58 @@
 ---
-title: Intro to solana
+title: Soldity program compilation
 author: shivam
 moduleNumber: module-1
 modulePart: module-1-a
 thisFileName: solidity-program-compilation
+orderNumber: '0'
 ---
 
-# Technical Architecture Comparison (Accounts on Both Platforms)
+# Objectives
 
-# Objective
+In the following lesson, you will be able to:
 
-In this lesson, you will:
+- Understand the role of Solidity in the Solana ecosystem.
+- Become familiar with the compilation process of a Solidity program.
+- Understand how the Ethereum and Solana ecosystems differ in terms of Solidity compilation.
 
-- Explore technical and architectural differences between Ethereum and Solana.
-- Showcase how Solana distinguishes itself from Ethereum by utilizing different paradigms.
-- Understand how Solang integrates Solidity with the Solana account model.
+## tl;dr
 
-## tl:dr
-
-This lessons take explores the technical and architectural differences between Solana and Ethereum. Solana stands out from Ethereum due to its unique blockchain structure, employing various programming approaches. It uses different paradigms and patterns for its account model, rent system, Cross-Program Invocation (CPI), and Program Derived Address (PDA), which will be covered in detail in this series.
+This lesson takes you through the process of Solidity program compilation. Solidity is crucial for smart contracts on Solana, and the Solang compiler is used to convert Solidity code into Solana-compatible bytecode. The process involves writing in Solidity, compiling to Solana bytecode, deploying on Solana, and making it operational. While similar to Ethereum, Solidity on Solana may need slight adjustments for compatibility, so copying directly from Ethereum might not work.
 
 # Overview
 
-**The technical structure of blockchains sets Solana apart from Ethereum through distinct programming approaches**. Solana utilizes diverse paradigms and patterns, moulding its account model, rent system, Cross-Program Invocation (CPI), and Program Derived Address (PDA). These concepts will be explored in-depth in this series. This article centers on outlining the account model and its differences from Ethereum's architecture.
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/df3c1e0d-01b0-4523-b846-e1bb2ca88f61/462fafb1-7d5d-4290-8ac9-aa4e6f8d41ee/Untitled.jpeg)
 
-## **Account Model:**
+## **Solidity on Solana**
 
-- In Solana's runtime environment, known as Sealevel, the account model simplifies complex interactions. For preserving the transaction state, the mechanism involves accounts. These are like files in systems such as Linux, storing lasting data beyond program lifetimes.
-- Unlike traditional files, an account's longevity is tied to its rent, denoted in fractional native tokens known as lamports. These accounts live in validator memory and rely on rent to persist. Regular scans are conducted to collect rent, and accounts with zero lamports are deleted. **Accounts are considered rent-exempt if they maintain a smallest lamport balance**.
-- Solana's Sealevel, unlike Ethereum's EVM, has two distinct account types: executable (upgradeable) and non-executable (for mutable data). Unlike EVM, Sealevel allows contract data access in any account, but changes are limited to the designated "owner" for security.
-- Solana's storage approach differs from Ethereum's. Any Solana account can host state. , Solana's contract state is within other accounts. Each Solana account links to an owner contract, securing state change control.
-- In account-based blockchains like Ethereum and Solana, versatile on-chain data enhances decentralized applications. Yet, **EVM and Sealevel differ in state storage**. Ethereum's smart contracts manage storage, while Solana allows any account. Smart contract storage uses bytecode. Solana's state is in accounts, each linked to an owner contract for state changes.
+### Using Solidity with Solana: A Seamless Process
 
-Here's a simplified comparison table highlighting the key differences between Solana and Ethereum their technical architecture and account models:
+Solidity, the programming language used to create smart contracts, is an important component of the Solana blockchain. Adding to its power is the Solang compiler. **This tool is essential for converting Solidity code to a format compatible with the Solana blockchain**. The compiler performs various optimisation stages, transforming the code into bytecode or machine code. This bytecode is specifically designed for Solana's platform, which makes it easy for Solidity developers to create and deploy smart contracts on Solana.
 
-| Aspect | Solana | Ethereum |
-| --- | --- | --- |
-| Account Model | Uses an account model referred to as accounts, which store data and bytecode. | Employs a single account for both storage and smart contract code. |
-| Data and Lamports | Accounts include Data and use fractional tokens called lamports for lifespan sign. | Ethereum uses gas for transaction cost estimation. |
-| Executable and Non-executable Accounts | Features two account types: executable (bytecode) and non-executable (mutable data). | Follows a basic account model for storage and code accounts for smart contracts. |
-| Storage Approach | Any account can host state; smart contract storage is confined to bytecode. | Smart contracts manage their storage. |
-| Ownership and Security | Each account has an owner contract to secure data changes and maintain integrity. | Ownership and control are linked to the Ethereum wallet address. |
-| Data Access | Contracts can read and write data in any account, but changes are limited to the account's "owner". | Smart contracts access data through the contract itself or external calls. |
-| Storage Flexibility and Encapsulation | Allows any account to host state, offering flexibility and encapsulation. | Offers more controlled storage for contracts, with data storage segregated. |
-| State Modification and Integrity | Ensures state changes are secured and validated through ownership contracts. | Requires proper coding practices to maintain data integrity and avoid vulnerabilities. |
-- On Ethereum, token contracts have a `mapping` which defines the balance for each owner address:
+Here's a breakdown of the process:
 
-```
-mapping (address => uint256) private _balances;
+1. **Crafting in Solidity**: Smart contracts are written in the Solidity programming language.
+2. **Compilation**: The Solang compiler compiles the Solidity smart contract into BPF (Berkeley Packet Filter) or SBF (Solana Bytecode Format) bytecode using the LLVM compiler.
+3. **Deployment**: The resulting BPF or SBF bytecode is deployed on the Solana Blockchain, becoming a Solana program.
+4. **Operation**: The Solidity Solana program becomes functional within the Solana Blockchain.
 
-```
+Even though the main ideas of Solidity are the same for Ethereum and Solana, there are some small changes you should make when using Solidity on Solana, which ensure seamless compatibility. While similarities exist, Solidity on Solana requires some refinement for a smooth integration with the Solana Blockchain. **This means directly copying from Ethereum might not work**.
 
-- On Solana, token balances are stored in unique accounts where the storage account address is derived from the address of the owner account.
+## ***Solidity on Ethereum***
 
-!https://res.cloudinary.com/practicaldev/image/fetch/s---VrOf4kR--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/gm32bz33sxfb2m1er2dq.jpeg
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/df3c1e0d-01b0-4523-b846-e1bb2ca88f61/d33ff8de-b5a7-4b33-a1b1-558583198daa/Untitled.jpeg)
 
-Solang integrates Solidity with the Solana account model by modifying existing code patterns and introducing new ones that are unique to Solana, making this complex undertaking possible. 
+Creating and Deploying Solidity Smart Contracts on Ethereum
 
-In the next lesson we take a dive into smart contracts in Ethereum and Solana and develop a smart contract for Solana using Solidity.
+Developing smart contracts using Solidity on the Ethereum platform follows this process:
+
+1. **Crafting the Smart Contract**: The process begins with crafting a smart contract using the Solidity programming language. This involves creating a .sol file that signifies the use of Solidity.
+2. **Compiling the Smart Contract**: The Solidity compiler comes into play to compile the smart contract written in Solidity.
+3. **Transformation to ABI and Bytecode**: After compilation, the high-level code transforms into ABI (Application Binary Interface) and bytecode formats. This transformation prepares the code for seamless integration into the Ethereum network.
+4. **Formation of Program Bytecode**: The bytecode takes another step forward and transforms into program bytecode, a significant milestone in the process.
+5. **Execution or Deployment on the Ethereum Chain**: The final step involves executing (deploying) the crafted smart contract onto the Ethereum blockchain. This deploys the smart contract, making it functional within the Ethereum network.
+
+This systematic sequence encapsulates the complete journey of implementing a Solidity-based smart contract on Ethereum's platform. 
+
+In the next lesson, we will explore Solang, the Solidity compiler in depth.
+

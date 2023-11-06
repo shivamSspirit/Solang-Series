@@ -1,0 +1,175 @@
+---
+title: Build Deploy And Test Cpi Flip Program
+author: shivam
+moduleNumber: module-3
+modulePart: module-3-b
+thisFileName: build-deploy-test-flip
+orderNumber: '2'
+---
+
+# Objectives
+
+In this lesson, you will:
+
+- Configure your program to the Solana Devnet.
+- Generate new wallet-keygen and airdrop Solana Devnet tokens.
+- Build and deploy your CPI Flip program to the Devnet.
+
+## tl;dr
+
+This lesson teaches you to build and deploy your CPI Flip program to the Solana Devnet. It involves setting your network cluster to devnet, generating a new wallet-keygen, and finally building and deploying the program.
+
+# Overview
+
+**Building the Program:** Before building the program, navigate to the `anchor.toml` file and switch the cluster to "devnet". Open the terminal in the root directory of your project and enter the following command:
+
+```
+anchor build
+
+```
+
+This command will generate a target folder in the project root and generate idl and types of our Solana program to interact with the client side using rpc methods. Now, open a new terminal and check our configuration by entering the command shown:
+
+```
+solana config get
+
+```
+
+After execution, you should get an output as shown below:
+
+```
+Config File: ~/.config/solana/cli/config.yml
+RPC URL: https://api.devnet.solana.com
+WebSocket URL: wss://api.devnet.solana.com/ (computed)
+Keypair Path: ~/.config/solana/id.json
+Commitment: confirmed
+
+```
+
+"Devnet" is the RPC URL, and my wallet's default location is at "keypairpath." Make sure you generate a wallet keypair for deploying the program. You can set devnet for cluster by executing the command shown below:
+
+```
+solana config set --url https://api.devnet.solana.com
+
+```
+
+Enter this command to generate a new keypair:
+
+```
+solana-keygen new
+
+```
+
+Now you have a wallet. You can check the address(pubkey) and balance of this account using these commands:
+
+```
+solana address
+solana balance
+
+```
+
+If you have some devnet sol then it is okay for deployment, if it is not then airdrop some devnet tokens by entering this command:
+
+```
+solana airdrop 4
+
+```
+
+## Deploying
+
+Deploying the program by opening a new terminal and starting network cluster by entering the command shown:
+
+```
+solana-test-validator
+
+```
+
+This will start a devnet cluster in the system. Next, deploy the program by running the command shown:
+
+```
+anchor deploy
+
+```
+
+The output should be as shown below:
+
+```
+Deploying cluster: https://api.devnet.solana.com
+Upgrade authority: ~/.config/solana/id.json
+Deploying program "hand"...
+Program path: ~/composability/cpi/target/deploy/hand.so...
+Program Id: 7zJ7E8uZccmCH89eykH8yZsB6G685nbz7sSq8N9sZTtq
+
+Deploying program "lever"...
+Program path: ~/composability/cpi/target/deploy/lever.so...
+Program Id: J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh
+
+Deploy success
+
+```
+
+Now, both programs are on chain (devnet). We can get the program id of our deployed program on the chain. Copy this program id and change it in our program (solidity file) as well as anchor.toml file. After pasting the new program to both files in **anchor.toml,** write like this:
+
+```
+[features]
+seeds = false
+skip-lint = false
+
+[programs.devnet]
+hand = "7zJ7E8uZccmCH89eykH8yZsB6G685nbz7sSq8N9sZTtq"
+lever="J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "Devnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+
+```
+
+Build the program again with the command:
+
+```
+anchor build
+
+```
+
+Before testing check dependencies and run:
+
+```
+yarn install
+npm install
+
+```
+
+Now, run tests by using this command:
+
+```
+anchor test
+
+```
+
+After this, you should see something like this:
+
+```
+cross-program-invocation
+Your transaction signature 5LixPfBtppvK6CGUgxKaY4obZfksEGoLXaKJMcvKgQVqcAir91oc1NHc8SCJ9MTbt4U9jvBHgQJPEQxwgkbqSXQv
+State: true
+    ✔ Initialize the lever! (1307ms)
+Your transaction signature 5HkGWLAriP5XRJ9MTCpnMP8ZzUx2JMXsDk2B8TNYzuXPm4Wng1BwfaDMsUwiXqHjSVA683DA9YWuWVUKNvN4hyDV
+Your transaction signature 4v1Zxyc5czpgkJ1SYYcwVi1C7K9icehPYkzDLUTyu9QfenaYqRnnkzVfX5Hyw6LXvA5kcdZEaiDsVx6o1hyNJx6x
+State: false
+    ✔ Pull the lever! (1528ms)
+Your transaction signature 4qWHg6hrdWcXmGoS5zD4RGHdPczcMNYzKZnDTef8yyN7RNJj5Spj1ULG2ii6wBgf4pSczZNd3bApxedDQCKhSFhW
+State: true
+    ✔ Pull it again! (694ms)
+
+  3 passing (4s)
+
+```
+
+And that's it! We've successfully made a CPI call to switch the power status from "on" to "off" and back to "on." This demonstrates how Cross-Program Invocation (CPI) functions in Solang to combine Solana programs.

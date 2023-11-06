@@ -1,0 +1,300 @@
+---
+title: Setup Mint Program For Deploy And Test
+author: shivam
+moduleNumber: module-2
+modulePart: module-2-b
+thisFileName: setup-for-test
+orderNumber: '1'
+---
+
+
+# Objectives
+
+In this lesson, you will:
+
+- Set up deployment for your project.
+- Configure and initiate tests for your project.
+- Create and mint the spl-tokens using Solidity.
+
+## tl;dr
+
+In this lesson, you will set up development by installing the required dependencies in the package.json file. We also create the spl tokens for our program in this section and mint them to our wallet. We will also create test cases for our Solidity code.
+
+# Overview
+
+First, go to the package.json file and change this block of code:
+
+```json
+{
+    "scripts": {
+        "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
+        "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check"
+    },
+    "dependencies": {
+        "@coral-xyz/anchor": "^0.28.0",
+        "@metaplex-foundation/js": "^0.19.4",
+        "@solana/spl-token": "^0.3.8",
+        "@solana/web3.js": "^1.78.4",
+    },
+    "devDependencies": {
+        "@types/bn.js": "^5.1.0",
+        "@types/chai": "^4.3.0",
+        "@types/mocha": "^9.0.0",
+        "chai": "^4.3.4",
+        "mocha": "^9.0.3",
+        "prettier": "^2.6.2",
+        "ts-mocha": "^10.0.0",
+        "typescript": "^4.3.5"
+    }
+}
+
+```
+
+Save this go to the terminal and enter the command for installing the required dependencies:
+
+```
+npm install
+
+```
+
+**The `anchor.toml` file serves as the central driver for our application. It's responsible for both app configuration and running tests**.
+
+```
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+
+```
+
+This script is an anchor.toml file responsible for running tests in test folder
+
+Now, let's proceed with writing a test script for `spl-token-minter`. To do this, navigate to the test folder and open the `spl-token-minter.ts` file. Remove all existing code in that file.
+
+Start with importing these programs and dependencies at the top of the file
+
+```tsx
+import * as anchor from "@coral-xyz/anchor";
+import { Program } from "@coral-xyz/anchor";
+import { SplTokenMinter } from "../target/types/spl_token_minter";
+import { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY,LAMPORTS_PER_SOL,ParsedAccountData } from "@solana/web3.js";
+import { Metaplex } from "@metaplex-foundation/js";
+import { assert } from "chai"
+import {
+  ASSOCIATED_TOKEN_PROGRAM_ID,
+  getOrCreateAssociatedTokenAccount,
+  TOKEN_PROGRAM_ID,
+  getAccount
+} from "@solana/spl-token";
+
+```
+
+Here are the imported modules, classes, and tools that are utilized in **test** for creating and sending SPL tokens to a user's associated token account:
+
+1. `import * as anchor from "@coral-xyz/anchor";`: This line brings in the entire Anchor library, enabling us to reference it as "anchor." Anchor is a valuable tool for developing Solana programs.
+2. `import { Program } from "@coral-xyz/anchor";`: This import specifically fetches the Program class from the Anchor library. The Program class facilitates the creation and interaction with Solana programs.
+3. `import { SplTokenMinter } from "../target/types/spl_token_minter";`: This import statement obtains the SplTokenMinter class from the `spl_token_minter` module, which will be explored further during the building process.
+4. `import { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY, LAMPORTS_PER_SOL, ParsedAccountData } from "@solana/web3.js";`: In this line, we import classes such as PublicKey, SystemProgram, and others from the `@solana/web3.js` library. These classes are valuable for managing Solana's public keys, system program, and rent-related aspects.
+5. `import { Metaplex } from "@metaplex-foundation/js";`: This import statement brings in the Metaplex class from the `@metaplex-foundation/js` library. Metaplex is likely used for tasks related to NFTs and metadata.
+6. `import { ASSOCIATED_TOKEN_PROGRAM_ID, getOrCreateAssociatedTokenAccount, TOKEN_PROGRAM_ID, getAccount } from "@solana/spl-token";`: These imports originate from the `@solana/spl-token` library, which is dedicated to Solana's token standard (SPL tokens). They are instrumental in managing associated token accounts and handling various token-related tasks.
+
+Now describe the test for spl-token-minter
+
+```tsx
+describe("spl-token-minter", () => {
+});
+
+```
+
+In this section, we will discuss and thoroughly test the functionality of the "spl-token-minter" program. Our testing process will include the creation of various test cases, assertions, and expectations to ensure the program's accurate behaviour. These tests will encompass a variety of scenarios, including token creation and minting. For this, you need to first set the requirements for the tests.
+
+```tsx
+// Configure the client to use the local cluster.
+  const provider = anchor.AnchorProvider.env();
+  anchor.setProvider(provider);
+
+  // Generate a new keypair for the data account for the program
+  const dataAccount = anchor.web3.Keypair.generate();
+  // Generate a mint keypair
+  const mintKeypair = anchor.web3.Keypair.generate();
+  const wallet = provider.wallet as anchor.Wallet;
+  const connection = provider.connection;
+
+  const program = anchor.workspace.SplTokenMinter as Program<SplTokenMinter>;
+
+  // Metadata for the Token
+  const tokenTitle = "Solana pro";
+  const tokenSymbol = "Gold";
+  const tokenUri =
+    "https://raw.githubusercontent.com/solana-developers/program-examples/new-examples/tokens/tokens/.assets/spl-token.json";
+
+```
+
+Here we are configuring and initiating the setup for testing our spl-token-minter Solana program.
+
+- **Configuration and Provider Setup**: First, we connect to the local cluster and set up the provider using AnchorProvider.env(). This provider is then assigned with anchor.setProvider(provider) The Provider is an abstraction of a connection to the Solana network, typically consisting of a Connection, Wallet, and a preflight commitment.
+- **Generating Key Pairs**: To store the program's state, we create a new data account using a key pair. We also generate a mintKeypair, likely for the minting process. We set up wallet and connection variables too.
+- **Initializing the Program**: We use anchor.workspace.SplTokenMinter to make an instance of the program as Program. This prepares the SplTokenMinter program from the workspace, The program is an abstraction that combines the Provider, idl, and the programID (which is generated when the program is built) and allows us to call RPC methods against our program.
+- **Defining Metadata**: We provide info about the token's metadata. This means giving the token a title, symbol, and URI. These metadata bits are super important for describing what the token is all about.
+
+Now to initialize the data account, write the following code:
+
+```tsx
+it("Is initialized!", async () => {
+    // Initialize data account for the program, which is required by Solang
+    const tx = await program.methods
+      .new()
+      .accounts({ dataAccount: dataAccount.publicKey })
+      .signers([dataAccount])
+      .rpc();
+    console.log("Your transaction signature", tx);
+  });
+
+```
+
+Here, we initialise the data account for the program, a crucial requirement for Solang. The initialization process is conducted using the new() method from the program.methods object. We specify the dataAccount as an account parameter and the dataAccount keypair as a signer. This ensures that the transaction possesses the necessary authorization and input parameters for the initialization operation.
+
+Now create spl token by entering the following code:
+
+```solidity
+it("Create an SPL Token!", async () => {
+    // Get the metadata address for the mint
+    const metaplex = Metaplex.make(connection);
+    const metadataAddress = await metaplex
+      .nfts()
+      .pdas()
+      .metadata({ mint: mintKeypair.publicKey });
+
+    // Create the token mint
+    const tx = await program.methods
+      .createTokenMint(
+        wallet.publicKey, // payer
+        mintKeypair.publicKey, // mint
+        wallet.publicKey, // mint authority
+        wallet.publicKey, // freeze authority
+        metadataAddress, // metadata address
+        9, // decimals
+        tokenTitle, // token name
+        tokenSymbol, // token symbol
+        tokenUri // token uri
+      )
+      .accounts({ dataAccount: dataAccount.publicKey })
+      .remainingAccounts([
+        {
+          pubkey: wallet.publicKey,
+          isWritable: true,
+          isSigner: true,
+        },
+        { pubkey: mintKeypair.publicKey, isWritable: true, isSigner: true },
+        {
+          pubkey: new PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"), // Metadata program id
+          isWritable: false,
+          isSigner: false,
+        },
+        { pubkey: metadataAddress, isWritable: true, isSigner: false },
+        { pubkey: SystemProgram.programId, isWritable: false, isSigner: false },
+        { pubkey: SYSVAR_RENT_PUBKEY, isWritable: false, isSigner: false },
+      ])
+      .signers([mintKeypair])
+      .rpc({ skipPreflight: true });
+    console.log("Your transaction signature", tx);
+  });
+
+```
+
+Here, we create an ***custom*** spl token named S***olana pro*** which has the title G***old.*** For this first, we create the Metaplex connection using this:
+
+```tsx
+const metaplex = Metaplex.make(connection);
+
+```
+
+Get the metadata address for our token mint:
+
+```tsx
+// Get the metadata address for the mint
+const metadataAddress = await metaplex
+      .nfts()
+      .pdas()
+      .metadata({ mint: mintKeypair.publicKey });
+
+```
+
+Let's look at how we get metadata details for a specific mint. We use **mintKeypair.publicKey** to say which mint we're looking at. When we run this code, we find the metadata address connected to that mint and save it in metadataAddress.
+
+Next, we use the createTokenMint method from our spl-token-minter program to make a token mint. We give it necessary accounts, data, and a decimal of 9 to make sure we create a F**ungible Token** mint. We also give accounts or signers for the methods.
+
+After that, we execute the transaction using **.rpc()** and set skipPreflight to true for an async process. We get the transaction signature (tx) for reference, and the results show up in the console.
+
+Now mint some S**olana Pro** tokens to our wallet:
+
+```tsx
+it("Mint some tokens to your wallet!", async () => {
+    // Wallet's associated token account address for mint
+    const tokenAccount = await getOrCreateAssociatedTokenAccount(
+      connection,
+      wallet.payer, // payer
+      mintKeypair.publicKey, // mint
+      wallet.publicKey // owner
+    );
+
+    const tx = await program.methods
+      .mintTo(
+        wallet.publicKey, // payer
+        tokenAccount.address, // associated token account address
+        mintKeypair.publicKey, // mint
+        new anchor.BN(15900000000) // amount to mint
+      )
+      .accounts({ dataAccount: dataAccount.publicKey })
+      .remainingAccounts([
+        {
+          pubkey: wallet.publicKey,
+          isWritable: true,
+          isSigner: true,
+        },
+        { pubkey: tokenAccount.address, isWritable: true, isSigner: false },
+        { pubkey: mintKeypair.publicKey, isWritable: true, isSigner: false },
+        {
+          pubkey: SystemProgram.programId,
+          isWritable: false,
+          isSigner: false,
+        },
+        { pubkey: TOKEN_PROGRAM_ID, isWritable: false, isSigner: false },
+        {
+          pubkey: ASSOCIATED_TOKEN_PROGRAM_ID,
+          isWritable: false,
+          isSigner: false,
+        },
+      ])
+      .rpc({ skipPreflight: true });
+    console.log("Your transaction signature", tx);
+  });
+
+```
+
+Initially, we establish an associated token account by leveraging the token mint and associating it with the user's wallet address. To accomplish this, we employ the **getOrCreateAssociatedTokenAccount**() method. This method requires several parameters, including the connection, the **payer** (associated with the wallet), the **mint**, and the owner (the wallet's owner).
+
+Next, we make a transaction by using the **mintTo** method from our ***spl-token-minter*** program. We give it important stuff like the wallet, the address of the associated token account, the mint key pair, and the number of tokens we want to mint (like Bn). We also include the accounts and signers, making sure we provide all the accounts needed to mint tokens to the user's wallet.
+
+Now let’s test and make an assertion if our tokens are minted or not by getting the token amount balance and make assert.equal with 159 tokens:
+
+```tsx
+// Get the minted token amount on the associated token account
+    const tokenAmount = (await getAccount(connection, tokenAccount.address)).amount;
+    console.log("tokenAmount", tokenAmount);
+    // Converting tokenAmount to a regular number using Number()
+    let tokens = Number(tokenAmount);
+    console.log("minted token amounts", tokens / LAMPORTS_PER_SOL);
+    assert.equal(tokens / LAMPORTS_PER_SOL, 159);
+
+```
+
+Lastly, open **anchor.toml** file and add this block of code in the end of the file.
+
+```
+[[test.validator.clone]]
+address = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
+
+```
+
+This is the metadata program id for Metaplex.
+
+Now we can move forward to build our program to generate program types and ids. Building, deployment and testing of the program will be explored deeply in the next lesson.

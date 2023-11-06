@@ -1,0 +1,157 @@
+---
+title: Upgrading Spl Token Minter Program
+author: shivam
+moduleNumber: module-4
+modulePart: module-4-b
+thisFileName: upgrade-minter-program
+orderNumber: '0'
+---
+
+# Objectives
+
+In this lesson, you will:
+
+- Modify your spl-token-transfer program to facilitate token transfer.
+- Write test file for Gold Token transfer.
+
+## tl;dr
+
+In this lesson, we are transferring gold tokens using the same program that was used for minting. We will add a transfer function in both the Solidity program and TypeScript test files. The function, transferTokens, facilitates the transfer of gold tokens between associated token accounts (ATAs) via Cross Program Invocation (CPI) to the SPL Token Library.
+
+# Overview
+
+Previously, in our spl-token-minter program we mint some gold token and transfer to our ATA. Now we want to transfer some gold token to another account.
+
+We're using the same code for our project. It's the same code for minting, and we've added the transfer function in both the Solidity program and the TypeScript test file. Open our code directory in VSCode and move to Solidity folder. In transfergold.sol file, add a transfer function under mintTo function:
+
+```solidity
+// Transfer tokens from one token account to another via Cross Program Invocation to Token Program
+function transferTokens(
+address from, // token account to transfer from
+address to, // token account to transfer to
+uint64 amount // amount of gold to transfer
+) public {
+SplToken.TokenAccountData from_data = SplToken.get_token_account_data(from);
+SplToken.transfer(from, to, from_data.owner, amount);
+}
+
+```
+
+In the code, we've made a transferTokens function that needs three things to work:
+
+1. The sender's token account with Gold Tokens.
+2. The recipient's account with the Gold Token Mint.
+3. The amount of Gold Tokens to transfer.
+
+Now in first line of function body we retreive the senderstoken account data by make a call to SplToken.get_token_account_data(from). In the next line, the SplToken.transfer ***function performs the actual gold token transfer between the specified ATAs.*** This function requires the following parameters:
+
+- **from**: The account from which we're transferring tokens.
+- **to**: The account to which we're transferring tokens.
+- **owner**: The public key of the owner of the from account.
+- **amount**: The amount of tokens to transfer.
+
+It executes a Cross-Program Invocation to the SPL Token Library using the transfer CPI (Cross-Program Invocation) as shown below:
+
+!https://res.cloudinary.com/practicaldev/image/fetch/s--9qYCv18S--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/vr7rfi6dtpa9mg73fz60.jpeg
+
+We transferred the amount of Gold Tokens from one Associated Token Account (ATA) to the other ATA using CPI (Cross-Program Invocation). 
+
+Now, we're going to write the test for transferring Gold Tokens. Open the transfersol.ts test file and add this test right after the *mint tokens to our wallet* test:
+
+```tsx
+// transfer token to another wallet via cpi
+
+it("Transfer some tokens to another wallet!", async () => {
+  // Wallet's associated token account address for mint
+  const tokenAccount = await getOrCreateAssociatedTokenAccount(
+    connection,
+    wallet.payer, // payer
+    mintKeypair.publicKey, // mint
+    wallet.publicKey // owner(shivam)
+  );
+
+  const receipient = anchor.web3.Keypair.generate();
+  const receipientTokenAccount = await getOrCreateAssociatedTokenAccount(
+    connection,
+    wallet.payer, // payer
+    mintKeypair.publicKey, // mint account
+    receipient.publicKey // owner(justin) account
+  );
+
+  console.log("receipientTokenAccount",receipientTokenAccount)
+
+  const tx = await program.methods
+    .transferTokens(
+      tokenAccount.address,
+      receipientTokenAccount.address,
+      new anchor.BN(54000000000)
+    )
+    .accounts({ dataAccount: dataAccount.publicKey })
+    .remainingAccounts([
+      {
+        pubkey: wallet.publicKey,
+        isWritable: true,
+        isSigner: true,
+      },
+      {
+        pubkey: mintKeypair.publicKey,
+        isWritable: false,
+        isSigner: false,
+      },
+      {
+        pubkey: tokenAccount.address,
+        isWritable: true,
+        isSigner: false,
+      },
+      {
+        pubkey: receipientTokenAccount.address,
+        isWritable: true,
+        isSigner: false,
+      },
+    ])
+    .rpc();
+  console.log("Your transaction signature", tx);
+
+ const recepienttokenAmount = (await getAccount(connection, receipientTokenAccount.address)).amount;
+  console.log("recipienttokenAmount", recepienttokenAmount);
+  let tokens = Number(recepienttokenAmount);
+
+  assert.equal(tokens / LAMPORTS_PER_SOL, 54);
+});
+
+```
+
+Here, first, we create the owner’s Associated Token Account (ATA):
+
+```tsx
+const tokenAccount = await getOrCreateAssociatedTokenAccount(
+    connection,
+    wallet.payer, // payer
+    mintKeypair.publicKey, // mint
+    wallet.publicKey // owner(shivam)
+  );
+
+```
+
+We use the `getOrCreateAssociatedTokenAccount` method from the SPL Token library to create an associated token account. We're using the same Gold Token Mint for this, and the owner is our wallet. Next, we create a new keypair for the recipient, which is the recipient in our case.
+
+```tsx
+const receipient = anchor.web3.Keypair.generate();
+
+```
+
+After this, we create the recipient’s ATA:
+
+```tsx
+const receipientTokenAccount = await getOrCreateAssociatedTokenAccount(
+    connection,
+    wallet.payer, // payer
+    mintKeypair.publicKey, // mint account
+    receipient.publicKey // owner(justin) account
+  );
+
+```
+
+By using same gold token mint and set owner as recipient. Next, we start a transaction using the transferTokens method provided by the Solidity program. We give it the necessary token accounts and specify the amount of Gold Tokens we want to transfer. Then, we provide the data account and other required accounts for these cross-program invocation (CPI) calls. Finally, we confirm our test by ensuring that the recipient’s ATA contains 54 Gold Tokens.
+
+In the next lesson, we move on to building, deploying and testing our program.

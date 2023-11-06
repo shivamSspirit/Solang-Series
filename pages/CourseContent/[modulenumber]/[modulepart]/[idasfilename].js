@@ -93,6 +93,14 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
   //const ifSlugequates = ifSlugEqual(router.asPath,allDocuments)
   ///console.log("ifSlugequates",ifSlugequates)
 
+  const orderedLessions  = filteredParts?.sort((a, b) => a.orderNumber - b.orderNumber)
+  .map((item, index) => {
+    // Use 'item' as the current object with orderNumber
+    // 'index' is the current position from 0 to n
+    // Add your logic here
+    return item; // or transform 'item' if needed
+  });
+
   const { modulenumber, modulepart, idasfilename } = router.query;
   console.log("modulenumber", modulenumber);
   const currentpath = `/CourseContent/${modulenumber}/${modulepart}/${idasfilename}`;
@@ -130,7 +138,7 @@ const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
             </div>
             <div className='mt-10'>
               <div>
-                {filteredParts?.map((lession, idx) => (
+                {orderedLessions?.map((lession, idx) => (
                   <div key={idx} id='breadcrumbs-one' className='mb-1'>
                     <li>
                       <Link

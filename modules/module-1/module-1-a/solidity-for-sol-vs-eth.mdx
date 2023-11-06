@@ -1,9 +1,10 @@
 ---
-title: Intro to solana
+title: Soldity For Solana Vs Ethereum
 author: shivam
 moduleNumber: module-1
 modulePart: module-1-a
-thisFileName: solidity-for-solvseth
+thisFileName: solidity-for-sol-vs-eth
+orderNumber: '2'
 ---
 
 # Solidity For Solana vs. Solidity For Ethereum
@@ -39,19 +40,83 @@ Simplifying Technical Concepts in Solana and Ethereum
 - Error definitions, reverts, and error messages don't work in Solana.
 - The ERC-20 interface isn't currently compatible with Solana.
 
+
 Here's a simplified comparison table between Solana and Ethereum various technical incompatibilities:
 
-| Concept | Solana | Ethereum |
-| --- | --- | --- |
-| Account Address Format | 32-byte key (address type) | 20-byte address |
-| Wallet Address Length | Varies (around 44 characters) | 40 characters (with 0x prefix) |
-| Required Solana Version | v1.8.1 | - |
-| Gas and Resource Management | Compute Units (similar to gas) | Gas and EVM instructions |
-| Compute Unit Allocation | 200k per function | Varies per instruction |
-| msg.sender Function | Not Available | Available |
-| Signature Verification | signatureVerify() | ecrecover() |
-| Try-Catch Statements | Not Functional | Available |
-| Error Handling and Reverts | Limited | Available |
-| ERC-20 Compatibility | Not Compatible | Compatible |
+<>
+<table>
+    <thead>
+      <tr>
+        <th>Concept</th>
+        <th>Solana</th>
+        <th>Ethereum</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Account Address Format</td>
+        <td>32-byte key (address type)</td>
+        <td>20-byte address</td>
+      </tr>
+
+      <tr>
+        <td>Wallet Address Length</td>
+        <td>Varies (around 44 characters)</td>
+        <td>40 characters (with 0x prefix)</td>
+      </tr>
+
+      <tr>
+     <td>Required Solana Version</td>
+        <td>v1.8.1</td>
+        <td>-</td>
+      </tr>
+
+ <tr>
+     <td>Gas and Resource Management</td>
+        <td>Compute Units (similar to gas)</td>
+        <td>Gas and EVM instructions</td>
+      </tr>
+
+ <tr>
+     <td>Compute Unit Allocation</td>
+        <td>200k per function</td>
+        <td>Varies per instruction </td>
+      </tr>
+
+ <tr>
+     <td>msg.sender Function</td>
+        <td> Not Available</td>
+        <td>Available</td>
+      </tr>
+
+ <tr>
+     <td>Signature Verification</td>
+        <td>signatureVerify()</td>
+        <td>ecrecover()</td>
+      </tr>
+
+ <tr>
+     <td>Try-Catch Statements</td>
+        <td>Not Functional</td>
+        <td>Available</td>
+      </tr>
+
+ <tr>
+     <td>Error Handling and Reverts</td>
+        <td>Limited</td>
+        <td>Available</td>
+      </tr>
+
+ <tr>
+     <td>ERC-20 Compatibility</td>
+        <td>Not Compatible</td>
+        <td>Compatible</td>
+      </tr>
+
+
+    </tbody>
+  </table>
+  </>
+
 
 In the next lesson, we provide an in-depth technical comparison between Solana and Ethereum, especially with regards to their architectures and their use of Solidity.

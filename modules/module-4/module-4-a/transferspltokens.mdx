@@ -1,0 +1,85 @@
+---
+title: How To Transfer Spl Tokens In Solana
+author: shivam
+moduleNumber: module-4
+modulePart: module-4-a
+thisFileName: transferspltokens
+orderNumber: '1'
+---
+
+
+# Objective
+
+In this lesson, you will:
+
+- Understand the underlying logic of transferring tokens in Solana.
+- Get to know about Associated Token Accounts in Solana.
+
+## tl;dr
+
+In this lesson, you are introduced to ATAs in Solana. To understand token transfers, consider an example where want to send gold tokens minted using the spl-token-minter program to your friend. Both of you need token accounts linked to the same gold token mint. Associated Token Accounts (ATAs) simplify managing token transfers and offer a way to create primary token accounts for each token owned. ATAs map user wallet addresses to their associated token accounts, streamlining the process.
+
+# Overview
+
+To understand the analogy behind transferring tokens, lets us consider the following example:
+
+I am Shivam, and I want to send some of the gold tokens we minted (in spl-token-minter program) to my friend, Justin.
+
+To get started, we need token accounts linked to the same mint, specifically the gold token mint. The actual token transfer happens from my account to Justin's. To make this transfer smoother, we need to create a brand-new associated token account for Justin. This step ensures that the transfer takes place seamlessly from my account to Justin's.
+
+But here's the twist - this isn't your typical wallet-to-wallet transfer. It stands apart from the usual Sol transfer process. Why? Because in this case, the system program takes charge of the transaction, eliminating the need to create another associated token account to hold the Sol that's being transferred.
+
+You can see this analogy in below image
+
+!https://res.cloudinary.com/practicaldev/image/fetch/s--cVtzhC33--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/fylzhbuk2b8ctccqui94.jpeg
+
+We will now proceed to interact with the Associated Token Account.
+
+## Associated token accounts in Solana
+
+Associated Token Accounts (ATAs) provide a simple and reliable way to find the token account associated with a specific public key and token mint. This makes it easier to manage token transfers and interactions within programs.
+
+Managing multiple token accounts under the same mint can be complex and confusing.
+
+Token program offers a way to generate token account keys based on a user's main System account address and the token mint address. This makes it easier for users to create a primary token account for each token they own, for simplifying management.
+
+These specialized accounts are called Associated Token Accounts (ATAs).
+
+This program establishes a standard and provides a mechanism to map a user's wallet address with their associated token accounts.
+
+!https://res.cloudinary.com/practicaldev/image/fetch/s--tdB17rA0--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ywu4nudz726nmibpt985.jpeg
+
+In this image, we're creating two linked token accounts for the Gold Token. We do this by using The Gold Token Mint and the owners' addresses. This process is essentially about generating a Program Derived Address (PDA) from the user's wallet and the Gold Token Mint. We will learn about PDA in next article
+
+**Some key take-away for ATA**
+
+Each Associated Token Account (ATA) is also a Program Derived Address (PDA) and every Associated Token Account (ATA) is also a Token Account.
+
+We can create associate token account in typescript  using `getOrCreateAssociatedTokenAccount` method provided by spl-token the module.
+
+```tsx
+const tokenAccount = await getOrCreateAssociatedTokenAccount(
+    connection,// web3 connection
+    wallet.payer, // payer for the account
+    mintKeypair.publicKey, // mint for the gold token
+    wallet.publicKey // owner(shivam)
+  );
+
+```
+
+The getOrCreateAssociatedTokenAccount() function is used to get the Token Account associated with a given address or create it if it doesn't exist and return a public key for gold token account.
+
+to hold some gold token we need to change owner and create brand new ATA as shown below:
+
+```jsx
+const recipient = anchor.web3.Keypair.generate(); // Random key generator
+
+const recipientTokenAccount = await getOrCreateAssociatedTokenAccount(
+    connection,   // web3 connection
+    wallet.payer, // payer for the account
+    mintKeypair.publicKey, // mint for the gold token
+    receipient.publicKey // owner
+  );
+```
+
+In the next lesson, we upgrade the spl-token-minter program to facilitate transfer of tokens.
