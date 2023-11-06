@@ -1,40 +1,111 @@
 ---
-title: Intro to solana
+title: Technical architectures comparision (Accounts on both blockchains)
 author: shivam
 moduleNumber: module-1
 modulePart: module-1-a
 thisFileName: account-comparision
+orderNumber: '3'
 ---
-
-# Solidity Basics
 
 # Objectives
 
 In this lesson, you will:
 
-- Become familiar with Solidity
-- Understand the unique features of Solidity
-- Understand practical applications of programs developed using Solidity.
+- Explore technical and architectural differences between Ethereum and Solana.
+- Showcase how Solana distinguishes itself from Ethereum by utilizing different paradigms.
+- Understand how Solang integrates Solidity with the Solana account model.
 
-## tl;dr
+## tl:dr
 
-This lesson provides a brief introduction to Solidity. It is a programming language developed for Ethereum in 2015. It is high-level, object-oriented, and draws inspiration from Python, C++, and JavaScript. Solidity is the foundation for Ethereum smart contracts and can create various contracts like voting systems, auctions, crowdfunding, and more.
+This lessons take explores the technical and architectural differences between Solana and Ethereum. Solana stands out from Ethereum due to its unique blockchain structure, employing various programming approaches. It uses different paradigms and patterns for its account model, rent system, Cross-Program Invocation (CPI), and Program Derived Address (PDA), which will be covered in detail in this series.
 
-## Overview
+# Overview
 
-Solidity is a recently developed programming language originating from Ethereum, the second-largest cryptocurrency market by capitalization. Introduced in 2015 under the guidance of Christian Reitwiessner, Ethereum's core developer, Solidity possesses a set of significant attributes:
+**The technical structure of blockchains sets Solana apart from Ethereum through distinct programming approaches**. Solana utilizes diverse paradigms and patterns, moulding its account model, rent system, Cross-Program Invocation (CPI), and Program Derived Address (PDA). These concepts will be explored in-depth in this series. This article centers on outlining the account model and its differences from Ethereum's architecture.
 
-- Solidity serves as a high-level programming language crafted for implementing smart contracts.
-- It adheres to a typed object-oriented (contract-oriented) paradigm.
-- The design of Solidity draws significant inspiration from programming languages like Python, C++, and JavaScript, all which function on the Ethereum Virtual Machine (EVM).
-- Solidity boasts support for intricate user-defined programming constructs, libraries, and inheritance.
-- As the predominant language, Solidity is the foundation for blockchain platforms.
-- The capabilities of Solidity extend to creating diverse contracts such as voting systems, blind auctions, crowdfunding mechanisms, multi-signature wallets, and more.
+## **Account Model:**
 
-### ***Learning Resources for Solidity***
+- In Solana's runtime environment, known as Sealevel, the account model simplifies complex interactions. For preserving the transaction state, the mechanism involves accounts. These are like files in systems such as Linux, storing lasting data beyond program lifetimes.
+- Unlike traditional files, an account's longevity is tied to its rent, denoted in fractional native tokens known as lamports. These accounts live in validator memory and rely on rent to persist. Regular scans are conducted to collect rent, and accounts with zero lamports are deleted. **Accounts are considered rent-exempt if they maintain a smallest lamport balance**.
+- Solana's Sealevel, unlike Ethereum's EVM, has two distinct account types: executable (upgradeable) and non-executable (for mutable data). Unlike EVM, Sealevel allows contract data access in any account, but changes are limited to the designated "owner" for security.
+- Solana's storage approach differs from Ethereum's. Any Solana account can host state. , Solana's contract state is within other accounts. Each Solana account links to an owner contract, securing state change control.
+- In account-based blockchains like Ethereum and Solana, versatile on-chain data enhances decentralized applications. Yet, **EVM and Sealevel differ in state storage**. Ethereum's smart contracts manage storage, while Solana allows any account. Smart contract storage uses bytecode. Solana's state is in accounts, each linked to an owner contract for state changes.
 
-[Solidity By Example](https://solidity-by-example.org/)
+Here's a simplified comparison table highlighting the key differences between Solana and Ethereum their technical architecture and account models:
 
-[Smart Contract Programmer - Youtube](https://www.youtube.com/watch?v=hMwdd664_iw&list=PLO5VPQH6OWdULDcret0S0EYQ7YcKzrigz)
+<>
+<table>
+    <thead>
+      <tr>
+        <th>Concept</th>
+        <th>Solana</th>
+        <th>Ethereum</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Account Model</td>
+        <td>Uses an account model referred to as accounts, which store data and bytecode.</td>
+        <td>Employs a single account for both storage and smart contract code.</td>
+      </tr>
 
-[CryptoZombies](https://cryptozombies.io/)
+      <tr>
+        <td>Data and Lamports</td>
+        <td>Accounts include Data and use fractional tokens called lamports for lifespan sign.</td>
+        <td>Ethereum uses gas for transaction cost estimation.</td>
+      </tr>
+
+      <tr>
+     <td>Executable and Non-executable Accounts</td>
+        <td>Features two account types: executable (bytecode) and non-executable (mutable data).</td>
+        <td>Follows a basic account model for storage and code accounts for smart contracts.</td>
+      </tr>
+
+ <tr>
+     <td>Storage Approach </td>
+        <td>Any account can host state; smart contract storage is confined to bytecode.)</td>
+        <td>Smart contracts manage their storage.</td>
+      </tr>
+
+ <tr>
+     <td>Ownership and Security</td>
+        <td>Each account has an owner contract to secure data changes and maintain integrity.</td>
+        <td>Ownership and control are linked to the Ethereum wallet address. </td>
+      </tr>
+
+ <tr>
+     <td>Data Access</td>
+        <td> Contracts can read and write data in any account, but changes are limited to the account's "owner".</td>
+        <td>Smart contracts access data through the contract itself or external calls.</td>
+      </tr>
+
+ <tr>
+     <td>Storage Flexibility and Encapsulation</td>
+        <td>Allows any account to host state, offering flexibility and encapsulation.</td>
+        <td> Offers more controlled storage for contracts, with data storage segregated.</td>
+      </tr>
+
+ <tr>
+     <td>State Modification and Integrity </td>
+        <td>Ensures state changes are secured and validated through ownership contracts.</td>
+        <td>Requires proper coding practices to maintain data integrity and avoid vulnerabilities.</td>
+      </tr>
+
+    </tbody>
+  </table>
+  </>
+
+- On Ethereum, token contracts have a `mapping` which defines the balance for each owner address:
+
+```
+mapping (address => uint256) private _balances;
+
+```
+
+- On Solana, token balances are stored in unique accounts where the storage account address is derived from the address of the owner account.
+
+!https://res.cloudinary.com/practicaldev/image/fetch/s---VrOf4kR--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/gm32bz33sxfb2m1er2dq.jpeg
+
+Solang integrates Solidity with the Solana account model by modifying existing code patterns and introducing new ones that are unique to Solana, making this complex undertaking possible. 
+
+In the next lesson we take a dive into smart contracts in Ethereum and Solana and develop a smart contract for Solana using Solidity.

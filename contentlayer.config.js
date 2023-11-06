@@ -57,6 +57,9 @@ export const Doc = defineDocumentType(() => ({
     thisFileName: {
       type: "string",
     },
+    orderNumber: {
+      type: "string"
+    }
   },
   computedFields,
 }));

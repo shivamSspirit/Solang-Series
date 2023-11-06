@@ -9,16 +9,17 @@ import { allDocuments } from "../../../../.contentlayer/generated";
 import { NextSeo } from "next-seo";
 
 export async function getStaticProps(context) {
-  // console.log("Running static props");
+   console.log("Running static props",context);
 
   const filteredParts = allDocuments.filter((lession) => {
+    console.log("lessiosnsss",lession)
     return (
       lession?.moduleNumber === `${context?.params?.modulenumber}` &&
       lession?.modulePart === `${context?.params?.modulepart}`
     );
   });
 
-  // console.log(filteredParts);
+   console.log("FilteredParts",filteredParts);
   // console.log("lessions for a part", lession);
   // Return notFound if the post does not exist.
   // if (!lession) return { notFound: true }
@@ -46,6 +47,16 @@ export async function getStaticPaths() {
 }
 
 const Course1 = ({ filteredParts }) => {
+  console.log("fifjsdhfjksdhfkjsdhfdjkhfjksdhfjkdshfjkshjklteredParts",filteredParts)
+
+
+  const orderedLessions  = filteredParts?.sort((a, b) => a.orderNumber - b.orderNumber)
+  .map((item, index) => {
+    // Use 'item' as the current object with orderNumber
+    // 'index' is the current position from 0 to n
+    // Add your logic here
+    return item; // or transform 'item' if needed
+  });
   const router = useRouter();
   const { modulenumber, modulepart } = router.query;
 
@@ -92,7 +103,7 @@ const Course1 = ({ filteredParts }) => {
             </div>
             <div className='mt-10'>
               <div>
-                {filteredParts?.map((lession, idx) => (
+                {orderedLessions?.map((lession, idx) => (
                   <div key={idx} id='breadcrumbs-one' className='mb-1'>
                     <li>
                       {/* {console.log("filename",lession)} */}

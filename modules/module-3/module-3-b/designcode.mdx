@@ -1,9 +1,264 @@
 ---
-title: Intro to solana
+title: Design Code For Cpi Flip Program
 author: shivam
 moduleNumber: module-3
-modulePart: module-3-a
+modulePart: module-3-b
 thisFileName: designcode
+orderNumber: '0'
 ---
 
-## designcode
+# Objectives
+
+In this lesson, you will:
+
+- Create the code for the CPI Flip program.
+- Understand CPI implementation in Solidity.
+
+## tl;dr
+
+This article explains how to set up and use Solang for cross-program invocation (CPI) on Solana. It begins with project setup, then walks through creating two programs: a caller (hand.sol) and a callee (lever.sol). The caller program interacts with the callee via CPI. The article details the code for both programs and explains CPI handling in Solang, simplifying CPI compared to Anchor. This demonstrates composability in Solana and Solang for program interaction.
+
+# Overview
+
+We are utilizing the same system setup of our project dependency from previous articles that is located [here](https://dev.to/shivamsspirit/minting-fungible-tokens-in-solana-using-solidity-solang-programming-languagepart-2-4lbc).
+
+We're kicking off by using the project initialization command shown below:
+
+```
+anchor init cpiinvoke --solidity
+
+```
+
+After that, navigate to the project directory:
+
+```
+cd cpiinvoke
+
+```
+
+Run the following command to open VSCode.
+
+```
+code .
+
+```
+
+We already discussed all project files in the previous module.
+
+Navigate to the solidity directory and make two files:
+
+hand.sol(this is the caller) and lever.sol(this is callee)
+
+## Program Design
+
+We're making a flip program that can turn on or off power using a boolean type. To do this, we need to create two programs: Program A (the caller) and Program B (the callee). Program A is in charge of calling Program B using cross-program invocation (CPI). Program B is the one being called from Program A.
+
+## Writing the programs
+
+Now, let's start by creating the called program. Navigate to the solidity directory within our project and open a created file called lever.sol. Then, paste the following code into this file:
+
+```solidity
+@program_id("J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh")
+contract lever {
+    // Switch state
+    bool private isOn = true;
+
+    @payer(payer) // payer for the data account
+    constructor() {}
+
+    // Switch the power on or off
+    function switchPower(string name) public {
+        // Flip the switch
+        isOn = !isOn;
+
+        // Print the name of the person who pulled the switch
+        print("{:} is pulling the power switch!".format(name));
+
+        // Print the current state of the switch
+        if (isOn){
+            print("The power is now on.");
+        } else {
+            print("The power is now off!");
+        }
+    }
+
+    // Get the current state of the switch
+    function get() public view returns (bool) {
+        return isOn;
+    }
+}
+
+```
+
+Let's understand the code:
+
+We're familiar with the program ID, payer, contract, and construction annotation from the previous modules.
+
+Now, we'll begin by defining the switch state.
+
+```solidity
+ // Switch state
+    bool private isOn = true;
+
+```
+
+Here, bool is the data type, private is used to set access limits, and isOn is the name of a variable with the value true. Next, we create a function called switchPower.
+
+```solidity
+function switchPower(string name) public {
+        // Flip the switch
+        isOn = !isOn;
+
+        // Print the name of the person who pulled the switch
+        print("{:} is pulling the power switch!".format(name));
+
+        // Print the current state of the switch
+        if (isOn){
+            print("The power is now on.");
+        } else {
+            print("The power is now off!");
+        }
+    }
+
+```
+
+This function takes a parameter called name, which is of string type, and it's visible to the public. Inside the function, it flips the value of isOn – if it was true, now it becomes false, and vice versa. After that, it prints the name of the person who triggered the switch.The function uses a basic programming concept, a conditional statement with an if-else block, to check if the power is on (true) or off (false).
+
+```solidity
+// Print the current state of the switch
+        if (isOn){
+            print("The power is now on.");
+        } else {
+            print("The power is now off!");
+        }
+
+```
+
+We expand our contract by adding another function. This function's role is to fetch the present state of the switch. It does this by having a view visibility, allowing anyone to read from it.
+
+```solidity
+// Get the current state of the switch
+    function get() public view returns (bool) {
+        return isOn;
+    }
+
+```
+
+That's it. This is our callee program, which receives cross-program invocation (CPI) instructions from the caller program. It then calls the switchPower function to handle and update the state of the switch.
+
+Let's now switch to our caller program.
+
+In the solidity directory, open a created file called hand.sol and copy-paste this block of code.
+
+```solidity
+import "solana";
+
+// Interface to the lever program.
+leverInterface constant leverProgram = leverInterface(address'J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh');
+interface leverInterface {
+    function switchPower(string name) external;
+}
+
+@program_id("7zJ7E8uZccmCH89eykH8yZsB6G685nbz7sSq8N9sZTtq")
+contract hand {
+
+    // Creating a data account is required by Solang, but the account is not used in this example.
+    // We only interact with the lever program.
+    @payer(payer) // payer for the data account
+    constructor() {}
+
+    // "Pull the lever" by calling the switchPower instruction on the lever program via a Cross Program Invocation.
+
+}
+
+```
+
+Let's break this down:
+
+We start by importing the Solana library. Then, we build an interface for our callee (lever, or Program B) within our caller program (hand, or Program A).
+
+***Interface***
+
+> When you flip a light switch, the light goes on.
+> 
+> 
+> You do not care how the switch turns the light on.
+> 
+> You just care that “it does turn the light on”.
+> 
+
+Next, we're required to perform a Cross-Program Invocation (CPI) to the lever program, live at address *J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh.* This process leads us to create the interface for the callee program.
+
+```solidity
+interface leverInterface {
+    function switchPower(string name) external;
+}
+
+```
+
+In this step, we're crafting an interface for the lever program. We're including the switchPower function's entry point into this interface as an external function.
+
+Afterwards, we set the program ID. In Solana contract development, programs are typically deployed to specific accounts. This account can be indicated in the source code using an annotation, specifically `@program_id`.
+
+Let's begin with the hand contract. We're creating a data account, a necessity in Solang, although it remains unused in this program. Our interaction is solely with the lever program.
+
+For this copy and paste pullLever function below constructor in hand.sol
+
+```solidity
+// "Pull the lever" by calling the switchPower instruction on the lever program via a Cross Program Invocation.
+    function pullLever(address dataAccount, string name) public {
+        // The account required by the switchPower instruction.
+        // This is the data account created by the lever program (not this program), which stores the state of the switch.
+        AccountMeta[1] metas = [
+            AccountMeta({pubkey: dataAccount, is_writable: true, is_signer: false})
+        ];
+
+        // The data required by the switchPower instruction.
+        string instructionData = name;
+
+        // Invoke the switchPower instruction on the lever program.
+        leverProgram.switchPower{accounts: metas}(instructionData);
+    }
+
+```
+
+The pullLever function handles receiving arguments from the caller as an instruction. It then sets the instruction data and triggers the lever by invoking the switchPower instruction on the lever program through a **Cross-Program Invocation** (CPI Invoke).
+
+During an external call (also known as CPI), the AccountMeta defines the accounts that need to be handed over to the called program.
+
+instruction for the CPI to be processed by the callee in the lever program.
+
+This is accountmeta information **address `pubkey`.**The address (or public key) of the account **bool `is_writable`**Can the callee write to this account **bool `is_signer`.**
+
+```solidity
+AccountMeta[1] metas = [
+AccountMeta({pubkey: dataAccount, is_writable: true, is_signer: false})
+];
+
+```
+
+NOTE-:
+
+For those familiar with Anchor Rust development, you're likely already acquainted with CPI (Cross-Program Invocation), but when working with Solang, things are a bit different. Unlike Anchor Rust, Solang doesn't have specific methods for CPI. Instead, if you use the syntax `<address>.call()`, a CPI is automatically constructed for you. The compiler takes care of generating the `invoke` or `invoke_signed` for you.
+
+Here's an example:
+
+```solidity
+leverInterface constant leverProgram = leverInterface(address'J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh');
+
+```
+
+This code allows you to perform a CPI to the lever program residing at address `J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh`.
+
+Now, when you have:
+
+```solidity
+leverProgram.switchPower{accounts: metas}(instructionData);
+
+```
+
+A CPI is constructed automatically, and the compiler generates an `invoke()` for this operation. This simplifies the process of working with CPI when using Solang.
+
+This is how we achieve composability in Solana and Solang – by utilizing Cross-Program Invocation (CPI).
+
+In our next lesson, we will write tests and explore how to do cpi with invoke_signed(that consumes PDA)

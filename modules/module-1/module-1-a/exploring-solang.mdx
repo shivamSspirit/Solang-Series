@@ -1,58 +1,29 @@
 ---
-title: Intro to solana
+title: Exploring solang
 author: shivam
 moduleNumber: module-1
 modulePart: module-1-a
 thisFileName: exploring-solang
+orderNumber: '1'
 ---
-
-# Solidity Program Compilation
 
 # Objectives
 
-In the following lesson, you will be able to:
+In this lesson, you will be:
 
-- Understand the role of Solidity in the Solana ecosystem.
-- Become familiar with the compilation process of a Solidity program.
-- Understand how the Ethereum and Solana ecosystems differ in terms of Solidity compilation.
+- Introduced to the Solang compiler
+- Understand Solana program compilation in detail.
 
-## tl;dr
+## tl:dr
 
-This lesson takes you through the process of Solidity program compilation. Solidity is crucial for smart contracts on Solana, and the Solang compiler is used to convert Solidity code into Solana-compatible bytecode. The process involves writing in Solidity, compiling to Solana bytecode, deploying on Solana, and making it operational. While similar to Ethereum, Solidity on Solana may need slight adjustments for compatibility, so copying directly from Ethereum might not work.
+This lesson explores Solang. It is the Solidity Compiler for creating Solana smart contracts using the Solidity programming language. It utilizes the llvm framework to generate efficient WebAssembly (WASM) or Solana SBF contract code, reducing execution costs. It's compatible with Ethereum's Solidity compiler (v0.8) and seamlessly integrates with Solana development tools like Anchor for easy Solana program development and deployment.
 
-# Overview
+## Overview
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/df3c1e0d-01b0-4523-b846-e1bb2ca88f61/462fafb1-7d5d-4290-8ac9-aa4e6f8d41ee/Untitled.jpeg)
+[Solang](https://solang.readthedocs.io/) is a Solidity Compiler designed to enable the creation of Solana programs—referred to as 'smart contracts' in other blockchain contexts—using the Solidity programming language.
+The compiler leverages the [llvm](https://www.llvm.org/) compiler framework to generate WebAssembly (WASM) or Solana SBF contract code. This approach yields optimized output, resulting in reduced gas costs or compute units during execution.
+Solang is crafted to maintain source file compatibility with version 0.8 of the Ethereum EVM Solidity compiler.
 
-## **Solidity on Solana**
+Moreover, it integrates with established Solana development tools and frameworks, such as Anchor, facilitating the streamlined construction and deployment of Solana programs rooted in the Solidity language.
 
-### Using Solidity with Solana: A Seamless Process
-
-Solidity, the programming language used to create smart contracts, is an important component of the Solana blockchain. Adding to its power is the Solang compiler. **This tool is essential for converting Solidity code to a format compatible with the Solana blockchain**. The compiler performs various optimisation stages, transforming the code into bytecode or machine code. This bytecode is specifically designed for Solana's platform, which makes it easy for Solidity developers to create and deploy smart contracts on Solana.
-
-Here's a breakdown of the process:
-
-1. **Crafting in Solidity**: Smart contracts are written in the Solidity programming language.
-2. **Compilation**: The Solang compiler compiles the Solidity smart contract into BPF (Berkeley Packet Filter) or SBF (Solana Bytecode Format) bytecode using the LLVM compiler.
-3. **Deployment**: The resulting BPF or SBF bytecode is deployed on the Solana Blockchain, becoming a Solana program.
-4. **Operation**: The Solidity Solana program becomes functional within the Solana Blockchain.
-
-Even though the main ideas of Solidity are the same for Ethereum and Solana, there are some small changes you should make when using Solidity on Solana, which ensure seamless compatibility. While similarities exist, Solidity on Solana requires some refinement for a smooth integration with the Solana Blockchain. **This means directly copying from Ethereum might not work**.
-
-## ***Solidity on Ethereum***
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/df3c1e0d-01b0-4523-b846-e1bb2ca88f61/d33ff8de-b5a7-4b33-a1b1-558583198daa/Untitled.jpeg)
-
-Creating and Deploying Solidity Smart Contracts on Ethereum
-
-Developing smart contracts using Solidity on the Ethereum platform follows this process:
-
-1. **Crafting the Smart Contract**: The process begins with crafting a smart contract using the Solidity programming language. This involves creating a .sol file that signifies the use of Solidity.
-2. **Compiling the Smart Contract**: The Solidity compiler comes into play to compile the smart contract written in Solidity.
-3. **Transformation to ABI and Bytecode**: After compilation, the high-level code transforms into ABI (Application Binary Interface) and bytecode formats. This transformation prepares the code for seamless integration into the Ethereum network.
-4. **Formation of Program Bytecode**: The bytecode takes another step forward and transforms into program bytecode, a significant milestone in the process.
-5. **Execution or Deployment on the Ethereum Chain**: The final step involves executing (deploying) the crafted smart contract onto the Ethereum blockchain. This deploys the smart contract, making it functional within the Ethereum network.
-
-This systematic sequence encapsulates the complete journey of implementing a Solidity-based smart contract on Ethereum's platform. 
-
-In the next lesson, we will explore Solang, the Solidity compiler in depth.
+In the next lesson, we take a look at the differences between solidity for Solana and solidity for Ethereum.

@@ -1,0 +1,89 @@
+---
+title: Solidity Constructor
+author: shivam
+moduleNumber: module-1
+modulePart: module-1-b
+thisFileName: constructor
+orderNumber: '5'
+---
+
+# Objectives
+
+***************In this lesson, you will:*************** 
+
+- Understand the importance of constructors in Solidity.
+
+## tl;dr
+
+In Solidity, contract state variables are stored in data accounts on the blockchain, and these accounts need to be initialized before using contract functions. This is typically done by calling a contract's constructor with the 'new' function. Constructors can be invoked with or without arguments, and the compiler can automatically manage accounts when there's a single instance of a contract type.
+
+# Overview
+
+Solidity contracts are linked to a data account, where the contract's state variables are stored on the blockchain. Prior to calling other contract functions that require it, this account must be initialized. To initialize the data account, a contract constructor that can be called with the 'new' function is used.
+When a constructor is invoked from another contract, the IDL file specifies the data account to initialize as 'contractName_dataAccount'. In the example below, to execute the 'test' instruction, the 'hatchling_dataAccount' account must be initialized as the new contract's data account.
+
+```soldity
+contract hatchling {
+string name;
+constructor(string id) payable {
+require(id != "", "name must be provided");
+name = id;
+}
+}
+
+contract adult {
+function test(address id) external {
+hatchling.new{program_id: id}("luna");
+}
+}
+```
+
+When a constructor call has no arguments, the compiler will automatically create the required AccountMeta array. However, this feature is only available for functions with external visibility. This is because the ordering of accounts cannot be tracked in private, internal, or public functions. It is important to note that automatic account management is only possible if there is a single instance of a particular contract type.
+Alternatively, the data account can be initialized using the accounts call argument. In this case, a fixed-length array of type AccountMeta must be instantiated and passed to the call. The array should contain all the accounts that the transaction requires, including the data account that needs to be initialized.
+
+For the creation of a contract, the data account must be the **first** element in such a vector and the system account 11111111111111111111111111111111 must be there. If the constructor one is calling has the [@payer annotation](https://solang.readthedocs.io/en/v0.3.3/targets/solana.html#payer-seeds-bump), the payer account would appear in the array as well. Moreover, the is_signer and is_writable bool flags need to be properly set, as shown:
+
+```soldity
+import 'solana';
+contract creator {
+@mutableSigner(data_account_to_initialize)
+@mutableSigner(payer)
+
+function create_with_metas() external {
+AccountMeta[3] metas = [
+AccountMeta({
+pubkey: tx.accounts.data_account_to_initialize.key,
+is_signer: true,
+is_writable: true}),
+AccountMeta({
+pubkey: tx.accounts.payer.key,
+is_signer: true,
+is_writable: true}),
+AccountMeta({
+pubkey: address"11111111111111111111111111111111",
+is_writable: false,
+is_signer: false})
+];
+
+Child.new{accounts: metas}();
+Child.use_metas{accounts: []}();
+}
+}
+
+@program_id("Chi1d5XD6nTAp2EyaNGqMxZzUjh6NvhXRxbGHP3D1RaT")
+
+contract Child {
+@payer(payer)
+constructor() {
+print("In child constructor");
+}
+
+function use_metas() pure public {
+print("I am using metas");
+}
+}
+```
+
+The sequence of the accounts in the AccountMeta array matters and must follow the [IDL ordering](https://solang.readthedocs.io/en/v0.3.3/targets/solana.html#account-management).
+
+In the next lesson, you will go through functions in Solidity.

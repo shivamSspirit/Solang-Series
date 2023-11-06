@@ -1,0 +1,206 @@
+---
+title: Creating A Mint Program
+author: shivam
+moduleNumber: module-2
+modulePart: module-2-b
+thisFileName: create-mint-program
+orderNumber: '0'
+---
+
+
+
+# Objectives
+
+In this lesson, you will:
+
+- Create your own Solidity code for your token minter project.
+- Understand the different components of a Solana program.
+
+## tl;dr
+
+This lessons guides you towards coding our token minter, from adding metadata for the token to creating functions for minting.
+
+# Overview
+
+Before starting ,you can clear all the boilerplate code off as we are going to build a spl-token-minter program.
+
+**What it takes to mint any custom spl tokens to token address**
+
+Minting SPL Tokens involves a conceptually straightforward process, yet the intricacy emerges in understanding Solana's mechanism for monitoring users' balances of SPL Tokens. By default, each Solana account tracks its SOL balance, the native token. However, a crucial question arises: **How does every Solana account manage its balance for any possible SPL Token within the network?** In reality, achieving this feat directly is unfeasible. The solution necessitates the creation of distinct accounts purposefully configured for each SPL Token, known as **Associated Token Accounts**. 
+
+Imagine the scenario of introducing a new token named "JOE." To determine an individual's JOE token balance: 
+
+- Mint the JOE tokens.
+- Establish an Associated Token Account customized for the user's wallet, designed to monitor their JOE balance.
+- Mint or transfer JOE tokens into the user's JOE Associated Token Account.
+
+In essence, Associated Token Accounts operate as basic counters, directly tied to a Mint and a Wallet. Their primary function is to convey the balance linked to a specific Mint for a specific Wallet.
+
+## Writing the program
+
+We will create a Solana program focused on minting fungible SPL tokens. To make this happen, we'll need the right Solidity libraries that handle creating tokens, making a token mint, and sending the freshly minted tokens to a user's wallet.
+
+Create a directory name ***libraries*** in the project folder. We'll be importing this code and utilizing specific methods to create and mint SPL tokens.
+
+1. Create mpl_metdata.sol in the library and add code from here: [mpl_metadata.sol](https://github.com/shivamsoni00/mintgoldtoken/blob/master/libraries/mpl_metadata.sol). This library provides a way for Solidity to interact with Metaplex mpl metadata.
+2. Create spl_token.sol in the library and add code from here. [spl_token.sol](https://github.com/shivamsoni00/mintgoldtoken/blob/master/libraries/spl_token.sol). This library provides a way for Solidity to interact with Solana's SPL-Token.
+3. Create system_instruction.sol in the library and add code from here: [system_instruction.sol](https://github.com/shivamsoni00/mintgoldtoken/blob/master/libraries/system_instruction.sol). This library provides a bridge for Solidity to interact with Solana's system instructions.
+4. Now go over to spl-token-minter.sol file and let’s import these libraries:
+
+```solidity
+import "../libraries/spl_token.sol";
+import "../libraries/mpl_metadata.sol";
+
+```
+
+In this code block, the import directive helps bring things from libraries. This is handy when you want to keep one definition in a file and use it in lots of other files.
+
+These import statements let the current contract use the functions, data structures, and variables from "spl_token.sol" (Solana SPL token) and "mpl_metadata.sol" (Metaplex) files. This adds to the contract's ability to create and mint tokens.
+
+Next, write this
+
+```solidity
+@program_id("4Huxs8ujxKqT76qqfmfJXMThmo4WMsvmdiCkqzNKF5kq")
+
+```
+
+On Solana, smart contracts are referred to as “programs”. The **@program_id** annotation is used to specify the on-chain address of the program.
+
+Next, write a program
+
+```solidity
+contract spl_token_minter {
+@payer(payer)
+    constructor() {}
+}
+
+```
+
+Within a contract **constructor**, you have the option to include the **@payer** annotation, which takes a sequence of characters as an argument. This annotation designates a Solana account responsible for funding the initialization of the contract's data account.
+
+The syntax @payer(payer) introduces an account named payer, which becomes essential for every invocation of the constructor.
+
+### **The significance of the @payer annotation**:
+
+When you put data on the blockchain, you need to set aside some SOL to pay for storage costs, including rent (which we'll explain more about later in the series). The @payer annotation tells us who's responsible for giving the needed SOL to create the account that stores the data.
+
+Next, write this code block (createTokenMint function) after the constructor in spl_token_minter contract.
+
+```solidity
+function createTokenMint(
+        address payer, // payer account
+        address mint, // mint account to be created
+        address mintAuthority, // mint authority for the mint account
+        address freezeAuthority, // freeze authority for the mint account
+        address metadata, // metadata account to be created
+        uint8 decimals, // decimals for the mint account
+        string name, // name for the metadata account
+        string symbol, // symbol for the metadata account
+        string uri // URI for the metadata account
+    ) public {
+        // Invoke System Program to create a new account for the mint account and,
+        // Invoke Token Program to initialize the mint account
+        // Set mint authority, freeze authority, and decimals for the mint account
+        SplToken.create_mint(
+            payer,            // payer account
+            mint,            // mint account
+            mintAuthority,   // mint authority
+            freezeAuthority, // freeze authority
+            decimals         // decimals
+        );
+
+        // Invoke Metadata Program to create a new account for the metadata account
+        MplMetadata.create_metadata_account(
+            metadata, // metadata account
+            mint,  // mint account
+            mintAuthority, // mint authority
+            payer, // payer
+            payer, // update authority (of the metadata account)
+            name, // name
+            symbol, // symbol
+            uri // URI (off-chain metadata json)
+        );
+    }
+
+```
+
+Let's break down what's happening in this code block:
+
+The `createTokenMint` function makes use of these parameters:
+
+- address payer, // payer account(who pay for the rent)
+- address mint, // mint account to be created (mint account for that specific any custom spl token)
+- address mintAuthority, // mint authority for the mint account(mint authority is account signer )
+- address freezeAuthority, // freeze authority for the mint account(same as mint authority)
+- address metadata, // metadata account to be created(metadata address used for storing metadata using metaplex program)
+- uint8 decimals, // decimals for the mint account(eth does not have decimal concept to create and mint token eth have different types of interfaces like erc-20 for fungible token and ERC721 for nft whereas in Solana is single spl token program is responsible for minting both type of tokens using decimal concept)
+- string name, // name for the metadata account(title, name of the token)
+- string symbol, // symbol for the metadata account(symbol of token)
+- string uri // uri for the metadata account(this is uri that is stored in somewhere decentralized storage providers like (ipfs) this is used for storing token logo and different types of metadata).
+
+This is responsible for creating a new token mint and its associated metadata within the Solana blockchain ecosystem.
+
+We use the **public** specifier for this function to make it accessible to everyone.
+
+### Creating a Mint Account and Setting Authorities
+
+In this step, we're making a mint account for our token and deciding who's in charge and how many decimal places it has. We do this by using the System Program and the Token Program. It happens when we use the SplToken.create_mint call. This sets up things like who's in charge, who can freeze, and how many decimals there are for the Mint account.
+
+```solidity
+SplToken.create_mint(
+            payer,            // payer account
+            mint,            // mint account
+            mintAuthority,   // mint authority
+            freezeAuthority, // freeze authority
+            decimals         // decimals
+        );
+
+```
+
+Creating Metadata Account for Minted Tokens
+
+After making the mint account, the process moves on to using the Metadata Program. This program helps set up a new account just for storing metadata linked to the minted tokens. We make this happen by using the MplMetadata.create_metadata_account call. This step takes care of things like who owns the metadata account, the name and symbol of the tokens, and a link to off-chain metadata using a URI (Uniform Resource Identifier).
+
+```solidity
+// Invoke Metadata Program to create a new account for the metadata account
+        MplMetadata.create_metadata_account(
+            metadata, // metadata account
+            mint,  // mint account
+            mintAuthority, // mint authority
+            payer, // payer
+            payer, // update authority (of the metadata account)
+            name, // name
+            symbol, // symbol
+            uri // uri (off-chain metadata JSON)
+        );
+
+```
+
+Now place the "mintTo" function directly under the "createTokenMint" function.
+
+```solidity
+function mintTo(address mintAuthority, address tokenAccount, address mint, uint64 amount) public {
+        // Mint tokens to the token account
+        SplToken.mint_to(
+            mint, // mint account
+            tokenAccount, // token account
+            mintAuthority, // mint authority
+            amount // amount
+        );
+    }
+
+```
+
+Here we are minting tokens to user wallet with mintTo Function. The mintTo function does something important: it mints tokens to a user's associated token account in their wallet. This helps Solana keep track of how many tokens each account has.
+
+We create associated accounts using the token mint and minting towards a user's wallet. Here's an example:
+
+Imagine I create the JOE token. To see how much JOE someone has, I'd have to:
+
+- Make the JOE token.
+- Make an Associated Token Account for that person's wallet to keep track of their JOE balance.
+- Mint or send JOE tokens to their JOE Associated Token Account
+
+Our Solidity program is now complete, allowing us to create and send tokens to a user's wallet.
+
+Next, we'll move to building, deploying, and running this program on the chain using the devnet cluster. Thanks to the Anchor framework, this is an easy and smooth process. To do this, we just need to set up the steps for running and testing our program.

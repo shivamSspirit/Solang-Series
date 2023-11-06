@@ -1,0 +1,78 @@
+---
+title: Implementing Cpi Into Solana programs
+author: shivam
+moduleNumber: module-3
+modulePart: module-3-a
+thisFileName: implement-cpi
+orderNumber: '2'
+---
+
+# Objectives
+
+In this lesson, you will learn:
+
+- Implementing CPI using the invoke() function.
+
+## tl;dr
+
+The invoke() function in Solana is used to call programs without needing signers. It involves routing instructions, accounts, and data to the callee program.  When creating a CPI, you define the accounts accessed and instruction data. Cross-Program Invocations allow limited depth reentrancy. The code example demonstrates using CPI to call a lever program.
+
+# Overview
+
+The `invoke` function is used when making a CPI that does not need any PDAs to act as signers. **When making CPIs, the Solana runtime extends the original signature passed into a program to the callee program**.
+
+When you're calling a program, you might find a library with helpful functions to create the Instruction. People and groups often make these libraries available, making it easier to call their programs.
+
+The definition of the `Instruction` type required for a CPI includes:
+
+- `invoke()` is built into Solana's runtime and handles routing the given instruction to another program via the instruction's `program_id` field.
+- `accounts` - a list of `AccountInfo` corresponding to all the accounts accessed by the other program
+- `data` - instruction data that will be understood by the other program
+
+### Shared data validation
+
+The AccountInfo structures given to this function hold data that the runtime uses . This data is copied to and from the memory space of the program being called.
+
+### Call Depth
+
+Cross-program invocations let programs call other programs ,but currently, this is limited to a depth of 4.
+
+### Reentrancy
+
+Currently, reentrancy is only allowed in cases of direct self-recursion, and it's limited to a set depth. This limitation is in place to prevent scenarios where a program could call another program from an interim state without knowing it might be called back. Direct recursion ensures that the program has complete control over its state when it's called back.
+
+To use `invoke` and `invoke_signed`, a list of `account_infos` is also required. Like the list of `AccountMeta` in the instructions, you need to include all the `AccountInfo` of each account that the program you're calling will read from or write to.
+
+Since programs can only get AccountInfo values from the runtime at the program's entry point, any account that the called program needs must be needed by the calling program and provided by its caller. This also applies to the program ID of the called program.
+
+In below code block see how cpi are creating to leverProgram by calling their switchPower function
+
+```solidity
+function pullLever(address dataAccount, string name) public {
+// The account required by the switchPower instruction.
+// This is the data account created by the lever program (not this program), which stores the state of the switch.
+AccountMeta[1] metas = [
+AccountMeta({pubkey: dataAccount, is_writable: true, is_signer: false})
+];
+
+    // The data required by the switchPower instruction.
+    string instructionData = name;
+
+    // Invoke the switchPower instruction on the lever program.
+    leverProgram.switchPower{accounts: metas}(instructionData);
+}
+
+```
+
+In this section of code, we're making a pullLever function that takes dataAccount and name as inputs. This function sets up the accountMeta for the data account of the lever program. It then puts the name into the instruction Data. Finally, we use cpi (cross-program-invocation) to call the switchPower method in the leverProgram(then a CPI is constructed, and the compiler will generate a invoke()), providing the necessary accountInfos and instructionData.
+
+When creating a CPI, use the following syntax to specify the `AccountMeta` for each account:
+
+- `AccountMeta::new` - indicates writable
+- `AccountMeta::new_readonly` - indicates not writable
+- `(pubkey, true)` - indicates account is signer
+- `(pubkey, false)` - indicates the account is not signer
+
+You usually make the `Instruction` within the calling program, but you can also get it from an external source through deserialization.
+
+In the next lesson, we will be writing tests for our CPI Flip program.
