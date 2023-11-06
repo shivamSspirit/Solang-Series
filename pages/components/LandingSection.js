@@ -30,12 +30,12 @@ const LandingSection = () => {
   const announcementData = [
     {
       img: landingPg1,
-      head: "Mint Gold(spl) Tokens",
+      head: "Mint fungible(spl) Tokens",
       desc: "In this module, we will develop a Solana program that will mint gold tokens (spl tokens). The program should be able to set up and execute the token-minting process.",
     },
     {
       img: landingPg2,
-      head: "Transfer minted gold tokens to another account(Ata)",
+      head: "Transfer minted fungible tokens to another account",
       desc: "In this module, we will develop a program on Solana that allows for the transfer of spl-tokens(minted in Module 2) to other accounts.",
     },
     {
@@ -117,15 +117,15 @@ const LandingSection = () => {
         "In this module of Solana with Solidity, you will learn the differences between Solana and EVM and develop an SPL token minter project using Solidity on Solana.",
     },
     {
-      heading: "Module 2: Minting Fungible Tokens on Solana with Solidity",
+      heading: "Module 2: Mint fungible(spl) Tokens",
       content:
-        "In this module, we will develop a Solana program that will mint gold tokens (spl tokens). The program should be able to set up and execute the token-minting process.",
+        "In this module, we will develop a Solana program that will mint fungible tokens (spl tokens). The program should be able to set up and execute the token-minting process.",
     },
     {
       heading:
         "Module 3: Building a CPI-Enabled Flip Program with Solidity on Solana",
       content:
-        "In this module, we dive you into the concepts of composability and CPI in Solana. We will also develop a hands-on solidity contract: a CPI Enabled Flip program on solana using Solidity.",
+        "In this module, we dive you into the concepts of composability and CPI in Solana. We will also develop a hands-on solidity contract: a CPI Enabled Flip program on solana.",
     },
     {
       heading: "Module 4: How to Transfer Solana Tokens with Solidity",
