@@ -127,13 +127,13 @@ const LandingSection = () => {
             <div className="text-3xl font-bold sm:text-4xl md:text-5xl">
             {"Deep Dive Into Solidity On Solana".split("").map((letter, index) => {
               return (
-                <span key={index} className="hover:text-funPinkDark hover:mb-3 transition-all duration-500 hover:duration-100 click:goodbyeLetterAnim text-3xl md:text-5xl mb-2 leading-relaxed">
+                <span key={index} className=" hover:text-funPinkDark hover:mb-3 transition-all duration-500 hover:duration-100 click:goodbyeLetterAnim text-3xl md:text-5xl mb-2 leading-loose subpixel-antialiased">
                   {letter}
                 </span>
               );
       })}
             </div>
-            <div className="text-xl md:text-2xl mt-3 font-bold uppercase text-[#ba8b02]">
+            <div className="text-xl md:text-2xl mt-3 font-bold uppercase text-[#ba8b02] leading-loose">
               Solidity on solana
             </div>
             <div className="mt-10 font-bodyFamily text-secondaryGrey text-sm md:text-base">

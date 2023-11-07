@@ -33,7 +33,7 @@ function NavBar() {
               {/* HAMBURGER BUTTON FOR MOBILE */}
               <div className='md:hidden'>
                 <button
-                  className='p-2 text-gray-700 rounded-md outline-none '
+                  className='p-2 text-gray-700 rounded-md outline-none mr-3'
                   onClick={() => setNavbar(!navbar)}
                 >
                   <span
@@ -108,12 +108,12 @@ function NavBar() {
                     FAQs
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <SearchIcon
                     onClick={() => router.push("/Search")}
                     className='hidden md:flex h-8 ml-4 mt-1 lg:mt-1 xl:mt-1 cursor-pointer'
                   />
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>
