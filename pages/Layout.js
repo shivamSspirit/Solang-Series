@@ -41,8 +41,9 @@ const Layout = ({ children }) => {
             {children}
             {(children?.type?.name !== "Search" &&
             children?.type?.name !== "FAQ" &&
-            !coursePage?.includes("Course")) &&
-            <FooterComp />}
+            !coursePage?.includes("Course")) ? <FooterComp />:
+           <></>
+            }
           </>
         )}
       </div>
