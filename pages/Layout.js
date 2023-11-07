@@ -15,15 +15,28 @@ const Layout = ({ children }) => {
   const paths = usePathname(); // this is path
   const router = useRouter(); // this is router
   console.log("router", router.pathname);
-  console.log("Layout",children?.type?.name);
+  console.log("Layout", children?.type?.name);
   console.log("paths", paths);
   const pathNames = paths?.split("/");
   if (pathNames?.[1] !== "404") {
     coursePage = pathNames?.[2];
   }
 
-  console.log("pathnmaes",pathNames)
-  console.log("coursepage",coursePage)
+  console.log("pathnmaes", pathNames);
+  console.log("coursepage", coursePage);
+
+  const addFooterORNot = () => {
+    const childtype = children?.type?.name;
+    if (
+      !(
+        childtype === "Search" ||
+        childtype === "FAQ" ||
+        coursePage?.includes("Course")
+      )
+    ) {
+      return <FooterComp />;
+    }
+  };
 
   return (
     <>
@@ -33,19 +46,12 @@ const Layout = ({ children }) => {
         ) : (
           <NextSeo titleTemplate="%s | Solidity On Solana" />
         )}
-        {children?.type?.name === "ComingSoon" ? (
-          children
-        ) : (
-          <>
-            <NavBar />
-            {children}
-            {(children?.type?.name !== "Search" &&
-            children?.type?.name !== "FAQ" &&
-            !coursePage?.includes("Course")) ? <FooterComp />:
-           <></>
-            }
-          </>
-        )}
+
+        <>
+          <NavBar />
+          {children}
+          {addFooterORNot()}
+        </>
       </div>
     </>
   );

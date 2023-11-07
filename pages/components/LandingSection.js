@@ -10,22 +10,15 @@ import Image from "next/image";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import FooterComp from "../../shared/Footer";
-// import Markdown from "react-markdown";
-// import CourseMap from "./CourseMap";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 
 const LandingSection = () => {
-  // const [curBtn, setCurBtn] = useState(0);
   const [svgHoverColor, setSvgHoverColor] = useState("white");
   const router = useRouter();
   const startBtnOnClick = () => {
     router.push("/CourseContent");
   };
-  // const resumeBtnOnClick = () => {
-  //   setCurBtn(2);
-  // };
 
   const announcementData = [
     {
@@ -79,31 +72,6 @@ const LandingSection = () => {
     </Box>
   );
 
-  // const moduleCard = (
-  //   <div className='flex justify-evenly rounded-full mx-8 '>
-  //     {announcementData.map((announcement, index) => (
-  //       <div
-  //         className='bg-[rgba(0, 0, 0, 0.16)] border border-[rgba(255, 255, 255, 0.36)] rounded-2xl w-[30%] flex-wrap ease-in-out my-5 mx-2 duration-200'
-  //         key={index}
-  //       >
-  //         <div className='m-1'>
-  //           <Image src={announcement.img} alt='med' />
-  //           <div className='px-3 rounded-b-2xl'>
-  //             <div className='text-2xl pt-6 pb-1'>{announcement.head}</div>
-  //             <div className='text-[#CECECE] pb-6'>{announcement.desc}</div>
-  //           </div>
-  //           <div className='mb-2'>
-  //             <Button className='w-full bg-white'>
-  //               <div className='text-center text-black text-xl'>
-  //                 Start Module
-  //               </div>
-  //             </Button>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     ))}
-  //   </div>
-  // );
 
   const timelineData = [
     {
@@ -150,27 +118,6 @@ const LandingSection = () => {
       ))}
     </div>
   );
-
-  // const whySoliditySection = (
-  //   <div className='bg-[#0000005C] text-white py-6 px-4 rounded-2xl'>
-  //     <div className='text-center text-4xl mb-10'>Why Solidity for Solana?</div>
-  //     <div className='flex justify-between'>
-  //       {whySolidityData.map((data, idx) => (
-  //         <div className='w-[30%]' key={idx}>
-  //           <div className='mb-5'>
-  //             <Ufo />
-  //           </div>
-  //           <div className='mb-4'>{data.head}</div>
-  //           <div className='text-gray-400'>
-  //             Whether you want to develop as a professional or discover a new
-  //             hobby, there's an online course for that. You can even take your
-  //             learning further with online micro credentials and degrees.
-  //           </div>
-  //         </div>
-  //       ))}
-  //     </div>
-  //   </div>
-  // );
 
   return (
     <div className="mt-20 sm:px-12">
@@ -251,8 +198,6 @@ const LandingSection = () => {
         </h5>
       </div>
       <div className="mt-20 mb-20">{timeLine}</div>
-      {/* <div className='mt-20'>{<CourseMap />}</div> */}
-      {/* <div className='mt-20'>{whySoliditySection}</div> */}
     </div>
   );
 };
