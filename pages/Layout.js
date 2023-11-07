@@ -14,19 +14,20 @@ const Layout = ({ children }) => {
   //  console.log(children?.type?.name, "Layout");
   const paths = usePathname(); // this is path
   const router = useRouter(); // this is router
-  console.log("patfdsedjsafkjdhskhbdfkhdhkhdshfkhkdsths", router.pathname);
-  console.log(children?.type?.name, "Layout");
-  console.log("pathssssssss", paths);
+  console.log("router", router.pathname);
+  console.log("Layout",children?.type?.name);
+  console.log("paths", paths);
   const pathNames = paths?.split("/");
   if (pathNames?.[1] !== "404") {
     coursePage = pathNames?.[2];
   }
 
+  console.log("pathnmaes",pathNames)
+  console.log("coursepage",coursePage)
+
   return (
     <>
       <div className="mt-12 mx-4 md:mx-10 lg:mx-20">
-        {/* <Navbar/>
-      {children} */}
         {children?.type?.name === "Home" ? (
           <NextSeo title="Solidity On Solana" />
         ) : (
@@ -38,9 +39,10 @@ const Layout = ({ children }) => {
           <>
             <NavBar />
             {children}
-            {children?.type?.name !== "Search" &&
-              children?.type?.name !== "FAQ" &&
-              !coursePage?.includes("Course") && <FooterComp />}
+            {(children?.type?.name !== "Search" &&
+            children?.type?.name !== "FAQ" &&
+            !coursePage?.includes("Course")) &&
+            <FooterComp />}
           </>
         )}
       </div>
