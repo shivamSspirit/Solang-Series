@@ -13,10 +13,10 @@ let coursePage = "";
 const Layout = ({ children }) => {
   //  console.log(children?.type?.name, "Layout");
   const paths = usePathname();
-const router = useRouter();
-  console.log("patfdsekhbdfkhdhkhdshfkhkdsths",router.pathname)
+  const router = useRouter();
+  console.log("patfdsekhbdfkhdhkhdshfkhkdsths", router.pathname);
   console.log(children?.type?.name, "Layout");
-   console.log("pathssssssss",paths)
+  console.log("pathssssssss", paths);
   const pathNames = paths?.split("/");
   if (pathNames?.[1] !== "404") {
     coursePage = pathNames?.[2];
@@ -24,13 +24,13 @@ const router = useRouter();
 
   return (
     <>
-      <div className='mt-12 mx-4 md:mx-10 lg:mx-20'>
+      <div className="mt-12 mx-4 md:mx-10 lg:mx-20">
         {/* <Navbar/>
       {children} */}
         {children?.type?.name === "Home" ? (
-          <NextSeo title='Solidity On Solana' />
+          <NextSeo title="Solidity On Solana" />
         ) : (
-          <NextSeo titleTemplate='%s | Solidity On Solana' />
+          <NextSeo titleTemplate="%s | Solidity On Solana" />
         )}
         {children?.type?.name === "ComingSoon" ? (
           children
