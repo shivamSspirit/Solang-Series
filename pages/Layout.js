@@ -42,10 +42,36 @@ const Layout = ({ children }) => {
     <>
       <div className="mt-12 mx-4 md:mx-10 lg:mx-20">
         {children?.type?.name === "Home" ? (
-          <NextSeo title="Solidity On Solana" />
+          <NextSeo title="Solidity On Solana" description="An Ultimate Dapp development Crash course build for Solana"  openGraph={{
+                    type: 'website',
+                    locale: 'en_IE',
+                    url: 'https://www.solidityonsolana.one/',
+                    siteName: 'Solidity On Solana',
+                }}/>
         ) : (
-          <NextSeo titleTemplate="%s | Solidity On Solana" />
+          <NextSeo titleTemplate="%s | Solidity On Solana" description="An Ultimate Dapp development Crash course build for Solana" openGraph={{
+                    type: 'website',
+                    locale: 'en_IE',
+                    url: 'https://www.solidityonsolana.one/',
+                    siteName: 'Solidity On Solana',
+                }}  />
         )}
+
+        {/* <DefaultSeo
+                title="Next SEO Example"
+                description="Next SEO is a plug in that makes managing your SEO easier in Next.js projects."
+                openGraph={{
+                    type: 'website',
+                    locale: 'en_IE',
+                    url: 'https://www.url.ie/',
+                    siteName: 'SiteName',
+                }}
+                twitter={{
+                    handle: '@handle',
+                    site: '@site',
+                    cardType: 'summary_large_image',
+                }}
+            /> */}
 
         <>
           <NavBar />
