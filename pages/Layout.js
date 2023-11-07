@@ -12,9 +12,9 @@ let coursePage = "";
 
 const Layout = ({ children }) => {
   //  console.log(children?.type?.name, "Layout");
-  const paths = usePathname();
-  const router = useRouter();
-  console.log("patfdsekhbdfkhdhkhdshfkhkdsths", router.pathname);
+  const paths = usePathname(); // this is path
+  const router = useRouter(); // this is router
+  console.log("patfdsedjsafkjdhskhbdfkhdhkhdshfkhkdsths", router.pathname);
   console.log(children?.type?.name, "Layout");
   console.log("pathssssssss", paths);
   const pathNames = paths?.split("/");
