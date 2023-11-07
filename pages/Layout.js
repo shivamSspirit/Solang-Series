@@ -23,20 +23,12 @@ const Layout = ({ children }) => {
   }
 
   console.log("pathnmaes", pathNames);
-  console.log("coursepage", coursePage);
+  console.log("coursfsdfepage", coursePage);
 
-  const addFooterORNot = () => {
-    const childtype = children?.type?.name;
-    if (
-      !(
-        childtype === "Search" ||
-        childtype === "FAQ" ||
-        coursePage?.includes("Course")
-      )
-    ) {
-      return <FooterComp />;
-    }
-  };
+  const pageType = children?.type?.name;
+  const isPageWithFooter = pageType !== "Search" && pageType !== "FAQ" && !pageType.includes("Course");
+    
+
 
   return (
     <>
@@ -76,7 +68,7 @@ const Layout = ({ children }) => {
         <>
           <NavBar />
           {children}
-          {addFooterORNot()}
+          {isPageWithFooter&&<FooterComp/>}
         </>
       </div>
     </>
