@@ -21,10 +21,10 @@ const FooterComp = () => {
           </div>
         </div>
         <div className='mb-10 text-gray-400'>
-          Dive into the world of blockchain development with our Solidity for
-          Solana courses.
+          Dive into the world of blockchain development with our Solidity On
+          Solana course.
         </div>
-        <div className='text-gray-400'>solidityforsolana@email.com</div>
+        <div className='text-gray-400'>solidityonsolana.one</div>
       </div>
       <div className='md:w-1/3 flex flex-col items-start text-gray-400'>
         <div className='flex mb-10 mt-10 md:mt-0'>

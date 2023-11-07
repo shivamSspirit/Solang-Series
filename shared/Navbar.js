@@ -1,15 +1,35 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import SiteLogo from "../assets/site-logo.svg";
 import MobileSiteLogo from "../assets/mob-nav-logo.png";
 import { useRouter } from "next/router";
 import SearchIcon from "@mui/icons-material/Search";
+import { useState, useEffect } from "react";
 
 function NavBar() {
   const router = useRouter();
   const [navbar, setNavbar] = useState(false);
+  //const [removesearchfrommobile, setremovesearchfrommobile] = useState(false);
+ // const [windows,setWindowWidth] = useState('');
   const currentRoute = router.pathname;
+
+   if (typeof window !== "undefined") {
+  //   // detect window screen width function
+  // setWindowWidth(window)
+  //   console.log("hdfhfdhjdfs", window.innerWidth);
+ }
+
+  // useEffect(() => {
+    
+  //     if (windows.innerWidth === 752) {
+  //       setremovesearchfrommobile(!removesearchfrommobile);
+  //     }
+    
+  // }, [windows.innerwi]);
+
+  // const size = useWindowSize();
 
   return (
     <div>
@@ -110,11 +130,13 @@ function NavBar() {
                 </li>
                 <li>
                   <SearchIcon
-                  style={navbar?{display:"none"}: {display: "block"}}
+                    // style={
+                    //   setremovesearchfrommobile
+                    //     ? { display: "none" }
+                    //     : { display: "block" }
+                    // }
                     onClick={() => router.push("/Search")}
-                    className={` ${
-                      navbar ? "hidden" : "block"
-                    } md:flex h-8 ml-4 mt-1 lg:mt-1 xl:mt-1 cursor-pointer`}
+                    className={`md:flex h-8 ml-4 mt-1 lg:mt-1 xl:mt-1 cursor-pointer`}
                   />
                 </li>
               </ul>

@@ -59,6 +59,9 @@ export const Doc = defineDocumentType(() => ({
     },
     orderNumber: {
       type: "string"
+    },
+    modulePartDescription: {
+      type: "string"
     }
   },
   computedFields,

@@ -1,12 +1,9 @@
 import React from "react";
-import illustration from "../../../../assets/illustration.png";
-import Image from "next/image";
-import NextBreadcrumb from "../../../components/NextBreadcrumb";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import curPageNumber from "../../../../shared/pageNumber";
 import { allDocuments } from "../../../../.contentlayer/generated";
 import { NextSeo } from "next-seo";
+import ColorModuleParts from "../../../components/ColorModuleParts";
 
 export async function getStaticProps(context) {
    console.log("Running static props",context);
@@ -47,20 +44,19 @@ export async function getStaticPaths() {
 }
 
 const Course1 = ({ filteredParts }) => {
-  console.log("fifjsdhfjksdhfkjsdhfdjkhfjksdhfjkdshfjkshjklteredParts",filteredParts)
-
+    console.log("allDocuments",allDocuments)
+  console.log("Filtered parts",filteredParts)
 
   const orderedLessions  = filteredParts?.sort((a, b) => a.orderNumber - b.orderNumber)
   .map((item, index) => {
-    // Use 'item' as the current object with orderNumber
-    // 'index' is the current position from 0 to n
-    // Add your logic here
     return item; // or transform 'item' if needed
   });
+
+  console.log("fockiiii",orderedLessions)
   const router = useRouter();
   const { modulenumber, modulepart } = router.query;
 
-  if (modulenumber === undefined) {
+  if (modulenumber === undefined || modulenumber === null) {
     // Return a loading state or handle the case when modulenumber is undefined.
     return <div>Loading...</div>;
   }
@@ -70,63 +66,36 @@ const Course1 = ({ filteredParts }) => {
 
   const modNum = modulenumber?.split("-")[1];
 
-  // console.log("modNum",modNum)
-  console.log(modulenumber);
 
   const [prevPg, nextPg, prevPgNumber, nextPgNumber] = curPageNumber({modulenumber});
-  // nextPg = nextPg;
+
+  const returnModuleColor=(moduleNumber)=>{
+    if(moduleNumber==="module-0"){
+      return "bg-[#bfbfff]";
+    } else if(moduleNumber==="module-1"){
+      return "bg-[#29232e]";
+    } else if(moduleNumber==="module-2"){
+      return "bg-[#CFB53B]";
+    } else if(moduleNumber==="module-3"){
+      return "bg-[#CD853F]";
+    } else if(moduleNumber==="module-4"){
+      return "bg-[#63a4da]";
+    }
+  }
+  
+
 
   return (
     <div className='my-20'>
       <NextSeo title={`Module ${modNum}`} />
-      <div className='flex sm:flex-col justify-between'>
-        <div>
-          <NextBreadcrumb
-            homeElement={"Home"}
-            separator={<span> | </span>}
-            activeClasses='text-amber-500'
-            containerClasses='flex py-5 bg-gradient-to-r from-purple-600 to-blue-600'
-            listClasses='hover:underline mx-2 font-bold'
-            capitalizeLinks
-            currentpath={currentpath}
-          />
-        </div>
-        <div className='flex flex-col-reverse md:flex-row'>
-          <div className='md:w-1/2 text-white'>
-            <div className='sm:mt-10 text-gray-400'>
-              Dive into the world of blockchain development with our Solidity
-              for Solana courses. Master the art of creating smart contracts on
-              the Solana network, opening the door to high-speed, secure, and
-              scalable decentralized applications. Join us on a journey of
-              learning that empowers you to shape the future of blockchain
-              technology
-            </div>
-            <div className='mt-10'>
-              <div>
-                {orderedLessions?.map((lession, idx) => (
-                  <div key={idx} id='breadcrumbs-one' className='mb-1'>
-                    <li>
-                      {/* {console.log("filename",lession)} */}
-                      <Link href={`/CourseContent${lession.slug}`}>
-                        {lession._raw.sourceFileName.replace(/\.mdx$/, "")}
-                      </Link>
-                    </li>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className='md:mb-16 md:w-1/2 lg:m-0'>
-            <div className='flex justify-center lg:justify-end'>
-              <Image
-                src={illustration}
-                alt='illustration'
-                className='fill-white'
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+     
+       <div className='flex sm:flex-col justify-between'>
+      <ColorModuleParts 
+      moduleColor= {returnModuleColor(modulenumber)}
+      currentpath= {currentpath}
+      orderedLessions={orderedLessions}
+      />
+       </div>
       <div className='mt-20 w-full flex justify-between text-white'>
         <div className='justify-start'>
           {prevPg && (
