@@ -75,43 +75,46 @@ const About = () => {
             <div className='text-white my-5 sm:mb-10'>
               <div className='text-5xl'>About</div>
               <div className='mt-10 text-secondaryGrey font-bodyFamily text-sm sm:text-base'>
-              <p>
-                We welcome you to Solidity for Solana. Here, we provide
-                educational resources and content for budding developers and
-                enthusiasts to learn blockchain technology, focusing mainly on
-                Solana development using Solidity, and focusing on those wanting
-                to transition from EVM to Solana. We aim to equip users with the
-                knowledge of developing dApps on Solana with ease while focusing
-                on simplicity, security and scalability.
-              </p>
-              <br />
-              <p>
-                we are bring here wealth of knowledge and resources for budding enthusiasts
-                willing to gain deep knowledge about the ins and outs of solidity on Solana.
-                We are dedicated to providing resources, education, and demos to
-                help users succeed in Solana development.
-              </p>
-              <br />
-              <p>
-                Our goal is to be the hub for users who want to learn about
-                blockchain. We aim to be the premier hub for educational content
-                on Solana and blockchain development. Our courses provide ample
-                knowledge of the deep technical concepts to know for development
-                on Solana. By utilising Solidity, we also provide a familiar
-                framework whose knowledge can be applied to other blockchains
-                too. Join us to learn more about blockchain and start your
-                journey of Solana development.
-              </p>
-              <br />
-              <p>
-                We're excited to have you along on this exciting journey.
-                Whether you're a seasoned developer, a blockchain enthusiast, or
-                someone new to the space, we're here to support your exploration
-                of Solidity on Solana. Together, we can unlock new
-                possibilities, create innovative solutions, and shape the future
-                of blockchain technology. Join us, and let's build the future of
-                decentralization together.
-              </p>
+                <p>
+                  We welcome you to Solidity for Solana. Here, we provide
+                  educational resources and content for budding developers and
+                  enthusiasts to learn blockchain technology, focusing mainly on
+                  Solana development using Solidity, and focusing on those
+                  wanting to transition from EVM to Solana. We aim to equip
+                  users with the knowledge of developing dApps on Solana with
+                  ease while focusing on simplicity, security and scalability.
+                </p>
+                <br />
+                <p>
+                  Our team is composed of experienced developers who themselves
+                  have years of experience in web development, blockchain
+                  development and everything in between. They bring in their
+                  wealth of knowledge and resources for budding enthusiasts
+                  willing to gain deep knowledge about the ins and outs of
+                  Solana. We are dedicated to providing resources, education,
+                  and tools to help users succeed in Solana development.
+                </p>
+                <br />
+                <p>
+                  Our goal is to be the hub for users who want to learn about
+                  blockchain. We aim to be the premier hub for educational
+                  content on Solana and EVM development. Our courses provide
+                  ample knowledge of the deep technical concepts to know for
+                  development on Solana. By utilising Solidity, we also provide
+                  a familiar framework whose knowledge can be applied to other
+                  blockchains too. Join us to learn more about blockchain and
+                  start your journey of Solana development.
+                </p>
+                <br />
+                <p>
+                  We're excited to have you along on this exciting journey.
+                  Whether you're a seasoned developer, a blockchain enthusiast,
+                  or someone new to the space, we're here to support your
+                  exploration of Solidity on Solana. Together, we can unlock new
+                  possibilities, create innovative solutions, and shape the
+                  future of blockchain technology. Join us, and let's build the
+                  future of decentralization together.
+                </p>
                 <br />
               </div>
             </div>
