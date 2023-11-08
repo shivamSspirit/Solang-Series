@@ -18,6 +18,8 @@ const Layout = ({ children }) => {
   const typeString = children.type.name;
   if (typeString !== "Error") fileName = typeString;
 
+  console.log(fileName);
+
   return (
     <>
       <div className='mt-12 mx-4 md:mx-10 lg:mx-20'>
