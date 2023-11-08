@@ -125,7 +125,7 @@ const returnModuleColor=(moduleNumber)=>{
  // console.log(mergedArray);
 
   const moduleCard = (
-    <div className="text-white cursor-pointer">
+    <div className='text-white'>
       <Box sx={{ flexGrow: 1 }}>
         <Grid
           container
@@ -135,29 +135,39 @@ const returnModuleColor=(moduleNumber)=>{
         >
           {mergedArray.map((announcement, index) => (
             <Grid item xs={3} sm={4} md={4} key={index}>
-              <div className={ `m-1 p-2 bg-[#858383] rounded-2xl border border-white ${returnModuleColor(announcement.module)}` }>
+              <div
+                className={`m-1 p-2 cursor-pointer bg-[#858383] rounded-2xl border border-white ${returnModuleColor(
+                  announcement.module
+                )}`}
+              >
                 <div>
                   <Image
                     src={announcement.img.src}
-                    alt="med"
+                    alt='med'
                     width={400}
                     height={220}
-                    className="w-full"
+                    className='w-full'
                   />
                 </div>
-                <div className="px-3 rounded-b-2xl">
-                  <div onClick={() => {
+                <div className='px-3 rounded-b-2xl'>
+                  <div
+                    onClick={() => {
                       router.push({
                         pathname: `/CourseContent/${announcement.module}/${announcement.module}-a`,
                       });
-                    }} className="text-2xl capitalize pt-2 pb-1 cursor-pointer">
+                    }}
+                    className='text-2xl capitalize pt-2 pb-1 cursor-pointer'
+                  >
                     {announcement.module}
                   </div>
-                  <div onClick={() => {
+                  <div
+                    onClick={() => {
                       router.push({
                         pathname: `/CourseContent/${announcement.module}/${announcement.module}-a`,
                       });
-                    }} className="text-white pb-2 cursor-text">
+                    }}
+                    className='text-white pb-2 cursor-pointer min-h-[52px] flex justify-start items-center'
+                  >
                     {announcement.desc}
                   </div>
                 </div>
