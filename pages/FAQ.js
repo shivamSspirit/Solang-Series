@@ -8,6 +8,7 @@ import Image from "next/image";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { NextSeo } from "next-seo";
+import Layout from "../shared/components/Layout";
 
 const accData = [
   {
@@ -41,7 +42,8 @@ const FAQ = () => {
   };
 
   return (
-    <div className="flex mb-16 flex-col justify-evenly">
+    <Layout showFooter={false}>
+  <div className="flex mb-16 flex-col justify-evenly">
       <NextSeo title='FAQ' />
       <div className='text-5xl my-20'>Frequently asked questions</div>
 
@@ -75,6 +77,8 @@ const FAQ = () => {
 
 
     </div>
+    </Layout>
+  
   );
 };
 
