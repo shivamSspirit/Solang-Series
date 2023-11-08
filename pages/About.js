@@ -84,19 +84,16 @@ const About = () => {
               </p>
               <br />
               <p>
-                Our team is composed of experienced developers who themselves
-                have years of experience in web development, blockchain
-                development and everything in between. They bring in their
-                wealth of knowledge and resources for budding enthusiasts
-                willing to gain deep knowledge about the ins and outs of Solana.
-                We are dedicated to providing resources, education, and tools to
+                we are bring here wealth of knowledge and resources for budding enthusiasts
+                willing to gain deep knowledge about the ins and outs of solidity on Solana.
+                We are dedicated to providing resources, education, and demos to
                 help users succeed in Solana development.
               </p>
               <br />
               <p>
                 Our goal is to be the hub for users who want to learn about
                 blockchain. We aim to be the premier hub for educational content
-                on Solana and EVM development. Our courses provide ample
+                on Solana and blockchain development. Our courses provide ample
                 knowledge of the deep technical concepts to know for development
                 on Solana. By utilising Solidity, we also provide a familiar
                 framework whose knowledge can be applied to other blockchains
