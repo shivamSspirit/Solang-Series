@@ -86,10 +86,7 @@ const About = () => {
                 </p>
                 <br />
                 <p>
-                  Our team is composed of experienced developers who themselves
-                  have years of experience in web development, blockchain
-                  development and everything in between. They bring in their
-                  wealth of knowledge and resources for budding enthusiasts
+                  we are brining wealth of knowledge and resources for budding enthusiasts
                   willing to gain deep knowledge about the ins and outs of
                   Solana. We are dedicated to providing resources, education,
                   and tools to help users succeed in Solana development.
