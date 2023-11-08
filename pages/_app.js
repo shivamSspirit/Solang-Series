@@ -1,8 +1,6 @@
 import Head from "next/head";
 import "../styles/globals.css";
 import Layout from "../components/Layout";
-// import "../dist/output.css";
-import { NextSeo } from "next-seo";
 
 export default function App({ Component, pageProps }) {
   return (

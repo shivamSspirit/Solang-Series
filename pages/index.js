@@ -1,9 +1,5 @@
 import Head from "next/head";
-import AppBar from "../shared/AppBar";
 import LandingSection from "../components/LandingSection";
-import { allDocuments } from "../.contentlayer/generated";
-// import { getModules } from "./utils/module-lession";
-import { useEffect } from "react";
 import { getModules } from "../utils/module-lession";
 
 export async function getStaticProps() {
@@ -20,12 +16,6 @@ export async function getStaticProps() {
 }
 
 export default function Home({ allModules }) {
-  // console.log("allModules",allModules)
-
-  // useEffect(()=>{
-  //   console.log("allllmidmsd",allModules)
-  // },[])
-
   return (
     <>
       <Head>

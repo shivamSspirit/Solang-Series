@@ -1,7 +1,5 @@
-import React, { PropsWithChildren, useMemo, useState } from "react";
+import React from "react";
 import FooterComp from "../shared/Footer";
-import { useRouter } from "next/router";
-import { usePathname } from "next/navigation";
 import NavBar from "../shared/Navbar";
 import { NextSeo } from "next-seo";
 
@@ -9,12 +7,6 @@ let coursePage = "";
 let fileName = "";
 
 const Layout = ({ children }) => {
-  const paths = usePathname();
-  const pathNames = paths?.split("/");
-  if (pathNames?.[1] !== "404") {
-    coursePage = pathNames?.[2];
-  }
-
   const typeString = children.type.name;
   if (typeString !== "Error") fileName = typeString;
 
