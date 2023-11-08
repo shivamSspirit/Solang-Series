@@ -24,77 +24,68 @@ This lesson teaches you to build and deploy your CPI Flip program to the Solana 
 
 **Building the Program:** Before building the program, navigate to the `anchor.toml` file and switch the cluster to "devnet". Open the terminal in the root directory of your project and enter the following command:
 
-```
+```bash
 anchor build
-
 ```
 
 This command will generate a target folder in the project root and generate idl and types of our Solana program to interact with the client side using rpc methods. Now, open a new terminal and check our configuration by entering the command shown:
 
-```
+```bash
 solana config get
-
 ```
 
 After execution, you should get an output as shown below:
 
-```
+```bash
 Config File: ~/.config/solana/cli/config.yml
 RPC URL: https://api.devnet.solana.com
 WebSocket URL: wss://api.devnet.solana.com/ (computed)
 Keypair Path: ~/.config/solana/id.json
 Commitment: confirmed
-
 ```
 
 "Devnet" is the RPC URL, and my wallet's default location is at "keypairpath." Make sure you generate a wallet keypair for deploying the program. You can set devnet for cluster by executing the command shown below:
 
-```
+```bash
 solana config set --url https://api.devnet.solana.com
-
 ```
 
 Enter this command to generate a new keypair:
 
-```
+```bash
 solana-keygen new
-
 ```
 
 Now you have a wallet. You can check the address(pubkey) and balance of this account using these commands:
 
-```
+```bash
 solana address
 solana balance
-
 ```
 
 If you have some devnet sol then it is okay for deployment, if it is not then airdrop some devnet tokens by entering this command:
 
-```
+```bash
 solana airdrop 4
-
 ```
 
 ## Deploying
 
 Deploying the program by opening a new terminal and starting network cluster by entering the command shown:
 
-```
+```bash
 solana-test-validator
-
 ```
 
 This will start a devnet cluster in the system. Next, deploy the program by running the command shown:
 
-```
+```bash
 anchor deploy
-
 ```
 
 The output should be as shown below:
 
-```
+```bash
 Deploying cluster: https://api.devnet.solana.com
 Upgrade authority: ~/.config/solana/id.json
 Deploying program "hand"...
@@ -106,12 +97,11 @@ Program path: ~/composability/cpi/target/deploy/lever.so...
 Program Id: J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh
 
 Deploy success
-
 ```
 
 Now, both programs are on chain (devnet). We can get the program id of our deployed program on the chain. Copy this program id and change it in our program (solidity file) as well as anchor.toml file. After pasting the new program to both files in **anchor.toml,** write like this:
 
-```
+```bash
 [features]
 seeds = false
 skip-lint = false
@@ -129,34 +119,30 @@ wallet = "~/.config/solana/id.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
-
 ```
 
 Build the program again with the command:
 
-```
+```bash
 anchor build
-
 ```
 
 Before testing check dependencies and run:
 
-```
+```bash
 yarn install
 npm install
-
 ```
 
 Now, run tests by using this command:
 
-```
+```bash
 anchor test
-
 ```
 
 After this, you should see something like this:
 
-```
+```bash
 cross-program-invocation
 Your transaction signature 5LixPfBtppvK6CGUgxKaY4obZfksEGoLXaKJMcvKgQVqcAir91oc1NHc8SCJ9MTbt4U9jvBHgQJPEQxwgkbqSXQv
 State: true
@@ -170,7 +156,6 @@ State: true
     ✔ Pull it again! (694ms)
 
   3 passing (4s)
-
 ```
 
 And that's it! We've successfully made a CPI call to switch the power status from "on" to "off" and back to "on." This demonstrates how Cross-Program Invocation (CPI) functions in Solang to combine Solana programs.

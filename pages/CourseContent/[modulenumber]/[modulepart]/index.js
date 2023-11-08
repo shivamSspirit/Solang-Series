@@ -45,13 +45,13 @@ export async function getStaticPaths() {
 }
 
 const Course1 = ({ filteredParts }) => {
-    // console.log("allDocuments",allDocuments)
+  // console.log("allDocuments",allDocuments)
   // console.log("Filtered parts",filteredParts)
 
-  const orderedLessions  = filteredParts?.sort((a, b) => a.orderNumber - b.orderNumber)
-  .map((item, index) => {
-    return item; // or transform 'item' if needed
-  });
+  const orderedLessions = filteredParts?.sort((a, b) => a.orderNumber - b.orderNumber)
+    .map((item, index) => {
+      return item; // or transform 'item' if needed
+    });
 
   // console.log("fockiiii",orderedLessions)
   const router = useRouter();
@@ -68,22 +68,22 @@ const Course1 = ({ filteredParts }) => {
   const modNum = modulenumber?.split("-")[1];
 
 
-  const [prevPg, nextPg, prevPgNumber, nextPgNumber] = curPageNumber({modulenumber});
+  const [prevPg, nextPg, prevPgNumber, nextPgNumber] = curPageNumber({ modulenumber });
 
-  const returnModuleColor=(moduleNumber)=>{
-    if(moduleNumber==="module-0"){
+  const returnModuleColor = (moduleNumber) => {
+    if (moduleNumber === "module-0") {
       return "bg-[#bfbfff]";
-    } else if(moduleNumber==="module-1"){
+    } else if (moduleNumber === "module-1") {
       return "bg-[#A3B86C]";
-    } else if(moduleNumber==="module-2"){
+    } else if (moduleNumber === "module-2") {
       return "bg-[#CFB53B]";
-    } else if(moduleNumber==="module-3"){
+    } else if (moduleNumber === "module-3") {
       return "bg-[#CD853F]";
-    } else if(moduleNumber==="module-4"){
+    } else if (moduleNumber === "module-4") {
       return "bg-[#63a4da]";
     }
   }
-  
+
   return (
     <Layout>
       <div className='my-20'>
@@ -120,3 +120,7 @@ const Course1 = ({ filteredParts }) => {
 };
 
 export default Course1;
+
+
+
+

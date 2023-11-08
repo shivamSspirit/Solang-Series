@@ -32,7 +32,7 @@ But here's the twist - this isn't your typical wallet-to-wallet transfer. It sta
 
 You can see this analogy in below image
 
-!https://res.cloudinary.com/practicaldev/image/fetch/s--cVtzhC33--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/fylzhbuk2b8ctccqui94.jpeg
+![solana token transfer](/moduleimages/all_token.jpeg)
 
 We will now proceed to interact with the Associated Token Account.
 
@@ -48,7 +48,7 @@ These specialized accounts are called Associated Token Accounts (ATAs).
 
 This program establishes a standard and provides a mechanism to map a user's wallet address with their associated token accounts.
 
-!https://res.cloudinary.com/practicaldev/image/fetch/s--tdB17rA0--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ywu4nudz726nmibpt985.jpeg
+![ata to pda](/moduleimages/ataTopda.jpeg)
 
 In this image, we're creating two linked token accounts for the Gold Token. We do this by using The Gold Token Mint and the owners' addresses. This process is essentially about generating a Program Derived Address (PDA) from the user's wallet and the Gold Token Mint. We will learn about PDA in next article
 
@@ -58,21 +58,20 @@ Each Associated Token Account (ATA) is also a Program Derived Address (PDA) and 
 
 We can create associate token account in typescript  using `getOrCreateAssociatedTokenAccount` method provided by spl-token the module.
 
-```tsx
+```ts
 const tokenAccount = await getOrCreateAssociatedTokenAccount(
     connection,// web3 connection
     wallet.payer, // payer for the account
     mintKeypair.publicKey, // mint for the gold token
     wallet.publicKey // owner(shivam)
   );
-
 ```
 
 The getOrCreateAssociatedTokenAccount() function is used to get the Token Account associated with a given address or create it if it doesn't exist and return a public key for gold token account.
 
 to hold some gold token we need to change owner and create brand new ATA as shown below:
 
-```jsx
+```ts
 const recipient = anchor.web3.Keypair.generate(); // Random key generator
 
 const recipientTokenAccount = await getOrCreateAssociatedTokenAccount(

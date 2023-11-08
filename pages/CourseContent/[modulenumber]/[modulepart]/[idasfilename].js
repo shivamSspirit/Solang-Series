@@ -157,7 +157,7 @@ const GeneralInfo = ({
                 <div
                   className={`bg-transparentBg border-[5px] ${
                     returnLessionColors(lession?.moduleNumber).border_color
-                  } px-3 py-2 rounded-[2.5rem] mr-6 h-16 w-16`}
+                  } px-3 py-2 rounded-[2.5rem] mr-1 md:mr-6 lg:mr-6 xld:mr-6 h-16 w-16`}
                 >
                   <div
                     className={`${
@@ -167,7 +167,7 @@ const GeneralInfo = ({
                     {lession?.modulePart[lession?.modulePart.length - 1] ?? "a"}
                   </div>
                 </div>
-                <div className='text-4xl'>{lession?.title}</div>
+                <div className='text-2xl md:text-3xl lg:text-4xl xl:text-4xl ml-5 md:ml-0 lg:ml-0 xl:ml-0'>{lession?.title}</div>
               </div>
             </div>
 

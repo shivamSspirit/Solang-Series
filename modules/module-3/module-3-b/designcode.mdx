@@ -25,23 +25,20 @@ We are utilizing the same system setup of our project dependency from previous a
 
 We're kicking off by using the project initialization command shown below:
 
-```
+```bash
 anchor init cpiinvoke --solidity
-
 ```
 
 After that, navigate to the project directory:
 
-```
+```bash
 cd cpiinvoke
-
 ```
 
 Run the following command to open VSCode.
 
-```
+```bash
 code .
-
 ```
 
 We already discussed all project files in the previous module.
@@ -87,8 +84,6 @@ contract lever {
     function get() public view returns (bool) {
         return isOn;
     }
-}
-
 ```
 
 Let's understand the code:
@@ -100,7 +95,6 @@ Now, we'll begin by defining the switch state.
 ```solidity
  // Switch state
     bool private isOn = true;
-
 ```
 
 Here, bool is the data type, private is used to set access limits, and isOn is the name of a variable with the value true. Next, we create a function called switchPower.
@@ -120,7 +114,6 @@ function switchPower(string name) public {
             print("The power is now off!");
         }
     }
-
 ```
 
 This function takes a parameter called name, which is of string type, and it's visible to the public. Inside the function, it flips the value of isOn – if it was true, now it becomes false, and vice versa. After that, it prints the name of the person who triggered the switch.The function uses a basic programming concept, a conditional statement with an if-else block, to check if the power is on (true) or off (false).
@@ -132,7 +125,6 @@ This function takes a parameter called name, which is of string type, and it's v
         } else {
             print("The power is now off!");
         }
-
 ```
 
 We expand our contract by adding another function. This function's role is to fetch the present state of the switch. It does this by having a view visibility, allowing anyone to read from it.
@@ -169,9 +161,7 @@ contract hand {
     constructor() {}
 
     // "Pull the lever" by calling the switchPower instruction on the lever program via a Cross Program Invocation.
-
 }
-
 ```
 
 Let's break this down:
@@ -181,12 +171,8 @@ We start by importing the Solana library. Then, we build an interface for our ca
 ***Interface***
 
 > When you flip a light switch, the light goes on.
-> 
-> 
 > You do not care how the switch turns the light on.
-> 
 > You just care that “it does turn the light on”.
-> 
 
 Next, we're required to perform a Cross-Program Invocation (CPI) to the lever program, live at address *J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh.* This process leads us to create the interface for the callee program.
 
@@ -194,7 +180,6 @@ Next, we're required to perform a Cross-Program Invocation (CPI) to the lever pr
 interface leverInterface {
     function switchPower(string name) external;
 }
-
 ```
 
 In this step, we're crafting an interface for the lever program. We're including the switchPower function's entry point into this interface as an external function.
@@ -220,7 +205,6 @@ For this copy and paste pullLever function below constructor in hand.sol
         // Invoke the switchPower instruction on the lever program.
         leverProgram.switchPower{accounts: metas}(instructionData);
     }
-
 ```
 
 The pullLever function handles receiving arguments from the caller as an instruction. It then sets the instruction data and triggers the lever by invoking the switchPower instruction on the lever program through a **Cross-Program Invocation** (CPI Invoke).
@@ -235,7 +219,6 @@ This is accountmeta information **address `pubkey`.**The address (or public key
 AccountMeta[1] metas = [
 AccountMeta({pubkey: dataAccount, is_writable: true, is_signer: false})
 ];
-
 ```
 
 NOTE-:
@@ -246,7 +229,6 @@ Here's an example:
 
 ```solidity
 leverInterface constant leverProgram = leverInterface(address'J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh');
-
 ```
 
 This code allows you to perform a CPI to the lever program residing at address `J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh`.
@@ -255,7 +237,6 @@ Now, when you have:
 
 ```solidity
 leverProgram.switchPower{accounts: metas}(instructionData);
-
 ```
 
 A CPI is constructed automatically, and the compiler generates an `invoke()` for this operation. This simplifies the process of working with CPI when using Solang.

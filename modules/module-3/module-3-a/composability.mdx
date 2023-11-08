@@ -108,7 +108,7 @@ To make a CPI, you must specify and construct an instruction on the program bein
 
 To make this work, the Instruction needs three things: the program ID of the program you're calling, information(data) that the program can understand, and a list of "AccountInfos." These AccountInfos are like the accounts the program you're calling will use see diagram below.
 
-!https://res.cloudinary.com/practicaldev/image/fetch/s--xvVbwsNQ--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/m4wk78dpsrkw485afpks.jpeg
+![cpi instruction](/moduleimages/cpi.jpeg)
 
 Here's the neat part: the calling program receives these AccountInfos from the system at the beginning. This means that any account the program you're calling requires must also be needed by the calling program. It's like a chain reaction – one thing leads to another.
 

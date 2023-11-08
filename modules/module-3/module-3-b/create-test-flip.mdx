@@ -131,7 +131,6 @@ describe("cross-program-invocation", () => {
     console.log("State:", val);
   });
 });
-
 ```
 
 Here, we begin by importing the necessary **dependencies** and **types** for both of our programs. This is crucial for managing tests that involve flipping the switch state, where Program A calls the "**switchPower**" function through cross-program invocation (CPI).
@@ -140,9 +139,7 @@ Then, we describe the test for the Cross-Program Invocation (CPI).
 
 ```tsx
 describe("cross-program-invocation", () => {
-
 }
-
 ```
 
 In this part, we'll talk about and test how the "CPI" program works. We'll write different test cases, make assertions, and set expectations to make sure the program behaves correctly. For this, you need to first set the Requirements for the test:
@@ -160,7 +157,6 @@ In this part, we'll talk about and test how the "CPI" program works. We'll write
   // The lever program and hand program
   const leverProgram = anchor.workspace.Lever as Program<Lever>;
   const handProgram = anchor.workspace.Hand as Program<Hand>;
-
 ```
 
 Here we configure and start the setup for testing our CPI Solana program.
@@ -189,7 +185,6 @@ it("Initialize the lever!", async () => {
 
     console.log("State:", val);
   });
-
 ```
 
 Here, we start by initializing the test and creating a transaction to establish a data account for the lever program. This is done below:
@@ -201,7 +196,6 @@ const tx = await leverProgram.methods
       .signers([dataAccountLever])
       .rpc();
     console.log("Your transaction signature", tx);
-
 ```
 
 Afterwards, we retrieve the current state value using this approach.
@@ -212,9 +206,7 @@ Afterwards, we retrieve the current state value using this approach.
       .get()
       .accounts({ dataAccount: dataAccountLever.publicKey })
       .view();
-
     console.log("State:", val);
-
 ```
 
 Here, we get the state value by calling the "get()" method from the lever program.
@@ -261,7 +253,6 @@ it("Pull the lever!", async () => {
 
     console.log("State:", val);
   });
-
 ```
 
 Next, we retrieve the current state value using the lever program's "get" method. Then, we perform another pull, this time with different arguments, and fetch the updated state value. And that’s it our tests are done.
