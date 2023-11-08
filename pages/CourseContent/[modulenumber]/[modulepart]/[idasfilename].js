@@ -6,7 +6,7 @@ import changePartFunction from "../../../../shared/changePartFunction";
 import NewSideBar from "../../../../components/NewSideBar";
 import { NextSeo } from "next-seo";
 import ColorModuleParts from "../../../../components/ColorModuleParts";
-import SideBar from "../../../../components/Sidebar";
+import Layout from "../../../../components/Layout";
 
 export async function getStaticPaths() {
   // Get a list of valid post paths.
@@ -86,11 +86,8 @@ const GeneralInfo = ({
 }) => {
   const MDXContent = useMDXComponent(lession.body.code);
   const router = useRouter();
-  
 
   // console.log("filtered Parts:",filteredParts)
-
-
 
   const orderedLessions = filteredParts
     ?.sort((a, b) => a.orderNumber - b.orderNumber)
@@ -107,13 +104,6 @@ const GeneralInfo = ({
     totalParts,
   });
 
- 
- const regXHeader = /\n(?<flag>#{1,6})\s+(?<content>.+)/g;
- const fetched  =  Array.from(lession.body.raw.matchAll(regXHeader));
-
- 
- console.log("fetched",fetched)
-
   const returnModuleColor = (moduleNumber) => {
     if (moduleNumber === "module-0") {
       return "bg-[#bfbfff]";
@@ -127,8 +117,6 @@ const GeneralInfo = ({
       return "bg-[#63a4da]";
     }
   };
-
-  
 
   const returnLessionColors = (lessionNumber) => {
     if (lessionNumber === "module-0") {
@@ -144,66 +132,92 @@ const GeneralInfo = ({
     }
   };
 
-  console.log("lessions",lession)
-
   return (
-    <div className="my-12">
-      <NextSeo titleTemplate="%s | Solidity On Solana" />
+    <Layout>
+      <div className='my-12'>
+        <NextSeo titleTemplate='%s | Solidity On Solana' />
 
-      <div className="flex sm:flex-col justify-between">
-        <ColorModuleParts
-          moduleColor={returnModuleColor(lession?.moduleNumber)}
-          currentpath={currentpath}
-          orderedLessions={orderedLessions}
-          activeFileName={idasfilename}
-        />
-      </div>
-
-      <div className="mt-20 sm:flex w-full gap-12">
-        <div className="hidden md:flex w-1/4">
-          <SideBar headings={lession.headings} />
+        <div className='flex sm:flex-col justify-between'>
+          <ColorModuleParts
+            moduleColor={returnModuleColor(lession?.moduleNumber)}
+            currentpath={currentpath}
+            orderedLessions={orderedLessions}
+            activeFileName={idasfilename}
+          />
         </div>
 
-        <div className="w-full md:w-3/4 lg:w-3/4 xl:w-3/4">
-          <div className="flex flex-col text-white">
-            <div className="flex justify-content items-center text-2xl mb-6">
-              <div className={`bg-transparentBg border-[5px] ${returnLessionColors(lession?.moduleNumber).border_color} px-3 py-2 rounded-[2.5rem] mr-6 h-16 w-16`}>
-                <div className={`${returnLessionColors(lession?.moduleNumber).text_color} text-3xl text-center font-bold`}>
-                {lession?.modulePart[lession?.modulePart.length-1]??"a"}
+        <div className='mt-20 sm:flex w-full gap-12'>
+          <div className='hidden md:flex w-1/4'>
+            <NewSideBar headings={lession.headings} />
+          </div>
+
+          <div className='w-full md:w-3/4 lg:w-3/4 xl:w-3/4'>
+            <div className='flex flex-col text-white'>
+              <div className='flex justify-content items-center text-2xl mb-6'>
+                <div
+                  className={`bg-transparentBg border-[5px] ${
+                    returnLessionColors(lession?.moduleNumber).border_color
+                  } px-3 py-2 rounded-[2.5rem] mr-6 h-16 w-16`}
+                >
+                  <div
+                    className={`${
+                      returnLessionColors(lession?.moduleNumber).text_color
+                    } text-3xl text-center font-bold`}
+                  >
+                    {lession?.modulePart[lession?.modulePart.length - 1] ?? "a"}
+                  </div>
                 </div>
+                <div className='text-4xl'>{lession?.title}</div>
               </div>
-              <div className="text-4xl">{lession?.title}</div>
+            </div>
+
+            <div
+              className={`border-collapse w-full ${
+                returnLessionColors(lession?.moduleNumber).textcolor
+              } aspect-[4/3] p-4 font-[Inter,sans-serif] subpixel-antialiased tracking-wide font-medium leading-relaxed list-outside text-left`}
+            >
+              <div
+                className={`prose-table:border-collapse prose-a:decoration-wavy ${
+                  returnLessionColors(lession?.moduleNumber).imgBorderColor
+                } ${
+                  returnLessionColors(lession?.moduleNumber).link_hover
+                } prose-p:text-left prose-p:leading-relaxed prose-p:subpixel-antialiased prose-p:w-full text-white prose max-w-none prose-p:text-base/7 md:ml-12 lg:ml-12 xl:ml-12 prose-headings:text-white prose-img:border-8  ${
+                  returnLessionColors(lession?.moduleNumber).link_color
+                } hover:prose-a:bg-white hover:prose-a:text-black prose-a:cursor-pointer  ${
+                  returnLessionColors(lession?.moduleNumber).headingsColor
+                }  ${
+                  returnLessionColors(lession?.moduleNumber).codeColor
+                } prose-code:text-center ${
+                  returnLessionColors(lession?.moduleNumber).blockquote
+                } `}
+              >
+                <MDXContent />
+              </div>
             </div>
           </div>
+        </div>
 
-          <div className={`border-collapse w-full ${returnLessionColors(lession?.moduleNumber).textcolor} aspect-[4/3] p-4 font-[Inter,sans-serif] subpixel-antialiased tracking-wide font-medium leading-relaxed list-outside text-left`}>
-            <div className={`prose-table:border-collapse prose-a:decoration-wavy ${returnLessionColors(lession?.moduleNumber).imgBorderColor} ${returnLessionColors(lession?.moduleNumber).link_hover} prose-p:text-left prose-p:leading-relaxed prose-p:subpixel-antialiased prose-p:w-full text-white prose max-w-none prose-p:text-base/7 md:ml-12 lg:ml-12 xl:ml-12 prose-headings:text-white prose-img:border-8  ${returnLessionColors(lession?.moduleNumber).link_color} hover:prose-a:bg-white hover:prose-a:text-black prose-a:cursor-pointer  ${returnLessionColors(lession?.moduleNumber).headingsColor}  ${returnLessionColors(lession?.moduleNumber).codeColor} prose-code:text-center ${returnLessionColors(lession?.moduleNumber).blockquote} `}>
-              <MDXContent />
-            </div>
+        <div className='mt-20 w-full flex justify-between text-white'>
+          <div className=''>
+            {prevPg && (
+              <a href={prevPg} className='flex flex-col'>
+                <span>Part {prevPgText}</span>
+                <span>Previous Part</span>
+              </a>
+            )}
+          </div>
+
+          <div className=''>
+            {nextPg && (
+              <a href={nextPg} className='flex flex-col justify-end'>
+                <span>Part {nextPgText}</span>
+                <span>Next Part</span>
+              </a>
+            )}
           </div>
         </div>
       </div>
-
-      <div className="mt-20 w-full flex justify-between text-white">
-        <div className="">
-          {prevPg && (
-            <a href={prevPg} className="flex flex-col">
-              <span>Part {prevPgText}</span>
-              <span>Previous Part</span>
-            </a>
-          )}
-        </div>
-
-        <div className="">
-          {nextPg && (
-            <a href={nextPg} className="flex flex-col justify-end">
-              <span>Part {nextPgText}</span>
-              <span>Next Part</span>
-            </a>
-          )}
-        </div>
-      </div>
-    </div>
+    </Layout>
   );
 };
 
