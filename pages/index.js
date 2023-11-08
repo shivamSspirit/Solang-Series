@@ -1,6 +1,6 @@
 import Head from "next/head";
 import AppBar from "../shared/AppBar";
-import LandingSection from "../shared/components/LandingSection";
+import LandingSection from "../components/LandingSection";
 import { allDocuments } from "../.contentlayer/generated";
 // import { getModules } from "./utils/module-lession";
 import { useEffect } from "react";

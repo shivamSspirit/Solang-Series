@@ -1,6 +1,6 @@
 import Head from "next/head";
 import "../styles/globals.css";
-import Layout from "../shared/components/Layout";
+import Layout from "../components/Layout";
 // import "../dist/output.css";
 import { NextSeo } from "next-seo";
 

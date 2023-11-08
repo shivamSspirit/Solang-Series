@@ -1,8 +1,8 @@
 import React, { PropsWithChildren, useMemo, useState } from "react";
-import FooterComp from "../Footer";
+import FooterComp from "../shared/Footer";
 import { useRouter } from "next/router";
 import { usePathname } from "next/navigation";
-import NavBar from "../Navbar";
+import NavBar from "../shared/Navbar";
 import { NextSeo } from "next-seo";
 
 let coursePage = "";
