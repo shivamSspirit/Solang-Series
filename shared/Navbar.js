@@ -41,7 +41,7 @@ function NavBar() {
               <div>
                 <div className='w-14 sm:hidden'>
                   <Link href={"/"}>
-                    <Image src={MobileSiteLogo} alt='logo' />
+                    <Image src={MobileSiteLogo} alt='logo' width={40} />
                   </Link>
                 </div>
                 <div className='hidden sm:flex'>

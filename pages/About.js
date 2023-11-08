@@ -13,6 +13,7 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { NextSeo } from "next-seo";
+import Layout from "../components/Layout";
 
 const About = () => {
   const [svgHoverColor, setSvgHoverColor] = useState("white");
@@ -66,13 +67,14 @@ const About = () => {
   );
 
   return (
-    <div className='mt-5 sm:px-12'>
-      <NextSeo title='About it' />
-      <div>
-        <div className='flex flex-col-reverse justify-between'>
-          <div className='text-white my-5 sm:mb-10'>
-            <div className='text-5xl'>About</div>
-            <div className='mt-10 text-secondaryGrey font-bodyFamily text-sm sm:text-base'>
+    <Layout>
+      <div className='mt-5 sm:px-12'>
+        <NextSeo title='About it' />
+        <div>
+          <div className='flex flex-col-reverse justify-between'>
+            <div className='text-white my-5 sm:mb-10'>
+              <div className='text-5xl'>About</div>
+              <div className='mt-10 text-secondaryGrey font-bodyFamily text-sm sm:text-base'>
               <p>
                 We welcome you to Solidity for Solana. Here, we provide
                 educational resources and content for budding developers and
@@ -110,21 +112,22 @@ const About = () => {
                 of blockchain technology. Join us, and let's build the future of
                 decentralization together.
               </p>
-              <br />
+                <br />
+              </div>
             </div>
-          </div>
-          <div className='mb-16 lg:m-0'>
-            <div className='flex justify-center'>
-              <Image
-                src={illustration}
-                alt='illustration'
-                className='fill-white'
-              />
+            <div className='mb-16 lg:m-0'>
+              <div className='flex justify-center'>
+                <Image
+                  src={illustration}
+                  alt='illustration'
+                  className='fill-white'
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
