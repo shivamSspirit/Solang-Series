@@ -73,7 +73,7 @@ const Course1 = ({ filteredParts }) => {
     if(moduleNumber==="module-0"){
       return "bg-[#bfbfff]";
     } else if(moduleNumber==="module-1"){
-      return "bg-[#29232e]";
+      return "bg-[#A3B86C]";
     } else if(moduleNumber==="module-2"){
       return "bg-[#CFB53B]";
     } else if(moduleNumber==="module-3"){

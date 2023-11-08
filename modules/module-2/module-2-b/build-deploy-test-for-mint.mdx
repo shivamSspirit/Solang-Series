@@ -49,14 +49,12 @@ For Devnet, please note that it uses an RPC URL, and your wallet's default locat
 
 ```
 solana config set --url https://api.devnet.solana.com
-
 ```
 
 By entering the following command you can generate a new keypair:
 
 ```
 solana-keygen new
-
 ```
 
 Now you have a wallet. You can check the address (pubkey) and balance of this account using these commands:
@@ -76,7 +74,6 @@ Once you have recieved the devnet sol tokens in your wallets, you can move on to
 
 ```
 solana-test-validator
-
 ```
 
 This will start a devnet cluster in the system. Next, deploy the program by entering the command:
@@ -94,7 +91,6 @@ Deploying program "spl_token_minter"...
 Program path: ~/Desktop/demo/spl-token-minter/target/deploy/spl_token_minter.so...
 Program Id: 3iCbv94ivHb4of8NEeikMbk2kckLVSDmUEprpQZ1cBUw
 Deploy success
-
 ```
 
 Our program is now deployed on the **Devnet** cluster. It possesses program upgrade authority, which is granted to our **wallet**. To proceed, we need to obtain the **program ID** of our deployed program on-chain.
@@ -103,29 +99,27 @@ Once we have the program ID, update it in our program (solidity file) as well as
 
 Build the program again with the command:
 
-```jsx
+```bash
 anchor build
-
 ```
 
 You are now ready for testing.
 
 Before testing, check whether testing dependencies are installed. If not, then run the following command in the terminal:
 
-```
+```bash
 yarn install
-
 ```
 
 After installing the required testing dependencies, we can test our Solidity program by running the following command in the terminal:
 
-```
+```bash
 anchor test
 ```
 
 You should get an output as shown below:
 
-```
+```bash
 spl-token-minter
 Your transaction signature 5KzehPTbYCuUtwQzbigvTnwnkiuNcWuXPtuWSMGMVc914xcV8ddFLV3BqEr3hMsbS9ga6SJjzEDcjRMZhGi6KgvJ
 ✔ Is initialized! (4616ms)
@@ -135,27 +129,25 @@ Your transaction signature 4qdXPTQArZTyFq5mCtdyJVx2Hu1NxeYnY1wwGCVpHy91SZjdkngvR
 minted token amounts **156**
 ✔ Mint some tokens to your wallet! (6090ms)
 3 passing (12s)
-
 ```
 
 If all tests are passed, we should be able to see minted tokens in Solana Explorer. For this, get the workspace program wallet address running this command in the terminal:
 
-```
+```bash
 solana address
-
 ```
 
-Now navigate to this link: https://explorer.solana.com/?cluster=devnet. Copy and paste your wallet address in the search explorer. The result should be as shown below:
+Now navigate to this link: [Solana_Explorer](https://explorer.solana.com/?cluster=devnet). Copy and paste your wallet address in the search explorer. The result should be as shown below:
 
-!https://res.cloudinary.com/practicaldev/image/fetch/s--YELKB4Oa--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/buuie3dbo3tkrh9406cr.jpeg
+![wallet overviews](/moduleimages/w-overview.jpeg)
 
 The Solana explorer provides us with important information about the deployed program and the wallet like balance transactions and token holdings. To see our minted tokens, click on Tokens, then the result should be as shown below:
 
-!https://res.cloudinary.com/practicaldev/image/fetch/s--hJI6Keww--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6l3spdtdb7getrtzxbb3.jpeg
+![token listing](/moduleimages/token_list.jpeg)
 
 Search and find out the minted tokens with the title Solana Pro that have ***159 GM*** supply. Clicking on it will a result as shown below:
 
-!https://res.cloudinary.com/practicaldev/image/fetch/s--4tgV-zJS--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/7fty68gardii3m3t21ll.jpeg
+![minted tokens listing](/moduleimages/g_token.jpeg)
 
 All the information related to minted tokens is here. 
 

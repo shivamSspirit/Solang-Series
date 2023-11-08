@@ -55,7 +55,7 @@ Function can have any number of arguments. Function arguments may have names; if
 
 The return values can have names as illustrated in the function get_initial_bound(). When all the return values have names, the return statement is not necessary at the end of the function. Instead, the values of the named return variables at the end of the function are automatically returned. However, it is still possible to explicitly return some values using the return statement.
 
-# F**unction Visibility**
+# Function Visibility
 
 Solidity functions have a visibility specifier that restricts the scope in which they can be called. Functions can be declared public, private, internal or external with the following definitions:
 
@@ -68,18 +68,17 @@ Both public and external functions can be called using the syntax `this.func()`
 
 If a function is defined outside a contract, it cannot have a visibility specifier (e.g. `public`).
 
-# **Arguments Passing and Return Values**
+# Arguments Passing and Return Values
 
 Function arguments can be passed either by position or by name. When they are called by name, arguments can be in any order. However, functions with anonymous arguments (arguments without name) cannot be called this way.
 
 ```solidity
 contract foo {
     function bar(uint32 x, bool y) public returns (uint32) {
-        **if** (y) {
-            **return** 2;
+        if (y) {
+            return 2;
         }
-
-        **return** 3;
+        return 3;
     }
 
     function test() public {
@@ -129,7 +128,7 @@ contract bar {
 }
 ```
 
-# **State Mutability**
+# State Mutability
 
 Functions in a contract can either read or write data in the contract storage. Functions that do not write data, can be executed off-chain, which is faster and does not require write access or any balance. There are two types of functions that do not write data: view and pure. Pure functions do not read data from the storage, while view functions do.
 
@@ -137,7 +136,7 @@ On the other hand, functions that write data come in two types: payable and non-
 
 Lastly, the constructor can be marked as payable, which means that a value can be passed along with the constructor.
 
-# **Function Overloading**
+# Function Overloading
 
 Multiple functions with the same name can be declared, as long as the arguments are different in at least one of two ways:
 
@@ -153,18 +152,18 @@ contract shape {
     int64 bar;
 
     function abs(int256 val) public returns (int256) {
-        **if** (val >= 0) {
-            **return** val;
-        } **else** {
-            **return** -val;
+        if (val >= 0) {
+            return val;
+        } else {
+            return -val;
         }
     }
 
     function abs(int64 val) public returns (int64) {
-        **if** (val >= 0) {
-            **return** val;
-        } **else** {
-            **return** -val;
+        if (val >= 0) {
+            return val;
+        } else {
+            return -val;
         }
     }
 

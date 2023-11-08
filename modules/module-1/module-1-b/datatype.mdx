@@ -16,7 +16,7 @@ modulePartDescription: In this part of the module, you will delve into the basic
 
 ## tl;dr
 
-Solidity supports various primitive types, including bool, integers (uint and int of different widths), fixed-length byte arrays, address types, and function types. The address type differs between EVM and Solana. Fixed-length arrays can be created with a constant length.
+Solidity supports various primitive types, including bool, integers (**uint and int of different widths**), fixed-length byte arrays, address types, and function types. The address type differs between EVM and Solana. Fixed-length arrays can be created with a constant length.
 
 # Overview
 
@@ -24,18 +24,20 @@ The following primitive types are supported.
 
 1. **Boolean Type (bool)** : This represents a single value which can be either true or false.
 2. **Integers:**
-- ***uint**: This represents a single unsigned integer of 256 bits wide. Values can be for example 0, 102, 0xdeadcafe, or 1000_000_000_000_000.
+- **uint**: This represents a single unsigned integer of 256 bits wide. Values can be for example 0, 102, 0xdeadcafe, or 1000_000_000_000_000.
 - **uint64, uint32, uint16, uint8**: These represent shorter single unsigned integers of the given width. These widths are the most efficient and should be used whenever possible.
 - **int:** This represents a single signed integer of 256 bits wide. Values can be for example -102, 0, 102 or -0xdead_cafe.
 - **int64, int32, int16, int8:** These represent shorter single-signed integers of the given width. These widths are the most efficient and should be used whenever possible.
 
-Note-: When using integers, whenever possible use the int64, int32 or uint64, uint32 types.
+> Note-: When using integers, whenever possible use the int64, int32 or uint64, uint32 types.
 
 1. **Fixed Length byte arrays:** Solidity has a primitive type unique to the language. It is a fixed-length byte array of 1 to 32 bytes, declared with *bytes* followed by the array length. For example, bytes32, bytes24, bytes8, or bytes1. byte is an alias for byte1, so byte is an array of 1 element. The arrays can be initialized with either a hex string hex"414243", or a text string "ABC", or a hex value 0x414243.
     
-    bytes4 foo = "ABCD"; bytes4 bar = hex"41_42_43_44";
+   ```Solidity 
+   bytes4 foo = "ABCD"; bytes4 bar = hex"41_42_43_44";
+   ```
     
-2. **Address and Address Payable Type:** The address type holds the address of an account. The length of an address type depends on the target being compiled for. On EVM, an address is 20 bytes. Solana has an address length of 32 bytes. The format of an address literal depends on what target you are building for. On EVM, Ethereum addresses can be specified with a particular hexadecimal number. Like, address for = 0xE9430d8C01C4E4Bb33E44fd7748942085D82fC91;
+2. **Address and Address Payable Type:** The address type holds the address of an account. The length of an address type depends on the target being compiled for. On EVM, an address is 20 bytes. Solana has an address length of 32 bytes. The format of an address literal depends on what target you are building for. On EVM, Ethereum addresses can be specified with a particular hexadecimal number. Like, address for = `0xE9430d8C01C4E4Bb33E44fd7748942085D82fC91`;
     
     The hexadecimal string should be 40 hexadecimal characters, and not contain any underscores. The capitalization, i.e. whether a to f values are capitalized, is important. It is defined in [EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md). For example, when compiling:
     
@@ -43,7 +45,9 @@ Note-: When using integers, whenever possible use the int64, int32 or uint64
     
     Solana addresses are base58 encoded, not hexadecimal. An address literal can be specified with the special syntax address"account".
     
+    ```Soldity
     address foo = address"5GBWmgdFAMqm8ZgAHGobqDqX6tjLxJhv53ygjNtaaAn3sjeZ";
+    ```
     
     note -: The type name address payable cannot be used as a cast in the Ethereum Foundation Solidity compiler, and the cast should be declared payable instead. This is [apparently due to a limitation in their parser](https://github.com/ethereum/solidity/pull/4926#discussion_r216586365). Solang’s generated parser has no such limitation and allows address payable to be used as a cast, but allows payable to be used as a cast well, for compatibility reasons.
     
@@ -56,28 +60,35 @@ Note-: When using integers, whenever possible use the int64, int32 or uint64
     When declaring a function type, you must specify the parameters types, return types, mutability, and whether it is external or internal. The parameters or return types cannot have names.
     
 
-```jsx
+```Solidity
 contract ft {
 
-function test() public {
-// reference to an internal function **with** two arguments, returning bool
-// **with** the default mutability (i.e. cannot be payable)
-function(int32, bool) internal returns (bool) x;
-// the local function func1 can be assigned to this type; mutability
-// can be more restrictive than the type.
-x = func1;
-// now you can call func1 via the x
-bool res = x(102, false);
-// reference to an internal function **with** no **return** values, must be pure
-function(int32, bool) internal pure y;
-// Does **not** compile:
-// Wrong number of **return** types **and** mutability **is** **not** compatible
-// y = func1;
-}
+  function test() public {
 
-function func1(int32 arg, bool arg2) internal view returns (bool) {
-**return** false;
-}
+    // reference to an internal function with two arguments, returning bool
+    // with the default mutability (i.e. cannot be payable)
+
+    function(int32, bool) internal returns(bool) x;
+
+    // the local function func1 can be assigned to this type; mutability
+    // can be more restrictive than the type.
+
+    x = func1;
+
+  // now you can call func1 via the x
+
+  bool res = x(102, false);
+    // reference to an internal function with no return values, must be pure
+
+    function(int32, bool) internal pure y;
+    // Does not compile:
+    // Wrong number of return types and mutability is not compatible
+    // y = func1;
+  }
+
+  function func1(int32 arg, bool arg2) internal view returns(bool) {
+    return false;
+  }
 }
 ```
 
@@ -87,52 +98,38 @@ Function types, like any other type, can be used as function arguments, return t
 
 External function types serve as a reference to a function within a specific contract. They store both the address of the contract and the function selector. On the other hand, internal function types only store the function reference. When assigning a value to an external function selector, you must specify the contract and function by using a function on a particular contract instance.
 
-```jsx
+```Solidity
+       
 contract ft {
-
-function test(address p) external {
-
-// this.callback can be used **as** an external function type value
-
-paffling.set_callback{program_id: p}(this.callback);
-
-}
-
-function callback(int32 count, string foo) public {
-
-// ...
-
-}
-
+  function test(address p) external {
+    // this.callback can be used **as** an external function type value
+    paffling.set_callback{ program_id: p } (this.callback);
+  }
+  function callback(int32 count, string foo) public {
+    // ...
+  }
 }
 
 contract paffling {
 
-// the first visibility "external" **is** **for** the function type, the second "internal" **is**// **for** the callback variables
+  // the first visibility external is for the function type, the second "internal" is for the callback variables
 
-function(int32, string) external internal callback;
-
-function set_callback(function(int32, string) external c) public {
-
-callback = c;
-
-}
-
-function piffle() public {
-
-callback{accounts: []}(1, "paffled");
-
-}
-
+  function(int32, string) external internal callback;
+  function set_callback(function(int32, string) external c) public {
+    callback = c;
+  }
+  function piffle() public {
+  callback{ accounts: [] } (1, "paffled");
+  }
 }
 ```
 
 On Solana, external calls from variables of type external functions require the accounts call argument. The compiler cannot determine the accounts such a function needs, so it does not automatically generate the AccountsMeta array.
 
-```jsx
-function test(function(int32, string) external myFunc) public {
-myFunc{accounts: []}(24, "accounts");
-}
+```Solidity
+       function test(function(int32, string) external myFunc) public {
+        myFunc{accounts: []}(24, "accounts");
+       }
 ```
 
 In the next lesson, you will go through constructors in Solidity.

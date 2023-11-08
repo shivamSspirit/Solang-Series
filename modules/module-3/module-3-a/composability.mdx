@@ -40,14 +40,55 @@ In Solana's programming universe, different programs can talk to each other usin
 
 Here's a simplified comparison table between Solana and Ethereum composability:
 
-| Aspect | Solana | Ethereum |
-| --- | --- | --- |
-| Composability Approach | Like Functional Programming (FP) | Interface-based Inheritance (OOP) |
-| Token Management | Centralised through spl-token | Each token has its own contract (e.g., ERC-20) |
-| Transaction Foundation | Centered around Solana accounts | Focuses on smart contract interaction |
-| Data Storage | Data distributed across atomic accounts | Data stored within the smart contract |
-| Concurrency Advantage | Supports simultaneous task execution | Limited parallel processing |
-| Inter-program Comm. | Cross-program invocation and PDA | Interface and inheritance |
+<>
+<table>
+    <thead>
+      <tr>
+        <th>Aspect</th>
+        <th>Solana</th>
+        <th>Ethereum</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Composability Approach</td>
+        <td>Like Functional Programming (FP)</td>
+        <td>Interface-based Inheritance (OOP)</td>
+      </tr>
+
+      <tr>
+        <td>Token Management</td>
+        <td>Through spl-token</td>
+        <td>Each token has its own contract (e.g., ERC-20)</td>
+      </tr>
+
+      <tr>
+     <td>Transaction Foundation</td>
+        <td>Centered around Solana accounts</td>
+        <td>Focuses on smart contract interaction </td>
+      </tr>
+
+ <tr>
+     <td>Data Storage</td>
+        <td>Data distributed across atomic accounts</td>
+        <td>Data stored within the smart contract</td>
+      </tr>
+
+ <tr>
+     <td>Concurrency Advantage</td>
+        <td>Supports simultaneous task execution</td>
+        <td>Limited parallel processing</td>
+      </tr>
+
+ <tr>
+     <td>Inter-program Comm.</td>
+        <td>Cross-program invocation and PDA</td>
+        <td>Interface and inheritance</td>
+      </tr>
+
+    </tbody>
+  </table>
+  </>
 
 ### Composability of programs in Solana via CPI and PDA
 

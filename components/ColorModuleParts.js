@@ -21,7 +21,7 @@ function ColorModuleParts({moduleColor,currentpath, orderedLessions,activeFileNa
     </div>
     <div className='flex flex-col-reverse md:flex-row'>
       <div className='md:w-1/2 text-white'>
-        <div className='sm:mt-10 text-gray-500'>
+        <div className='sm:mt-10 text-gray-100 subpixel-antialiased tracking-wide leading-relaxed text-left'>
          {orderedLessions?.[1]?.modulePartDescription}
         </div>
         <div className='mt-10'>
