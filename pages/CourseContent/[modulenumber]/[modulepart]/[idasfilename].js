@@ -1,18 +1,18 @@
 import React from "react";
 import illustration from "../../../../assets/illustration.png";
 import Image from "next/image";
-import NextBreadcrumb from "../../../components/NextBreadcrumb";
+import NextBreadcrumb from "../../../NextBreadcrumb";
 import { useRouter } from "next/router";
 import SideBar from "../../../components/Sidebar";
 import curPageNumber from "../../../../shared/pageNumber";
 import { allDocuments } from "../../../../.contentlayer/generated";
-// import { getAllPostIds, getPostData } from "../../../../utils/module-lession";
-//import { allDocuments, type Post } from 'contentlayer/generated'
 import { useMDXComponent } from "next-contentlayer/hooks";
 import changePartFunction from "../../../../shared/changePartFunction";
 import Link from "next/link";
 import NewSideBar from "../../../components/NewSideBar";
 import { NextSeo } from "next-seo";
+import ColorModuleParts from "../../../components/ColorModuleParts";
+
 export async function getStaticPaths() {
   // Get a list of valid post paths.
   const paths = allDocuments.map((lession) => {
@@ -30,11 +30,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  // console.log("context",context)
-
-  //  console.log("vvvvv",`${context.params.modulenumber}/${context.params.modulepart}/${context.params.idasfilename}`)
-  // Find the post for the current page.
-
   const filteredParts = allDocuments.filter((lession) => {
     return (
       lession.moduleNumber === `${context.params.modulenumber}` &&
@@ -65,7 +60,9 @@ export async function getStaticProps(context) {
 
   // using Ascii, getting the max parts in each module
   const totalParts =
-  lastLetter.charCodeAt(0) === "a".charCodeAt(0) ? lastLetter.charCodeAt(0) - "a".charCodeAt(0) + 2  : lastLetter.charCodeAt(0) - "a".charCodeAt(0) + 1
+    lastLetter.charCodeAt(0) === "a".charCodeAt(0)
+      ? lastLetter.charCodeAt(0) - "a".charCodeAt(0) + 2
+      : lastLetter.charCodeAt(0) - "a".charCodeAt(0) + 1;
 
   console.log("titalpartsss", totalParts);
 
@@ -77,8 +74,6 @@ export async function getStaticProps(context) {
       `${context?.params?.modulenumber}/${context.params.modulepart}/${context.params.idasfilename}`
   );
 
-  //console.log("lession",lession)
-  // Return notFound if the post does not exist.
   if (!lession) return { notFound: true };
 
   // Return the post as page props.
@@ -87,17 +82,6 @@ export async function getStaticProps(context) {
   };
 }
 
-// const ifSlugEqual=(currentroute,allDocuments)=>{
-//   const currentPathmodules = currentroute.replace(/^\/CourseContent/, '');
-//   //console.log("currentPathmodules",currentPathmodules)
-//   const findFile = allDocuments.find(lession=>lession.slug===currentPathmodules)
-//   //console.log("findFile",findFile)
-//   if(findFile){
-//     return true;
-//   }
-//   return false;
-// }
-
 const GeneralInfo = ({
   lession,
   totalParts,
@@ -105,26 +89,18 @@ const GeneralInfo = ({
   totalLessons,
   lastLetter,
 }) => {
-  console.log("postData:", lastLetter.charCodeAt(0) === "a".charCodeAt(0) ? lastLetter.charCodeAt(0) - "a".charCodeAt(0) + 2  : lastLetter.charCodeAt(0) - "a".charCodeAt(0) + 1);
-  console.log("titalpartsss", lastLetter.charCodeAt(0), "a".charCodeAt(0));
   const MDXContent = useMDXComponent(lession.body.code);
   const router = useRouter();
-  // console.log(router.asPath, " Pathname");
-  // /CourseContent/module-0/module-0-a/course-guide
-  //const ifSlugequates = ifSlugEqual(router.asPath,allDocuments)
-  ///console.log("ifSlugequates",ifSlugequates)
+
+  console.log("filtered Parts:",filteredParts)
 
   const orderedLessions = filteredParts
     ?.sort((a, b) => a.orderNumber - b.orderNumber)
     .map((item, index) => {
-      // Use 'item' as the current object with orderNumber
-      // 'index' is the current position from 0 to n
-      // Add your logic here
-      return item; // or transform 'item' if needed
+      return item;
     });
 
   const { modulenumber, modulepart, idasfilename } = router.query;
-  console.log("modulenumber", modulenumber);
   const currentpath = `/CourseContent/${modulenumber}/${modulepart}/${idasfilename}`;
 
   const [prevPg, nextPg, prevPgText, nextPgText] = changePartFunction({
@@ -133,68 +109,31 @@ const GeneralInfo = ({
     totalParts,
   });
 
-  console.log("modfsdfdsjbkhshifhifsdeisefishhifsisulenumber", prevPg, nextPg);
+  const returnModuleColor = (moduleNumber) => {
+    if (moduleNumber === "module-0") {
+      return "bg-[#bfbfff]";
+    } else if (moduleNumber === "module-1") {
+      return "bg-[#29232e]";
+    } else if (moduleNumber === "module-2") {
+      return "bg-[#CFB53B]";
+    } else if (moduleNumber === "module-3") {
+      return "bg-[#CD853F]";
+    } else if (moduleNumber === "module-4") {
+      return "bg-[#63a4da]";
+    }
+  };
 
   return (
     <div className="my-12">
       <NextSeo titleTemplate="%s | Solidity On Solana" />
 
-      <div className="flex sm:flex-col justify-between p-8 rounded-3xl bg-primaryDark">
-        <div>
-          <NextBreadcrumb
-            homeElement={"Home"}
-            separator={<span> | </span>}
-            activeClasses="text-amber-500"
-            containerClasses="flex py-5 bg-gradient-to-r from-purple-600 to-blue-600"
-            listClasses="hover:underline mx-2 font-bold"
-            capitalizeLinks
-            currentpath={currentpath}
-          />
-        </div>
-
-        <div className="flex flex-col-reverse md:flex-row">
-          <div className="md:w-1/2 text-white">
-            <div className="mt-10 text-gray-400">
-              Dive into the world of blockchain development with our Solidity
-              for Solana courses. Master the art of creating smart contracts on
-              the Solana network, opening the door to high-speed, secure, and
-              scalable decentralized applications. Join us on a journey of
-              learning that empowers you to shape the future of blockchain
-              technology
-            </div>
-            <div className="mt-10">
-              <div>
-                {orderedLessions?.map((lession, idx) => (
-                  <div key={idx} id="breadcrumbs-one" className="mb-1">
-                    <li>
-                      <Link
-                        // className="after:bg-primary"
-                        href={`/CourseContent${lession.slug}`}
-                        className={
-                          idasfilename ===
-                            lession._raw.sourceFileName.replace(/\.mdx$/, "") &&
-                          "active"
-                        }
-                      >
-                        {lession._raw.sourceFileName.replace(/\.mdx$/, "")}
-                      </Link>
-                    </li>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="md:w-1/2">
-            <div className="flex justify-center md:justify-end">
-              <Image
-                src={illustration}
-                alt="illustration"
-                className="fill-white"
-              />
-            </div>
-          </div>
-        </div>
+      <div className="flex sm:flex-col justify-between">
+        <ColorModuleParts
+          moduleColor={returnModuleColor(lession?.moduleNumber)}
+          currentpath={currentpath}
+          orderedLessions={orderedLessions}
+          activeFileName={idasfilename}
+        />
       </div>
 
       <div className="mt-20 sm:flex w-full gap-12">
@@ -216,16 +155,6 @@ const GeneralInfo = ({
 
           <div className="border-collapse w-full text-rose-950 aspect-[4/3] p-4 font-[Inter,sans-serif] subpixel-antialiased tracking-wide font-medium leading-relaxed list-outside text-left ">
             <div className="prose-table:border-collapse prose-a:underline	prose-a:decoration-sky-500 prose-p:text-left prose-p:leading-relaxed prose-p:subpixel-antialiased prose-p:w-full text-white prose max-w-none prose-p:text-base/7 md:ml-12 lg:ml-12 xl:ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer prose-red prose-strong:text-funPinkDark prose-pre:bg-primaryDark">
-              {/* <div>
-              {postData.title}
-              <br />
-              {postData.id}
-              <br />
-              {postData.author}
-              <br />
-              <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-            </div> */}
-
               <MDXContent />
             </div>
           </div>

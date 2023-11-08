@@ -14,6 +14,13 @@ import { experimentalStyled as styled } from "@mui/material/styles";
 import { useRouter } from "next/router";
 import { getModules } from "utils/module-lession";
 import { NextSeo } from "next-seo";
+import { allDocuments } from "../.contentlayer/generated";
+
+// export async function getStaticProps(context) {
+//   console.log("Running static props",context);
+
+//  return { props: { filteredParts } };
+// }
 
 export async function getStaticProps() {
   const allModuleNumbers = await getModules();
@@ -28,60 +35,96 @@ export async function getStaticProps() {
   };
 }
 
-const announcementData = [
+export const announcementData = [
   {
     img: Course1,
     head: "Module Name ",
-    desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
+    desc: "Introduction",
+    module_color:"#bfbfff"
   },
   {
     img: Course2,
     head: "Module Name",
-    desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
+    desc: "Building Solana Programs with Solidity",
+    module_color:"#29232e"
   },
   {
     img: Course3,
     head: "Module Name",
-    desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
+    desc: "Minting Fungible Tokens",
+    module_color:"#CFB53B"
   },
   {
     img: Course4,
     head: "Module Name ",
-    desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
+    desc: "Building a CPI-Enabled Flip Program",
+    module_color:"#CD853F"
   },
   {
     img: Course5,
     head: "Module Name",
+    desc: "How to Transfer Solana Tokens with Solidity",
+    module_color:"#63a4da"
+  },
+  // {
+  //   img: Course6,
+  //   head: "Module Name",
+  //   desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
+  // },
+  {
+    img: Course6,
+    head: "Module Name",
     desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
+    module_color:"#E6BE8A"
   },
   {
     img: Course6,
     head: "Module Name",
     desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
-  },
-  {
-    img: Course6,
-    head: "Module Name",
-    desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
-  },
-  {
-    img: Course6,
-    head: "Module Name",
-    desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
+    module_color:"#E6BE8A"
   },
 ];
 
 const CourseContent = ({ allModules }) => {
+ // console.log("allDocsfdfssd", allDocuments);
   const mergedArray = allModules.map((moduleName, index) => ({
     module: moduleName,
     ...announcementData[index],
   }));
   const router = useRouter();
 
+
+//   const moduleColors={
+//     "module-0":"#FAFAD2",
+//     "module-1":"#EEE8AA",
+//     "module-2":"#C5B358",
+//     "module-3":"#CD853F",
+//     "module-4":"#E6BE8A"
+// }
+
+
+const returnModuleColor=(moduleNumber)=>{
+  const findmodule = mergedArray?.find(module=>module?.module===moduleNumber);
+  console.log("findmodule,",findmodule)
+  const colors = findmodule?.module_color;
+  if(colors==="#bfbfff"){
+    return "hover:bg-[#bfbfff]";
+  } else if(colors==="#29232e"){
+    return "hover:bg-[#29232e]";
+  } else if(colors==="#CFB53B"){
+    return "hover:bg-[#CFB53B]";
+  } else if(colors==="#CD853F"){
+    return "hover:bg-[#CD853F]";
+  }
+  else if(colors==="#63a4da"){
+    return "hover:bg-[#63a4da]";
+  }
+
+}
  // console.log(mergedArray);
 
   const moduleCard = (
-    <div className='text-white'>
+    <div className="text-white">
       <Box sx={{ flexGrow: 1 }}>
         <Grid
           container
@@ -91,38 +134,46 @@ const CourseContent = ({ allModules }) => {
         >
           {mergedArray.map((announcement, index) => (
             <Grid item xs={3} sm={4} md={4} key={index}>
-              <div className='m-1 p-2 bg-primaryDark rounded-2xl border border-white'>
+              <div className={ `m-1 p-2 bg-[#858383] rounded-2xl border border-white ${returnModuleColor(announcement.module)}` }>
                 <div>
                   <Image
                     src={announcement.img.src}
-                    alt='med'
+                    alt="med"
                     width={400}
                     height={220}
                     className="w-full"
                   />
                 </div>
-                <div className='px-3 rounded-b-2xl'>
-                  <div className='text-2xl capitalize pt-6 pb-1'>
+                <div className="px-3 rounded-b-2xl">
+                  <div onClick={() => {
+                      router.push({
+                        pathname: `/CourseContent/${announcement.module}/${announcement.module}-a`,
+                      });
+                    }} className="text-2xl capitalize pt-2 pb-1 cursor-pointer">
                     {announcement.module}
                   </div>
-                  <div className='text-secondaryGrey pb-6'>
+                  <div onClick={() => {
+                      router.push({
+                        pathname: `/CourseContent/${announcement.module}/${announcement.module}-a`,
+                      });
+                    }} className="text-white pb-2 cursor-text">
                     {announcement.desc}
                   </div>
                 </div>
-                <div className='mb-[1px]'>
+                {/* <div className="mb-[1px]">
                   <Button
-                    className='w-full bg-white'
+                    className="w-full bg-white"
                     onClick={() => {
                       router.push({
                         pathname: `/CourseContent/${announcement.module}/${announcement.module}-a`,
                       });
                     }}
                   >
-                    <div className='text-center font-bold text-black text-xl'>
+                    <div className="text-center font-bold text-black text-xl">
                       Start Module
                     </div>
                   </Button>
-                </div>
+                </div> */}
               </div>
             </Grid>
           ))}
@@ -132,14 +183,14 @@ const CourseContent = ({ allModules }) => {
   );
 
   return (
-    <div className='my-16 text-white'>
-      <NextSeo title='Course Content' />
-      <div className='mb-3'>
+    <div className="my-16 text-white">
+      <NextSeo title="Course Content" />
+      <div className="mb-3">
         {"Solidity On Solana".split("").map((letter, index) => {
           return (
             <span
               key={index}
-              className='hover:text-funPinkDark hover:mb-3 transition-all duration-500 hover:duration-100 click:goodbyeLetterAnim text-3xl md:text-5xl mb-2 leading-relaxed '
+              className="hover:text-funPinkDark hover:mb-3 transition-all duration-500 hover:duration-100 click:goodbyeLetterAnim text-3xl md:text-5xl mb-2 leading-relaxed "
             >
               {letter}
             </span>
@@ -147,11 +198,12 @@ const CourseContent = ({ allModules }) => {
         })}
       </div>
       {/* <div className='text-3xl md:text-5xl mb-2'>Solidity On Solana</div> */}
-      <div className='mb-10 text-sm md:text-base'>
-        Description of course content, If you make changes to the material and
-        want to distribute the modified version, it must be licensed under the
-        same license. Using the material for commercial purposes is forbidden
-        without permission.
+      <div className="mb-10 text-sm md:text-base">
+      The course is divided into nine modules, labeled from <strong>Module-0</strong> to <strong>Module-8</strong>. Each module is further
+      divided into two parts for clear understanding, and these are referred to as 'Module Number Part.
+      Additionally, each module part contains easily digestible lessons, so you can explore each concept thoroughly.
+      Immerse yourself in the world of Solidity on Solana and become proficient in creating smart contracts through
+      this well-organized and informative modules
       </div>
       <div>{moduleCard}</div>
     </div>

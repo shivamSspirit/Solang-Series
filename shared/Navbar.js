@@ -1,22 +1,42 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import SiteLogo from "../assets/site-logo.svg";
 import MobileSiteLogo from "../assets/mob-nav-logo.png";
 import { useRouter } from "next/router";
 import SearchIcon from "@mui/icons-material/Search";
+import { useState, useEffect } from "react";
 
 function NavBar() {
   const router = useRouter();
   const [navbar, setNavbar] = useState(false);
+  //const [removesearchfrommobile, setremovesearchfrommobile] = useState(false);
+ // const [windows,setWindowWidth] = useState('');
   const currentRoute = router.pathname;
+
+   if (typeof window !== "undefined") {
+  //   // detect window screen width function
+  // setWindowWidth(window)
+  //   console.log("hdfhfdhjdfs", window.innerWidth);
+ }
+
+  // useEffect(() => {
+    
+  //     if (windows.innerWidth === 752) {
+  //       setremovesearchfrommobile(!removesearchfrommobile);
+  //     }
+    
+  // }, [windows.innerwi]);
+
+  // const size = useWindowSize();
 
   return (
     <div>
-      <nav className='rounded-lg py-2 text-white bg-primaryDark shadow-lg shadow-black'>
-        <div className='justify-between px-4 mx-auto md:items-center md:flex md:px-8'>
+      <nav className="rounded-lg py-2 text-white bg-primaryDark shadow-lg shadow-black">
+        <div className="justify-between px-4 mx-auto md:items-center md:flex md:px-8">
           <div>
-            <div className='flex items-center justify-between py-3 md:py-5 md:block'>
+            <div className="flex items-center justify-between py-3 md:py-5 md:block">
               {/* LOGO */}
               <div>
                 <div className='w-14 sm:hidden'>
@@ -31,9 +51,9 @@ function NavBar() {
                 </div>
               </div>
               {/* HAMBURGER BUTTON FOR MOBILE */}
-              <div className='md:hidden'>
+              <div className="md:hidden">
                 <button
-                  className='p-2 text-gray-700 rounded-md outline-none '
+                  className="p-2 text-gray-700 rounded-md outline-none mr-3"
                   onClick={() => setNavbar(!navbar)}
                 >
                   <span
@@ -57,7 +77,7 @@ function NavBar() {
                 </button>
                 <SearchIcon
                   onClick={() => router.push("/Search")}
-                  className='h-5 lg:mt-1 xl:mt-1 cursor-pointer'
+                  className="h-5 hidden md:block lg:block lg:mt-1 xl:mt-1 cursor-pointer"
                 />
               </div>
             </div>
@@ -68,13 +88,13 @@ function NavBar() {
                 navbar ? "p-3 md:p-0 block" : "hidden"
               }`}
             >
-              <ul className='z-10 md:h-auto items-center justify-center md:flex '>
+              <ul className="z-10 md:h-auto items-center justify-center md:flex ">
                 <li
                   className={`cursor-pointer mb-2 md:mb-0 text-start hover:text-gray-300 text-lg mx-3 ${
                     currentRoute === "/" ? "text-white" : ""
                   }`}
                 >
-                  <Link href='/' onClick={() => setNavbar(!navbar)}>
+                  <Link href="/" onClick={() => setNavbar(!navbar)}>
                     Home
                   </Link>
                 </li>
@@ -83,7 +103,7 @@ function NavBar() {
                     currentRoute === "/About" ? "text-white" : ""
                   }`}
                 >
-                  <Link href='/About' onClick={() => setNavbar(!navbar)}>
+                  <Link href="/About" onClick={() => setNavbar(!navbar)}>
                     About
                   </Link>
                 </li>
@@ -93,7 +113,7 @@ function NavBar() {
                   }`}
                 >
                   <Link
-                    href='/CourseContent'
+                    href="/CourseContent"
                     onClick={() => setNavbar(!navbar)}
                   >
                     Course content
@@ -104,12 +124,17 @@ function NavBar() {
                     currentRoute === "/FAQs" ? "text-white" : ""
                   }`}
                 >
-                  <Link href='/FAQ' onClick={() => setNavbar(!navbar)}>
+                  <Link href="/FAQ" onClick={() => setNavbar(!navbar)}>
                     FAQs
                   </Link>
                 </li>
                 <li>
                   <SearchIcon
+                    // style={
+                    //   setremovesearchfrommobile
+                    //     ? { display: "none" }
+                    //     : { display: "block" }
+                    // }
                     onClick={() => router.push("/Search")}
                     className='md:flex hidden h-8 ml-4 mt-1 lg:mt-1 xl:mt-1 cursor-pointer'
                   />

@@ -1,12 +1,32 @@
 import Head from "next/head";
 import AppBar from "../shared/AppBar";
 import LandingSection from "./components/LandingSection";
-import ComingSoon from "./comingSoon/ComingSoon";
 import {allDocuments} from '../.contentlayer/generated'
+// import { getModules } from "./utils/module-lession";
+import { useEffect } from "react";
+import {getModules} from '../utils/module-lession'
 
-export default function Home() {
+export async function getStaticProps() {
+  const allModuleNumbers = await getModules();
+  console.log("allModuleNumbers", allModuleNumbers);
+  const allModules = allModuleNumbers.map((post) =>
+    post.substring("modules/".length)
+  );
+  return {
+    props: {
+      allModules,
+    },
+  };
+}
 
-  // console.log("alldocs",allDocuments)
+export default function Home({allModules}) {
+console.log("allModules",allModules)
+
+
+// useEffect(()=>{
+//   console.log("allllmidmsd",allModules)
+// },[])
+  
 
   return (
     <>
@@ -18,8 +38,7 @@ export default function Home() {
         {/* <link href="/dist/output.css" rel="stylesheet"/> */}
       </Head>
       <div className='w-full'>
-        <LandingSection />
-        {/* <ComingSoon/>  */}
+        <LandingSection allModules={allModules} />
       </div>
     </>
   );
