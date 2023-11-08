@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 export default function NewSideBar({ headings }) {
   const router = useRouter();
-  console.log("headings",headings)
+  // console.log("headings",headings)
 
   const menuItems = [
     {

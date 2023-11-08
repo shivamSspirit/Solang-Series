@@ -1,14 +1,8 @@
 import React from "react";
-import illustration from "../../../../assets/illustration.png";
-import Image from "next/image";
-import NextBreadcrumb from "../../../NextBreadcrumb";
 import { useRouter } from "next/router";
-import SideBar from "../../../components/Sidebar";
-import curPageNumber from "../../../../shared/pageNumber";
 import { allDocuments } from "../../../../.contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import changePartFunction from "../../../../shared/changePartFunction";
-import Link from "next/link";
 import NewSideBar from "../../../components/NewSideBar";
 import { NextSeo } from "next-seo";
 import ColorModuleParts from "../../../components/ColorModuleParts";
@@ -64,7 +58,7 @@ export async function getStaticProps(context) {
       ? lastLetter.charCodeAt(0) - "a".charCodeAt(0) + 2
       : lastLetter.charCodeAt(0) - "a".charCodeAt(0) + 1;
 
-  console.log("titalpartsss", totalParts);
+  // console.log("titalpartsss", totalParts);
 
   // console.log(totalParts, " Total Parts");
 
@@ -92,7 +86,7 @@ const GeneralInfo = ({
   const MDXContent = useMDXComponent(lession.body.code);
   const router = useRouter();
 
-  console.log("filtered Parts:",filteredParts)
+  // console.log("filtered Parts:",filteredParts)
 
   const orderedLessions = filteredParts
     ?.sort((a, b) => a.orderNumber - b.orderNumber)

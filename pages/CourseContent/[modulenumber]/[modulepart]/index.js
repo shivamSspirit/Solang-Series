@@ -6,17 +6,17 @@ import { NextSeo } from "next-seo";
 import ColorModuleParts from "../../../components/ColorModuleParts";
 
 export async function getStaticProps(context) {
-   console.log("Running static props",context);
+  //  console.log("Running static props",context);
 
   const filteredParts = allDocuments.filter((lession) => {
-    console.log("lessiosnsss",lession)
+    // console.log("lessiosnsss",lession)
     return (
       lession?.moduleNumber === `${context?.params?.modulenumber}` &&
       lession?.modulePart === `${context?.params?.modulepart}`
     );
   });
 
-   console.log("FilteredParts",filteredParts);
+  //  console.log("FilteredParts",filteredParts);
   // console.log("lessions for a part", lession);
   // Return notFound if the post does not exist.
   // if (!lession) return { notFound: true }
@@ -28,7 +28,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  console.log("Static paths runnning");
+  // console.log("Static paths runnning");
   // Get a list of valid post paths.
   const paths = allDocuments?.map((lession) => {
     // console.log("lessions", lession);
@@ -44,15 +44,15 @@ export async function getStaticPaths() {
 }
 
 const Course1 = ({ filteredParts }) => {
-    console.log("allDocuments",allDocuments)
-  console.log("Filtered parts",filteredParts)
+    // console.log("allDocuments",allDocuments)
+  // console.log("Filtered parts",filteredParts)
 
   const orderedLessions  = filteredParts?.sort((a, b) => a.orderNumber - b.orderNumber)
   .map((item, index) => {
     return item; // or transform 'item' if needed
   });
 
-  console.log("fockiiii",orderedLessions)
+  // console.log("fockiiii",orderedLessions)
   const router = useRouter();
   const { modulenumber, modulepart } = router.query;
 

@@ -3,8 +3,9 @@ import illustration from "../../assets/illustration.png";
 import NextBreadcrumb from '../NextBreadcrumb';
 import Link from 'next/link';
 import Image from 'next/image'
+
 function ColorModuleParts({moduleColor,currentpath, orderedLessions,activeFileName}) {
-  console.log("currentpath",currentpath)
+  // console.log("currentpath",currentpath)
   return (
     <div className={`${moduleColor} p-10 rounded-[0.99rem]`}>
     <div>

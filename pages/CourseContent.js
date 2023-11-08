@@ -105,7 +105,7 @@ const CourseContent = ({ allModules }) => {
 
 const returnModuleColor=(moduleNumber)=>{
   const findmodule = mergedArray?.find(module=>module?.module===moduleNumber);
-  console.log("findmodule,",findmodule)
+  // console.log("findmodule,",findmodule)
   const colors = findmodule?.module_color;
   if(colors==="#bfbfff"){
     return "hover:bg-[#bfbfff]";
