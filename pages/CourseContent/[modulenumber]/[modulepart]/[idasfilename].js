@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import { allDocuments } from "../../../../.contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import changePartFunction from "../../../../shared/changePartFunction";
-import NewSideBar from "../../../components/NewSideBar";
+import NewSideBar from "../../../../components/NewSideBar";
 import { NextSeo } from "next-seo";
-import ColorModuleParts from "../../../components/ColorModuleParts";
+import ColorModuleParts from "../../../../components/ColorModuleParts";
 
 export async function getStaticPaths() {
   // Get a list of valid post paths.

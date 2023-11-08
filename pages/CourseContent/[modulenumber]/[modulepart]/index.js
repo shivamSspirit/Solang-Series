@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import curPageNumber from "../../../../shared/pageNumber";
 import { allDocuments } from "../../../../.contentlayer/generated";
 import { NextSeo } from "next-seo";
-import ColorModuleParts from "../../../components/ColorModuleParts";
+import ColorModuleParts from "../../../../components/ColorModuleParts";
 
 export async function getStaticProps(context) {
   //  console.log("Running static props",context);

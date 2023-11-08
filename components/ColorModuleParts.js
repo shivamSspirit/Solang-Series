@@ -1,6 +1,6 @@
 import React from 'react'
-import illustration from "../../assets/illustration.png";
-import NextBreadcrumb from '../NextBreadcrumb';
+import illustration from "../assets/illustration.png";
+import NextBreadcrumb from '../pages/NextBreadcrumb';
 import Link from 'next/link';
 import Image from 'next/image'
 
