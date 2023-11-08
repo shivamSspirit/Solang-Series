@@ -70,7 +70,7 @@ export const Doc = defineDocumentType(() => ({
 export default makeSource({
   contentDirPath: "modules",
   documentTypes: [Doc],
-  md: {
+  mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
       rehypeSlug,

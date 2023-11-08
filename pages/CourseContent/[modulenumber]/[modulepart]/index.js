@@ -4,6 +4,7 @@ import curPageNumber from "../../../../shared/pageNumber";
 import { allDocuments } from "../../../../.contentlayer/generated";
 import { NextSeo } from "next-seo";
 import ColorModuleParts from "../../../../components/ColorModuleParts";
+import Layout from "../../../../components/Layout";
 
 export async function getStaticProps(context) {
   //  console.log("Running static props",context);
@@ -83,38 +84,38 @@ const Course1 = ({ filteredParts }) => {
     }
   }
   
-
-
   return (
-    <div className='my-20'>
-      <NextSeo title={`Module ${modNum}`} />
-     
-       <div className='flex sm:flex-col justify-between'>
-      <ColorModuleParts 
-      moduleColor= {returnModuleColor(modulenumber)}
-      currentpath= {currentpath}
-      orderedLessions={orderedLessions}
-      />
-       </div>
-      <div className='mt-20 w-full flex justify-between text-white'>
-        <div className='justify-start'>
-          {prevPg && (
-            <a href={prevPg} className='flex flex-col'>
-              <span>Part {prevPgNumber}</span>
-              <span>Previous Part</span>
-            </a>
-          )}
+    <Layout>
+      <div className='my-20'>
+        <NextSeo title={`Module ${modNum}`} />
+
+        <div className='flex sm:flex-col justify-between'>
+          <ColorModuleParts
+            moduleColor={returnModuleColor(modulenumber)}
+            currentpath={currentpath}
+            orderedLessions={orderedLessions}
+          />
         </div>
-        <div className='justify-end'>
-          {nextPg && (
-            <a href={nextPg} className='flex flex-col justify-end'>
-              <span>Part {nextPgNumber}</span>
-              <span>Next Part</span>
-            </a>
-          )}
+        <div className='mt-20 w-full flex justify-between text-white'>
+          <div className='justify-start'>
+            {prevPg && (
+              <a href={prevPg} className='flex flex-col'>
+                <span>Part {prevPgNumber}</span>
+                <span>Previous Part</span>
+              </a>
+            )}
+          </div>
+          <div className='justify-end'>
+            {nextPg && (
+              <a href={nextPg} className='flex flex-col justify-end'>
+                <span>Part {nextPgNumber}</span>
+                <span>Next Part</span>
+              </a>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

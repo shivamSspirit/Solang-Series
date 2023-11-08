@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import { getModules } from "utils/module-lession";
 import { NextSeo } from "next-seo";
 import { allDocuments } from "../.contentlayer/generated";
+import Layout from "../components/Layout";
 
 // export async function getStaticProps(context) {
 //   console.log("Running static props",context);
@@ -124,7 +125,7 @@ const returnModuleColor=(moduleNumber)=>{
  // console.log(mergedArray);
 
   const moduleCard = (
-    <div className="text-white">
+    <div className="text-white cursor-pointer">
       <Box sx={{ flexGrow: 1 }}>
         <Grid
           container
@@ -183,30 +184,35 @@ const returnModuleColor=(moduleNumber)=>{
   );
 
   return (
-    <div className="my-16 text-white">
-      <NextSeo title="Course Content" />
-      <div className="mb-3">
-        {"Solidity On Solana".split("").map((letter, index) => {
-          return (
-            <span
-              key={index}
-              className="hover:text-funPinkDark hover:mb-3 transition-all duration-500 hover:duration-100 click:goodbyeLetterAnim text-3xl md:text-5xl mb-2 leading-relaxed "
-            >
-              {letter}
-            </span>
-          );
-        })}
+    <Layout>
+      <div className='my-16 text-white'>
+        <NextSeo title='Course Content' />
+        <div className='mb-3'>
+          {"Solidity On Solana".split("").map((letter, index) => {
+            return (
+              <span
+                key={index}
+                className='hover:text-funPinkDark hover:mb-3 transition-all duration-500 hover:duration-100 click:goodbyeLetterAnim text-3xl md:text-5xl mb-2 leading-relaxed '
+              >
+                {letter}
+              </span>
+            );
+          })}
+        </div>
+        {/* <div className='text-3xl md:text-5xl mb-2'>Solidity On Solana</div> */}
+        <div className='mb-10 text-sm md:text-base'>
+          The course is divided into nine modules, labeled from{" "}
+          <strong>Module-0</strong> to <strong>Module-8</strong>. Each module is
+          further divided into two parts for clear understanding, and these are
+          referred to as 'Module Number Part. Additionally, each module part
+          contains easily digestible lessons, so you can explore each concept
+          thoroughly. Immerse yourself in the world of Solidity on Solana and
+          become proficient in creating smart contracts through this
+          well-organized and informative modules
+        </div>
+        <div>{moduleCard}</div>
       </div>
-      {/* <div className='text-3xl md:text-5xl mb-2'>Solidity On Solana</div> */}
-      <div className="mb-10 text-sm md:text-base">
-      The course is divided into nine modules, labeled from <strong>Module-0</strong> to <strong>Module-8</strong>. Each module is further
-      divided into two parts for clear understanding, and these are referred to as 'Module Number Part.
-      Additionally, each module part contains easily digestible lessons, so you can explore each concept thoroughly.
-      Immerse yourself in the world of Solidity on Solana and become proficient in creating smart contracts through
-      this well-organized and informative modules
-      </div>
-      <div>{moduleCard}</div>
-    </div>
+    </Layout>
   );
 };
 
