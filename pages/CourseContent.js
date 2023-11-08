@@ -87,7 +87,7 @@ const CourseContent = ({ allModules }) => {
           container
           spacing={{ xs: 2, md: 3, lg: 8, xl: 14 }}
           className='flex justify-center md:justify-start items-center'
-          columns={{ xs: 4, sm: 8, md: 12 }}
+          columns={{ xs: 3, sm: 8, md: 12 }}
         >
           {mergedArray.map((announcement, index) => (
             <Grid item xs={3} sm={4} md={4} key={index}>
