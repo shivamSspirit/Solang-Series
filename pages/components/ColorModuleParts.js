@@ -1,9 +1,10 @@
 import React from 'react'
 import illustration from "../../assets/illustration.png";
-import NextBreadcrumb from './NextBreadcrumb';
+import NextBreadcrumb from '../NextBreadcrumb';
 import Link from 'next/link';
 import Image from 'next/image'
-function ColorModuleParts({moduleColor,currentpath, orderedLessions}) {
+function ColorModuleParts({moduleColor,currentpath, orderedLessions,activeFileName}) {
+  console.log("currentpath",currentpath)
   return (
     <div className={`${moduleColor} p-10 rounded-[0.99rem]`}>
     <div>
@@ -26,9 +27,10 @@ function ColorModuleParts({moduleColor,currentpath, orderedLessions}) {
           <div>
             {orderedLessions?.map((lession, idx) => (
               <div key={idx} id='breadcrumbs-one' className='mb-1'>
+              {console.log("lession",lession)}
                 <li>
                   {/* {console.log("filename",lession)} */}
-                  <Link href={`/CourseContent${lession.slug}`}>
+                  <Link className={`${activeFileName===lession.thisFileName?"active":""}`}  href={`/CourseContent${lession.slug}`}>
                     {lession?._raw?.sourceFileName?.replace(/\.mdx$/, "")}
                   </Link>
                 </li>

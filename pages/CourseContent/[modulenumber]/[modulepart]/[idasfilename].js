@@ -1,7 +1,7 @@
 import React from "react";
 import illustration from "../../../../assets/illustration.png";
 import Image from "next/image";
-import NextBreadcrumb from "../../../components/NextBreadcrumb";
+import NextBreadcrumb from "../../../NextBreadcrumb";
 import { useRouter } from "next/router";
 import SideBar from "../../../components/Sidebar";
 import curPageNumber from "../../../../shared/pageNumber";
@@ -132,6 +132,7 @@ const GeneralInfo = ({
           moduleColor={returnModuleColor(lession?.moduleNumber)}
           currentpath={currentpath}
           orderedLessions={orderedLessions}
+          activeFileName={idasfilename}
         />
       </div>
 
