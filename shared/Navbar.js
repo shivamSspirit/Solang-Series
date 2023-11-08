@@ -75,10 +75,10 @@ function NavBar() {
                     }`}
                   ></span>
                 </button>
-                {/* <SearchIcon
+                <SearchIcon
                   onClick={() => router.push("/Search")}
                   className="h-5 hidden md:block lg:block lg:mt-1 xl:mt-1 cursor-pointer"
-                /> */}
+                />
               </div>
             </div>
           </div>
@@ -128,7 +128,7 @@ function NavBar() {
                     FAQs
                   </Link>
                 </li>
-                {/* <li>
+                <li>
                   <SearchIcon
                     // style={
                     //   setremovesearchfrommobile
@@ -138,7 +138,7 @@ function NavBar() {
                     onClick={() => router.push("/Search")}
                     className='md:flex hidden h-8 ml-4 mt-1 lg:mt-1 xl:mt-1 cursor-pointer'
                   />
-                </li> */}
+                </li>
               </ul>
             </div>
           </div>
