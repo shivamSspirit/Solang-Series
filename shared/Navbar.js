@@ -20,13 +20,13 @@ function NavBar() {
               {/* LOGO */}
               <div>
                 <div className='w-14 sm:hidden'>
-                <Link href={'/'}>
-                <Image src={MobileSiteLogo} alt='logo' />
-                </Link>
+                  <Link href={"/"}>
+                    <Image src={MobileSiteLogo} alt='logo' />
+                  </Link>
                 </div>
                 <div className='hidden sm:flex'>
-                <Link href={'/'}>
-                  <SiteLogo />
+                  <Link href={"/"}>
+                    <SiteLogo />
                   </Link>
                 </div>
               </div>
@@ -111,7 +111,7 @@ function NavBar() {
                 <li>
                   <SearchIcon
                     onClick={() => router.push("/Search")}
-                    className='hidden md:flex h-8 ml-4 mt-1 lg:mt-1 xl:mt-1 cursor-pointer'
+                    className='md:flex hidden h-8 ml-4 mt-1 lg:mt-1 xl:mt-1 cursor-pointer'
                   />
                 </li>
               </ul>
