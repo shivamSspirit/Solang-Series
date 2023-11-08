@@ -41,7 +41,7 @@ const FAQ = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col justify-evenly">
       <NextSeo title='FAQ' />
       <div className='text-5xl my-20'>Frequently asked questions</div>
 

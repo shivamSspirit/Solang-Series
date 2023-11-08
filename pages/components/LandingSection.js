@@ -159,8 +159,8 @@ const LandingSection = ({ allModules }) => {
       <div>
         <div className="flex lg:flex-row flex-col-reverse justify-between">
           <div className="lg:w-1/2 text-white">
-            <div className="text-3xl font-bold sm:text-4xl md:text-5xl">
-              {"Deep Dive Into Solidity On Solana"
+            <div className="text-2xl font-bold sm:text-3xl md:text-4xl">
+              {"Building on Solana: A Deep Dive"
                 .split("")
                 .map((letter, index) => {
                   return (
