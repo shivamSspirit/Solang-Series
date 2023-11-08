@@ -7,6 +7,7 @@ import TwitterX from "../assets/twitterX.svg";
 import SiteLogo from "../assets/site-logo.svg";
 import CCFooter from "../assets/CCFooter.svg";
 import Image from "next/image";
+import Link from 'next/link';
 
 const FooterComp = () => {
   return (
@@ -24,7 +25,9 @@ const FooterComp = () => {
           Dive into the world of blockchain development with our Solidity On
           Solana course.
         </div>
-        <div className='text-gray-400'>solidityonsolana.one</div>
+        <div className='text-gray-400'> <Link  className="ml-3 mr-3 underline" href={'https://solidityonsolana.one/'}>
+        solidityOnsolana.one
+        </Link>   </div>
       </div>
       <div className='md:w-1/3 flex flex-col items-start text-gray-400'>
         <div className='flex mb-10 mt-10 md:mt-0'>
@@ -36,8 +39,10 @@ const FooterComp = () => {
           <CCFooter />
         </div>
         <div className='text-gray-400'>
-          The material is licensed under the Creative Commons BY-NC-SA 3.0
-          License.
+        <span>The material is powered by</span> 
+        <Link  className="ml-3 mr-3 underline" href={'https://solidityonsolana.one/'}>
+        solidityonsolana.one
+        </Link>   
         </div>
       </div>
     </Footer>

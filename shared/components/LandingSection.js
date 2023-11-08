@@ -7,6 +7,7 @@ import { React, useState } from "react";
 import illustration from "../../assets/illustration.png";
 import landingPg1 from "../../assets/landingPg1.png";
 import landingPg2 from "../../assets/landingPg2.png";
+import { useStyleRegistry } from "styled-jsx";
 
 const announcementData = [
   {
@@ -58,6 +59,7 @@ const timelineData = [
 const LandingSection = ({ allModules }) => {
   // console.log("all modes in land",allModules)
   const [svgHoverColor, setSvgHoverColor] = useState("white");
+  const [disable,setDisable]= useState(false);
   const router = useRouter();
   const startBtnOnClick = () => {
     router.push("/CourseContent");
@@ -72,15 +74,16 @@ const LandingSection = ({ allModules }) => {
 
   const returnModulePath = (announcement) => {
     if (announcement === "module-5") {
-      router.push({
-        pathname: `/`,
-      });
+      setDisable(true);
     } else {
       router.push({
         pathname: `/CourseContent/${announcement}/${announcement}-a`,
       });
     }
   };
+
+console.log("disable",disable)
+
 
   const module = (
     <Box sx={{ flexGrow: 1, color: "white" }}>
@@ -106,18 +109,14 @@ const LandingSection = ({ allModules }) => {
                 }}
                 src={announcement.img}
                 alt="med"
-                className={`cursor-pointer ${
-                  announcement.module === "module-5"
-                    ? "disabled text-opacity-0.5"
-                    : ""
-                }`}
+                className={`cursor-pointer ${  'module-5'=== announcement.module ? "hover:opacity-10"  :" " }`}
               />
               <div className="px-3 rounded-b-2xl max-w-[416px] ml-2">
                 <div
                   className={`text-2xl font-semibold pt-6 pb-1 cursor-pointer ${
-                    announcement.module === "module-5"
-                      ? "disabled text-opacity-0.5 opacity-0.3"
-                      : ""
+                    'module-5'=== announcement.module
+                      ? "hover:opacity-10"
+                      : " "
                   }`}
                   onClick={() => {
                     returnModulePath(announcement.module);
@@ -125,7 +124,9 @@ const LandingSection = ({ allModules }) => {
                 >
                   {announcement.head}
                 </div>
-                <div className="text-secondaryGrey pb-6 font-bodyFamily">
+                <div className={`text-secondaryGrey pb-6 font-bodyFamily ${ 'module-5'=== announcement.module
+                      ? "hover:opacity-10"
+                      : " "}`}>
                   {announcement.desc}
                 </div>
               </div>
@@ -135,6 +136,11 @@ const LandingSection = ({ allModules }) => {
       </Grid>
     </Box>
   );
+
+
+
+
+
 
   const timeLine = (
     <div className="timeline">
@@ -160,7 +166,7 @@ const LandingSection = ({ allModules }) => {
         <div className="flex lg:flex-row flex-col-reverse justify-between">
           <div className="lg:w-1/2 text-white">
             <div className="text-2xl font-bold sm:text-3xl md:text-4xl">
-              {"Building on Solana: A Deep Dive"
+              {"Building On Solana: A Deep Dive"
                 .split("")
                 .map((letter, index) => {
                   return (

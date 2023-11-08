@@ -24,30 +24,27 @@ In this lesson, we set up the development workspace for our token minter project
 
 Start off by creating a new folder. This is where all your work will be located. Once you have created the folder, open a terminal in that folder and run the following command.
 
-```
+```bash
 anchor init spl-token-minter --solidity
-
 ```
 
 This will take some time. Anchor will be installing all dependencies that are needed for the project.
 
 After that, navigate to the project directory by running the following command in the terminal:
 
-```
+```bash
 cd spl-token-minter
-
 ```
 
 Run the following command to open VSCode:
 
-```
+```bash
 code .
-
 ```
 
 Once VSCode has started, you will see that the project will have a structure as shown:
 
-!https://res.cloudinary.com/practicaldev/image/fetch/s--HN1mrp0g--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/klip2l42jbs1bjrhbj36.png
+![project File overviews](/moduleimages/a_generated.png)
 
 By default, this is Anchor organizes newly created project. In building our project, we will focus on these folders/files only. Here's a simplified and concise version of the content:
 
@@ -59,10 +56,8 @@ By default, this is Anchor organizes newly created project. In building our proj
 
 You can ignore these for now: migrations, node_modules, .prettierignore, package.json, tsconfig.json. We'll go over them later.
 
-*Note -:*
 
-> If you're used to working with Solidity on Ethereum, you know about Mainnet and Testnet. With Solana, it might be a bit surprising to find out that there are three options instead of two.
-> 
+> *Note -:* If you're used to working with Solidity on Ethereum, you know about Mainnet and Testnet. With Solana, it might be a bit surprising to find out that there are three options instead of two.
 
 Types of Solana Blockchain Cluster:
 
@@ -74,11 +69,11 @@ You'll only need to worry about Testnet if you're directly dealing with the Sola
 
 In ***anchor.toml*** file you will need to change cluster: localnet to devnet
 
-!https://res.cloudinary.com/practicaldev/image/fetch/s--pgDTXDEp--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/33y7gmh8ttve1azuewaq.jpeg
+![localnet](/moduleimages/a_local.jpg)
 
 Once changed, the Anchor.toml should look like below:
 
-!https://res.cloudinary.com/practicaldev/image/fetch/s--u49Educp--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/cdq66z71gq70u0xbzvh8.jpeg
+![localnet](/moduleimages/a_dev.jpg)
 
 Next, let’s go over the starter code beginning with the on-chain program itself. Within your project's `./solidity` directory, you’ll find the following contract named spl-token-minter.sol below, which includes:
 
@@ -87,7 +82,7 @@ Next, let’s go over the starter code beginning with the on-chain program itsel
 - A print function for messages in the program logs.
 - A get function to retrieve the current state variable value.
 
-!https://res.cloudinary.com/practicaldev/image/fetch/s--k9DDDBAf--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/zve8jd01bhzrz19x3rig.png
+![flip program](/moduleimages/a_flip.png)
 
 ### **Important Differences** (Compared with EVM smart contract).
 
@@ -97,9 +92,8 @@ The `@program_id` annotation:
 
 **On Solana, smart contracts are referred to as “programs”**. The @**program_id** annotation is used to specify the on-chain address of the program.
 
-```
-@program_id("F1ipperKF9EfD821ZbbYjS319LXYiBmjhzkkf5a26rC") //
-
+```solidity
+@program_id("F1ipperKF9EfD821ZbbYjS319LXYiBmjhzkkf5a26rC")
 ```
 
 on-chain program address.
@@ -108,12 +102,11 @@ The **@payer** annotation:
 
 **When storing data on the Solana blockchain, a certain amount of SOL needs to be allocated to cover the storage costs and the rent**(we will discuss this later in further articles). The @payer annotation specifies the user that will pay the SOL required to create the account for storing the state variable.
 
-```
+```solidity
 @payer(payer) // payer for the "data account"
 constructor(address payer) {
     print("Hello, World!");
 }
-
 ```
 
 **Storing of state data**

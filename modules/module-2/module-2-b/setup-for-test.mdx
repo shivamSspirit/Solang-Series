@@ -48,14 +48,12 @@ First, go to the package.json file and change this block of code:
         "typescript": "^4.3.5"
     }
 }
-
 ```
 
 Save this go to the terminal and enter the command for installing the required dependencies:
 
 ```
 npm install
-
 ```
 
 **The `anchor.toml` file serves as the central driver for our application. It's responsible for both app configuration and running tests**.
@@ -63,7 +61,6 @@ npm install
 ```
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
-
 ```
 
 This script is an anchor.toml file responsible for running tests in test folder
@@ -102,7 +99,6 @@ Now describe the test for spl-token-minter
 ```tsx
 describe("spl-token-minter", () => {
 });
-
 ```
 
 In this section, we will discuss and thoroughly test the functionality of the "spl-token-minter" program. Our testing process will include the creation of various test cases, assertions, and expectations to ensure the program's accurate behaviour. These tests will encompass a variety of scenarios, including token creation and minting. For this, you need to first set the requirements for the tests.
@@ -126,7 +122,6 @@ In this section, we will discuss and thoroughly test the functionality of the "s
   const tokenSymbol = "Gold";
   const tokenUri =
     "https://raw.githubusercontent.com/solana-developers/program-examples/new-examples/tokens/tokens/.assets/spl-token.json";
-
 ```
 
 Here we are configuring and initiating the setup for testing our spl-token-minter Solana program.
@@ -148,14 +143,13 @@ it("Is initialized!", async () => {
       .rpc();
     console.log("Your transaction signature", tx);
   });
-
 ```
 
 Here, we initialise the data account for the program, a crucial requirement for Solang. The initialization process is conducted using the new() method from the program.methods object. We specify the dataAccount as an account parameter and the dataAccount keypair as a signer. This ensures that the transaction possesses the necessary authorization and input parameters for the initialization operation.
 
 Now create spl token by entering the following code:
 
-```solidity
+```tsx
 it("Create an SPL Token!", async () => {
     // Get the metadata address for the mint
     const metaplex = Metaplex.make(connection);
@@ -198,14 +192,12 @@ it("Create an SPL Token!", async () => {
       .rpc({ skipPreflight: true });
     console.log("Your transaction signature", tx);
   });
-
 ```
 
 Here, we create an ***custom*** spl token named S***olana pro*** which has the title G***old.*** For this first, we create the Metaplex connection using this:
 
 ```tsx
 const metaplex = Metaplex.make(connection);
-
 ```
 
 Get the metadata address for our token mint:
@@ -216,7 +208,6 @@ const metadataAddress = await metaplex
       .nfts()
       .pdas()
       .metadata({ mint: mintKeypair.publicKey });
-
 ```
 
 Let's look at how we get metadata details for a specific mint. We use **mintKeypair.publicKey** to say which mint we're looking at. When we run this code, we find the metadata address connected to that mint and save it in metadataAddress.
@@ -268,7 +259,6 @@ it("Mint some tokens to your wallet!", async () => {
       .rpc({ skipPreflight: true });
     console.log("Your transaction signature", tx);
   });
-
 ```
 
 Initially, we establish an associated token account by leveraging the token mint and associating it with the user's wallet address. To accomplish this, we employ the **getOrCreateAssociatedTokenAccount**() method. This method requires several parameters, including the connection, the **payer** (associated with the wallet), the **mint**, and the owner (the wallet's owner).
@@ -285,15 +275,13 @@ Now let’s test and make an assertion if our tokens are minted or not by gettin
     let tokens = Number(tokenAmount);
     console.log("minted token amounts", tokens / LAMPORTS_PER_SOL);
     assert.equal(tokens / LAMPORTS_PER_SOL, 159);
-
 ```
 
 Lastly, open **anchor.toml** file and add this block of code in the end of the file.
 
-```
+```solidity
 [[test.validator.clone]]
 address = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
-
 ```
 
 This is the metadata program id for Metaplex.

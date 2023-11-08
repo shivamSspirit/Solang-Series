@@ -10,7 +10,7 @@ modulePartDescription: In this part of the module, you will delve into the basic
 
 # Objectives:
 
-************\*************In this lesson, you will:************\*************
+In this lesson, you will:
 
 - Get to know about the file structure in Solang.
 
@@ -25,19 +25,19 @@ A single file may contain multiple contracts. Solidity files end with .sol exten
 A contract is defined with the contract keyword, followed by the contract name and then the definition of the contract in between curly braces `{` and `}`.
 
 ```soldity
-contract A {
-/// foo simply returns true
-function foo() public returns (bool) {
-return true;
-}
-}
+    contract A {
+         /// foo simply returns true
+           function foo() public returns (bool) {
+             return true;
+            }
+         }
 
-contract B {
-/// bar simply returns false
-function bar() public returns (bool) {
-return false;
-}
-}
+    contract B {
+         /// bar simply returns false
+           function bar() public returns (bool) {
+                return false;
+         }
+       }
 ```
 
 For best practices define only a single contract in each file, and keep the contract name the same as the file name.

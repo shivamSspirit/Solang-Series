@@ -48,34 +48,34 @@ There are different types of imports you can use with Solidity on Solana:
 
 - Import everything from the library.
 - Select a few items from the library.
-- Import maps
-- 
+- Import maps 
 
 **Import everything from the library-:**
 
-```jsx
+```solidity
 import "defines. sol";
 ```
 
 It is also possible to import everything from defines. sol by leaving the list out. Note that this is different from ES6, which would import nothing with this syntax.
 
-**Select a few items from the m library-:**
+**Select a few items from the library-:**
 
-```jsx
+```solidity
 import {foo, bar} from "defines.sol";
 ```
 
 Solang will look for the file definitions. sol in the paths specified with the --importpath command-line option. If the file is relative, e.g. import "./defines.sol"; or import "../defines.sol"; then the directory relative to the parent file is used.
 
-**import maps**➖
+**import maps-:**
 
 Another method for locating files is using import maps. This maps the first directory of an import path to a different location on the file system. Say you add the command line option
-
- --import map @openzeppelin=/opt/open zeppelin-contracts/contracts, 
+```solidity
+import map @openzeppelin=/opt/open zeppelin-contracts/contracts,
+``` 
 
 then
 
-```jsx
+```solidity
 import "@openzeppelin/interfaces/IERC20.sol";
 ```
 
@@ -85,7 +85,7 @@ will automatically map to /opt/open zeppelin-contracts/contracts/interfaces/IER
 
 It is also possible to rename an import.
 
-```jsx
+```solidity
 import {bar as baz,foo} from "defines.sol";
 ```
 
@@ -93,13 +93,13 @@ The bar is now renamed as Baz.
 
 Rather than renaming individual imports, it is also possible to make all the items in a file available under a special import object, as shown:
 
-```jsx
+```solidity
 import "defines. sol" as deaths;
 ```
 
 There is another syntax, which does the same.
 
-```jsx
+```solidity
 import * as defs from "defines. sol";
 ```
 

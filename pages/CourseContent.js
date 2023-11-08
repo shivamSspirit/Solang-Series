@@ -46,7 +46,7 @@ export const announcementData = [
     img: Course2,
     head: "Module Name",
     desc: "Building Solana Programs with Solidity",
-    module_color:"#29232e"
+    module_color:"#A3B86C"
   },
   {
     img: Course3,
@@ -109,8 +109,8 @@ const returnModuleColor=(moduleNumber)=>{
   const colors = findmodule?.module_color;
   if(colors==="#bfbfff"){
     return "hover:bg-[#bfbfff]";
-  } else if(colors==="#29232e"){
-    return "hover:bg-[#29232e]";
+  } else if(colors==="#A3B86C"){
+    return "hover:bg-[#A3B86C]";
   } else if(colors==="#CFB53B"){
     return "hover:bg-[#CFB53B]";
   } else if(colors==="#CD853F"){

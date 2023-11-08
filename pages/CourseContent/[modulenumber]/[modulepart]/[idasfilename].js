@@ -107,13 +107,27 @@ const GeneralInfo = ({
     if (moduleNumber === "module-0") {
       return "bg-[#bfbfff]";
     } else if (moduleNumber === "module-1") {
-      return "bg-[#29232e]";
+      return "bg-[#A3B86C]";
     } else if (moduleNumber === "module-2") {
       return "bg-[#CFB53B]";
     } else if (moduleNumber === "module-3") {
       return "bg-[#CD853F]";
     } else if (moduleNumber === "module-4") {
       return "bg-[#63a4da]";
+    }
+  };
+
+  const returnLessionColors = (lessionNumber) => {
+    if (lessionNumber === "module-0") {
+      return {blockquote:"prose-blockquote:text-[#bfbfff]",codeColor:"prose-code:text-[#bfbfff]",text_color:"text-[#bfbfff]",link_hover:"hover:prose-a:decoration-[#bfbfff]", headingsColor:"prose-strong:text-[#bfbfff]", border_color:"border-[#bfbfff]",imgBorderColor:"prose-img:border-[#bfbfff]",link_color:"prose-a:text-[#bfbfff]"};
+    } else if (lessionNumber === "module-1") {
+      return {blockquote:"prose-blockquote:text-[#A3B86C]",codeColor:"prose-code:text-[#A3B86C]",text_color:"text-[#A3B86C]", link_hover:"hover:prose-a:decoration-[#A3B86C]", headingsColor:"prose-strong:text-[#A3B86C]", border_color:"border-[#A3B86C]",imgBorderColor:"prose-img:border-[#A3B86C]",link_color:"prose-a:text-[#A3B86C]"};
+    } else if (lessionNumber === "module-2") {
+      return {blockquote:"prose-blockquote:text-[#CFB53B]",codeColor:"prose-code:text-[#CFB53B]",text_color:"text-[#CFB53B]", link_hover:"hover:prose-a:decoration-[#CFB53B]", headingsColor:"prose-strong:text-[#CFB53B]", border_color:"border-[#CFB53B]",imgBorderColor:"prose-img:border-[#CFB53B]",link_color:"prose-a:text-[#CFB53B]"};
+    } else if (lessionNumber === "module-3") {
+      return {blockquote:"prose-blockquote:text-[#CD853F]",codeColor:"prose-code:text-[#CD853F]",text_color:"text-[#CD853F]", link_hover:"hover:prose-a:decoration-[#CD853F]", headingsColor:"prose-strong:text-[#CD853F]", border_color:"border-[#CD853F]",imgBorderColor:"prose-img:border-[#CD853F]",link_color:"prose-a:text-[#CD853F]"};
+    } else if (lessionNumber === "module-4") {
+      return {blockquote:"prose-blockquote:text-[#63a4da]",codeColor:"prose-code:text-[#63a4da]",text_color:"text-[#63a4da]", link_hover:"hover:prose-a:decoration-[#63a4da]", headingsColor:"prose-strong:text-[#63a4da]", border_color:"border-[#63a4da]",imgBorderColor:"prose-img:border-[#63a4da]",link_color:"prose-a:text-[#63a4da]"};
     }
   };
 
@@ -138,17 +152,17 @@ const GeneralInfo = ({
         <div className="w-full md:w-3/4 lg:w-3/4 xl:w-3/4">
           <div className="flex flex-col text-white">
             <div className="flex justify-content items-center text-2xl mb-6">
-              <div className="bg-transparentBg border-[5px] border-mod1Color px-3 py-2 rounded-[2.5rem] mr-6 h-16 w-16">
-                <div className="text-white text-3xl text-center font-bold">
-                  a
+              <div className={`bg-transparentBg border-[5px] ${returnLessionColors(lession?.moduleNumber).border_color} px-3 py-2 rounded-[2.5rem] mr-6 h-16 w-16`}>
+                <div className={`${returnLessionColors(lession?.moduleNumber).text_color} text-3xl text-center font-bold`}>
+                {lession?.modulePart[lession?.modulePart.length-1]??"a"}
                 </div>
               </div>
-              <div className="text-4xl">General Info</div>
+              <div className="text-4xl">{lession?.title}</div>
             </div>
           </div>
 
-          <div className="border-collapse w-full text-rose-950 aspect-[4/3] p-4 font-[Inter,sans-serif] subpixel-antialiased tracking-wide font-medium leading-relaxed list-outside text-left ">
-            <div className="prose-table:border-collapse prose-a:underline	prose-a:decoration-sky-500 prose-p:text-left prose-p:leading-relaxed prose-p:subpixel-antialiased prose-p:w-full text-white prose max-w-none prose-p:text-base/7 md:ml-12 lg:ml-12 xl:ml-12 prose-headings:text-white prose-img:border-8 prose-img:border-mod1Color prose-a:text-white hover:prose-a:bg-mod1Color hover:prose-a:text-black prose-a:cursor-pointer prose-red prose-strong:text-funPinkDark prose-pre:bg-primaryDark">
+          <div className={`border-collapse w-full ${returnLessionColors(lession?.moduleNumber).textcolor} aspect-[4/3] p-4 font-[Inter,sans-serif] subpixel-antialiased tracking-wide font-medium leading-relaxed list-outside text-left`}>
+            <div className={`prose-table:border-collapse prose-a:decoration-wavy ${returnLessionColors(lession?.moduleNumber).imgBorderColor} ${returnLessionColors(lession?.moduleNumber).link_hover} prose-p:text-left prose-p:leading-relaxed prose-p:subpixel-antialiased prose-p:w-full text-white prose max-w-none prose-p:text-base/7 md:ml-12 lg:ml-12 xl:ml-12 prose-headings:text-white prose-img:border-8  ${returnLessionColors(lession?.moduleNumber).link_color} hover:prose-a:bg-white hover:prose-a:text-black prose-a:cursor-pointer  ${returnLessionColors(lession?.moduleNumber).headingsColor}  ${returnLessionColors(lession?.moduleNumber).codeColor} prose-code:text-center ${returnLessionColors(lession?.moduleNumber).blockquote} `}>
               <MDXContent />
             </div>
           </div>

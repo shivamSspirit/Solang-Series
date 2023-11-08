@@ -25,17 +25,17 @@ When a constructor is invoked from another contract, the IDL file specifies the 
 
 ```soldity
 contract hatchling {
-string name;
-constructor(string id) payable {
-require(id != "", "name must be provided");
-name = id;
+  string name;
+  constructor(string id) payable {
+    require(id != "", "name must be provided");
+    name = id;
+  }
 }
-}
-
-contract adult {
-function test(address id) external {
-hatchling.new{program_id: id}("luna");
-}
+  
+  contract adult {
+  function test(address id) external {
+    hatchling.new{ program_id: id } ("luna");
+  }
 }
 ```
 
@@ -47,41 +47,44 @@ For the creation of a contract, the data account must be the **first** element
 ```soldity
 import 'solana';
 contract creator {
-@mutableSigner(data_account_to_initialize)
-@mutableSigner(payer)
+  @mutableSigner(data_account_to_initialize)
+  @mutableSigner(payer)
 
-function create_with_metas() external {
-AccountMeta[3] metas = [
-AccountMeta({
-pubkey: tx.accounts.data_account_to_initialize.key,
-is_signer: true,
-is_writable: true}),
-AccountMeta({
-pubkey: tx.accounts.payer.key,
-is_signer: true,
-is_writable: true}),
-AccountMeta({
-pubkey: address"11111111111111111111111111111111",
-is_writable: false,
-is_signer: false})
-];
+  function create_with_metas() external {
+    AccountMeta[3] metas = [
+      AccountMeta({
+        pubkey: tx.accounts.data_account_to_initialize.key,
+        is_signer: true,
+        is_writable: true
+      }),
+      AccountMeta({
+        pubkey: tx.accounts.payer.key,
+        is_signer: true,
+        is_writable: true
+      }),
+      AccountMeta({
+        pubkey: address"11111111111111111111111111111111",
+        is_writable: false,
+        is_signer: false
+      })
+    ];
 
-Child.new{accounts: metas}();
-Child.use_metas{accounts: []}();
-}
+    Child.new{ accounts: metas } ();
+    Child.use_metas{ accounts: [] } ();
+  }
 }
 
 @program_id("Chi1d5XD6nTAp2EyaNGqMxZzUjh6NvhXRxbGHP3D1RaT")
 
 contract Child {
-@payer(payer)
-constructor() {
-print("In child constructor");
-}
+  @payer(payer)
+  constructor() {
+    print("In child constructor");
+  }
 
-function use_metas() pure public {
-print("I am using metas");
-}
+  function use_metas() pure public {
+    print("I am using metas");
+  }
 }
 ```
 
