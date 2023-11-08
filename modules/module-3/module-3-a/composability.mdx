@@ -18,7 +18,7 @@ In this lesson, you will:
 
 ## tl;dr
 
-Composability in Web3 is similar to how open-source software components are used to build various applications. In Solana, composability is akin to Functional Programming (FP), while Ethereum's approach is closer to Interface-based Inheritance (OOP). Solana uses spl-token to manage tokens centrally, while Ethereum has separate contracts like ERC-20.
+Composability in Web3 is similar to how open-source software components are used to build various applications. In Solana, composability is akin to Functional Programming FP, while Ethereum's approach is closer to Interface-based Inheritance OOP. Solana uses spl-token to manage tokens centrally, while Ethereum has separate contracts like ERC-20.
 
 It enables blockchain apps to collaborate by linking together through smart contracts or project assembly. Composability offers quicker development, enhanced innovation, and user-friendly collaboration in the Web3 ecosystem.
 
@@ -30,9 +30,9 @@ Web3, the updated Internet version, is reintroducing composability. In Web3, com
 
 ## Composability Of Programs (within Solana and Ethereum)
 
-In Solana, composability can be considered to be like Functional Programming (FP). It is similar to having separate roles for a smart contract and the data it uses. When dealing with Solana, transactions is centered around Solana accounts, which form the core of the entire Solana ecosystem. Unlike Ethereum, where each token has its special contract, Solana uses something called **spl-token** to control all tokens in one place.
+In Solana, composability can be considered to be like Functional Programming FP. It is similar to having separate roles for a smart contract and the data it uses. When dealing with Solana, transactions is centered around Solana accounts, which form the core of the entire Solana ecosystem. Unlike Ethereum, where each token has its special contract, Solana uses something called **spl-token** to control all tokens in one place.
 
-Ethereum's composability is akin to interface-based inheritance in traditional Object Oriented Programming (OOP). This means that if something acts like a particular entity, it's treated as such. In Ethereum, you expand on established standards like ERC-20 and implement the necessary functions.
+Ethereum's composability is akin to interface-based inheritance in traditional Object Oriented Programming OOP. This means that if something acts like a particular entity, it's treated as such. In Ethereum, you expand on established standards like ERC-20 and implement the necessary functions.
 
 On Ethereum, data lives right inside the smart contract. But in Solana, data is spread out across many atomic accounts. Even though it might sound a bit complex, this setup lets Solana do many things at the same time. Transactions that need to look at an account, without changing it, can all happen together.
 
@@ -52,14 +52,14 @@ Here's a simplified comparison table between Solana and Ethereum composability:
     <tbody>
       <tr>
         <td>Composability Approach</td>
-        <td>Like Functional Programming (FP)</td>
-        <td>Interface-based Inheritance (OOP)</td>
+        <td>Like Functional Programming FP</td>
+        <td>Interface-based Inheritance OOP</td>
       </tr>
 
       <tr>
         <td>Token Management</td>
-        <td>Through spl-token</td>
-        <td>Each token has its own contract (e.g., ERC-20)</td>
+        <td>Through spl token</td>
+        <td>Each token has its own contract e.g ERC-20</td>
       </tr>
 
       <tr>
@@ -81,24 +81,24 @@ Here's a simplified comparison table between Solana and Ethereum composability:
       </tr>
 
  <tr>
-     <td>Inter-program Comm.</td>
-        <td>Cross-program invocation and PDA</td>
-        <td>Interface and inheritance</td>
+     <td>Inter program Comm</td>
+      <td>Cross program invocation and PDA</td>
+      <td>Interface and inheritance</td>
       </tr>
 
     </tbody>
   </table>
-  </>
+</>
 
 ### Composability of programs in Solana via CPI and PDA
 
-Cross-Program Invocation (CPI) is key to ensuring collaboration between Solana programs. This enables the composability of Solana programs. It enables one program to call another, establishing a smooth connection. This feature simplifies the expansive Solana system into a unified ecosystem for developers.
+Cross-Program Invocation CPI is key to ensuring collaboration between Solana programs. This enables the composability of Solana programs. It enables one program to call another, establishing a smooth connection. This feature simplifies the expansive Solana system into a unified ecosystem for developers.
 
 **Calling Programs with CPIs**
 
-A Cross-Program Invocation (CPI) is when one program calls another program, aiming at a certain instruction in that program. CPIs allow the calling program to extend its signer privileges to the callee program.
+A Cross-Program Invocation CPI is when one program calls another program, aiming at a certain instruction in that program. CPIs allow the calling program to extend its signer privileges to the callee program.
 
-This is achieved using instructions like invoke or invoke_signed. The latter is employed when programs have to give their signatures for Program-Derived Addresses (PDAs, which we'll cover in this series).
+This is achieved using instructions like invoke or invoke_signed. The latter is employed when programs have to give their signatures for Program-Derived Addresses PDAs, which we'll cover in this series.
 
 CPIs are what make Solana programs work together. Any public instruction of a program can be triggered by another program using a CPI. This makes different programs within the Solana system work together like clockwork. Even though we can't control the accounts and data that are sent to a program, we should always double-check the information we pass into a CPI. This is crucial for keeping the program secure and working as expected.
 
@@ -116,7 +116,7 @@ Oh, and that program ID we mentioned? The program doing the calling needs to get
 
 Imagine this instruction as a recipe – you gather these elements, and then something incredible unfolds. It's like a sort of magic that's built into the Solana system.
 
-***In this tutorial, you'll discover how to use invoke CPI in Solang when a program-derived address (PDA) isn't required for the signer.***
+***In this tutorial, you'll discover how to use invoke CPI in Solang when a program-derived address PDA isn't required for the signer.***
 
 ### Composability of contracts in Ethereum
 

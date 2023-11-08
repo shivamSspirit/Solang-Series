@@ -6,6 +6,7 @@ import changePartFunction from "../../../../shared/changePartFunction";
 import NewSideBar from "../../../../components/NewSideBar";
 import { NextSeo } from "next-seo";
 import ColorModuleParts from "../../../../components/ColorModuleParts";
+import SideBar from "../../../../components/Sidebar";
 
 export async function getStaticPaths() {
   // Get a list of valid post paths.
@@ -85,8 +86,11 @@ const GeneralInfo = ({
 }) => {
   const MDXContent = useMDXComponent(lession.body.code);
   const router = useRouter();
+  
 
   // console.log("filtered Parts:",filteredParts)
+
+
 
   const orderedLessions = filteredParts
     ?.sort((a, b) => a.orderNumber - b.orderNumber)
@@ -103,6 +107,13 @@ const GeneralInfo = ({
     totalParts,
   });
 
+ 
+ const regXHeader = /\n(?<flag>#{1,6})\s+(?<content>.+)/g;
+ const fetched  =  Array.from(lession.body.raw.matchAll(regXHeader));
+
+ 
+ console.log("fetched",fetched)
+
   const returnModuleColor = (moduleNumber) => {
     if (moduleNumber === "module-0") {
       return "bg-[#bfbfff]";
@@ -117,6 +128,8 @@ const GeneralInfo = ({
     }
   };
 
+  
+
   const returnLessionColors = (lessionNumber) => {
     if (lessionNumber === "module-0") {
       return {blockquote:"prose-blockquote:text-[#bfbfff]",codeColor:"prose-code:text-[#bfbfff]",text_color:"text-[#bfbfff]",link_hover:"hover:prose-a:decoration-[#bfbfff]", headingsColor:"prose-strong:text-[#bfbfff]", border_color:"border-[#bfbfff]",imgBorderColor:"prose-img:border-[#bfbfff]",link_color:"prose-a:text-[#bfbfff]"};
@@ -130,6 +143,8 @@ const GeneralInfo = ({
       return {blockquote:"prose-blockquote:text-[#63a4da]",codeColor:"prose-code:text-[#63a4da]",text_color:"text-[#63a4da]", link_hover:"hover:prose-a:decoration-[#63a4da]", headingsColor:"prose-strong:text-[#63a4da]", border_color:"border-[#63a4da]",imgBorderColor:"prose-img:border-[#63a4da]",link_color:"prose-a:text-[#63a4da]"};
     }
   };
+
+  console.log("lessions",lession)
 
   return (
     <div className="my-12">
@@ -146,7 +161,7 @@ const GeneralInfo = ({
 
       <div className="mt-20 sm:flex w-full gap-12">
         <div className="hidden md:flex w-1/4">
-          <NewSideBar headings={lession.headings} />
+          <SideBar headings={lession.headings} />
         </div>
 
         <div className="w-full md:w-3/4 lg:w-3/4 xl:w-3/4">

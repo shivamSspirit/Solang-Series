@@ -121,14 +121,13 @@ Here's a simplified comparison table highlighting the key differences between So
 
 - On Ethereum, token contracts have a `mapping` which defines the balance for each owner address:
 
-```
+```solidity
 mapping (address => uint256) private _balances;
-
 ```
 
 - On Solana, token balances are stored in unique accounts where the storage account address is derived from the address of the owner account.
 
-![uo](https://res.cloudinary.com/practicaldev/image/fetch/s---VrOf4kR--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/gm32bz33sxfb2m1er2dq.jpeg)
+![solana Account](https://res.cloudinary.com/practicaldev/image/fetch/s---VrOf4kR--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/gm32bz33sxfb2m1er2dq.jpeg)
 
 Solang integrates Solidity with the Solana account model by modifying existing code patterns and introducing new ones that are unique to Solana, making this complex undertaking possible.
 

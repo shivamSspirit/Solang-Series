@@ -12,6 +12,7 @@
     "@emotion/react": "^11.10.6",
     "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.6",
+    "@jsdevtools/rehype-toc": "^3.0.2",
     "@mdx-js/react": "^3.0.0",
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.11",

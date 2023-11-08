@@ -14,7 +14,7 @@ import { experimentalStyled as styled } from "@mui/material/styles";
 import { useRouter } from "next/router";
 import { getModules } from "utils/module-lession";
 import { NextSeo } from "next-seo";
-import { allDocuments } from "../.contentlayer/generated";
+// import { allDocuments } from "../.contentlayer/generated";
 
 // export async function getStaticProps(context) {
 //   console.log("Running static props",context);
@@ -200,7 +200,7 @@ const returnModuleColor=(moduleNumber)=>{
       {/* <div className='text-3xl md:text-5xl mb-2'>Solidity On Solana</div> */}
       <div className="mb-10 text-sm md:text-base">
       The course is divided into nine modules, labeled from <strong>Module-0</strong> to <strong>Module-8</strong>. Each module is further
-      divided into two parts for clear understanding, and these are referred to as 'Module Number Part.
+      divided into two parts for clear understanding, and these are referred to as <strong>Module Number Part</strong>.
       Additionally, each module part contains easily digestible lessons, so you can explore each concept thoroughly.
       Immerse yourself in the world of Solidity on Solana and become proficient in creating smart contracts through
       this well-organized and informative modules

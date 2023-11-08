@@ -3,7 +3,10 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
-import GithubSlugger from "github-slugger"
+import GithubSlugger from "github-slugger";
+
+import rehypeToc from "@jsdevtools/rehype-toc";
+
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields = {
@@ -19,23 +22,33 @@ const computedFields = {
     type: "json",
     resolve: async (doc) => {
       const regXHeader = /\n(?<flag>#{1,6})\s+(?<content>.+)/g;
-      const slugger = new GithubSlugger()
+      const slugger = new GithubSlugger();
       const headings = Array.from(doc.body.raw.matchAll(regXHeader)).map(
-          ({ groups }) => {
-            const flag = groups?.flag;
-            const content = groups?.content;
-            return {
-              level: flag.length,
-              text: content,
-              slug: content ? slugger.slug(content) : undefined
-            };
-          }
-        );
-        return headings;
+        ({ groups }) => {
+          const flag = groups?.flag;
+          const content = groups?.content;
+          return {
+            level:
+              flag.length == 1 ? "one" : flag.length == 2 ? "two" : "three",
+            text: content,
+            slug: content ? slugger.slug(content) : undefined,
+          };
+        }
+      );
+      return headings;
     },
   },
+
+  // toc: {
+  //   type: "json",
+  //   resolve: async (doc) => {
+  //     const regularExp = /\n(?<flag>#{1,6})\s+(?<content>.+)/g;
+  //     const headingsArr = Array;
+  //     return true;
+  //   },
+  // },
 };
-// h
+
 export const Doc = defineDocumentType(() => ({
   name: "Doc",
   filePathPattern: `**/**/*.mdx`,
@@ -58,14 +71,16 @@ export const Doc = defineDocumentType(() => ({
       type: "string",
     },
     orderNumber: {
-      type: "string"
+      type: "string",
     },
     modulePartDescription: {
-      type: "string"
-    }
+      type: "string",
+    },
   },
+
   computedFields,
 }));
+
 
 export default makeSource({
   contentDirPath: "modules",
@@ -73,35 +88,7 @@ export default makeSource({
   md: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
-      rehypeSlug,
-      [
-        rehypePrettyCode,
-        {
-          theme: "github-dark",
-          onVisitLine(node) {
-            // Prevent lines from collapsing in `display: grid` mode, and allow empty
-            // lines to be copy/pasted
-            if (node.children.length === 0) {
-              node.children = [{ type: "text", value: " " }];
-            }
-          },
-          onVisitHighlightedLine(node) {
-            node.properties.className.push("line--highlighted");
-          },
-          onVisitHighlightedWord(node) {
-            node.properties.className = ["word--highlighted"];
-          },
-        },
-      ],
-      [
-        rehypeAutolinkHeadings,
-        {
-          properties: {
-            className: ["subheading-anchor"],
-            ariaLabel: "Link to section",
-          },
-        },
-      ],
+      rehypeSlug,rehypeAutolinkHeadings,rehypeToc
     ],
   },
 });
