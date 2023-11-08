@@ -14,7 +14,8 @@ import { experimentalStyled as styled } from "@mui/material/styles";
 import { useRouter } from "next/router";
 import { getModules } from "utils/module-lession";
 import { NextSeo } from "next-seo";
-// import { allDocuments } from "../.contentlayer/generated";
+import { allDocuments } from "../.contentlayer/generated";
+import Layout from "../components/Layout";
 
 // export async function getStaticProps(context) {
 //   console.log("Running static props",context);
@@ -124,7 +125,7 @@ const returnModuleColor=(moduleNumber)=>{
  // console.log(mergedArray);
 
   const moduleCard = (
-    <div className="text-white">
+    <div className='text-white'>
       <Box sx={{ flexGrow: 1 }}>
         <Grid
           container
@@ -134,29 +135,39 @@ const returnModuleColor=(moduleNumber)=>{
         >
           {mergedArray.map((announcement, index) => (
             <Grid item xs={3} sm={4} md={4} key={index}>
-              <div className={ `m-1 p-2 bg-[#858383] rounded-2xl border border-white ${returnModuleColor(announcement.module)}` }>
+              <div
+                className={`m-1 p-2 cursor-pointer bg-[#858383] rounded-2xl border border-white ${returnModuleColor(
+                  announcement.module
+                )}`}
+              >
                 <div>
                   <Image
                     src={announcement.img.src}
-                    alt="med"
+                    alt='med'
                     width={400}
                     height={220}
-                    className="w-full"
+                    className='w-full'
                   />
                 </div>
-                <div className="px-3 rounded-b-2xl">
-                  <div onClick={() => {
+                <div className='px-3 rounded-b-2xl'>
+                  <div
+                    onClick={() => {
                       router.push({
                         pathname: `/CourseContent/${announcement.module}/${announcement.module}-a`,
                       });
-                    }} className="text-2xl capitalize pt-2 pb-1 cursor-pointer">
+                    }}
+                    className='text-2xl capitalize pt-2 pb-1 cursor-pointer'
+                  >
                     {announcement.module}
                   </div>
-                  <div onClick={() => {
+                  <div
+                    onClick={() => {
                       router.push({
                         pathname: `/CourseContent/${announcement.module}/${announcement.module}-a`,
                       });
-                    }} className="text-white pb-2 cursor-text">
+                    }}
+                    className='text-white pb-2 cursor-pointer min-h-[52px] flex justify-start items-center'
+                  >
                     {announcement.desc}
                   </div>
                 </div>
@@ -183,30 +194,35 @@ const returnModuleColor=(moduleNumber)=>{
   );
 
   return (
-    <div className="my-16 text-white">
-      <NextSeo title="Course Content" />
-      <div className="mb-3">
-        {"Solidity On Solana".split("").map((letter, index) => {
-          return (
-            <span
-              key={index}
-              className="hover:text-funPinkDark hover:mb-3 transition-all duration-500 hover:duration-100 click:goodbyeLetterAnim text-3xl md:text-5xl mb-2 leading-relaxed "
-            >
-              {letter}
-            </span>
-          );
-        })}
+    <Layout>
+      <div className='my-16 text-white'>
+        <NextSeo title='Course Content' />
+        <div className='mb-3'>
+          {"Solidity On Solana".split("").map((letter, index) => {
+            return (
+              <span
+                key={index}
+                className='hover:text-funPinkDark hover:mb-3 transition-all duration-500 hover:duration-100 click:goodbyeLetterAnim text-3xl md:text-5xl mb-2 leading-relaxed '
+              >
+                {letter}
+              </span>
+            );
+          })}
+        </div>
+        {/* <div className='text-3xl md:text-5xl mb-2'>Solidity On Solana</div> */}
+        <div className='mb-10 text-sm md:text-base'>
+          The course is divided into nine modules, labeled from{" "}
+          <strong>Module-0</strong> to <strong>Module-8</strong>. Each module is
+          further divided into two parts for clear understanding, and these are
+          referred to as 'Module Number Part. Additionally, each module part
+          contains easily digestible lessons, so you can explore each concept
+          thoroughly. Immerse yourself in the world of Solidity on Solana and
+          become proficient in creating smart contracts through this
+          well-organized and informative modules
+        </div>
+        <div>{moduleCard}</div>
       </div>
-      {/* <div className='text-3xl md:text-5xl mb-2'>Solidity On Solana</div> */}
-      <div className="mb-10 text-sm md:text-base">
-      The course is divided into nine modules, labeled from <strong>Module-0</strong> to <strong>Module-8</strong>. Each module is further
-      divided into two parts for clear understanding, and these are referred to as <strong>Module Number Part</strong>.
-      Additionally, each module part contains easily digestible lessons, so you can explore each concept thoroughly.
-      Immerse yourself in the world of Solidity on Solana and become proficient in creating smart contracts through
-      this well-organized and informative modules
-      </div>
-      <div>{moduleCard}</div>
-    </div>
+    </Layout>
   );
 };
 
