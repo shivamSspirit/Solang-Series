@@ -86,7 +86,7 @@ const About = () => {
                 </p>
                 <br />
                 <p>
-                  we are brining wealth of knowledge and resources for budding enthusiasts
+                  we are bringing wealth of knowledge and resources for budding enthusiasts
                   willing to gain deep knowledge about the ins and outs of
                   Solana. We are dedicated to providing resources, education,
                   and tools to help users succeed in Solana development.
