@@ -166,18 +166,18 @@ const LandingSection = ({ allModules }) => {
 
   return (
     <Layout>
-      <div className='mt-20 sm:px-12'>
+      <div className='mt-5 md:mt-20 sm:px-12'>
         <div>
           <div className='flex lg:flex-row flex-col-reverse justify-between'>
             <div className='lg:w-1/2 text-white'>
-              <div className='text-2xl font-bold sm:text-3xl md:text-4xl'>
+              <div className='font-bold text-2xl xs:text-4xl sm:text-3xl md:text-4xl'>
                 {"Building On Solana: A Deep Dive"
                   .split("")
                   .map((letter, index) => {
                     return (
                       <span
                         key={index}
-                        className=' hover:text-funPinkDark hover:mb-3 transition-all duration-500 hover:duration-100 click:goodbyeLetterAnim text-3xl md:text-5xl mb-2 leading-loose subpixel-antialiased'
+                        className=' hover:text-funPinkDark hover:mb-3 transition-all duration-500 hover:duration-100 click:goodbyeLetterAnim text-3xl leading-5 md:text-5xl mb-2 md:leading-loose subpixel-antialiased'
                       >
                         {letter}
                       </span>
