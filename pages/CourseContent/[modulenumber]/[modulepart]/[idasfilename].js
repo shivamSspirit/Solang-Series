@@ -96,6 +96,8 @@ const GeneralInfo = ({
   const MDXContent = useMDXComponent(lession.body.code);
   const router = useRouter();
 
+  console.log(lession.body.raw, " RAW DATA");
+
   // console.log("filtered Parts:",filteredParts)
   const mdxComponents = {
     h1: MdxH1,

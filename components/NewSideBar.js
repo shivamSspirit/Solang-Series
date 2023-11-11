@@ -28,7 +28,7 @@ export default function NewSideBar({ headings }) {
             {headings?.map((heading, idx) => (
               <Link href={`#${heading.slug}`}>
                 <li
-                  className='text-white list-outside leading-normal tracking-normal md:text-gray-400 hover:font-sans  hover:subpixel-antialiased text-[14px]  capitalize cursor-pointer whitespace-normal my-4 flex-wrap  hover:bg-gray-700 w-full text-left'
+                  className='text-white list-outside leading-normal tracking-normal md:text-gray-400 text-[14px] capitalize cursor-pointer whitespace-normal my-4 flex-wrap  hover:bg-gray-700 w-full text-left'
                   key={idx}
                 >
                   -{heading.slug}
