@@ -5,7 +5,7 @@ import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import GithubSlugger from "github-slugger";
 
-import rehypeToc from "@jsdevtools/rehype-toc";
+// import rehypeToc from "@jsdevtools/rehype-toc";
 
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
@@ -88,7 +88,15 @@ export default makeSource({
   md: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
-      rehypeSlug,rehypeAutolinkHeadings,rehypeToc
+      rehypeSlug,
+      [
+        rehypeAutolinkHeadings,
+        {
+          properties: {
+            className: ["anchor"],
+          },
+        },
+      ],
     ],
   },
 });

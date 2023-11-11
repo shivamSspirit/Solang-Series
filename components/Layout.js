@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
   const typeString = children.type.name;
   if (typeString !== "Error") fileName = typeString;
 
-  console.log(fileName);
+  // console.log(fileName);
 
   return (
     <>

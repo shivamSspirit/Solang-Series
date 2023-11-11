@@ -14,7 +14,7 @@ export default function SideBar({ headings }) {
   }
 
 
-  console.log("headings",headings)
+  // console.log("headings",headings)
 
   // useEffect(() => {
   //   const handleScroll = () => {
