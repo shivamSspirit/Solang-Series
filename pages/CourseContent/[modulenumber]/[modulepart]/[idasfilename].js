@@ -219,12 +219,12 @@ const GeneralInfo = ({
                 <div
                   className={`bg-transparentBg border-[5px] ${
                     returnLessionColors(lession?.moduleNumber).border_color
-                  } px-3 py-2 rounded-[2.5rem] mr-2 md:mr-6 lg:mr-6 xld:mr-6 h-16 w-16`}
+                  } px-3 py-2 rounded-[2.5rem] mr-2 md:mr-6 lg:mr-6 xld:mr-6 h-[64px] w-[64px]`}
                 >
                   <div
                     className={`${
                       returnLessionColors(lession?.moduleNumber).text_color
-                    } text-3xl text-center font-bold`}
+                    } text-3xl relative left-[8px] font-bold h-[64px] w-[64px]`}
                   >
                     {lession?.modulePart[lession?.modulePart.length - 1] ?? "a"}
                   </div>

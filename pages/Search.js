@@ -3,10 +3,6 @@ import React from "react";
 import Layout from "../shared/components/Layout";
 
 const Search = () => {
-  function handleFocus() {
-    searchInput.current.blur(); // removing focus
-  }
-
   return (
     <Layout showFooter={false}>
       <div className=''>

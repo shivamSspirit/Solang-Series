@@ -28,7 +28,7 @@ const NextBreadcrumb = ({
 
   return (
     <div>
-      <ul id='breadcrumbs-one' className='hidden md:flex'>
+      <ul id='breadcrumbs-one' className='hidden lg:flex'>
         {pathNames?.map((link, index) => {
         //  console.log("trimmedPat",trimmedPath?.slice(2, index + 2)?.join("/"))
           let href = index <= 1 ? `/CourseContent` : `/CourseContent/${trimmedPath?.slice(2, index + 2)?.join("/")}`;
