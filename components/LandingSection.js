@@ -61,7 +61,7 @@ const timelineData = [
 ];
 
 const LandingSection = ({ allModules }) => {
-  console.log("all modes in land", allModules);
+  // console.log("all modes in land", allModules);
   const [svgHoverColor, setSvgHoverColor] = useState("white");
   const [disable, setDisable] = useState(false);
   const router = useRouter();

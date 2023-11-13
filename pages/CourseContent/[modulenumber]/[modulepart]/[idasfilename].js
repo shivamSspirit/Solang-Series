@@ -6,7 +6,16 @@ import changePartFunction from "../../../../shared/changePartFunction";
 import NewSideBar from "../../../../components/NewSideBar";
 import { NextSeo } from "next-seo";
 import ColorModuleParts from "../../../../components/ColorModuleParts";
+import GithubSlugger from "github-slugger";
 import Layout from "../../../../components/Layout";
+import {
+  MdxH1,
+  MdxH2,
+  MdxH3,
+  MdxH4,
+  MdxH5,
+  MdxH6,
+} from "../../../../components/Mdxheadings";
 
 export async function getStaticPaths() {
   // Get a list of valid post paths.
@@ -87,7 +96,17 @@ const GeneralInfo = ({
   const MDXContent = useMDXComponent(lession.body.code);
   const router = useRouter();
 
+  console.log(lession.body.raw, " RAW DATA");
+
   // console.log("filtered Parts:",filteredParts)
+  const mdxComponents = {
+    h1: MdxH1,
+    h2: MdxH2,
+    h3: MdxH3,
+    h4: MdxH4,
+    h5: MdxH5,
+    h6: MdxH6,
+  };
 
   const orderedLessions = filteredParts
     ?.sort((a, b) => a.orderNumber - b.orderNumber)
@@ -120,15 +139,60 @@ const GeneralInfo = ({
 
   const returnLessionColors = (lessionNumber) => {
     if (lessionNumber === "module-0") {
-      return {blockquote:"prose-blockquote:text-[#bfbfff]",codeColor:"prose-code:text-[#bfbfff]",text_color:"text-[#bfbfff]",link_hover:"hover:prose-a:decoration-[#bfbfff]", headingsColor:"prose-strong:text-[#bfbfff]", border_color:"border-[#bfbfff]",imgBorderColor:"prose-img:border-[#bfbfff]",link_color:"prose-a:text-[#bfbfff]"};
+      return {
+        blockquote: "prose-blockquote:text-[#bfbfff]",
+        codeColor: "prose-code:text-[#bfbfff]",
+        text_color: "text-[#bfbfff]",
+        link_hover: "hover:prose-a:decoration-[#bfbfff]",
+        headingsColor: "prose-strong:text-[#bfbfff]",
+        border_color: "border-[#bfbfff]",
+        imgBorderColor: "prose-img:border-[#bfbfff]",
+        link_color: "prose-a:text-[#bfbfff]",
+      };
     } else if (lessionNumber === "module-1") {
-      return {blockquote:"prose-blockquote:text-[#A3B86C]",codeColor:"prose-code:text-[#A3B86C]",text_color:"text-[#A3B86C]", link_hover:"hover:prose-a:decoration-[#A3B86C]", headingsColor:"prose-strong:text-[#A3B86C]", border_color:"border-[#A3B86C]",imgBorderColor:"prose-img:border-[#A3B86C]",link_color:"prose-a:text-[#A3B86C]"};
+      return {
+        blockquote: "prose-blockquote:text-[#A3B86C]",
+        codeColor: "prose-code:text-[#A3B86C]",
+        text_color: "text-[#A3B86C]",
+        link_hover: "hover:prose-a:decoration-[#A3B86C]",
+        headingsColor: "prose-strong:text-[#A3B86C]",
+        border_color: "border-[#A3B86C]",
+        imgBorderColor: "prose-img:border-[#A3B86C]",
+        link_color: "prose-a:text-[#A3B86C]",
+      };
     } else if (lessionNumber === "module-2") {
-      return {blockquote:"prose-blockquote:text-[#CFB53B]",codeColor:"prose-code:text-[#CFB53B]",text_color:"text-[#CFB53B]", link_hover:"hover:prose-a:decoration-[#CFB53B]", headingsColor:"prose-strong:text-[#CFB53B]", border_color:"border-[#CFB53B]",imgBorderColor:"prose-img:border-[#CFB53B]",link_color:"prose-a:text-[#CFB53B]"};
+      return {
+        blockquote: "prose-blockquote:text-[#CFB53B]",
+        codeColor: "prose-code:text-[#CFB53B]",
+        text_color: "text-[#CFB53B]",
+        link_hover: "hover:prose-a:decoration-[#CFB53B]",
+        headingsColor: "prose-strong:text-[#CFB53B]",
+        border_color: "border-[#CFB53B]",
+        imgBorderColor: "prose-img:border-[#CFB53B]",
+        link_color: "prose-a:text-[#CFB53B]",
+      };
     } else if (lessionNumber === "module-3") {
-      return {blockquote:"prose-blockquote:text-[#CD853F]",codeColor:"prose-code:text-[#CD853F]",text_color:"text-[#CD853F]", link_hover:"hover:prose-a:decoration-[#CD853F]", headingsColor:"prose-strong:text-[#CD853F]", border_color:"border-[#CD853F]",imgBorderColor:"prose-img:border-[#CD853F]",link_color:"prose-a:text-[#CD853F]"};
+      return {
+        blockquote: "prose-blockquote:text-[#CD853F]",
+        codeColor: "prose-code:text-[#CD853F]",
+        text_color: "text-[#CD853F]",
+        link_hover: "hover:prose-a:decoration-[#CD853F]",
+        headingsColor: "prose-strong:text-[#CD853F]",
+        border_color: "border-[#CD853F]",
+        imgBorderColor: "prose-img:border-[#CD853F]",
+        link_color: "prose-a:text-[#CD853F]",
+      };
     } else if (lessionNumber === "module-4") {
-      return {blockquote:"prose-blockquote:text-[#63a4da]",codeColor:"prose-code:text-[#63a4da]",text_color:"text-[#63a4da]", link_hover:"hover:prose-a:decoration-[#63a4da]", headingsColor:"prose-strong:text-[#63a4da]", border_color:"border-[#63a4da]",imgBorderColor:"prose-img:border-[#63a4da]",link_color:"prose-a:text-[#63a4da]"};
+      return {
+        blockquote: "prose-blockquote:text-[#63a4da]",
+        codeColor: "prose-code:text-[#63a4da]",
+        text_color: "text-[#63a4da]",
+        link_hover: "hover:prose-a:decoration-[#63a4da]",
+        headingsColor: "prose-strong:text-[#63a4da]",
+        border_color: "border-[#63a4da]",
+        imgBorderColor: "prose-img:border-[#63a4da]",
+        link_color: "prose-a:text-[#63a4da]",
+      };
     }
   };
 
@@ -157,17 +221,19 @@ const GeneralInfo = ({
                 <div
                   className={`bg-transparentBg border-[5px] ${
                     returnLessionColors(lession?.moduleNumber).border_color
-                  } px-3 py-2 rounded-[2.5rem] mr-1 md:mr-6 lg:mr-6 xld:mr-6 h-16 w-16`}
+                  } px-3 py-2 rounded-[2.5rem] mr-2 md:mr-6 lg:mr-6 xld:mr-6 h-[64px] w-[64px]`}
                 >
                   <div
                     className={`${
                       returnLessionColors(lession?.moduleNumber).text_color
-                    } text-3xl text-center font-bold`}
+                    } text-3xl relative left-[8px] font-bold h-[64px] w-[64px]`}
                   >
                     {lession?.modulePart[lession?.modulePart.length - 1] ?? "a"}
                   </div>
                 </div>
-                <div className='text-2xl md:text-3xl lg:text-4xl xl:text-4xl ml-5 md:ml-0 lg:ml-0 xl:ml-0'>{lession?.title}</div>
+                <div className='text-2xl md:text-3xl lg:text-4xl xl:text-4xl sm:ml-5 md:ml-0 lg:ml-0 xl:ml-0'>
+                  {lession?.title}
+                </div>
               </div>
             </div>
 
@@ -191,7 +257,7 @@ const GeneralInfo = ({
                   returnLessionColors(lession?.moduleNumber).blockquote
                 } `}
               >
-                <MDXContent />
+                <MDXContent components={mdxComponents} />
               </div>
             </div>
           </div>
