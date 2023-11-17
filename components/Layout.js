@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
             openGraph={{
               url: "https://solidityonsolana.one/",
               title: "Soldity For Solana",
-              description: "A full stack web developer, who loves to design and develop beautiful websites. I have been coding for over a year now. One of my hobbies is writing, I love to document my journey by writing blog posts and also teach others through them.",
+              description: "An Ultimate Crash Course on how to build on solana using solidity",
               images: [
                 {
                   url: "/moduleimages/site-log.svg",
@@ -49,7 +49,7 @@ const Layout = ({ children }) => {
             openGraph={{
               url: "https://solidityonsolana.one/",
               title: "Soldity For Solana",
-              description: "A full stack web developer, who loves to design and develop beautiful websites. I have been coding for over a year now. One of my hobbies is writing, I love to document my journey by writing blog posts and also teach others through them.",
+              description: "An Ultimate Crash Course on how to build on solana using solidity",
               images: [
                 {
                   url: "/moduleimages/site-log.svg",
@@ -82,3 +82,4 @@ const Layout = ({ children }) => {
 };
 
 export default Layout;
+
