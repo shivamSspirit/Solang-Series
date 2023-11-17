@@ -101,7 +101,7 @@ const Course1 = ({ filteredParts }) => {
               description: "An Ultimate Crash Course on how to build on solana using solidity",
               images: [
                 {
-                  url: "/moduleimages/site-log.svg",
+                  url: "https://res.cloudinary.com/ddwkxn8ak/image/upload/v1699181695/solangsol/land_fjuvyw.jpg",
                   width: 600,
                   height: 420,
                   alt: "Soldity For Solana",
