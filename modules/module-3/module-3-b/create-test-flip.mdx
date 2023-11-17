@@ -8,18 +8,18 @@ orderNumber: '1'
 modulePartDescription: In this part of the module, you will delve into code design and develop an actual flip program by utilizing cross-program invocation techniques in Solana using Solidity. The process begins with creating an interface in Solidity. Subsequently, you will write tests for it using `TypeScript` and proceed with building, deploying, and testing this flip program.
 ---
 
-# Objectives
+## Objectives
 
-In this lesson, you will:
+In this lession, you will:
 
 - Configure testing environment for Solang
 - Write test cases for the Solidity code.
 
 ## tl;dr
 
-This lesson provides instructions for writing tests for a Solana program that involves cross-program invocation (CPI). It starts by configuring the testing environment and generating key pairs for data accounts. The tests include initializing a data account for the lever program, pulling a virtual lever through CPI, and fetching and checking the updated state value. The tests verify the functionality of the program.
+This lession provides instructions for writing tests for a Solana program that involves cross-program invocation (CPI). It starts by configuring the testing environment and generating key pairs for data accounts. The tests include initializing a data account for the lever program, pulling a virtual lever through CPI, and fetching and checking the updated state value. The tests verify the functionality of the program.
 
-# Overview
+## Overview
 
 ## Writing tests
 
@@ -257,4 +257,4 @@ it("Pull the lever!", async () => {
 
 Next, we retrieve the current state value using the lever program's "get" method. Then, we perform another pull, this time with different arguments, and fetch the updated state value. And that’s it our tests are done.
 
-In the next lesson, we explore building and deploying our Solana program to the blockchain.
+In the next lession, we explore building and deploying our Solana program to the blockchain.

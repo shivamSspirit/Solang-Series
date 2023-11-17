@@ -8,22 +8,25 @@ orderNumber: '0'
 modulePartDescription: In this part of the module, we will enhance our previous token minter program by enabling the transfer of minted tokens to another account through cross-program invocation. Subsequently, we will proceed to build, deploy, and test the program.
 ---
 
-# Objectives
+## Objectives
 
-In this lesson, you will:
+In this lession, you will:
 
 - Modify your spl-token-transfer program to facilitate token transfer.
 - Write test file for Gold Token transfer.
 
 ## tl;dr
 
-In this lesson, we are transferring gold tokens using the same program that was used for minting. We will add a transfer function in both the Solidity program and TypeScript test files. The function, transferTokens, facilitates the transfer of gold tokens between associated token accounts (ATAs) via Cross Program Invocation (CPI) to the SPL Token Library.
+In this lession, we are transferring gold tokens using the same program that was used for minting. We will add a transfer function in both the Solidity program and TypeScript test files. The function, transferTokens, facilitates the transfer of gold tokens between associated token accounts (ATAs) via Cross Program Invocation (CPI) to the SPL Token Library.
 
-# Overview
+## Overview
 
-Previously, in our spl-token-minter program we mint some gold token and transfer to our ATA. Now we want to transfer some gold token to another account.
+Previously, in our ***spl-token-minter program*** we mint some gold token and transfer to our ATA. Now we want to transfer some gold token to another account.
 
 We're using the same code for our project. It's the same code for minting, and we've added the transfer function in both the Solidity program and the TypeScript test file. Open our code directory in VSCode and move to Solidity folder. In transfergold.sol file, add a transfer function under mintTo function:
+
+
+## Transferring
 
 ```solidity
 // Transfer tokens from one token account to another via Cross Program Invocation to Token Program
@@ -55,6 +58,8 @@ It executes a Cross-Program Invocation to the SPL Token Library using the transf
 ![only ata](/moduleimages/ata_only.jpeg)
 
 We transferred the amount of Gold Tokens from one Associated Token Account (ATA) to the other ATA using CPI (Cross-Program Invocation). 
+
+## Testing
 
 Now, we're going to write the test for transferring Gold Tokens. Open the transfersol.ts test file and add this test right after the *mint tokens to our wallet* test:
 
@@ -149,4 +154,4 @@ const receipientTokenAccount = await getOrCreateAssociatedTokenAccount(
 
 By using same gold token mint and set owner as recipient. Next, we start a transaction using the transferTokens method provided by the Solidity program. We give it the necessary token accounts and specify the amount of Gold Tokens we want to transfer. Then, we provide the data account and other required accounts for these cross-program invocation (CPI) calls. Finally, we confirm our test by ensuring that the recipient’s ATA contains 54 Gold Tokens.
 
-In the next lesson, we move on to building, deploying and testing our program.
+In the next lession, we move on to building, deploying and testing our program.

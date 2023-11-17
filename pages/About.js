@@ -9,6 +9,8 @@ import landingPg2 from "../assets/landingPg2.png";
 import Ufo from "../assets/Ufo.svg";
 import Image from "next/image";
 
+import Link from 'next/link'
+
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
@@ -79,8 +81,8 @@ const About = () => {
                   We welcome you to Solidity for Solana. Here, we provide
                   educational resources and content for budding developers and
                   enthusiasts to learn blockchain technology, focusing mainly on
-                  Solana development using Solidity, and focusing on those
-                  wanting to transition from EVM to Solana. We aim to equip
+                  Solana development using <Link className="underline decoration-[#3f6212] decoration-wavy hover:bg-blue-300 hover:text-black" href={'https://solang.readthedocs.io/en/v0.3.3/language/introduction.html'}>Solidity</Link>, and focusing on those
+                  wanting to transition from <Link className="underline decoration-[#3f6212] decoration-wavy hover:bg-blue-300 hover:text-black" href={'https://ethereum.org/en/'}>EVM</Link> to <Link className="underline decoration-[#3f6212] decoration-wavy hover:bg-blue-300 hover:text-black" href={'https://solana.com/'}>Solana</Link>. We aim to equip
                   users with the knowledge of developing dApps on Solana with
                   ease while focusing on simplicity, security and scalability.
                 </p>

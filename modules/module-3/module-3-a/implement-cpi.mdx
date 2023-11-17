@@ -8,9 +8,9 @@ orderNumber: '2'
 modulePartDescription: In this part of the module, you will explore the composability of programs and how it works in Solana and Ethereum. You will also learn how to implement Cross-Program Invocation techniques.
 ---
 
-# Objectives
+## Objectives
 
-In this lesson, you will learn:
+In this lession, you will learn:
 
 - Implementing CPI using the invoke() function.
 
@@ -18,7 +18,7 @@ In this lesson, you will learn:
 
 The invoke() function in Solana is used to call programs without needing signers. It involves routing instructions, accounts, and data to the callee program.  When creating a CPI, you define the accounts accessed and instruction data. Cross-Program Invocations allow limited depth reentrancy. The code example demonstrates using CPI to call a lever program.
 
-# Overview
+## Overview
 
 The `invoke` function is used when making a CPI that does not need any PDAs to act as signers. **When making CPIs, the Solana runtime extends the original signature passed into a program to the callee program**.
 
@@ -75,4 +75,4 @@ When creating a CPI, use the following syntax to specify the `AccountMeta` for
 
 You usually make the `Instruction` within the calling program, but you can also get it from an external source through deserialization.
 
-In the next lesson, we will be writing tests for our CPI Flip program.
+In the next lession, we will be writing tests for our CPI Flip program.

@@ -9,9 +9,9 @@ modulePartDescription: In this part of the module, you will delve into the basic
 ---
 
 
-# Objective
+## Objective
 
-************************In this lesson, you will:************************
+************************In this lession, you will:************************
 
 - Understand function declaration in and out of a contract
 - Know about the types of visibilities of functions.
@@ -21,7 +21,7 @@ modulePartDescription: In this part of the module, you will delve into the basic
 
 Solidity allows functions in and outside contracts, each with distinct visibility (public, private, internal, external). Functions can use named or positional arguments and have named return values. Functions can be view, pure, payable, or non-payable, with constructors in Ethereum being marked as payable to accept Ether. Function overloading is permitted based on differing argument types, and mangled names in the ABI distinguish overloaded functions. This flexibility makes Solidity suitable for smart contract development.
 
-# Overview
+## Overview
 
 A function can be declared inside a contract, where it has access to the contract storage variables, other contract functions etc. Functions can be also be declared outside a contract.
 
@@ -55,7 +55,7 @@ Function can have any number of arguments. Function arguments may have names; if
 
 The return values can have names as illustrated in the function get_initial_bound(). When all the return values have names, the return statement is not necessary at the end of the function. Instead, the values of the named return variables at the end of the function are automatically returned. However, it is still possible to explicitly return some values using the return statement.
 
-# Function Visibility
+## Function Visibility
 
 Solidity functions have a visibility specifier that restricts the scope in which they can be called. Functions can be declared public, private, internal or external with the following definitions:
 
@@ -68,7 +68,7 @@ Both public and external functions can be called using the syntax `this.func()`
 
 If a function is defined outside a contract, it cannot have a visibility specifier (e.g. `public`).
 
-# Arguments Passing and Return Values
+**_Arguments Passing and Return Values_**
 
 Function arguments can be passed either by position or by name. When they are called by name, arguments can be in any order. However, functions with anonymous arguments (arguments without name) cannot be called this way.
 
@@ -128,7 +128,7 @@ contract bar {
 }
 ```
 
-# State Mutability
+## State Mutability
 
 Functions in a contract can either read or write data in the contract storage. Functions that do not write data, can be executed off-chain, which is faster and does not require write access or any balance. There are two types of functions that do not write data: view and pure. Pure functions do not read data from the storage, while view functions do.
 
@@ -136,7 +136,7 @@ On the other hand, functions that write data come in two types: payable and non-
 
 Lastly, the constructor can be marked as payable, which means that a value can be passed along with the constructor.
 
-# Function Overloading
+## Function Overloading
 
 Multiple functions with the same name can be declared, as long as the arguments are different in at least one of two ways:
 

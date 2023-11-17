@@ -42,11 +42,11 @@ export async function getStaticProps(context) {
   });
 
   // Extracting total files to get its length
-  const totalLessons = allDocuments.filter((lession) => {
+  const totallessions = allDocuments.filter((lession) => {
     return lession?.moduleNumber === `${context?.params?.modulenumber}`;
   });
 
-  const totalLessionsortedbymoduleparts = totalLessons
+  const totalLessionsortedbymoduleparts = totallessions
     ?.sort((a, b) => a.moduleParts - b.moduleParts)
     .map((item, index) => {
       // Use 'item' as the current object with orderNumber
@@ -82,7 +82,7 @@ export async function getStaticProps(context) {
 
   // Return the post as page props.
   return {
-    props: { lession, totalParts, filteredParts, totalLessons, lastLetter },
+    props: { lession, totalParts, filteredParts, totallessions, lastLetter },
   };
 }
 
@@ -90,7 +90,7 @@ const GeneralInfo = ({
   lession,
   totalParts,
   filteredParts,
-  totalLessons,
+  totallessions,
   lastLetter,
 }) => {
   const MDXContent = useMDXComponent(lession.body.code);

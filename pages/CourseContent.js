@@ -215,7 +215,7 @@ const returnModuleColor=(moduleNumber)=>{
           <strong>Module-0</strong> to <strong>Module-8</strong>. Each module is
           further divided into two parts for clear understanding, and these are
           referred to as 'Module Number Part. Additionally, each module part
-          contains easily digestible lessons, so you can explore each concept
+          contains easily digestible lessions, so you can explore each concept
           thoroughly. Immerse yourself in the world of Solidity on Solana and
           become proficient in creating smart contracts through this
           well-organized and informative modules
