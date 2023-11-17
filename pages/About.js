@@ -71,7 +71,31 @@ const About = () => {
   return (
     <Layout>
       <div className='mt-5 sm:px-12'>
-        <NextSeo title='About it' />
+        <NextSeo
+            title="About It"
+            titleTemplate="Soldity On Solana"
+            defaultTitle="Soldity On Solana"
+            description="Deep dive into solana development using solidity"
+            canonical="https://solidityonsolana.one/"
+            openGraph={{
+              url: "https://solidityonsolana.one/",
+              title: "Soldity For Solana",
+              description: "A full stack web developer, who loves to design and develop beautiful websites. I have been coding for over a year now. One of my hobbies is writing, I love to document my journey by writing blog posts and also teach others through them.",
+              images: [
+                {
+                  url: "/moduleimages/site-log.svg",
+                  width: 600,
+                  height: 420,
+                  alt: "Soldity For Solana",
+                },
+              ],
+            }}
+            twitter={{
+              handle: "@shivamSspirit",
+              site: "shivamSspirit",
+              cardType: "summary_large_image",
+            }}
+          /> 
         <div>
           <div className='flex flex-col-reverse justify-between'>
             <div className='text-white my-5 sm:mb-10'>
