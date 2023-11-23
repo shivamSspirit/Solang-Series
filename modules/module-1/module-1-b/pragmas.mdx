@@ -4,21 +4,20 @@ author: shivam
 moduleNumber: module-1
 modulePart: module-1-b
 thisFileName: pragmas
-orderNumber: '3'
+orderNumber: "3"
 modulePartDescription: In this part of the module, you will delve into the basics of the Solidity programming language, which is used for building Solana programs. You will take a deep dive into foundational Solidity for solana concepts.
 ---
 
-
 # Objective
 
-*************************In this lesson, you will:*************************
+************\*************In this lesson, you will:************\*************
 
 - Understand what are pragmas in Solidity.
 - Know about the importance of pragma versions in Solidity.
 
 ## tl;dr
 
-Pragmas are compiler directives in Solidity with a name and value. They are used to specify compiler versions and other settings. Solang  ignores most pragma statements, so there's no need for a **`pragma solidity`** statement when using Solang. Unlike Ethereum Solidity, Solang doesn't enforce version matching and views compiler versions as a property of the build environment rather than the source code.
+Pragmas are compiler directives in Solidity with a name and value. They are used to specify compiler versions and other settings. Solang ignores most pragma statements, so there's no need for a **`pragma solidity`** statement when using Solang. Unlike Ethereum Solidity, Solang doesn't enforce version matching and views compiler versions as a property of the build environment rather than the source code.
 
 # Overview
 
@@ -26,7 +25,7 @@ A pragma value is a special directive to the compiler. It has a name and a value
 
 Often, Solidity source files start with a pragma solidity which specifies the Ethereum Foundation Solidity compiler version which is permitted to compile this code. Solang does not follow the Ethereum Foundation Solidity compiler version numbering scheme, so these pragma statements are silently ignored. There is no need for a pragma solidity statement when using Solang.
 
-```solidity
+```Solidity
 pragma solidity** >=**0.4.0** <**0.4.8**; pragma experimental ABIEncoderV2;
 ```
 

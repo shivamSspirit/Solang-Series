@@ -4,7 +4,7 @@ author: shivam
 moduleNumber: module-3
 modulePart: module-3-b
 thisFileName: designcode
-orderNumber: '0'
+orderNumber: "0"
 modulePartDescription: In this part of the module, you will delve into code design and develop an actual flip program by utilizing cross-program invocation techniques in Solana using Solidity. The process begins with creating an interface in Solidity. Subsequently, you will write tests for it using `TypeScript` and proceed with building, deploying, and testing this flip program.
 ---
 
@@ -55,7 +55,7 @@ We're making a flip program that can turn on or off power using a boolean type. 
 
 Now, let's start by creating the called program. Navigate to the solidity directory within our project and open a created file called lever.sol. Then, paste the following code into this file:
 
-```solidity
+```Solidity
 @program_id("J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh")
 contract lever {
     // Switch state
@@ -92,14 +92,14 @@ We're familiar with the program ID, payer, contract, and construction annotation
 
 Now, we'll begin by defining the switch state.
 
-```solidity
+```Solidity
  // Switch state
     bool private isOn = true;
 ```
 
 Here, bool is the data type, private is used to set access limits, and isOn is the name of a variable with the value true. Next, we create a function called switchPower.
 
-```solidity
+```Solidity
 function switchPower(string name) public {
         // Flip the switch
         isOn = !isOn;
@@ -118,7 +118,7 @@ function switchPower(string name) public {
 
 This function takes a parameter called name, which is of string type, and it's visible to the public. Inside the function, it flips the value of isOn – if it was true, now it becomes false, and vice versa. After that, it prints the name of the person who triggered the switch.The function uses a basic programming concept, a conditional statement with an if-else block, to check if the power is on (true) or off (false).
 
-```solidity
+```Solidity
 // Print the current state of the switch
         if (isOn){
             print("The power is now on.");
@@ -129,7 +129,7 @@ This function takes a parameter called name, which is of string type, and it's v
 
 We expand our contract by adding another function. This function's role is to fetch the present state of the switch. It does this by having a view visibility, allowing anyone to read from it.
 
-```solidity
+```Solidity
 // Get the current state of the switch
     function get() public view returns (bool) {
         return isOn;
@@ -143,7 +143,7 @@ Let's now switch to our caller program.
 
 In the solidity directory, open a created file called hand.sol and copy-paste this block of code.
 
-```solidity
+```Solidity
 import "solana";
 
 // Interface to the lever program.
@@ -168,15 +168,15 @@ Let's break this down:
 
 We start by importing the Solana library. Then, we build an interface for our callee (lever, or Program B) within our caller program (hand, or Program A).
 
-***Interface***
+**_Interface_**
 
 > When you flip a light switch, the light goes on.
 > You do not care how the switch turns the light on.
 > You just care that “it does turn the light on”.
 
-Next, we're required to perform a Cross-Program Invocation (CPI) to the lever program, live at address *J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh.* This process leads us to create the interface for the callee program.
+Next, we're required to perform a Cross-Program Invocation (CPI) to the lever program, live at address _J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh._ This process leads us to create the interface for the callee program.
 
-```solidity
+```Solidity
 interface leverInterface {
     function switchPower(string name) external;
 }
@@ -190,7 +190,7 @@ Let's begin with the hand contract. We're creating a data account, a necessity i
 
 For this copy and paste pullLever function below constructor in hand.sol
 
-```solidity
+```Solidity
 // "Pull the lever" by calling the switchPower instruction on the lever program via a Cross Program Invocation.
     function pullLever(address dataAccount, string name) public {
         // The account required by the switchPower instruction.
@@ -215,7 +215,7 @@ instruction for the CPI to be processed by the callee in the lever program.
 
 This is accountmeta information **address `pubkey`.**The address (or public key) of the account **bool `is_writable`**Can the callee write to this account **bool `is_signer`.**
 
-```solidity
+```Solidity
 AccountMeta[1] metas = [
 AccountMeta({pubkey: dataAccount, is_writable: true, is_signer: false})
 ];
@@ -227,7 +227,7 @@ For those familiar with Anchor Rust development, you're likely already acquainte
 
 Here's an example:
 
-```solidity
+```Solidity
 leverInterface constant leverProgram = leverInterface(address'J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh');
 ```
 
@@ -235,7 +235,7 @@ This code allows you to perform a CPI to the lever program residing at address 
 
 Now, when you have:
 
-```solidity
+```Solidity
 leverProgram.switchPower{accounts: metas}(instructionData);
 ```
 

@@ -4,7 +4,7 @@ author: shivam
 moduleNumber: module-2
 modulePart: module-2-a
 thisFileName: create-dev-space
-orderNumber: '1'
+orderNumber: "1"
 modulePartDescription: In this part of the module, you will receive a brief introduction to minting tokens and the setup for local development. You will establish a new project directory and utilize the Anchor framework to create an SPL token minter program.
 ---
 
@@ -56,8 +56,7 @@ By default, this is Anchor organizes newly created project. In building our proj
 
 You can ignore these for now: migrations, node_modules, .prettierignore, package.json, tsconfig.json. We'll go over them later.
 
-
-> *Note -:* If you're used to working with Solidity on Ethereum, you know about Mainnet and Testnet. With Solana, it might be a bit surprising to find out that there are three options instead of two.
+> _Note -:_ If you're used to working with Solidity on Ethereum, you know about Mainnet and Testnet. With Solana, it might be a bit surprising to find out that there are three options instead of two.
 
 Types of Solana Blockchain Cluster:
 
@@ -67,7 +66,7 @@ Types of Solana Blockchain Cluster:
 
 You'll only need to worry about Testnet if you're directly dealing with the Solana protocol. The tokens on Testnet aren't real money, and you can get free SOL through airdrops.
 
-In ***anchor.toml*** file you will need to change cluster: localnet to devnet
+In **_anchor.toml_** file you will need to change cluster: localnet to devnet
 
 ![localnet](/moduleimages/a_local.jpg)
 
@@ -92,7 +91,7 @@ The `@program_id` annotation:
 
 **On Solana, smart contracts are referred to as “programs”**. The @**program_id** annotation is used to specify the on-chain address of the program.
 
-```solidity
+```Solidity
 @program_id("F1ipperKF9EfD821ZbbYjS319LXYiBmjhzkkf5a26rC")
 ```
 
@@ -102,7 +101,7 @@ The **@payer** annotation:
 
 **When storing data on the Solana blockchain, a certain amount of SOL needs to be allocated to cover the storage costs and the rent**(we will discuss this later in further articles). The @payer annotation specifies the user that will pay the SOL required to create the account for storing the state variable.
 
-```solidity
+```Solidity
 @payer(payer) // payer for the "data account"
 constructor(address payer) {
     print("Hello, World!");

@@ -4,11 +4,9 @@ author: shivam
 moduleNumber: module-2
 modulePart: module-2-b
 thisFileName: create-mint-program
-orderNumber: '0'
+orderNumber: "0"
 modulePartDescription: In this part of the module, you will create a minting program using Solidity. You will set up tests, build, deploy, and test the program, along with this demo code.
 ---
-
-
 
 # Objectives
 
@@ -27,9 +25,9 @@ Before starting ,you can clear all the boilerplate code off as we are going to b
 
 **What it takes to mint any custom spl tokens to token address**
 
-Minting SPL Tokens involves a conceptually straightforward process, yet the intricacy emerges in understanding Solana's mechanism for monitoring users' balances of SPL Tokens. By default, each Solana account tracks its SOL balance, the native token. However, a crucial question arises: **How does every Solana account manage its balance for any possible SPL Token within the network?** In reality, achieving this feat directly is unfeasible. The solution necessitates the creation of distinct accounts purposefully configured for each SPL Token, known as **Associated Token Accounts**. 
+Minting SPL Tokens involves a conceptually straightforward process, yet the intricacy emerges in understanding Solana's mechanism for monitoring users' balances of SPL Tokens. By default, each Solana account tracks its SOL balance, the native token. However, a crucial question arises: **How does every Solana account manage its balance for any possible SPL Token within the network?** In reality, achieving this feat directly is unfeasible. The solution necessitates the creation of distinct accounts purposefully configured for each SPL Token, known as **Associated Token Accounts**.
 
-Imagine the scenario of introducing a new token named "JOE." To determine an individual's JOE token balance: 
+Imagine the scenario of introducing a new token named "JOE." To determine an individual's JOE token balance:
 
 - Mint the JOE tokens.
 - Establish an Associated Token Account customized for the user's wallet, designed to monitor their JOE balance.
@@ -41,14 +39,14 @@ In essence, Associated Token Accounts operate as basic counters, directly tied t
 
 We will create a Solana program focused on minting fungible SPL tokens. To make this happen, we'll need the right Solidity libraries that handle creating tokens, making a token mint, and sending the freshly minted tokens to a user's wallet.
 
-Create a directory name ***libraries*** in the project folder. We'll be importing this code and utilizing specific methods to create and mint SPL tokens.
+Create a directory name **_libraries_** in the project folder. We'll be importing this code and utilizing specific methods to create and mint SPL tokens.
 
 1. Create mpl_metdata.sol in the library and add code from here: [mpl_metadata.sol](https://github.com/shivamsoni00/mintgoldtoken/blob/master/libraries/mpl_metadata.sol). This library provides a way for Solidity to interact with Metaplex mpl metadata.
 2. Create spl_token.sol in the library and add code from here. [spl_token.sol](https://github.com/shivamsoni00/mintgoldtoken/blob/master/libraries/spl_token.sol). This library provides a way for Solidity to interact with Solana's SPL-Token.
 3. Create system_instruction.sol in the library and add code from here: [system_instruction.sol](https://github.com/shivamsoni00/mintgoldtoken/blob/master/libraries/system_instruction.sol). This library provides a bridge for Solidity to interact with Solana's system instructions.
 4. Now go over to spl-token-minter.sol file and let’s import these libraries:
 
-```solidity
+```Solidity
 import "../libraries/spl_token.sol";
 import "../libraries/mpl_metadata.sol"
 ```
@@ -59,7 +57,7 @@ These import statements let the current contract use the functions, data structu
 
 Next, write this
 
-```solidity
+```Solidity
 @program_id("4Huxs8ujxKqT76qqfmfJXMThmo4WMsvmdiCkqzNKF5kq")
 ```
 
@@ -67,7 +65,7 @@ On Solana, smart contracts are referred to as “programs”. The **@program_id
 
 Next, write a program
 
-```solidity
+```Solidity
 contract spl_token_minter {
 @payer(payer)
     constructor() {}
@@ -84,7 +82,7 @@ When you put data on the blockchain, you need to set aside some SOL to pay for s
 
 Next, write this code block (createTokenMint function) after the constructor in spl_token_minter contract.
 
-```solidity
+```Solidity
 function createTokenMint(
         address payer, // payer account
         address mint, // mint account to be created
@@ -143,7 +141,7 @@ We use the **public** specifier for this function to make it accessible to eve
 
 In this step, we're making a mint account for our token and deciding who's in charge and how many decimal places it has. We do this by using the System Program and the Token Program. It happens when we use the SplToken.create_mint call. This sets up things like who's in charge, who can freeze, and how many decimals there are for the Mint account.
 
-```solidity
+```Solidity
 SplToken.create_mint(
             payer,            // payer account
             mint,            // mint account
@@ -157,7 +155,7 @@ Creating Metadata Account for Minted Tokens
 
 After making the mint account, the process moves on to using the Metadata Program. This program helps set up a new account just for storing metadata linked to the minted tokens. We make this happen by using the MplMetadata.create_metadata_account call. This step takes care of things like who owns the metadata account, the name and symbol of the tokens, and a link to off-chain metadata using a URI (Uniform Resource Identifier).
 
-```solidity
+```Solidity
 // Invoke Metadata Program to create a new account for the metadata account
         MplMetadata.create_metadata_account(
             metadata, // metadata account
@@ -173,7 +171,7 @@ After making the mint account, the process moves on to using the Metadata Progra
 
 Now place the "mintTo" function directly under the "createTokenMint" function.
 
-```solidity
+```Solidity
 function mintTo(address mintAuthority, address tokenAccount, address mint, uint64 amount) public {
         // Mint tokens to the token account
         SplToken.mint_to(
