@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { allDocuments } from "../../../../.contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
@@ -7,6 +7,12 @@ import NewSideBar from "../../../../components/NewSideBar";
 import { NextSeo } from "next-seo";
 import ColorModuleParts from "../../../../components/ColorModuleParts";
 import GithubSlugger from "github-slugger";
+import Prism from "prismjs";
+
+require("prismjs/components/prism-solidity");
+require("prismjs/components/prism-typescript");
+require("prismjs/components/prism-bash");
+
 import Layout from "../../../../components/Layout";
 import {
   MdxH1,
@@ -107,6 +113,10 @@ const GeneralInfo = ({
     h5: MdxH5,
     h6: MdxH6,
   };
+  
+  useEffect(() => {
+    Prism.highlightAll();
+  }, []);
 
   const orderedLessions = filteredParts
     ?.sort((a, b) => a.orderNumber - b.orderNumber)
