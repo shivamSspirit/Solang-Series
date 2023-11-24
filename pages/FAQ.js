@@ -3,8 +3,6 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
-import expandIcon from "../assets/expandIcon.png";
-import Image from "next/image";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { NextSeo } from "next-seo";
@@ -30,7 +28,6 @@ const accData = [
 ];
 
 const FAQ = () => {
-
   const [expanded, setExpanded] = useState(
     new Array(accData.length).fill(false)
   );
@@ -43,42 +40,38 @@ const FAQ = () => {
 
   return (
     <Layout showFooter={false}>
-  <div className="flex mb-16 flex-col justify-evenly">
-      <NextSeo title='FAQ' />
-      <div className='text-5xl my-20'>Frequently asked questions</div>
+      <div className='flex mb-16 flex-col justify-evenly'>
+        <NextSeo title='FAQ' />
+        <div className='text-5xl my-20'>Frequently asked questions</div>
 
-      <div>
-        {accData.map((data, idx) => (
-          <Accordion
-            key={idx}
-            className='bg-primaryDark border border-white my-2 text-white'
-            expanded={expanded[idx]}
-            style={{backgroundColor:"#201F1F", color:"whiteSmoke"}}
-          >
-            <AccordionSummary
-              onClick={() => toggleAccordion(idx)}
-              expandIcon={
-                expanded[idx] ? (
-                  <RemoveIcon style={{ color: "white" }} />
-                ) : (
-                  <AddIcon style={{ color: "white" }} />
-                )
-              }
+        <div>
+          {accData.map((data, idx) => (
+            <Accordion
+              key={idx}
+              className='bg-primaryDark border border-white my-2 text-white'
+              expanded={expanded[idx]}
+              style={{ backgroundColor: "#201F1F", color: "whiteSmoke" }}
             >
-              <Typography>{data.title}</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>{data.ans}</Typography>
-            </AccordionDetails>
-          </Accordion>
-        ))}
-
+              <AccordionSummary
+                onClick={() => toggleAccordion(idx)}
+                expandIcon={
+                  expanded[idx] ? (
+                    <RemoveIcon style={{ color: "white" }} />
+                  ) : (
+                    <AddIcon style={{ color: "white" }} />
+                  )
+                }
+              >
+                <Typography>{data.title}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>{data.ans}</Typography>
+              </AccordionDetails>
+            </Accordion>
+          ))}
+        </div>
       </div>
-
-
-    </div>
     </Layout>
-  
   );
 };
 

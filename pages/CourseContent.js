@@ -10,11 +10,9 @@ import Image from "next/image";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import { experimentalStyled as styled } from "@mui/material/styles";
 import { useRouter } from "next/router";
 import { getModules } from "utils/module-lession";
 import { NextSeo } from "next-seo";
-import { allDocuments } from "../.contentlayer/generated";
 import Layout from "../components/Layout";
 
 // export async function getStaticProps(context) {
@@ -41,31 +39,31 @@ export const announcementData = [
     img: Course1,
     head: "Module Name ",
     desc: "Introduction",
-    module_color:"#bfbfff"
+    module_color: "#bfbfff",
   },
   {
     img: Course2,
     head: "Module Name",
     desc: "Building Solana Programs with Solidity",
-    module_color:"#A3B86C"
+    module_color: "#A3B86C",
   },
   {
     img: Course3,
     head: "Module Name",
     desc: "Minting Fungible Tokens",
-    module_color:"#CFB53B"
+    module_color: "#CFB53B",
   },
   {
     img: Course4,
     head: "Module Name ",
     desc: "Building a CPI-Enabled Flip Program",
-    module_color:"#CD853F"
+    module_color: "#CD853F",
   },
   {
     img: Course5,
     head: "Module Name",
     desc: "How to Transfer Solana Tokens with Solidity",
-    module_color:"#63a4da"
+    module_color: "#63a4da",
   },
   // {
   //   img: Course6,
@@ -76,53 +74,51 @@ export const announcementData = [
     img: Course6,
     head: "Module Name",
     desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
-    module_color:"#E6BE8A"
+    module_color: "#E6BE8A",
   },
   {
     img: Course6,
     head: "Module Name",
     desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
-    module_color:"#E6BE8A"
+    module_color: "#E6BE8A",
   },
 ];
 
 const CourseContent = ({ allModules }) => {
- // console.log("allDocsfdfssd", allDocuments);
+  // console.log("allDocsfdfssd", allDocuments);
   const mergedArray = allModules.map((moduleName, index) => ({
     module: moduleName,
     ...announcementData[index],
   }));
   const router = useRouter();
 
+  //   const moduleColors={
+  //     "module-0":"#FAFAD2",
+  //     "module-1":"#EEE8AA",
+  //     "module-2":"#C5B358",
+  //     "module-3":"#CD853F",
+  //     "module-4":"#E6BE8A"
+  // }
 
-//   const moduleColors={
-//     "module-0":"#FAFAD2",
-//     "module-1":"#EEE8AA",
-//     "module-2":"#C5B358",
-//     "module-3":"#CD853F",
-//     "module-4":"#E6BE8A"
-// }
-
-
-const returnModuleColor=(moduleNumber)=>{
-  const findmodule = mergedArray?.find(module=>module?.module===moduleNumber);
-  // console.log("findmodule,",findmodule)
-  const colors = findmodule?.module_color;
-  if(colors==="#bfbfff"){
-    return "hover:bg-[#bfbfff]";
-  } else if(colors==="#A3B86C"){
-    return "hover:bg-[#A3B86C]";
-  } else if(colors==="#CFB53B"){
-    return "hover:bg-[#CFB53B]";
-  } else if(colors==="#CD853F"){
-    return "hover:bg-[#CD853F]";
-  }
-  else if(colors==="#63a4da"){
-    return "hover:bg-[#63a4da]";
-  }
-
-}
- // console.log(mergedArray);
+  const returnModuleColor = (moduleNumber) => {
+    const findmodule = mergedArray?.find(
+      (module) => module?.module === moduleNumber
+    );
+    // console.log("findmodule,",findmodule)
+    const colors = findmodule?.module_color;
+    if (colors === "#bfbfff") {
+      return "hover:bg-[#bfbfff]";
+    } else if (colors === "#A3B86C") {
+      return "hover:bg-[#A3B86C]";
+    } else if (colors === "#CFB53B") {
+      return "hover:bg-[#CFB53B]";
+    } else if (colors === "#CD853F") {
+      return "hover:bg-[#CD853F]";
+    } else if (colors === "#63a4da") {
+      return "hover:bg-[#63a4da]";
+    }
+  };
+  // console.log(mergedArray);
 
   const moduleCard = (
     <div className='text-white'>
@@ -171,20 +167,6 @@ const returnModuleColor=(moduleNumber)=>{
                     {announcement.desc}
                   </div>
                 </div>
-                {/* <div className="mb-[1px]">
-                  <Button
-                    className="w-full bg-white"
-                    onClick={() => {
-                      router.push({
-                        pathname: `/CourseContent/${announcement.module}/${announcement.module}-a`,
-                      });
-                    }}
-                  >
-                    <div className="text-center font-bold text-black text-xl">
-                      Start Module
-                    </div>
-                  </Button>
-                </div> */}
               </div>
             </Grid>
           ))}

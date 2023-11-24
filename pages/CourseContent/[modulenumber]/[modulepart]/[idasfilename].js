@@ -6,7 +6,6 @@ import changePartFunction from "../../../../shared/changePartFunction";
 import NewSideBar from "../../../../components/NewSideBar";
 import { NextSeo } from "next-seo";
 import ColorModuleParts from "../../../../components/ColorModuleParts";
-import GithubSlugger from "github-slugger";
 import Prism from "prismjs";
 
 require("prismjs/components/prism-solidity");
@@ -96,8 +95,6 @@ const GeneralInfo = ({
   lession,
   totalParts,
   filteredParts,
-  totalLessons,
-  lastLetter,
 }) => {
   const MDXContent = useMDXComponent(lession.body.code);
   const router = useRouter();
@@ -120,7 +117,7 @@ const GeneralInfo = ({
 
   const orderedLessions = filteredParts
     ?.sort((a, b) => a.orderNumber - b.orderNumber)
-    .map((item, index) => {
+    .map((item) => {
       return item;
     });
 

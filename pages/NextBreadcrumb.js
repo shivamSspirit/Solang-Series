@@ -3,17 +3,8 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const NextBreadcrumb = ({
-  homeElement,
-  containerClasses,
-  listClasses,
-  activeClasses,
-  capitalizeLinks,
-  currentpath,
-}) => {
-
-
-  const router  = useRouter();
+const NextBreadcrumb = ({ capitalizeLinks, currentpath }) => {
+  const router = useRouter();
   // console.log("router",router)
   const trimmedPath = currentpath?.split("/");
 
@@ -21,28 +12,39 @@ const NextBreadcrumb = ({
     return path;
   });
 
-
   // console.log("pathNames from bread:")
-
-
 
   return (
     <div>
       <ul id='breadcrumbs-one' className='hidden lg:flex'>
         {pathNames?.map((link, index) => {
-        //  console.log("trimmedPat",trimmedPath?.slice(2, index + 2)?.join("/"))
-          let href = index <= 1 ? `/CourseContent` : `/CourseContent/${trimmedPath?.slice(2, index + 2)?.join("/")}`;
+          //  console.log("trimmedPat",trimmedPath?.slice(2, index + 2)?.join("/"))
+          let href =
+            index <= 1
+              ? `/CourseContent`
+              : `/CourseContent/${trimmedPath?.slice(2, index + 2)?.join("/")}`;
 
-
-          let itemLink = capitalizeLinks ? link[0]?.toUpperCase() + link?.slice(1, link.length) : link;
-          // console.log("itemlonk",itemLink)
-
-          {/* {console.log("router.query.idasfilename==itemLink",router.query.idasfilename[0].toUpperCase() + router.query.idasfilename?.slice(1, router.query.idasfilename.length)===itemLink)} */}
-
+          let itemLink = capitalizeLinks
+            ? link[0]?.toUpperCase() + link?.slice(1, link.length)
+            : link;
+          {
+            /* {console.log("router.query.idasfilename==itemLink",router.query.idasfilename[0].toUpperCase() + router.query.idasfilename?.slice(1, router.query.idasfilename.length)===itemLink)} */
+          }
           return (
             <React.Fragment key={index}>
               <li>
-                <Link className={`${router?.query?.idasfilename?.[0]?.toUpperCase() + router?.query?.idasfilename?.slice(1, link.length)===itemLink?"active":""}`} href={href} >{itemLink}</Link>
+                <Link
+                  className={`${
+                    router?.query?.idasfilename?.[0]?.toUpperCase() +
+                      router?.query?.idasfilename?.slice(1, link.length) ===
+                    itemLink
+                      ? "active"
+                      : ""
+                  }`}
+                  href={href}
+                >
+                  {itemLink}
+                </Link>
               </li>
             </React.Fragment>
           );
