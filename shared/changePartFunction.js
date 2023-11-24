@@ -4,7 +4,7 @@ export default function changePartFunction({
   totalParts,
 }) {
 
-  console.log("modunvbvbvsidfhehifhyfsehfisedhfsdfheuwhfuwesfuhsulenumberhere",modulenumber,modulepart,totalParts)
+  // console.log("modunvbvbvsidfhehifhyfsehfisedhfsdfheuwhfuwesfuhsulenumberhere",modulenumber,modulepart,totalParts)
   // Extracting the module number (module-1), and returning its last index.
   const modulepartChar = modulepart?.split("-")[2];
   const moduleNumberNumeric = parseInt(modulenumber?.split("-")[1], 10);

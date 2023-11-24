@@ -13,7 +13,7 @@ const Search = () => {
     return findText;
   });
 
-  console.log(searchedWordData);
+  // console.log(searchedWordData);
 
   return (
     <Layout showFooter={false}>

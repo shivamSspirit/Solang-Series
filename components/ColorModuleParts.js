@@ -28,7 +28,7 @@ function ColorModuleParts({moduleColor,currentpath, orderedLessions,activeFileNa
           <div>
             {orderedLessions?.map((lession, idx) => (
               <div key={idx} id='breadcrumbs-one' className='mb-1'>
-              {console.log("lession",lession)}
+              {/* {console.log("lession",lession)} */}
                 <li>
                   {/* {console.log("filename",lession)} */}
                   <Link className={`${activeFileName===lession.thisFileName?"active":""}`}  href={`/CourseContent${lession.slug}`}>
