@@ -24,7 +24,7 @@ In this lession, you will set up development by installing the required dependen
 
 First, go to the package.json file and change this block of code:
 
-```json
+```Json
 {
   "scripts": {
     "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
@@ -51,13 +51,13 @@ First, go to the package.json file and change this block of code:
 
 Save this go to the terminal and enter the command for installing the required dependencies:
 
-```
+```bash
 npm install
 ```
 
 **The `anchor.toml` file serves as the central driver for our application. It's responsible for both app configuration and running tests**.
 
-```
+```bash
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
 ```
@@ -282,7 +282,7 @@ assert.equal(tokens / LAMPORTS_PER_SOL, 159);
 
 Lastly, open **anchor.toml** file and add this block of code in the end of the file.
 
-```Solidity
+```bash
 [[test.validator.clone]]
 address = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
 ```

@@ -27,7 +27,7 @@ After building, we start up a new Solana devnet cluster and deploy our upgraded 
 
 To start off, open the terminal in the root directory of your project and enter the following command.
 
-```
+```bash
 anchor build
 ```
 
@@ -36,13 +36,13 @@ This command will generate a target folder in the project root and generate idl 
 
 ## Deploying
 
-```
+```bash
 solana config get
 ```
 
 After execution, you should get an output similar as shown below:
 
-```
+```bash
 Config File: ~/.config/solana/cli/config.yml
 RPC URL: https://api.devnet.solana.com
 WebSocket URL: wss://api.devnet.solana.com/ (computed)
@@ -52,42 +52,44 @@ Commitment: confirmed
 
 Devnet is the RPC URL, and my wallet's default location is at keypairpath. Make sure you Generate a wallet keypair for deploying the program. You can set devnet for cluster by entering this command:
 
-```
+```bash
 solana config set --url https://api.devnet.solana.com
 ```
 
 Enter this command to generate a new keypair
 
-```
+```bash
 solana-keygen new
 ```
 
 Now you have a wallet. You can check the address (pubkey) and balance of this account entering these commands
 
-```
+```bash
 solana address
 solana balance
 ```
 
 If you have some devnet sol then it is okay for deployment. If not, then get some devnet airdrop in your wallet by entering this command:
 
-`solana airdrop 4`
+```bash
+solana airdrop 4
+```
 
 Up next, start off deployment by opening a new terminal and starting network cluster by executing this command:
 
-```
+```bash
 solana-test-validator
 ```
 
 This will start a devnet cluster in the system. To deploy the program, enter the following command:
 
-```
+```bash
 anchor deploy
 ```
 
 You should get an output similar to as shown below:
 
-```
+```bash
 Deploying cluster: https://api.devnet.solana.com
 Upgrade authority: ~/.config/solana/id.json
 Deploying program "spl_token_minter"...
@@ -99,27 +101,28 @@ Deploy success
 
 Now our both program is on chain (devnet). Next, we get the program id of our deployed program on the chain. For this, grab this program id and change it in our program (solidity file) as well as anchor.toml file. After pasting the new program id to both files, build the program again with the command:
 
-`anchor build`
+```bash
+anchor build
+```
 
 Next, to test the program, we first check the required dependencies and run the following command:
 
-```
+```bash
 yarn install
 npm install
-
 ```
 
 ## Testing
 
 Now, run tests by entering this command:
 
-```
+```bash
 anchor test
 ```
 
 After this, you should get an output as shown below:
 
-```
+```bash
 spl-token-minter
 Your transaction signature 5eMMtzhkGq8sZFNkLir3i7KFCua6b9itjym7mn1Gm2KBTPDjUL6p27qMba8GynZwVfvEBynF2rc57qBrtR3XZdiJ
     ✔ Is initialized! (2311ms)

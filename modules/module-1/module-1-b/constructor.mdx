@@ -23,7 +23,7 @@ In Solidity, contract state variables are stored in data accounts on the blockch
 Solidity contracts are linked to a data account, where the contract's state variables are stored on the blockchain. Prior to calling other contract functions that require it, this account must be initialized. To initialize the data account, a contract constructor that can be called with the 'new' function is used.
 When a constructor is invoked from another contract, the IDL file specifies the data account to initialize as 'contractName_dataAccount'. In the example below, to execute the 'test' instruction, the 'hatchling_dataAccount' account must be initialized as the new contract's data account.
 
-```soldity
+```Soldity
 contract hatchling {
   string name;
   constructor(string id) payable {
@@ -44,7 +44,7 @@ Alternatively, the data account can be initialized using the accounts call argum
 
 For the creation of a contract, the data account must be the **first** element in such a vector and the system account 11111111111111111111111111111111 must be there. If the constructor one is calling has the [@payer annotation](https://solang.readthedocs.io/en/v0.3.3/targets/solana.html#payer-seeds-bump), the payer account would appear in the array as well. Moreover, the is_signer and is_writable bool flags need to be properly set, as shown:
 
-```soldity
+```Soldity
 import 'solana';
 contract creator {
   @mutableSigner(data_account_to_initialize)

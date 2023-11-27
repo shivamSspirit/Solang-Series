@@ -25,7 +25,7 @@ In this lession, you go through the process of building, deploying and testing y
 
 To build your project, navigate to the terminal in project root directory and enter the following command:
 
-```
+```bash
 anchor build
 ```
 
@@ -36,13 +36,13 @@ This command will generate a target folder in the project root directory and gen
 
 Now open a new terminal and check our configuration by entering this command:
 
-```
+```bash
 solana config get
 ```
 
 After running this you should get an output similar as shown below:
 
-```
+```bash
 Config File: ~/.config/solana/cli/config.yml
 RPC URL: https://api.devnet.solana.com
 WebSocket URL: wss://api.devnet.solana.com/ (computed)
@@ -52,44 +52,44 @@ Commitment: confirmed
 
 For Devnet, please note that it uses an RPC URL, and your wallet's default location is specified by the `keypairpath`. Make sure to generate a wallet keypair for program deployment. You can set devnet for cluster by entering this command:
 
-```
+```bash
 solana config set --url https://api.devnet.solana.com
 ```
 
 By entering the following command you can generate a new keypair:
 
-```
+```bash
 solana-keygen new
 ```
 
 Now you have a wallet. You can check the address (pubkey) and balance of this account using these commands:
 
-```
+```bash
 solana address
 solana balance
 ```
 
 If you have some devnet sol then it is okay for deployment. If you do not have devnet sol then you can get some devnet airdropped in your wallet by entering this command.
 
-```
+```bash
 solana airdrop 
 ```
 
 Once you have recieved the devnet sol tokens in your wallets, you can move on to deploying your program onto the Solana network, which will use up some of the sol tokens. For deployment, open the terminal in the new tab and start the network cluster by entering this command:
 
-```
+```bash
 solana-test-validator
 ```
 
 This will start a devnet cluster in the system. Next, deploy the program by entering the command:
 
-```
+```bash
 anchor deploy
 ```
 
 After successful deployment, you will get an output in the terminal as shown:
 
-```
+```bash
 Deploying cluster: https://api.devnet.solana.com
 Upgrade authority: ~.config/solana/id.json
 Deploying program "spl_token_minter"...
