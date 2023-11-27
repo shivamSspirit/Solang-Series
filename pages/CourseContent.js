@@ -178,7 +178,31 @@ const CourseContent = ({ allModules }) => {
   return (
     <Layout>
       <div className='my-16 text-white'>
-        <NextSeo title='Course Content' />
+      <NextSeo
+            title="Course Content"
+            titleTemplate="Soldity On Solana"
+            defaultTitle="Soldity On Solana"
+            description="Deep dive into solana development using solidity"
+            canonical="https://solidityonsolana.one/"
+            openGraph={{
+              url: "https://solidityonsolana.one/",
+              title: "Soldity For Solana",
+              description: "An Ultimate Crash Course on how to build on solana using solidity",
+              images: [
+                {
+                  url: "https://res.cloudinary.com/ddwkxn8ak/image/upload/v1699181695/solangsol/land_fjuvyw.jpg",
+                  width: 600,
+                  height: 420,
+                  alt: "Soldity For Solana",
+                },
+              ],
+            }}
+            twitter={{
+              handle: "@shivamSspirit",
+              site: "shivamSspirit",
+              cardType: "summary_large_image",
+            }}
+          />
         <div className='mb-3'>
           {"Solidity On Solana".split("").map((letter, index) => {
             return (
@@ -197,7 +221,7 @@ const CourseContent = ({ allModules }) => {
           <strong>Module-0</strong> to <strong>Module-8</strong>. Each module is
           further divided into two parts for clear understanding, and these are
           referred to as 'Module Number Part. Additionally, each module part
-          contains easily digestible lessons, so you can explore each concept
+          contains easily digestible lessions, so you can explore each concept
           thoroughly. Immerse yourself in the world of Solidity on Solana and
           become proficient in creating smart contracts through this
           well-organized and informative modules

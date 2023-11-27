@@ -8,7 +8,31 @@ const About = () => {
   return (
     <Layout>
       <div className='mt-5 sm:px-12'>
-        <NextSeo title='About it' />
+        <NextSeo
+            title="About It"
+            titleTemplate="Soldity On Solana"
+            defaultTitle="Soldity On Solana"
+            description="Deep dive into solana development using solidity"
+            canonical="https://solidityonsolana.one/"
+            openGraph={{
+              url: "https://solidityonsolana.one/",
+              title: "Soldity For Solana",
+              description: "An Ultimate Crash Course on how to build on solana using solidity",
+              images: [
+                {
+                  url: "https://res.cloudinary.com/ddwkxn8ak/image/upload/v1699181695/solangsol/land_fjuvyw.jpg",
+                  width: 600,
+                  height: 420,
+                  alt: "Soldity For Solana",
+                },
+              ],
+            }}
+            twitter={{
+              handle: "@shivamSspirit",
+              site: "shivamSspirit",
+              cardType: "summary_large_image",
+            }}
+          /> 
         <div>
           <div className='flex flex-col-reverse justify-between'>
             <div className='text-white my-5 sm:mb-10'>
@@ -18,8 +42,8 @@ const About = () => {
                   We welcome you to Solidity for Solana. Here, we provide
                   educational resources and content for budding developers and
                   enthusiasts to learn blockchain technology, focusing mainly on
-                  Solana development using Solidity, and focusing on those
-                  wanting to transition from EVM to Solana. We aim to equip
+                  Solana development using <Link className="underline decoration-[#3f6212] decoration-wavy hover:bg-blue-300 hover:text-black" href={'https://solang.readthedocs.io/en/v0.3.3/language/introduction.html'}>Solidity</Link>, and focusing on those
+                  wanting to transition from <Link className="underline decoration-[#3f6212] decoration-wavy hover:bg-blue-300 hover:text-black" href={'https://ethereum.org/en/'}>EVM</Link> to <Link className="underline decoration-[#3f6212] decoration-wavy hover:bg-blue-300 hover:text-black" href={'https://solana.com/'}>Solana</Link>. We aim to equip
                   users with the knowledge of developing dApps on Solana with
                   ease while focusing on simplicity, security and scalability.
                 </p>

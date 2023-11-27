@@ -8,18 +8,20 @@ orderNumber: '2'
 modulePartDescription: In this part of the module, you will create a minting program using Solidity. You will set up tests, build, deploy, and test the program, along with this demo code.
 ---
 
-# Objectives
+## Objectives
 
-In this lesson, you will:
+In this lession, you will:
 
 - Build your spl-token-minter program.
 - Deploy and test your minter program
 
 ## tl;dr
 
-In this lesson, you go through the process of building, deploying and testing your spl-token-minter program. Once the program has been built successfully, the process of connecting your wallet to your devnet and airdropping testnet tokens is explained. After building, we start up a new Solana devnet cluster and deploy our spl-token-minter program to the devnet. The, we will test our deployed program and ensure it has been built and deployed successfully by searching for the transaction signature in Solana Explorer.
+In this lession, you go through the process of building, deploying and testing your spl-token-minter program. Once the program has been built successfully, the process of connecting your wallet to your devnet and airdropping testnet tokens is explained. After building, we start up a new Solana devnet cluster and deploy our spl-token-minter program to the devnet. The, we will test our deployed program and ensure it has been built and deployed successfully by searching for the transaction signature in Solana Explorer.
 
-# Overview
+## Overview
+
+## Build
 
 To build your project, navigate to the terminal in project root directory and enter the following command:
 
@@ -28,6 +30,9 @@ anchor build
 ```
 
 This command will generate a target folder in the project root directory and generate idl and types of our Solana program to interact with the client side using Remote Procedural Calls or RPC methods.
+
+
+## Deploy 
 
 Now open a new terminal and check our configuration by entering this command:
 
@@ -110,6 +115,8 @@ Before testing, check whether testing dependencies are installed. If not, then r
 ```bash
 yarn install
 ```
+
+## Test
 
 After installing the required testing dependencies, we can test our Solidity program by running the following command in the terminal:
 

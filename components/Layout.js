@@ -16,9 +16,54 @@ const Layout = ({ children }) => {
     <>
       <div className='mt-12 mx-4 md:mx-10 lg:mx-20'>
         {fileName === "Home" ? (
-          <NextSeo title='Solidity On Solana' />
+          <NextSeo
+            title="Soldity On Solana"
+            titleTemplate="Soldity On Solana"
+            defaultTitle="Soldity On Solana"
+            description="Deep dive into solana development using solidity"
+            canonical="https://solidityonsolana.one/"
+            openGraph={{
+              url: "https://solidityonsolana.one/",
+              title: "Soldity For Solana",
+              description: "An Ultimate Crash Course on how to build on solana using solidity",
+              images: [
+                {
+                  url: "https://res.cloudinary.com/ddwkxn8ak/image/upload/v1699181695/solangsol/land_fjuvyw.jpg",
+                  width: 600,
+                  height: 420,
+                  alt: "Soldity For Solana",
+                },
+              ],
+            }}
+            twitter={{
+              handle: "@shivamSspirit",
+              site: "shivamSspirit",
+              cardType: "summary_large_image",
+            }}
+          />
+
         ) : (
-          <NextSeo titleTemplate='%s | Solidity On Solana' />
+          <NextSeo titleTemplate='%s | Solidity On Solana' defaultTitle="Soldity On Solana"
+            description="Deep dive into solana development using solidity"
+            canonical="https://solidityonsolana.one/"
+            openGraph={{
+              url: "https://solidityonsolana.one/",
+              title: "Soldity For Solana",
+              description: "An Ultimate Crash Course on how to build on solana using solidity",
+              images: [
+                {
+                  url: "https://res.cloudinary.com/ddwkxn8ak/image/upload/v1699181695/solangsol/land_fjuvyw.jpg",
+                  width: 600,
+                  height: 420,
+                  alt: "Soldity For Solana",
+                },
+              ],
+            }}
+            twitter={{
+              handle: "@shivamSspirit",
+              site: "shivamSspirit",
+              cardType: "summary_large_image",
+            }} />
         )}
         {fileName === "ComingSoon" ? (
           children
@@ -37,3 +82,4 @@ const Layout = ({ children }) => {
 };
 
 export default Layout;
+

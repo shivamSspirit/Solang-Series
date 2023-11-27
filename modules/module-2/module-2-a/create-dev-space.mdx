@@ -10,7 +10,7 @@ modulePartDescription: In this part of the module, you will receive a brief intr
 
 ## Objectives:
 
-In this lesson, you will:
+In this lession, you will:
 
 - Create a development workspace for your minter project.
 - Understand the boilerplate code that comes along with installing the Anchor framework.
@@ -18,7 +18,7 @@ In this lesson, you will:
 
 ## tl;dr
 
-In this lesson, we set up the development workspace for our token minter project, which involves setting up the project directory. The boilerplate code of the framework is also explained in this lesson. Finally, we wrap up by examining the difference between the Solidity code of a Solana program and an Ethereum smart contract.
+In this lession, we set up the development workspace for our token minter project, which involves setting up the project directory. The boilerplate code of the framework is also explained in this lession. Finally, we wrap up by examining the difference between the Solidity code of a Solana program and an Ethereum smart contract.
 
 # Overview
 
@@ -74,6 +74,10 @@ Once changed, the Anchor.toml should look like below:
 
 ![localnet](/moduleimages/a_dev.jpg)
 
+### Checkpoint
+
+> Next Change wallet in ***.toml File*** to your newly generated keypair address in your local system
+
 Next, let’s go over the starter code beginning with the on-chain program itself. Within your project's `./solidity` directory, you’ll find the following contract named spl-token-minter.sol below, which includes:
 
 - A constructor for state variable initialization.
@@ -83,13 +87,15 @@ Next, let’s go over the starter code beginning with the on-chain program itsel
 
 ![flip program](/moduleimages/a_flip.png)
 
-### **Important Differences** (Compared with EVM smart contract).
+## Important Differences 
+
+***Compared with EVM smart contract***
 
 Compared to an EVM smart contract, there are two important differences you might notice:
 
 The `@program_id` annotation:
 
-**On Solana, smart contracts are referred to as “programs”**. The @**program_id** annotation is used to specify the on-chain address of the program.
+On Solana, smart contracts are referred to as ***programs***. The **@program_id** annotation is used to specify the on-chain address of the program.
 
 ```Solidity
 @program_id("F1ipperKF9EfD821ZbbYjS319LXYiBmjhzkkf5a26rC")
@@ -110,11 +116,11 @@ constructor(address payer) {
 
 **Storing of state data**
 
-An important distinction between EVM smart contracts and Solana programs is how each store "state" variables/data:
+An important distinction between EVM smart contracts and Solana programs is how each store ***state*** variables/data:
 
 EVM smart contracts can directly store state variables.
 
-Solana on-chain programs, on the other hand, create separate accounts to hold state data. These are often referred to as "data accounts" and are "owned" by a program.
+Solana on-chain programs, on the other hand, create separate accounts to hold state data. These are often referred to as **data accounts** and are **owned** by a program.
 
 In this example, when the contract is deployed, it is deployed to the address specified in @program_id. When the constructor is called after the program is deployed, a separate account with its address is created to store the state variable, instead of being stored within the contract itself.
 

@@ -12,17 +12,17 @@ import Layout from "./Layout";
 const announcementData = [
   {
     img: landingPg1,
-    head: "Mint fungible spl Tokens",
-    desc: "In this module, we will develop a Solana program that will mint gold tokens (spl tokens). The program should be able to set up and execute the token-minting process.",
+    head: "Mint spl Tokens",
+    desc: "In this module, we will develop a Solana program that will mint fungible spl tokens. The program should be able to set up and execute the token-minting process.",
   },
   {
     img: landingPg2,
-    head: "Transfer minted fungible tokens to another account",
+    head: "Transfer spl tokens",
     desc: "In this module, we will develop a program on Solana that allows for the transfer of spl-tokens that minted in Module 2 to other accounts.",
   },
   {
     img: landingPg1,
-    head: "Mint and Sell NFT, Dive into composability",
+    head: "Mint and Sell NFT",
     desc: "In this module, we will develop a program on Solana that allows for the mint and sell nft",
   },
 ];
@@ -36,7 +36,7 @@ const timelineData = [
   {
     heading: "Module 1: Overview of Building Solana Programs using Solidity",
     content:
-      "In this module of Solana with Solidity, you will learn the differences between Solana and EVM and develop an SPL token minter project using Solidity on Solana.",
+      "In this module of Solana with Solidity, you will learn the differences between Solana and EVM and explore brief overview of solidity on solana.",
   },
   {
     heading: "Module 2: Mint fungible(spl) Tokens",

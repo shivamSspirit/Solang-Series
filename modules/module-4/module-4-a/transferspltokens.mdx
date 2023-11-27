@@ -9,18 +9,18 @@ modulePartDescription: In this part of the module, you will receive a brief intr
 ---
 
 
-# Objective
+## Objective
 
-In this lesson, you will:
+In this lession, you will:
 
 - Understand the underlying logic of transferring tokens in Solana.
 - Get to know about Associated Token Accounts in Solana.
 
 ## tl;dr
 
-In this lesson, you are introduced to ATAs in Solana. To understand token transfers, consider an example where want to send gold tokens minted using the spl-token-minter program to your friend. Both of you need token accounts linked to the same gold token mint. Associated Token Accounts (ATAs) simplify managing token transfers and offer a way to create primary token accounts for each token owned. ATAs map user wallet addresses to their associated token accounts, streamlining the process.
+In this lession, you are introduced to ATAs in Solana. To understand token transfers, consider an example where want to send gold tokens minted using the spl-token-minter program to your friend. Both of you need token accounts linked to the same gold token mint. Associated Token Accounts (ATAs) simplify managing token transfers and offer a way to create primary token accounts for each token owned. ATAs map user wallet addresses to their associated token accounts, streamlining the process.
 
-# Overview
+## Overview
 
 To understand the analogy behind transferring tokens, lets us consider the following example:
 
@@ -36,7 +36,7 @@ You can see this analogy in below image
 
 We will now proceed to interact with the Associated Token Account.
 
-## Associated token accounts in Solana
+## Associated token accounts
 
 Associated Token Accounts (ATAs) provide a simple and reliable way to find the token account associated with a specific public key and token mint. This makes it easier to manage token transfers and interactions within programs.
 
@@ -82,4 +82,4 @@ const recipientTokenAccount = await getOrCreateAssociatedTokenAccount(
   );
 ```
 
-In the next lesson, we upgrade the spl-token-minter program to facilitate transfer of tokens.
+In the next lession, we upgrade the spl-token-minter program to facilitate transfer of tokens.

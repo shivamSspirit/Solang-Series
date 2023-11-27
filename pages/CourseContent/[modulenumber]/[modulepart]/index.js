@@ -87,7 +87,33 @@ const Course1 = ({ filteredParts }) => {
   return (
     <Layout>
       <div className='my-20'>
-        <NextSeo title={`Module ${modNum}`} />
+        
+
+        <NextSeo
+            title={`Module ${modNum}`}
+            titleTemplate="Soldity On Solana"
+            defaultTitle="Soldity On Solana"
+            description="Deep dive into solana development using solidity"
+            canonical="https://solidityonsolana.one/"
+            openGraph={{
+              url: "https://solidityonsolana.one/",
+              title: "Soldity For Solana",
+              description: "An Ultimate Crash Course on how to build on solana using solidity",
+              images: [
+                {
+                  url: "https://res.cloudinary.com/ddwkxn8ak/image/upload/v1699181695/solangsol/land_fjuvyw.jpg",
+                  width: 600,
+                  height: 420,
+                  alt: "Soldity For Solana",
+                },
+              ],
+            }}
+            twitter={{
+              handle: "@shivamSspirit",
+              site: "shivamSspirit",
+              cardType: "summary_large_image",
+            }}
+          />
 
         <div className='flex sm:flex-col justify-between'>
           <ColorModuleParts

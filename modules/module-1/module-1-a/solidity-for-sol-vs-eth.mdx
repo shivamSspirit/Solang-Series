@@ -10,25 +10,32 @@ modulePartDescription: In this part of the module, you will delve into the role 
 
 # Objectives
 
-In this lesson, you will able to:
+In this lession, you will able to:
 
 - Explain the adjustments for Solidity on Solana.
 - Understand the technical differences between Ethereum and Solana.
 
 # tl;dr
 
-In this lesson, we take a brief look at the differences in the development environments of Solana and Ethereum. In Solidity contracts on Solana, there are two accounts: a program account for the executable code and a data account for storage variables, different from Ethereum's single-account approach where one account handles both code and data.
+In this lession, we take a brief look at the differences in the development environments of Solana and Ethereum. In Solidity contracts on Solana, there are two accounts: a program account for the executable code and a data account for storage variables, different from Ethereum's single-account approach where one account handles both code and data.
 
 # Overview
 
-## Adapting Solidity for Solana's Unique Environment
+***Adapting Solidity for Solana's Unique Environment***
 
 **When integrating Solidity's mechanics into the Solana environment, certain adjustments are necessary**. Within a Solidity contract on Solana, a distinct structure emerges, comprising two separate accounts: a data account and a program account. The program account stores the contract's executable binary and controls the data account, which encompasses all storage variables. This contrasts with Ethereum's approach, where a single account manages both executable code and data.
 
 Simplifying Technical Concepts in Solana and Ethereum
 
-- In Solana, an account is represented by a 32-byte key, denoted as the **`address`** type, which differs from Ethereum's 20-byte address format. An address is represented using syntax like **`36VtvSbE6jVGGQytYWSaDPG7uZphaxEjpJHUUpuUbq4D`**.
-- It's important to note that Ethereum's address format **`0xE0f5206BBD039e7b0592d8918820024e2a7437b9`** isn't compatible with Solana.
+- In Solana, an account is represented by a 32-byte key, denoted as the **`address`** type, which differs from Ethereum's 20-byte address format. An address is represented using syntax like 
+```bash
+36VtvSbE6jVGGQytYWSaDPG7uZphaxEjpJHUUpuUbq4D
+```
+- It's important to note that Ethereum's address format 
+```bash 
+0xE0f5206BBD039e7b0592d8918820024e2a7437b9
+```
+ isn't compatible with Solana.
 - Ethereum's wallet addresses generally have 40 characters, including the 0x prefix. , Solana wallet addresses can be around 44 characters in length, without a fixed prefix.
 - The use of Solana's target requires **[Solana](https://www.solana.com/)** version v1.8.1.
 - In Ethereum, setting the gas limit while invoking a smart contract function influences resource consumption. Gas encompasses the on-chain execution expenses and permits the prioritization of execution through the allocation of extra gas. Each instruction within the Ethereum Virtual Machine (EVM) carries a unique gas value, which corresponds to real ETH costs.
@@ -42,80 +49,80 @@ Simplifying Technical Concepts in Solana and Ethereum
 
 Here's a simplified comparison table between Solana and Ethereum various technical incompatibilities:
 
-<>
-<table>
-    <thead>
-      <tr>
-        <th>Concept</th>
+    <>
+          <table>
+              <thead>
+                  <tr>
+                      <th>Concept</th>
         <th>Solana</th>
         <th>Ethereum</th>
-      </tr>
-    </thead>
+                  </tr>
+                  </thead>
     <tbody>
-      <tr>
-        <td>Account Address Format</td>
+              <tr>
+                      <td>Account Address Format</td>
         <td>32-byte key (address type)</td>
         <td>20-byte address</td>
-      </tr>
+                  </tr>
 
       <tr>
-        <td>Wallet Address Length</td>
+                  <td>Wallet Address Length</td>
         <td>Varies (around 44 characters)</td>
         <td>40 characters (with 0x prefix)</td>
-      </tr>
+                  </tr>
 
       <tr>
-     <td>Required Solana Version</td>
+                  <td>Required Solana Version</td>
         <td>v1.8.1</td>
         <td>-</td>
-      </tr>
+                  </tr>
 
  <tr>
-     <td>Gas and Resource Management</td>
+             <td>Gas and Resource Management</td>
         <td>Compute Units (similar to gas)</td>
         <td>Gas and EVM instructions</td>
-      </tr>
+                  </tr>
 
  <tr>
-     <td>Compute Unit Allocation</td>
+             <td>Compute Unit Allocation</td>
         <td>200k per function</td>
         <td>Varies per instruction </td>
-      </tr>
+                  </tr>
 
  <tr>
-     <td>msg.sender Function</td>
+             <td>msg.sender Function</td>
         <td> Not Available</td>
         <td>Available</td>
-      </tr>
+                  </tr>
 
  <tr>
-     <td>Signature Verification</td>
+             <td>Signature Verification</td>
         <td>signatureVerify()</td>
         <td>ecrecover()</td>
-      </tr>
+                  </tr>
 
  <tr>
-     <td>Try-Catch Statements</td>
+             <td>Try-Catch Statements</td>
         <td>Not Functional</td>
         <td>Available</td>
-      </tr>
+                  </tr>
 
  <tr>
-     <td>Error Handling and Reverts</td>
+             <td>Error Handling and Reverts</td>
         <td>Limited</td>
         <td>Available</td>
-      </tr>
+                  </tr>
 
  <tr>
-     <td>ERC-20 Compatibility</td>
+             <td>ERC-20 Compatibility</td>
         <td>Not Compatible</td>
         <td>Compatible</td>
-      </tr>
+                  </tr>
 
 
-    </tbody>
-  </table>
-  </>
+                  </tbody>
+              </table>
+          </>
 
 
-In the next lesson, we provide an in-depth technical comparison between Solana and Ethereum, especially with regards to their architectures and their use of Solidity.
+In the next lession, we provide an in-depth technical comparison between Solana and Ethereum, especially with regards to their architectures and their use of Solidity.

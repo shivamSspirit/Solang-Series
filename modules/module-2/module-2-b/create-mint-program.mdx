@@ -8,18 +8,18 @@ orderNumber: "0"
 modulePartDescription: In this part of the module, you will create a minting program using Solidity. You will set up tests, build, deploy, and test the program, along with this demo code.
 ---
 
-# Objectives
+## Objectives
 
-In this lesson, you will:
+In this lession, you will:
 
 - Create your own Solidity code for your token minter project.
 - Understand the different components of a Solana program.
 
 ## tl;dr
 
-This lessons guides you towards coding our token minter, from adding metadata for the token to creating functions for minting.
+This lessions guides you towards coding our token minter, from adding metadata for the token to creating functions for minting.
 
-# Overview
+## Overview
 
 Before starting ,you can clear all the boilerplate code off as we are going to build a spl-token-minter program.
 
@@ -76,7 +76,7 @@ Within a contract **constructor**, you have the option to include the **@payer
 
 The syntax @payer(payer) introduces an account named payer, which becomes essential for every invocation of the constructor.
 
-### **The significance of the @payer annotation**:
+***The significance of the @payer annotation***:
 
 When you put data on the blockchain, you need to set aside some SOL to pay for storage costs, including rent (which we'll explain more about later in the series). The @payer annotation tells us who's responsible for giving the needed SOL to create the account that stores the data.
 
@@ -137,7 +137,7 @@ This is responsible for creating a new token mint and its associated metadata wi
 
 We use the **public** specifier for this function to make it accessible to everyone.
 
-### Creating a Mint Account and Setting Authorities
+***Creating a Mint Account and Setting Authorities***
 
 In this step, we're making a mint account for our token and deciding who's in charge and how many decimal places it has. We do this by using the System Program and the Token Program. It happens when we use the SplToken.create_mint call. This sets up things like who's in charge, who can freeze, and how many decimals there are for the Mint account.
 
@@ -151,7 +151,7 @@ SplToken.create_mint(
         );
 ```
 
-Creating Metadata Account for Minted Tokens
+***Creating Metadata Account for Minted Tokens***
 
 After making the mint account, the process moves on to using the Metadata Program. This program helps set up a new account just for storing metadata linked to the minted tokens. We make this happen by using the MplMetadata.create_metadata_account call. This step takes care of things like who owns the metadata account, the name and symbol of the tokens, and a link to off-chain metadata using a URI (Uniform Resource Identifier).
 
@@ -169,7 +169,7 @@ After making the mint account, the process moves on to using the Metadata Progra
         );
 ```
 
-Now place the "mintTo" function directly under the "createTokenMint" function.
+Now place the ***mintTo*** function directly under the "createTokenMint" function.
 
 ```Solidity
 function mintTo(address mintAuthority, address tokenAccount, address mint, uint64 amount) public {
