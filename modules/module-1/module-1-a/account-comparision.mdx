@@ -63,52 +63,62 @@ Here's a simplified comparison table highlighting the key differences between So
       </tr>
 
 {" "}
-<tr className="border border-slate-600">
-  <td className="p-3">Storage Approach </td>
-  <td className="p-3">
+
+<tr className='border border-slate-600'>
+  <td className='p-3'>Storage Approach </td>
+  <td className='p-3'>
     Any account can host state; smart contract storage is confined to bytecode.)
   </td>
-  <td className="p-3">Smart contracts manage their storage.</td>
+  <td className='p-3'>Smart contracts manage their storage.</td>
 </tr>
 
- <tr className="border border-slate-600"r>
-     <td className="p-3">Ownership and Security</td>
-        <td className="p-3">Each account has an owner contract to secure data changes and maintain integrity.</td>
-        <td className="p-3">Ownership and control are linked to the Ethereum wallet address. </td>
-      </tr>
+{" "}
+<tr className='border border-slate-600' r>
+  <td className='p-3'>Ownership and Security</td>
+  <td className='p-3'>
+    Each account has an owner contract to secure data changes and maintain
+    integrity.
+  </td>
+  <td className='p-3'>
+    Ownership and control are linked to the Ethereum wallet address.{" "}
+  </td>
+</tr>
 
 {" "}
-<tr className="border border-slate-600">
-  <td className="p-3">Data Access</td>
-  <td className="p-3">
+
+<tr className='border border-slate-600'>
+  <td className='p-3'>Data Access</td>
+  <td className='p-3'>
     {" "}
     Contracts can read and write data in any account, but changes are limited to
     the account's "owner".
   </td>
-  <td className="p-3">
+  <td className='p-3'>
     Smart contracts access data through the contract itself or external calls.
   </td>
 </tr>
 
 {" "}
-<tr className="border border-slate-600">
-  <td className="p-3">Storage Flexibility and Encapsulation</td>
-  <td className="p-3">
+
+<tr className='border border-slate-600'>
+  <td className='p-3'>Storage Flexibility and Encapsulation</td>
+  <td className='p-3'>
     Allows any account to host state, offering flexibility and encapsulation.
   </td>
-  <td className="p-3">
+  <td className='p-3'>
     {" "}
     Offers more controlled storage for contracts, with data storage segregated.
   </td>
 </tr>
 
 {" "}
-<tr className="border border-slate-600">
-  <td className="p-3">State Modification and Integrity </td>
-  <td className="p-3">
+
+<tr className='border border-slate-600'>
+  <td className='p-3'>State Modification and Integrity </td>
+  <td className='p-3'>
     Ensures state changes are secured and validated through ownership contracts.
   </td>
-  <td className="p-3">
+  <td className='p-3'>
     Requires proper coding practices to maintain data integrity and avoid
     vulnerabilities.
   </td>
@@ -121,7 +131,7 @@ Here's a simplified comparison table highlighting the key differences between So
 
 - On Ethereum, token contracts have a `mapping` which defines the balance for each owner address:
 
-```solidity
+```Solidity
 mapping (address => uint256) private _balances;
 ```
 

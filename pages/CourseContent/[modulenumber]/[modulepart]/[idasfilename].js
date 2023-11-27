@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { allDocuments } from "../../../../.contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
@@ -6,7 +6,12 @@ import changePartFunction from "../../../../shared/changePartFunction";
 import NewSideBar from "../../../../components/NewSideBar";
 import { NextSeo } from "next-seo";
 import ColorModuleParts from "../../../../components/ColorModuleParts";
-import GithubSlugger from "github-slugger";
+import Prism from "prismjs";
+
+require("prismjs/components/prism-solidity");
+require("prismjs/components/prism-typescript");
+require("prismjs/components/prism-bash");
+
 import Layout from "../../../../components/Layout";
 import {
   MdxH1,
@@ -90,13 +95,11 @@ const GeneralInfo = ({
   lession,
   totalParts,
   filteredParts,
-  totallessions,
-  lastLetter,
 }) => {
   const MDXContent = useMDXComponent(lession.body.code);
   const router = useRouter();
 
-  console.log(lession.body.raw, " RAW DATA");
+  // console.log(lession.body.raw, " RAW DATA");
 
   // console.log("filtered Parts:",filteredParts)
   const mdxComponents = {
@@ -107,10 +110,14 @@ const GeneralInfo = ({
     h5: MdxH5,
     h6: MdxH6,
   };
+  
+  useEffect(() => {
+    Prism.highlightAll();
+  }, []);
 
   const orderedLessions = filteredParts
     ?.sort((a, b) => a.orderNumber - b.orderNumber)
-    .map((item, index) => {
+    .map((item) => {
       return item;
     });
 

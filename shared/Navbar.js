@@ -1,35 +1,16 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import SiteLogo from "../assets/site-logo.svg";
 import MobileSiteLogo from "../assets/mob-nav-logo.png";
 import { useRouter } from "next/router";
 import SearchIcon from "@mui/icons-material/Search";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function NavBar() {
   const router = useRouter();
   const [navbar, setNavbar] = useState(false);
-  //const [removesearchfrommobile, setremovesearchfrommobile] = useState(false);
- // const [windows,setWindowWidth] = useState('');
   const currentRoute = router.pathname;
-
-   if (typeof window !== "undefined") {
-  //   // detect window screen width function
-  // setWindowWidth(window)
-  //   console.log("hdfhfdhjdfs", window.innerWidth);
- }
-
-  // useEffect(() => {
-    
-  //     if (windows.innerWidth === 752) {
-  //       setremovesearchfrommobile(!removesearchfrommobile);
-  //     }
-    
-  // }, [windows.innerwi]);
-
-  // const size = useWindowSize();
 
   return (
     <div>

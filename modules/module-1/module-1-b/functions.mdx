@@ -4,10 +4,9 @@ author: shivam
 moduleNumber: module-1
 modulePart: module-1-b
 thisFileName: functions
-orderNumber: '6'
+orderNumber: "6"
 modulePartDescription: In this part of the module, you will delve into the basics of the Solidity programming language, which is used for building Solana programs. You will take a deep dive into foundational Solidity for solana concepts.
 ---
-
 
 ## Objective
 
@@ -72,7 +71,7 @@ If a function is defined outside a contract, it cannot have a visibility specifi
 
 Function arguments can be passed either by position or by name. When they are called by name, arguments can be in any order. However, functions with anonymous arguments (arguments without name) cannot be called this way.
 
-```solidity
+```Solidity
 contract foo {
     function bar(uint32 x, bool y) public returns (uint32) {
         if (y) {
@@ -109,7 +108,7 @@ contract foo {
 
 It is also possible to call functions on other contracts, which is also known as calling external functions. The called function must be declared public. Calling external functions requires ABI encoding the arguments, and ABI decoding the return values. The syntax for calling a contract is the same as that of the external call, except that it must be done on a contract type variable.
 
-```solidity
+```Solidity
 contract foo {
     function bar1(uint32 x, bool y) public returns (address, bytes32) {
         return (address(3), hex"01020304");
@@ -143,11 +142,11 @@ Multiple functions with the same name can be declared, as long as the arguments 
 - The number of arguments must be different
 - The type of at least one of the arguments is different
 
-A function cannot be overloaded by changing the return types or number of returned values. 
+A function cannot be overloaded by changing the return types or number of returned values.
 
 Here is an example of an overloaded function:
 
-```solidity
+```Solidity
 contract shape {
     int64 bar;
 
@@ -173,7 +172,7 @@ contract shape {
 }
 ```
 
-In the function foo, abs() is called with an `int64` so the second implementation of the function abs() is called. Solana runtime requires unique function names, so overloaded function names will be mangled in the ABI or the IDL. 
+In the function foo, abs() is called with an `int64` so the second implementation of the function abs() is called. Solana runtime requires unique function names, so overloaded function names will be mangled in the ABI or the IDL.
 
 The function name will be concatenated with all of its argument types, separated by underscores, using the following rules:
 
@@ -184,7 +183,7 @@ The function name will be concatenated with all of its argument types, separated
 
 The following example illustrates some overloaded functions and their mangled name:
 
-```solidity
+```Solidity
 enum E {
     v1,
     v2

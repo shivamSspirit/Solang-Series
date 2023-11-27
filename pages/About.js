@@ -1,73 +1,11 @@
-import { Button } from "flowbite-react";
-import { React, useState } from "react";
-import ActiveLeftArrow from "../assets/activelefticon.svg";
-import InActiveLeftArrow from "../assets/inactiveLeftIcon.svg";
+import { React } from "react";
 import illustration from "../assets/illustration.png";
-import cardImg from "../assets/CardImg.png";
-import landingPg1 from "../assets/landingPg1.png";
-import landingPg2 from "../assets/landingPg2.png";
-import Ufo from "../assets/Ufo.svg";
 import Image from "next/image";
-
-import Link from 'next/link'
-
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
 import { NextSeo } from "next-seo";
 import Layout from "../components/Layout";
+import Link from "next/link";
 
 const About = () => {
-  const [svgHoverColor, setSvgHoverColor] = useState("white");
-
-  const announcementData = [
-    {
-      img: cardImg,
-      head: "Module Name ",
-      desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
-    },
-    {
-      img: cardImg,
-      head: "Module Name",
-      desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
-    },
-    {
-      img: cardImg,
-      head: "Module Name",
-      desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
-    },
-  ];
-
-  const module = (
-    <Box sx={{ flexGrow: 1, color: "white" }}>
-      <Grid
-        container
-        className='flex justify-evenly items-center'
-        columns={{ xs: 4, sm: 10, md: 14, lg: 14 }}
-      >
-        {announcementData.map((announcement, index) => (
-          <Grid
-            className='bg-[rgba(0, 0, 0, 0.16)] my-2 rounded-2xl'
-            item
-            xs={3}
-            sm={4}
-            md={4}
-            lg={4}
-            key={index}
-          >
-            <div className='m-1'>
-              <Image src={announcement.img} alt='med' />
-              <div className='px-3 rounded-b-2xl'>
-                <div className='text-2xl pt-6 pb-1'>{announcement.head}</div>
-                <div className='text-[#CECECE] pb-6'>{announcement.desc}</div>
-              </div>
-            </div>
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
-  );
-
   return (
     <Layout>
       <div className='mt-5 sm:px-12'>

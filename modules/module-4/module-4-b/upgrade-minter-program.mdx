@@ -4,7 +4,7 @@ author: shivam
 moduleNumber: module-4
 modulePart: module-4-b
 thisFileName: upgrade-minter-program
-orderNumber: '0'
+orderNumber: "0"
 modulePartDescription: In this part of the module, we will enhance our previous token minter program by enabling the transfer of minted tokens to another account through cross-program invocation. Subsequently, we will proceed to build, deploy, and test the program.
 ---
 
@@ -25,10 +25,7 @@ Previously, in our ***spl-token-minter program*** we mint some gold token and tr
 
 We're using the same code for our project. It's the same code for minting, and we've added the transfer function in both the Solidity program and the TypeScript test file. Open our code directory in VSCode and move to Solidity folder. In transfergold.sol file, add a transfer function under mintTo function:
 
-
-## Transferring
-
-```solidity
+```Solidity
 // Transfer tokens from one token account to another via Cross Program Invocation to Token Program
 function transferTokens(
   address from, // token account to transfer from
@@ -46,7 +43,7 @@ In the code, we've made a transferTokens function that needs three things to wor
 2. The recipient's account with the Gold Token Mint.
 3. The amount of Gold Tokens to transfer.
 
-Now in first line of function body we retreive the senderstoken account data by make a call to SplToken.get_token_account_data(from). In the next line, the SplToken.transfer ***function performs the actual gold token transfer between the specified ATAs.*** This function requires the following parameters:
+Now in first line of function body we retreive the senderstoken account data by make a call to SplToken.get_token_account_data(from). In the next line, the SplToken.transfer **_function performs the actual gold token transfer between the specified ATAs._** This function requires the following parameters:
 
 - **from**: The account from which we're transferring tokens.
 - **to**: The account to which we're transferring tokens.
@@ -57,7 +54,7 @@ It executes a Cross-Program Invocation to the SPL Token Library using the transf
 
 ![only ata](/moduleimages/ata_only.jpeg)
 
-We transferred the amount of Gold Tokens from one Associated Token Account (ATA) to the other ATA using CPI (Cross-Program Invocation). 
+We transferred the amount of Gold Tokens from one Associated Token Account (ATA) to the other ATA using CPI (Cross-Program Invocation).
 
 ## Testing
 
@@ -82,7 +79,7 @@ it("Transfer some tokens to another wallet!", async () => {
     receipient.publicKey // owner(justin) account
   );
 
-  console.log("receipientTokenAccount",receipientTokenAccount)
+  console.log("receipientTokenAccount", receipientTokenAccount);
 
   const tx = await program.methods
     .transferTokens(
@@ -116,7 +113,9 @@ it("Transfer some tokens to another wallet!", async () => {
     .rpc();
   console.log("Your transaction signature", tx);
 
- const recepienttokenAmount = (await getAccount(connection, receipientTokenAccount.address)).amount;
+  const recepienttokenAmount = (
+    await getAccount(connection, receipientTokenAccount.address)
+  ).amount;
   console.log("recipienttokenAmount", recepienttokenAmount);
   let tokens = Number(recepienttokenAmount);
 
@@ -128,11 +127,11 @@ Here, first, we create the owner’s Associated Token Account (ATA):
 
 ```ts
 const tokenAccount = await getOrCreateAssociatedTokenAccount(
-    connection,
-    wallet.payer, // payer
-    mintKeypair.publicKey, // mint
-    wallet.publicKey // owner(shivam)
-  );
+  connection,
+  wallet.payer, // payer
+  mintKeypair.publicKey, // mint
+  wallet.publicKey // owner(shivam)
+);
 ```
 
 We use the `getOrCreateAssociatedTokenAccount` method from the SPL Token library to create an associated token account. We're using the same Gold Token Mint for this, and the owner is our wallet. Next, we create a new keypair for the recipient, which is the recipient in our case.
@@ -145,13 +144,13 @@ After this, we create the recipient’s ATA:
 
 ```ts
 const receipientTokenAccount = await getOrCreateAssociatedTokenAccount(
-    connection,
-    wallet.payer, // payer
-    mintKeypair.publicKey, // mint account
-    receipient.publicKey // owner(justin) account
-  );
+  connection,
+  wallet.payer, // payer
+  mintKeypair.publicKey, // mint account
+  receipient.publicKey // owner(justin) account
+);
 ```
 
 By using same gold token mint and set owner as recipient. Next, we start a transaction using the transferTokens method provided by the Solidity program. We give it the necessary token accounts and specify the amount of Gold Tokens we want to transfer. Then, we provide the data account and other required accounts for these cross-program invocation (CPI) calls. Finally, we confirm our test by ensuring that the recipient’s ATA contains 54 Gold Tokens.
 
-In the next lession, we move on to building, deploying and testing our program.
+In the next lesson, we move on to building, deploying and testing our program.

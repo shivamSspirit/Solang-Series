@@ -4,10 +4,9 @@ author: shivam
 moduleNumber: module-1
 modulePart: module-1-b
 thisFileName: imports
-orderNumber: '2'
+orderNumber: "2"
 modulePartDescription: In this part of the module, you will delve into the basics of the Solidity programming language, which is used for building Solana programs. You will take a deep dive into foundational Solidity for solana concepts.
 ---
-
 
 # Objectives
 
@@ -27,7 +26,7 @@ The import directive is used to import other solidity files in one file, which c
 Solidity imports are somewhat similar to JavaScript ES6 imports, however there is no export statement or default export.
 
 ```jsx
-import {foo, bar} from "defines.sol";
+import { foo, bar } from "defines.sol";
 ```
 
 Just like with ES6, import is hoisted to the top and both foo and bar are usable even before the import statement.
@@ -48,11 +47,11 @@ There are different types of imports you can use with Solidity on Solana:
 
 - Import everything from the library.
 - Select a few items from the library.
-- Import maps 
+- Import maps
 
 **Import everything from the library-:**
 
-```solidity
+```Solidity
 import "defines. sol";
 ```
 
@@ -60,7 +59,7 @@ It is also possible to import everything from defines. sol by leaving the list
 
 **Select a few items from the library-:**
 
-```solidity
+```Solidity
 import {foo, bar} from "defines.sol";
 ```
 
@@ -69,13 +68,14 @@ Solang will look for the file definitions. sol in the paths specified with the
 **import maps-:**
 
 Another method for locating files is using import maps. This maps the first directory of an import path to a different location on the file system. Say you add the command line option
-```solidity
+
+```Solidity
 import map @openzeppelin=/opt/open zeppelin-contracts/contracts,
-``` 
+```
 
 then
 
-```solidity
+```Solidity
 import "@openzeppelin/interfaces/IERC20.sol";
 ```
 
@@ -85,7 +85,7 @@ will automatically map to /opt/open zeppelin-contracts/contracts/interfaces/IER
 
 It is also possible to rename an import.
 
-```solidity
+```Solidity
 import {bar as baz,foo} from "defines.sol";
 ```
 
@@ -93,13 +93,13 @@ The bar is now renamed as Baz.
 
 Rather than renaming individual imports, it is also possible to make all the items in a file available under a special import object, as shown:
 
-```solidity
+```Solidity
 import "defines. sol" as deaths;
 ```
 
 There is another syntax, which does the same.
 
-```solidity
+```Solidity
 import * as defs from "defines. sol";
 ```
 
