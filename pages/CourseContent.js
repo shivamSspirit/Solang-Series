@@ -136,7 +136,13 @@ const CourseContent = ({ allModules }) => {
                   announcement.module
                 )}`}
               >
-                <div>
+                <div
+                 onClick={() => {
+                      router.push({
+                        pathname: `/CourseContent/${announcement.module}/${announcement.module}-a`,
+                      });
+                    }}
+                >
                   <Image
                     src={announcement.img.src}
                     alt='med'

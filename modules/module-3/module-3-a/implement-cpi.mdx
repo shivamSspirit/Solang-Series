@@ -48,7 +48,8 @@ Since programs can only get AccountInfo values from the runtime at the program's
 
 In below code block see how cpi are creating to leverProgram by calling their switchPower function
 
-```Solidity
+```solidity
+
 function pullLever(address dataAccount, string name) public {
 // The account required by the switchPower instruction.
 // This is the data account created by the lever program (not this program), which stores the state of the switch.
@@ -62,6 +63,7 @@ AccountMeta({pubkey: dataAccount, is_writable: true, is_signer: false})
     // Invoke the switchPower instruction on the lever program.
     leverProgram.switchPower{accounts: metas}(instructionData);
 }
+
 ```
 
 In this section of code, we're making a pullLever function that takes dataAccount and name as inputs. This function sets up the accountMeta for the data account of the lever program. It then puts the name into the instruction Data. Finally, we use cpi (cross-program-invocation) to call the switchPower method in the leverProgram(then a CPI is constructed, and the compiler will generate a invoke()), providing the necessary accountInfos and instructionData.
