@@ -3,6 +3,7 @@ import illustration from "../assets/illustration.png";
 import Image from "next/image";
 import { NextSeo } from "next-seo";
 import Layout from "../components/Layout";
+import Link from "next/link";
 
 const About = () => {
   return (
