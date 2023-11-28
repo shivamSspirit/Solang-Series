@@ -1,7 +1,5 @@
 import Head from "next/head";
 import "../styles/globals.css";
-import "../styles/prism.css";
-import Layout from "../components/Layout";
 
 export default function App({ Component, pageProps }) {
   return (
