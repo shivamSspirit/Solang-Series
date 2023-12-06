@@ -113,7 +113,7 @@ const GeneralInfo = ({
   
   useEffect(() => {
     Prism.highlightAll();
-  }, []);
+  }, [lession]);
 
   const orderedLessions = filteredParts
     ?.sort((a, b) => a.orderNumber - b.orderNumber)
