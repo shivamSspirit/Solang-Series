@@ -1,86 +1,61 @@
 ---
-title: Soldity Data types
-author: shivam
+title: Understanding Solidity Data Types
+author: Shivam
 moduleNumber: module-1
 modulePart: module-1-b
 thisFileName: datatype
 orderNumber: "4"
-modulePartDescription: In this part of the module, you will delve into the basics of the Solidity programming language, which is used for building Solana programs. You will take a deep dive into foundational Solidity for solana concepts.
+modulePartDescription: This part of the module dives into the basic data types in Solidity used for building Solana programs.
 ---
 
 # Objectives
 
-*************************In this lession, you will:*************************
+In this lesson, you will:
 
-- Understand the various data types available in Solidity and implement them.
+- Learn about various data types in Solidity and how to use them.
 
 ## tl;dr
 
-Solidity supports various primitive types, including bool, integers (**uint and int of different widths**), fixed-length byte arrays, address types, and function types. The address type differs between EVM and Solana. Fixed-length arrays can be created with a constant length.
+Solidity supports a range of basic data types, including booleans, integers (both signed and unsigned), fixed-length byte arrays, address types, and function types. Note that the address type varies between Ethereum Virtual Machine (EVM) and Solana. You can also create fixed-length arrays with a set size.
 
-# Overview
+# Detailed Explanation
 
-The following primitive types are supported.
+Here's a rundown of the primary data types in Solidity:
 
-- **Boolean Type (bool)** : This represents a single value which can be either true or false.
-- **Integers:**
-- **uint**: This represents a single unsigned integer of 256 bits wide. Values can be for example 0, 102, 0xdeadcafe, or 1000_000_000_000_000.
-- **uint64, uint32, uint16, uint8**: These represent shorter single unsigned integers of the given width. These widths are the most efficient and should be used whenever possible.
-- **int:** This represents a single signed integer of 256 bits wide. Values can be for example -102, 0, 102 or -0xdead_cafe.
-- **int64, int32, int16, int8:** These represent shorter single-signed integers of the given width. These widths are the most efficient and should be used whenever possible.
+1. **Boolean Type (bool)**: Represents true or false.
+2. **Integers**:
+   - **uint**: An unsigned 256-bit integer. Examples include 0, 102, 0xdeadcafe, 1000_000_000_000_000.
+   - **uint64, uint32, uint16, uint8**: Shorter unsigned integers. Using the most efficient width is recommended.
+   - **int**: A signed 256-bit integer. Examples include -102, 0, 102, -0xdead_cafe.
+   - **int64, int32, int16, int8**: Shorter signed integers. Opt for the most efficient width where possible.
 
-> Note-: When using integers, whenever possible use the int64, int32 or uint64, uint32 types.
+> Note: It's best to use int64, int32, uint64, or uint32 types when working with integers.
 
-1. **Fixed Length byte arrays:** Solidity has a primitive type unique to the language. It is a fixed-length byte array of 1 to 32 bytes, declared with *bytes* followed by the array length. For example, bytes32, bytes24, bytes8, or bytes1. byte is an alias for byte1, so byte is an array of 1 element. The arrays can be initialized with either a hex string hex"414243", or a text string "ABC", or a hex value 0x414243.
+3. **Fixed-Length Byte Arrays**: Unique to Solidity, these are arrays of 1 to 32 bytes, like bytes32, bytes24, bytes8, or bytes1. `byte` is an alias for `bytes1`. Initialize these arrays with a hex string (e.g., hex"414243"), a text string ("ABC"), or a hex value (0x414243).
    ```Solidity
    bytes4 foo = "ABCD"; bytes4 bar = hex"41_42_43_44";
    ```
-2. **Address and Address Payable Type:** The address type holds the address of an account. The length of an address type depends on the target being compiled for. On EVM, an address is 20 bytes. Solana has an address length of 32 bytes. The format of an address literal depends on what target you are building for. On EVM, Ethereum addresses can be specified with a particular hexadecimal number. Like, address for = `0xE9430d8C01C4E4Bb33E44fd7748942085D82fC91`;
+4. **Address Types**:
+   - **Regular Address**: Holds a 20-byte EVM account address or a 32-byte Solana account address.
+   - **Address Payable**: Similar to a regular address but can receive Ether in Ethereum. In Solidity for Solana, `address payable` can be used as a cast.
 
-   The hexadecimal string should be 40 hexadecimal characters, and not contain any underscores. The capitalization, i.e. whether a to f values are capitalized, is important. It is defined in [EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md). For example, when compiling:
+5. **Fixed-Length Arrays**: Created with `[length]` after the type name. They can contain any data type, including other arrays.
 
-   address for = 0xe9430d8C01C4E4Bb33E44fd7748942085D82fC91;
-
-   Solana addresses are base58 encoded, not hexadecimal. An address literal can be specified with the special syntax address"account".
-
-   ```Soldity
-   address foo = address"5GBWmgdFAMqm8ZgAHGobqDqX6tjLxJhv53ygjNtaaAn3sjeZ";
-   ```
-
-   note -: The type name address payable cannot be used as a cast in the Ethereum Foundation Solidity compiler, and the cast should be declared payable instead. This is [apparently due to a limitation in their parser](https://github.com/ethereum/solidity/pull/4926#discussion_r216586365). Solang’s generated parser has no such limitation and allows address payable to be used as a cast, but allows payable to be used as a cast well, for compatibility reasons.
-
-3. **Fixed Length Arrays: A**rrays are created by adding [length] to the type name, where length is a constant expression. An array can be created with any data type, including arrays themselves (also known as arrays of arrays).
-
-   On Solana, contracts cannot be used as data types, which means they cannot be used as function parameters, function returns or variables. Instead, contracts are deployed to a specific address, which is often known during compile time. Therefore, there is no need to store that address as a variable within a contract type.
-
-4. **Function Types:** Function types are references to functions. You can use function types to pass functions for callbacks, for example. Function types come in two flavours, internal and external. An internal function is a reference to a function in the same contract or one of its base contracts. An external function is a reference to a public or external function on any contract.
-
-   When declaring a function type, you must specify the parameters types, return types, mutability, and whether it is external or internal. The parameters or return types cannot have names.
+6. **Function Types**: Refer to functions and come in two flavors: internal and external. Internal functions are within the same contract or its base contracts. External functions reference public or external functions on any contract. Function types specify parameter types, return types, and mutability.
 
 ```Solidity
 contract ft {
-
   function test() public {
-
-    // reference to an internal function with two arguments, returning bool
-    // with the default mutability (i.e. cannot be payable)
-
     function(int32, bool) internal returns(bool) x;
+    x
 
-    // the local function func1 can be assigned to this type; mutability
-    // can be more restrictive than the type.
+ = func1;
 
-    x = func1;
+    // Call func1 via x
+    bool res = x(102, false);
 
-  // now you can call func1 via the x
-
-  bool res = x(102, false);
-    // reference to an internal function with no return values, must be pure
-
+    // Define a function type with no return values, must be pure
     function(int32, bool) internal pure y;
-    // Does not compile:
-    // Wrong number of return types and mutability is not compatible
-    // y = func1;
   }
 
   function func1(int32 arg, bool arg2) internal view returns(bool) {
@@ -89,44 +64,38 @@ contract ft {
 }
 ```
 
-If the internal or external keyword is omitted, the type defaults to internal.
-
-Function types, like any other type, can be used as function arguments, return types, or contract storage variables. However, you cannot use internal function types in public function parameters or return types.
-
-External function types serve as a reference to a function within a specific contract. They store both the address of the contract and the function selector. On the other hand, internal function types only store the function reference. When assigning a value to an external function selector, you must specify the contract and function by using a function on a particular contract instance.
+External function types store both the contract address and function selector. Assigning to external function types requires specifying the contract and function.
 
 ```Solidity
-
 contract ft {
   function test(address p) external {
-    // this.callback can be used **as** an external function type value
     paffling.set_callback{ program_id: p } (this.callback);
   }
+
   function callback(int32 count, string foo) public {
     // ...
   }
 }
 
 contract paffling {
-
-  // the first visibility external is for the function type, the second "internal" is for the callback variables
-
   function(int32, string) external internal callback;
+
   function set_callback(function(int32, string) external c) public {
     callback = c;
   }
+
   function piffle() public {
-  callback{ accounts: [] } (1, "paffled");
+    callback{ accounts: [] } (1, "paffled");
   }
 }
 ```
 
-On Solana, external calls from variables of type external functions require the accounts call argument. The compiler cannot determine the accounts such a function needs, so it does not automatically generate the AccountsMeta array.
+On Solana, for calls from variables of external function types, you must use the `accounts` call argument. The compiler can't automatically determine the required accounts, so you need to manually specify them.
 
 ```Solidity
-       function test(function(int32, string) external myFunc) public {
-        myFunc{accounts: []}(24, "accounts");
-       }
+function test(function(int32, string) external myFunc) public {
+  myFunc{accounts: []}(24, "accounts");
+}
 ```
 
-In the next lession, you will go through constructors in Solidity.
+In the next lesson, we will explore constructors in Solidity, furthering your understanding of how to structure and initialize Solidity contracts.

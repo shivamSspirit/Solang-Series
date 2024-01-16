@@ -1,30 +1,31 @@
 ---
-title: Exploring solang
-author: shivam
+title: Exploring Solang
+author: Shivam
 moduleNumber: module-1
 modulePart: module-1-a
 thisFileName: exploring-solang
 orderNumber: '1'
-modulePartDescription: In this part of the module, you will delve into the role of Solidity in building Solana programs. You will explore Solang, Solana accounts, and conduct a comparative analysis of Solidity for Solana versus Ethereum.
+modulePartDescription: This part of the module focuses on understanding the role of Solidity in the development of Solana programs, exploring Solang, Solana accounts, and the differences between Solidity for Solana and Ethereum.
+
 ---
 
 # Objectives
 
-In this lession, you will be:
+In this lesson, you will:
 
-- Introduced to the Solang compiler
-- Understand Solana program compilation in detail.
+- Be introduced to the Solang compiler.
+- Understand the process of compiling Solana programs in detail.
 
-## tl:dr
+## tl;dr
 
-This lession explores Solang. It is the Solidity Compiler for creating Solana smart contracts using the Solidity programming language. It utilizes the llvm framework to generate efficient WebAssembly `WASM` or Solana SBF contract code, reducing execution costs. It's compatible with Ethereum's Solidity compiler (v0.8) and seamlessly integrates with Solana development tools like Anchor for easy Solana program development and deployment.
+This lesson delves into Solang, a Solidity compiler for Solana that enables the creation of Solana smart contracts using the Solidity language. Solang uses the llvm framework to generate efficient WebAssembly (WASM) or Solana SBF contract code, which helps in reducing execution costs. It's compatible with Ethereum's Solidity compiler (version 0.8) and integrates seamlessly with Solana development tools like Anchor, making the development and deployment of Solana programs straightforward.
 
 ## Overview
 
-[Solang](https://solang.readthedocs.io/) is a Solidity Compiler designed to enable the creation of Solana programs—referred to as 'smart contracts' in other blockchain contexts—using the Solidity programming language.
-The compiler leverages the [llvm](https://llvm.org/) compiler framework to generate WebAssembly [WASM](https://www.rust-lang.org/what/wasm) or [Solana SBF](https://bpf.wtf/sol-0x03-isa/) contract code. This approach yields optimized output, resulting in reduced gas costs or compute units during execution.
-Solang is crafted to maintain source file compatibility with version 0.8 of the Ethereum EVM Solidity compiler.
+[Solang](https://solang.readthedocs.io/) is a specialized Solidity Compiler designed to facilitate the development of Solana programs (analogous to smart contracts in other blockchain platforms) using the Solidity programming language. Utilizing the [llvm compiler framework](https://llvm.org/), Solang translates Solidity code into optimized WebAssembly (WASM) or Solana SBF contract code. This optimization leads to reduced gas costs or compute units when the contracts are executed on the Solana network.
 
-Moreover, it integrates with established Solana development tools and frameworks, such as Anchor, facilitating the streamlined construction and deployment of Solana programs rooted in the Solidity language.
+Solang strives to maintain compatibility with Ethereum's EVM Solidity compiler, specifically version 0.8, ensuring that developers who are familiar with Ethereum's Solidity can easily transition to developing for Solana. This compatibility is a significant advantage for Ethereum developers looking to explore Solana's ecosystem.
 
-In the next lession, we take a look at the differences between solidity for Solana and solidity for Ethereum.
+Furthermore, Solang is designed to integrate smoothly with popular Solana development tools, such as the Anchor framework. This integration facilitates an efficient workflow for developers, enabling them to build and deploy Solana programs using Solidity in a familiar and effective environment.
+
+In the next lesson, we will examine the differences between using Solidity for Solana and Solidity for Ethereum, providing insights into how these two blockchain platforms vary in their approach to smart contract development.
