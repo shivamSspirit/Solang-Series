@@ -1,143 +1,130 @@
 ---
-title: Composability of programs or contracts
-author: shivam
+title: Composability of Programs or Contracts
+author: Shivam
 moduleNumber: module-3
 modulePart: module-3-a
 thisFileName: composability
 orderNumber: '1'
-modulePartDescription: In this part of the module, you will explore the composability of programs and how it works in Solana and Ethereum. You will also learn how to implement Cross-Program Invocation techniques.
+modulePartDescription: This section of Module 3 delves into the concept of composability in programs, focusing on how it operates in Solana and Ethereum, and introduces the implementation of Cross-Program Invocation (CPI) techniques.
 ---
 
 ## Objectives
 
-In this lession, you will:
+In this lesson, you will:
 
-- Understand the concept of composability in web3
-- Understand the differences between Solana and Ethereum in terms of composability.
-- Explore composability of programs in Solana via CPI and PDA
+- Gain an understanding of composability in the Web3 ecosystem.
+- Learn about the differences in composability between Solana and Ethereum.
+- Explore the composability of programs in Solana through CPI and PDA.
 
 ## tl;dr
 
-Composability in Web3 is similar to how open-source software components are used to build various applications. In Solana, composability is akin to Functional Programming FP, while Ethereum's approach is closer to Interface-based Inheritance OOP. Solana uses spl-token to manage tokens centrally, while Ethereum has separate contracts like ERC-20.
+Composability in Web3 is akin to the use of open-source software components in building diverse applications. In Solana, it resembles Functional Programming (FP), while Ethereum’s approach is more akin to Interface-based Inheritance in Object-Oriented Programming (OOP). Solana centralizes token management via spl-token, whereas Ethereum employs separate contracts like ERC-20 for each token type.
 
-It enables blockchain apps to collaborate by linking together through smart contracts or project assembly. Composability offers quicker development, enhanced innovation, and user-friendly collaboration in the Web3 ecosystem.
+Composability allows blockchain applications to collaborate effectively, linking through smart contracts or project assemblies. It offers faster development, spurs innovation, and facilitates user-friendly interactions in the Web3 space.
 
 ## Overview
 
-Composability is a concept that might be familiar to Web2 developers. It means using software parts that fit into various apps. This concept has existed since the advent of open-source technology and held significant importance during the early days of the Internet. While web2 got a boost from this, web3 also relies on it improve user experiences and spark fresh ideas.
+Composability, a familiar concept for Web2 developers, involves using modular software components adaptable to various applications. This principle, rooted in open-source technology, has been pivotal since the early internet days, boosting both Web2 and now Web3, enhancing user experiences and fostering new ideas.
 
-Web3, the updated Internet version, is reintroducing composability. In Web3, composability occurs when parts of blockchain apps link up, either via smart contracts or project assembly. It allows various blockchain apps, such as trading platforms and decentralized apps, to collaborate.
+Web3, the evolved iteration of the internet, re-emphasizes composability. In this context, composability happens when blockchain applications, such as trading platforms and decentralized apps (DApps), interconnect through smart contracts or project assemblies.
 
-## Composability Of Programs
+## Composability
 
-In Solana, composability can be considered to be like Functional Programming FP. It is similar to having separate roles for a smart contract and the data it uses. When dealing with Solana, transactions is centered around Solana accounts, which form the core of the entire Solana ecosystem. Unlike Ethereum, where each token has its special contract, Solana uses something called **spl-token** to control all tokens in one place.
+Of Programs
 
-Ethereum's composability is akin to interface-based inheritance in traditional Object Oriented Programming OOP. This means that if something acts like a particular entity, it's treated as such. In Ethereum, you expand on established standards like ERC-20 and implement the necessary functions.
+In Solana, composability can be likened to Functional Programming (FP). This approach involves distinct roles for smart contracts and the data they utilize. Transactions in Solana revolve around Solana accounts, which form the cornerstone of the ecosystem. Unlike Ethereum, where each token operates through its unique contract, Solana employs **spl-token** to manage all tokens centrally.
 
-On Ethereum, data lives right inside the smart contract. But in Solana, data is spread out across many atomic accounts. Even though it might sound a bit complex, this setup lets Solana do many things at the same time. Transactions that need to look at an account, without changing it, can all happen together.
+Conversely, Ethereum's composability echoes interface-based inheritance found in traditional Object-Oriented Programming (OOP). This means treating entities according to their behavior. Ethereum builds upon established standards like ERC-20, requiring specific function implementations.
 
-In Solana's programming universe, different programs can talk to each other using something called cross-program invocation and PDA. One program can tell another program what to do. The starting program takes a little break while the other program does its thing.
+In Ethereum, data resides directly within smart contracts, whereas Solana distributes data across numerous atomic accounts. While this may seem complex, it allows Solana to execute multiple operations concurrently. Transactions that only read from an account without altering it can be processed simultaneously.
 
-Here's a simplified comparison table between Solana and Ethereum composability:
+In Solana's programming environment, different programs communicate via Cross-Program Invocation (CPI) and Program-Derived Addresses (PDA). This enables one program to instruct another, pausing while the second program executes the task.
+
+Here's a simplified comparison between Solana and Ethereum composability:
 
 <>
 <table>
     <thead>
-      <tr>
-        <th>Aspect</th>
-        <th>Solana</th>
-        <th>Ethereum</th>
-      </tr>
+        <tr>
+            <th>Aspect</th>
+            <th>Solana</th>
+            <th>Ethereum</th>
+        </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Composability Approach</td>
-        <td>Like Functional Programming FP</td>
-        <td>Interface-based Inheritance OOP</td>
-      </tr>
-
-      <tr>
-        <td>Token Management</td>
-        <td>Through spl token</td>
-        <td>Each token has its own contract e.g ERC-20</td>
-      </tr>
-
-      <tr>
-     <td>Transaction Foundation</td>
-        <td>Centered around Solana accounts</td>
-        <td>Focuses on smart contract interaction </td>
-      </tr>
-
- <tr>
-     <td>Data Storage</td>
-        <td>Data distributed across atomic accounts</td>
-        <td>Data stored within the smart contract</td>
-      </tr>
-
- <tr>
-     <td>Concurrency Advantage</td>
-        <td>Supports simultaneous task execution</td>
-        <td>Limited parallel processing</td>
-      </tr>
-
- <tr>
-     <td>Inter program Comm</td>
-      <td>Cross program invocation and PDA</td>
-      <td>Interface and inheritance</td>
-      </tr>
-
+        <tr>
+            <td>Composability Approach</td>
+            <td>Functional Programming (FP)</td>
+            <td>Interface-based Inheritance (OOP)</td>
+        </tr>
+        <tr>
+            <td>Token Management</td>
+            <td>Centralized via spl-token</td>
+            <td>Individual contracts (e.g., ERC-20)</td>
+        </tr>
+        <tr>
+            <td>Transaction Foundation</td>
+            <td>Centered around Solana accounts</td>
+            <td>Focused on smart contract interactions</td>
+        </tr>
+        <tr>
+            <td>Data Storage</td>
+            <td>Data distributed across atomic accounts</td>
+            <td>Data stored within the smart contract</td>
+        </tr>
+        <tr>
+            <td>Concurrency Advantage</td>
+            <td>Supports simultaneous task execution</td>
+            <td>Limited parallel processing</td>
+        </tr>
+        <tr>
+            <td>Inter-Program Communication</td>
+            <td>Cross-Program Invocation (CPI) and PDA</td>
+            <td>Interfaces and inheritance</td>
+        </tr>
     </tbody>
-  </table>
+</table>
 </>
 
 ## Composability in Solana via CPI and PDA
 
-Cross-Program Invocation CPI is key to ensuring collaboration between Solana programs. This enables the composability of Solana programs. It enables one program to call another, establishing a smooth connection. This feature simplifies the expansive Solana system into a unified ecosystem for developers.
+Cross-Program Invocation (CPI) is a crucial element in enabling collaboration between Solana programs. It facilitates the composability of these programs, allowing one to call another, thereby creating a seamless network. This feature simplifies the expansive ecosystem, unifying it for developers.
 
-**Calling Programs with CPIs**
+**Implementing CPI Calls**
 
-A Cross-Program Invocation CPI is when one program calls another program, aiming at a certain instruction in that program. CPIs allow the calling program to extend its signer privileges to the callee program.
+In CPI, a program calls another, targeting a specific instruction within that program. CPIs allow the calling program to extend its signer privileges to the callee program. This is accomplished using methods like `invoke` or `invoke_signed`, the latter being used when signatures are required for Program-Derived Addresses (PDAs).
 
-This is achieved using instructions like invoke or invoke_signed. The latter is employed when programs have to give their signatures for Program-Derived Addresses PDAs, which we'll cover in this series.
+CPIs are instrumental in interlinking Solana programs. Any public instruction of a program can be invoked by another through CPI, ensuring harmonious operation within the ecosystem. While the accounts and data sent to a program are not directly controllable, it's vital to thoroughly verify the information passed into a CPI for security and functionality.
 
-CPIs are what make Solana programs work together. Any public instruction of a program can be triggered by another program using a CPI. This makes different programs within the Solana system work together like clockwork. Even though we can't control the accounts and data that are sent to a program, we should always double-check the information we pass into a CPI. This is crucial for keeping the program secure and working as expected.
+The process of one program calling another is straightforward when viewed as issuing an "Instruction." To execute a CPI, you must define and construct an instruction on the invoked program and provide a list of necessary accounts. If a PDA is involved as a signer, `signers_seeds` must also be included in `invoke_signed`.
 
-Don't worry if the concept of one program calling another seems complex – it's quite straightforward. Think of it as giving directions using an "Instruction."
+An Instruction requires three key elements: the program ID of the called program, data the program can interpret, and a list of "AccountInfos." These AccountInfos represent the accounts the called program will utilize.
 
-To make a CPI, you must specify and construct an instruction on the program being invoked and supply a list of accounts necessary for that instruction. If a PDA is required as a signer, the `signers_seeds` must also be provided when using `invoke_signed`.
+![CPI Instruction Diagram](/moduleimages/cpi.jpeg)
 
-To make this work, the Instruction needs three things: the program ID of the program you're calling, information(data) that the program can understand, and a list of "AccountInfos." These AccountInfos are like the accounts the program you're calling will use see diagram below.
+The calling program receives these AccountInfos from the system at the outset. Thus, any account needed by the called program must also be required by the calling program, creating a chain of dependencies.
 
-![cpi instruction](/moduleimages/cpi.jpeg)
+In this tutorial, you'll learn how to use `invoke` CPI in Solang when a Program-Derived Address (PDA) is not required as a signer.
 
-Here's the neat part: the calling program receives these AccountInfos from the system at the beginning. This means that any account the program you're calling requires must also be needed by the calling program. It's like a chain reaction – one thing leads to another.
+## Composability of Contracts in Ethereum
 
-Oh, and that program ID we mentioned? The program doing the calling needs to get it in the same way. It's a rule everyone follows.
-
-Imagine this instruction as a recipe – you gather these elements, and then something incredible unfolds. It's like a sort of magic that's built into the Solana system.
-
-***In this tutorial, you'll discover how to use invoke CPI in Solang when a program-derived address PDA isn't required for the signer.***
-
-## Composability of contracts in Ethereum
-
-Smart contracts on Ethereum work like public APIs – they're like building blocks that can be used without starting from scratch. For instance, you can use the ready-made smart contracts from projects like Uniswap, a decentralized exchange, to simplify tasks in your app.
+APIs, serving as modular building blocks for application development. Projects like Uniswap, a decentralized exchange, provide ready-made smart contracts that can simplify tasks in other applications.
 
 **How Composability Works in Ethereum**
+Ethereum's smart contracts are universally accessible, promoting application development with their open nature. Composability in Ethereum is built on three key pillars:
 
-Ethereum's smart contracts are open to everyone, enhancing app development. Composability relies on three aspects:
+1. **Modularity:** Each smart contract is designed with a specific function in mind.
+2. **Autonomy:** Smart contracts operate independently.
+3. **Discoverability:** These contracts are open for anyone to use and adapt.
 
-1. **Modularity:** Each smart contract has a specific role.
-2. **Autonomy:** Smart contracts can function .
-3. **Discoverability:** Anyone can use and modify smart contracts.
+Here's an example to illustrate:
 
-An Example:
-
-Imagine a situation where a token has a higher value on one exchange than another. If you have enough money, you can buy it on the cheaper exchange and sell it on the more expensive one to make a profit. But if you don't have enough money, you can use something called a flash loan. This kind of loan lets you borrow assets without having to put up anything as security. With flash loans, you can do complicated things in one move, like buying and selling tokens to make money. And all this is possible because smart contracts are working together.
+Consider a scenario where the price of a token differs between two exchanges. If you possess sufficient funds, you could purchase the token at a lower price on one exchange and sell it at a higher rate on another, securing a profit. In case of inadequate funds, a flash loan comes into play. This type of loan allows you to borrow assets without collateral. By leveraging flash loans, you can execute complex transactions, like simultaneous buying and selling, to capitalize on market discrepancies—all enabled by the collaborative nature of smart contracts.
 
 Advantages of Composability:
 
-- **Quicker Development:** Developers avoid starting from scratch.
-- **Enhanced Innovation:** Experimenting with new ideas becomes simpler.
-- **User-Friendly:** Apps collaborate seamlessly.
+- **Faster Development:** Developers bypass the need to build from the ground up.
+- **Boosted Innovation:** The ease of experimenting with novel concepts is increased.
+- **User-centric Interaction:** Applications work together smoothly, enhancing user experience.
 
-In the next lession, we write the code for our CPI Flip program.
+In our next lesson, we will dive into coding the CPI Flip program.
