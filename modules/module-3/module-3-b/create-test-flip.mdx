@@ -1,29 +1,29 @@
 ---
-title: Create Test For Cpi Flip Program
-author: shivam
+title: Creating Tests for CPI Flip Program
+author: Shivam
 moduleNumber: module-3
 modulePart: module-3-b
 thisFileName: create-test-flip
 orderNumber: '1'
-modulePartDescription: In this part of the module, you will delve into code design and develop an actual flip program by utilizing cross-program invocation techniques in Solana using Solidity. The process begins with creating an interface in Solidity. Subsequently, you will write tests for it using `TypeScript` and proceed with building, deploying, and testing this flip program.
+modulePartDescription: In this part of Module 3, you'll delve into the practical aspects of coding a flip program that leverages Cross-Program Invocation (CPI) techniques in Solana using Solidity. You will start with creating an interface in Solidity and then move on to writing tests for the program using `TypeScript`, followed by building, deploying, and testing the flip program.
 ---
 
 ## Objectives
 
-In this lession, you will:
+In this lesson, you will:
 
-- Configure testing environment for Solang
+- Set up a testing environment for Solang.
 - Write test cases for the Solidity code.
 
 ## tl;dr
 
-This lession provides instructions for writing tests for a Solana program that involves cross-program invocation (CPI). It starts by configuring the testing environment and generating key pairs for data accounts. The tests include initializing a data account for the lever program, pulling a virtual lever through CPI, and fetching and checking the updated state value. The tests verify the functionality of the program.
+This lesson provides guidance on writing tests for a Solana program that incorporates cross-program invocation (CPI). It begins with setting up the testing environment and generating key pairs for data accounts. The tests involve initializing a data account for the lever program, executing a virtual lever pull through CPI, and verifying the updated state value. These tests aim to ensure the program's functionality.
 
 ## Overview
 
-## Writing tests
+### Writing Tests
 
-Start by going into the test file and removing all the existing code. Then, replace it with this block of code.
+To start, clear the existing code in the test file and replace it with the following code block:
 
 ```tsx
 import * as anchor from "@coral-xyz/anchor";
@@ -32,21 +32,21 @@ import { Lever } from "../target/types/lever";
 import { Hand } from "../target/types/hand";
 
 describe("cross-program-invocation", () => {
-  // Configure the client to use the local cluster.
+  // Configuration for the local cluster.
   const provider = anchor.AnchorProvider.env();
   anchor.setProvider(provider);
 
-  // Generate a new keypair for the data accounts for each program
+  // Generate keypairs for data accounts of each program.
   const dataAccountLever = anchor.web3.Keypair.generate();
   const dataAccountHand = anchor.web3.Keypair.generate();
   const wallet = provider.wallet;
 
-  // The lever program and hand program
+  // Lever and Hand programs
   const leverProgram = anchor.workspace.Lever as Program<Lever>;
   const handProgram = anchor.workspace.Hand as Program<Hand>;
 
   it("Initialize the lever!", async () => {
-    // Initialize data account for the lever program
+    // Initialize data account for lever program
     const tx = await leverProgram.methods
       .new()
       .accounts({ dataAccount: dataAccountLever.publicKey })
@@ -54,18 +54,16 @@ describe("cross-program-invocation", () => {
       .rpc();
     console.log("Your transaction signature", tx);
 
-    // Fetch the state of the data account
+    // Fetch and display the state of the data account
     const val = await leverProgram.methods
       .get()
       .accounts({ dataAccount: dataAccountLever.publicKey })
       .view();
-
     console.log("State:", val);
   });
 
   it("Pull the lever!", async () => {
-    // Initialize data account for the hand program
-    // This is required by Solang, but the account is not used
+    // Initialize data account for hand program
     const tx = await handProgram.methods
       .new()
       .accounts({ dataAccount: dataAccountHand.publicKey })
@@ -73,18 +71,20 @@ describe("cross-program-invocation", () => {
       .rpc();
     console.log("Your transaction signature", tx);
 
-    // Call the pullLever instruction on the hand program, which invokes the lever program via CPI
+    // Invoke pullLever in hand program, calling lever program via CPI
     const tx2 = await handProgram.methods
       .pullLever(dataAccountLever.publicKey, "Chris")
       .accounts({ dataAccount: dataAccountHand.publicKey })
       .remainingAccounts([
+        // Lever program's data account
         {
-          pubkey: dataAccountLever.publicKey, // The lever program's data account, which stores the state
+          pubkey: dataAccountLever.publicKey,
           isWritable: true,
           isSigner: false,
         },
+        // Lever program's ID
         {
-          pubkey: leverProgram.programId, // The lever program's program ID
+          pubkey: leverProgram.programId,
           isWritable: false,
           isSigner: false,
         },
@@ -92,28 +92,29 @@ describe("cross-program-invocation", () => {
       .rpc({ skipPreflight: true });
     console.log("Your transaction signature", tx2);
 
-    // Fetch the state of the data account
+    // Fetch and display updated state
     const val = await leverProgram.methods
       .get()
       .accounts({ dataAccount: dataAccountLever.publicKey })
       .view();
-
     console.log("State:", val);
   });
 
   it("Pull it again!", async () => {
-    // Call the pullLever instruction on the hand program, which invokes the lever program via CPI
+    // Repeat lever pull with different arguments
     const tx = await handProgram.methods
       .pullLever(dataAccountLever.publicKey, "Ashley")
       .accounts({ dataAccount: dataAccountHand.publicKey })
-      .remainingAccounts([
+      .remainingAccounts(
+        // Lever program's data account
         {
-          pubkey: dataAccountLever.publicKey, // The lever program's data account, which stores the state
+          pubkey: dataAccountLever.publicKey,
           isWritable: true,
           isSigner: false,
         },
+        // Lever program's ID
         {
-          pubkey: leverProgram.programId, // The lever program's program ID
+          pubkey: leverProgram.programId,
           isWritable: false,
           isSigner: false,
         },
@@ -122,20 +123,23 @@ describe("cross-program-invocation", () => {
 
     console.log("Your transaction signature", tx);
 
-    // Fetch the state of the data account
+    // Fetch and display updated state
     const val = await leverProgram.methods
       .get()
       .accounts({ dataAccount: dataAccountLever.publicKey })
       .view();
-
     console.log("State:", val);
   });
 });
 ```
 
-Here, we begin by importing the necessary **dependencies** and **types** for both of our programs. This is crucial for managing tests that involve flipping the switch state, where Program A calls the "**switchPower**" function through cross-program invocation (CPI).
+In this code:
 
-Then, we describe the test for the Cross-Program Invocation (CPI).
+- We import necessary dependencies and types for our programs, enabling the testing of the switch state toggle via CPI.
+- The `describe` block outlines our test suite for the CPI program.
+- We configure the testing environment, generate keypairs for data accounts, and initialize program instances.
+
+### Test Requirements and Setup
 
 ```tsx
 describe("cross-program-invocation", () => {
@@ -149,23 +153,20 @@ In this part, we'll talk about and test how the "CPI" program works. We'll write
   const provider = anchor.AnchorProvider.env();
   anchor.setProvider(provider);
 
-  // Generate a new keypair for the data accounts for each program
+  // Generate new keypairs for data accounts
   const dataAccountLever = anchor.web3.Keypair.generate();
   const dataAccountHand = anchor.web3.Keypair.generate();
   const wallet = provider.wallet;
 
-  // The lever program and hand program
+  // Initialize Lever and Hand programs
   const leverProgram = anchor.workspace.Lever as Program<Lever>;
   const handProgram = anchor.workspace.Hand as Program<Hand>;
 ```
 
-Here we configure and start the setup for testing our CPI Solana program.
-
-- **Configuration and Provider Setup**: First, we connect to the local cluster and set up the provider using AnchorProvider.env(). This provider is then assigned with anchor.setProvider(provider) The Provider is an abstraction of a connection to the Solana network, typically consisting of a Connection, Wallet, and a preflight commitment.
-- **Generating Key Pairs**: To store the program's state, we create a new data account using a key pair. Here, we generate a new keypair for the data accounts for each program. We set up wallet variables too.
-- **Initializing the Program**: We use anchor.workspace.Lever and anchor.workspace.Hand to make an instance of the program as Program. This prepares both program from the workspace., The program, which is an abstraction that combines the Provider, idl, and the programID (which is generated when the program is built), allows us to call RPC methods against our program.
-
+Here, we establish the testing setup by connecting to a local cluster, generating keypairs for data accounts, and initializing our Lever and Hand programs.
 Now, let's initialize the data account for the lever program:
+
+### Initializing the Data Account for the Lever Program
 
 ```tsx
 it("Initialize the lever!", async () => {
@@ -187,33 +188,9 @@ it("Initialize the lever!", async () => {
   });
 ```
 
-Here, we start by initializing the test and creating a transaction to establish a data account for the lever program. This is done below:
+In this test case, we initialize a data account for the lever program and fetch its state.
 
-```tsx
-const tx = await leverProgram.methods
-      .new()
-      .accounts({ dataAccount: dataAccountLever.publicKey })
-      .signers([dataAccountLever])
-      .rpc();
-    console.log("Your transaction signature", tx);
-```
-
-Afterwards, we retrieve the current state value using this approach.
-
-```tsx
-// Fetch the state of the data account
-    const val = await leverProgram.methods
-      .get()
-      .accounts({ dataAccount: dataAccountLever.publicKey })
-      .view();
-    console.log("State:", val);
-```
-
-Here, we get the state value by calling the "get()" method from the lever program.
-
-Now, let's construct a test for pulling the lever. This test creates a transaction to alter the power state by initiating a cross-program invocation (CPI) to the lever program from the hand program.
-
-First, we set up the data account for the hand program, which is needed by Solang even though it remains unused. Then, the transaction uses the lever's data account and the name of the person who pulled the switch. We include the rest of the accounts and the program ID as accounts and instruction data for the CPI call:
+### Testing the Lever Pull Functionality
 
 ```tsx
 it("Pull the lever!", async () => {
@@ -255,6 +232,31 @@ it("Pull the lever!", async () => {
   });
 ```
 
-Next, we retrieve the current state value using the lever program's "get" method. Then, we perform another pull, this time with different arguments, and fetch the updated state value. And that’s it our tests are done.
+This test case focuses on the functionality of pulling the lever, where the hand program calls the lever program via CPI. We check the updated state post-CPI execution.
 
-In the next lession, we explore building and deploying our Solana program to the blockchain.
+### Repeating the Lever Pull with Different Arguments
+
+```tsx
+  it("Pull it again!", async () => {
+    // Repeat lever pull with different arguments
+    const tx = await handProgram.methods
+      .pullLever(dataAccountLever.publicKey, "Ashley")
+      .accounts({ dataAccount: dataAccountHand.publicKey })
+      .remainingAccounts([
+        // Account configurations
+      ])
+      .rpc({ skipPreflight: true });
+
+    console.log("Your transaction signature", tx);
+
+    // Fetch the state of the data account
+    const val = await leverProgram.methods
+      .get()
+      .accounts({ dataAccount: dataAccountLever.publicKey })
+      .view();
+    console.log("State:", val);
+  });
+```
+Here, we perform another lever pull with varying arguments to ensure the program responds correctly to different inputs.
+
+In the next lesson, we will explore the process of building and deploying our Solana program to the blockchain, further advancing our understanding of Solana development.
