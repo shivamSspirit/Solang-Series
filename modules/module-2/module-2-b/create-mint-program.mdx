@@ -96,6 +96,9 @@ function createTokenMint(
     }
 ```
 
+**Difference from Ethereum** :- Decimals for the mint account (unlike Ethereum, which does not have a decimal concept for creating and minting tokens. Ethereum has different types of interfaces, such as ERC-20 for fungible tokens and ERC-721 for NFTs. In contrast, Solana employs a single SPL token program responsible for minting both types of tokens, using the decimal concept.)
+
+
 This function handles creating a new token mint and its metadata. It involves interacting with Solana's System Program and Token Program to establish the mint account and setting various authorities and properties for it. Then, it uses the Metadata Program to create an account for storing metadata related to the minted tokens.
 
 ### Minting Tokens to User Wallets

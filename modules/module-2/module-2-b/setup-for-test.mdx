@@ -168,7 +168,7 @@ it("Create an SPL Token!", async () => {
 });
 ```
 
-This script crafts a custom SPL token, "Solana Pro," titled "Gold." It begins with creating a Metaplex connection and retrieving the metadata address for the token mint, crucial steps for the subsequent creation process.
+This script crafts a custom SPL token, "Solana Pro," titled "Gold." It begins with creating a Metaplex connection and retrieving the metadata address for the token mint and a decimal of 9 to make sure we create a `Fungible Token mint`., crucial steps for the subsequent creation process.
 
 To mint "Solana Pro" tokens to your wallet, follow this script:
 
@@ -245,3 +245,4 @@ address = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
 ```
 
 This line specifies the metadata program ID for Metaplex, essential for the proper functioning of your program. With these steps completed, your program is set up for further development, including building, deploying, and testing, which will be covered in the subsequent lesson.
+
