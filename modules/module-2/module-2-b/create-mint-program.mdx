@@ -103,18 +103,19 @@ This function handles creating a new token mint and its metadata. It involves in
 
 ### Minting Tokens to User Wallets
 
-Next, include the `mintTo` function:
+Next, include the `create_mint` function:
 
 ```Solidity
-function mintTo(address mintAuthority, address tokenAccount, address mint, uint64 amount) public {
+
     // Mint tokens to the token account
-    SplToken.mint_to(
-        mint, // mint account
-        tokenAccount, // token account
-        mintAuthority, // mint authority
-        amount // amount
-    );
-}
+       SplToken.create_mint(
+            payer,            // payer account
+            mint,            // mint account
+            mintAuthority,   // mint authority
+            freezeAuthority, // freeze authority
+            decimals         // decimals
+        );
+
 ```
 
 This function mints tokens directly to a user's associated token account. It's a crucial part of how Solana manages and tracks the distribution of SPL tokens.
