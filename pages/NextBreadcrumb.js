@@ -28,7 +28,7 @@ const NextBreadcrumb = ({ capitalizeLinks, currentpath }) => {
             ? link[0]?.toUpperCase() + link?.slice(1, link.length)
             : link;
           
-             {console.log("router.query.idasfilename==itemLink",router.query.idasfilename[0].toUpperCase() + router.query.idasfilename?.slice(1, router.query.idasfilename.length)===itemLink)}
+             {console.log("router.query.idasfilename==itemLink",router.query.idasfilename?.[0].toUpperCase() + router.query.idasfilename?.slice(1, router.query.idasfilename.length)===itemLink)}
           
           return (
             <React.Fragment key={index}>

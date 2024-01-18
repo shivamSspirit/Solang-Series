@@ -23,7 +23,7 @@ import Layout from "../components/Layout";
 
 export async function getStaticProps() {
   const allModuleNumbers = await getModules();
-  //console.log("allModuleNumbers", allModuleNumbers);
+  console.log("allModuleNumbers", allModuleNumbers);
   const allModules = allModuleNumbers.map((post) =>
     post.substring("modules/".length)
   );
@@ -85,11 +85,13 @@ export const announcementData = [
 ];
 
 const CourseContent = ({ allModules }) => {
-  // console.log("allDocsfdfssd", allDocuments);
+  console.log("allModules", allModules);
   const mergedArray = allModules.map((moduleName, index) => ({
     module: moduleName,
     ...announcementData[index],
   }));
+
+  console.log("mergedArray", mergedArray);
   const router = useRouter();
 
   //   const moduleColors={
