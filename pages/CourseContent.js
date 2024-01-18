@@ -73,7 +73,7 @@ export const announcementData = [
   {
     img: Course6,
     head: "Module Name",
-    desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
+    desc: "Mint And Transfer NFT",
     module_color: "#E6BE8A",
   },
   {
