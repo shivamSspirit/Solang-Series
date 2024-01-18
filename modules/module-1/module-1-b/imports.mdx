@@ -1,108 +1,80 @@
 ---
-title: How Imports works
-author: shivam
+title: Understanding Solidity Imports
+author: Shivam
 moduleNumber: module-1
 modulePart: module-1-b
 thisFileName: imports
 orderNumber: "2"
-modulePartDescription: In this part of the module, you will delve into the basics of the Solidity programming language, which is used for building Solana programs. You will take a deep dive into foundational Solidity for solana concepts.
+modulePartDescription: This section focuses on understanding the import functionality in Solidity, a crucial aspect for building Solana programs.
 ---
 
 # Objectives
 
-*************************In this lession, you will:*************************
+In this lesson, you will:
 
-- Understand how the import directive in Solidity is different than other languages.
-- Go through the various types of imports in Solidity.
+- Learn how Solidity's import directive functions and how it differs from other languages.
+- Explore the different types of imports in Solidity.
 
 ## tl;dr
 
-Solidity's import directive is used to bring code from other files into your file. It is similar to JavaScript imports. You can import specific items, everything, or rename imports. Imported items include constants, structs, enums, events, functions, and contracts. Import paths can be managed using import maps. Renaming and grouping imports are also possible.
+Solidity uses the import directive to include code from other files, similar to JavaScript imports. This feature allows you to incorporate constants, structs, enums, events, functions, and contracts from external files. Unlike JavaScript, Solidity doesn’t have an export statement or default export.
 
-# Overview
+## Detailed Overview
 
-The import directive is used to import other solidity files in one file, which can used in other files. For example, by importing the Solana library into our solidity contract we can use multiple methods from it to interact with Solana programs.
+**Import Directive:**
 
-Solidity imports are somewhat similar to JavaScript ES6 imports, however there is no export statement or default export.
+In Solidity, the import directive is used to integrate other Solidity files into your contract. For instance, importing the Solana library lets you utilize its methods within your Solidity contracts. Solidity's approach to imports is somewhat akin to JavaScript's ES6, with some differences.
 
+Example:
 ```Solidity
 import { foo, bar } from "defines.sol";
 ```
 
-Just like with ES6, import is hoisted to the top and both foo and bar are usable even before the import statement.
+In Solidity, `import` is hoisted, allowing `foo` and `bar` to be accessible before the import statement. 
 
-The following items are always exported, which means they can be imported into another file.
+**Types of Imports:**
 
-- global constants
-- struct definitions
-- enums definitions
-- event definitions
-- global functions
-- free-standing functions
-- contracts, including abstract contracts, libraries, and interfaces
+There are several types of imports you can use:
 
-## Types of imports
+1. **Import Everything from a Library:**
+   ```Solidity
+   import "defines.sol";
+   ```
+   This imports all items from "defines.sol", differing from ES6 where such syntax imports nothing.
 
-There are different types of imports you can use with Solidity on Solana:
+2. **Select Specific Items from a Library:**
+   ```Solidity
+   import { foo, bar } from "defines.sol";
+   ```
+   Only imports `foo` and `bar` from "defines.sol".
 
-- Import everything from the library.
-- Select a few items from the library.
-- Import maps
+3. **Using Import Maps:**
+   Import maps link a path segment to a specific location on the file system. For example:
+   ```Solidity
+   import map @openzeppelin=/opt/openzeppelin-contracts/contracts
+   import "@openzeppelin/interfaces/IERC20.sol";
+   ```
+   This would link to `/opt/openzeppelin-contracts/contracts/interfaces/IERC20.sol`.
 
-**Import everything from the library-:**
+## Renaming Imports
 
-```Solidity
-import "defines. sol";
-```
-
-It is also possible to import everything from defines. sol by leaving the list out. Note that this is different from ES6, which would import nothing with this syntax.
-
-**Select a few items from the library-:**
-
-```Solidity
-import {foo, bar} from "defines.sol";
-```
-
-Solang will look for the file definitions. sol in the paths specified with the --importpath command-line option. If the file is relative, e.g. import "./defines.sol"; or import "../defines.sol"; then the directory relative to the parent file is used.
-
-**import maps-:**
-
-Another method for locating files is using import maps. This maps the first directory of an import path to a different location on the file system. Say you add the command line option
+You can also rename imports for convenience or to avoid name clashes:
 
 ```Solidity
-import map @openzeppelin=/opt/open zeppelin-contracts/contracts,
+import { bar as baz, foo } from "defines.sol";
 ```
 
-then
+This renames `bar` to `baz` from "defines.sol".
+
+**Grouping Imports Under a Namespace:**
 
 ```Solidity
-import "@openzeppelin/interfaces/IERC20.sol";
+import "defines.sol" as defs;
+// Now use defs.bar, defs.foo, etc.
 ```
 
-will automatically map to /opt/open zeppelin-contracts/contracts/interfaces/IERC20.sol.
+This groups all imports from "defines.sol" under the `defs` namespace.
 
-## Renaming imports
+Next, we'll delve into pragma directives in Solidity,
 
-It is also possible to rename an import.
-
-```Solidity
-import {bar as baz,foo} from "defines.sol";
-```
-
-The bar is now renamed as Baz.
-
-Rather than renaming individual imports, it is also possible to make all the items in a file available under a special import object, as shown:
-
-```Solidity
-import "defines. sol" as deaths;
-```
-
-There is another syntax, which does the same.
-
-```Solidity
-import * as defs from "defines. sol";
-```
-
-In this case, the bar is defined in defines. sol can is now visible as defs.bar, and foo as defs.foo
-
-In the next lession, you will go through the pragma directives of Solidity.
+an essential aspect for setting up your Solidity environment for Solana programming. Pragma directives dictate compiler behavior and compatibility, ensuring your code is interpreted correctly.

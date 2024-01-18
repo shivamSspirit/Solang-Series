@@ -1,46 +1,45 @@
 ---
-title: Build Deploy And Test Mint fungible Token Program
-author: shivam
+title: Build, Deploy, and Test Mint Fungible Token Program
+author: Shivam
 moduleNumber: module-2
 modulePart: module-2-b
 thisFileName: build-deploy-test-for-mint
 orderNumber: '2'
-modulePartDescription: In this part of the module, you will create a minting program using Solidity. You will set up tests, build, deploy, and test the program, along with this demo code.
+modulePartDescription: This section of the module guides you through creating a minting program using Solidity. You will learn how to set up tests, build, deploy, and test the program, complemented by a demonstration code.
 ---
 
 ## Objectives
 
-In this lession, you will:
+In this lesson, you will:
 
-- Build your spl-token-minter program.
-- Deploy and test your minter program
+- Build your SPL-Token-Minter program.
+- Deploy and test the program on the Solana network.
 
 ## tl;dr
 
-In this lession, you go through the process of building, deploying and testing your spl-token-minter program. Once the program has been built successfully, the process of connecting your wallet to your devnet and airdropping testnet tokens is explained. After building, we start up a new Solana devnet cluster and deploy our spl-token-minter program to the devnet. The, we will test our deployed program and ensure it has been built and deployed successfully by searching for the transaction signature in Solana Explorer.
+This lesson covers the stages of building, deploying, and testing your SPL-Token-Minter program. It begins with building the program, then discusses connecting your wallet to the devnet and airdropping testnet tokens. After building, you'll learn to initiate a new Solana devnet cluster and deploy your program. Finally, you'll test the deployed program and verify its success through the transaction signature in Solana Explorer.
 
 ## Overview
 
-## Build
+### Build
 
-To build your project, navigate to the terminal in project root directory and enter the following command:
+To build your project, open your terminal, navigate to the project's root directory, and run:
 
 ```bash
 anchor build
 ```
 
-This command will generate a target folder in the project root directory and generate idl and types of our Solana program to interact with the client side using Remote Procedural Calls or RPC methods.
+This compiles your project, creating a `target` folder in the root directory with the IDL and types needed to interact with your Solana program using RPC methods.
 
+### Deploy 
 
-## Deploy 
-
-Now open a new terminal and check our configuration by entering this command:
+Start by checking your configuration:
 
 ```bash
 solana config get
 ```
 
-After running this you should get an output similar as shown below:
+You should see an output like this:
 
 ```bash
 Config File: ~/.config/solana/cli/config.yml
@@ -50,44 +49,46 @@ Keypair Path: ~/.config/solana/id.json
 Commitment: confirmed
 ```
 
-For Devnet, please note that it uses an RPC URL, and your wallet's default location is specified by the `keypairpath`. Make sure to generate a wallet keypair for program deployment. You can set devnet for cluster by entering this command:
+For the Devnet, note the RPC URL and the location of your wallet's keypair. Ensure you have a wallet keypair for deployment. Set the cluster to Devnet with:
 
 ```bash
-solana config set --url https://api.devnet.solana.com
+solana
+
+config set --url https://api.devnet.solana.com
 ```
 
-By entering the following command you can generate a new keypair:
+Generate a new keypair with this command:
 
 ```bash
 solana-keygen new
 ```
 
-Now you have a wallet. You can check the address (pubkey) and balance of this account using these commands:
+Now, check your wallet's address and balance:
 
 ```bash
 solana address
 solana balance
 ```
 
-If you have some devnet sol then it is okay for deployment. If you do not have devnet sol then you can get some devnet airdropped in your wallet by entering this command.
+If you lack Devnet SOL, airdrop some to your wallet:
 
 ```bash
-solana airdrop 
+solana airdrop <amount>
 ```
 
-Once you have recieved the devnet sol tokens in your wallets, you can move on to deploying your program onto the Solana network, which will use up some of the sol tokens. For deployment, open the terminal in the new tab and start the network cluster by entering this command:
+With sufficient SOL, you're set to deploy your program. Start a Solana devnet cluster:
 
 ```bash
 solana-test-validator
 ```
 
-This will start a devnet cluster in the system. Next, deploy the program by entering the command:
+Then, deploy your program:
 
 ```bash
 anchor deploy
 ```
 
-After successful deployment, you will get an output in the terminal as shown:
+You'll see a confirmation like this:
 
 ```bash
 Deploying cluster: https://api.devnet.solana.com
@@ -98,64 +99,54 @@ Program Id: 3iCbv94ivHb4of8NEeikMbk2kckLVSDmUEprpQZ1cBUw
 Deploy success
 ```
 
-Our program is now deployed on the **Devnet** cluster. It possesses program upgrade authority, which is granted to our **wallet**. To proceed, we need to obtain the **program ID** of our deployed program on-chain.
+Your program is now on the Devnet. Record the program ID and update it in your Solidity file and `anchor.toml`.
 
-Once we have the program ID, update it in our program (solidity file) as well as the `anchor.toml` file. Make sure to replace the existing program ID with the new one in both files.
-
-Build the program again with the command:
+Rebuild the program:
 
 ```bash
 anchor build
 ```
 
-You are now ready for testing.
+### Test
 
-Before testing, check whether testing dependencies are installed. If not, then run the following command in the terminal:
+Ensure testing dependencies are installed:
 
 ```bash
 yarn install
 ```
 
-## Test
-
-After installing the required testing dependencies, we can test our Solidity program by running the following command in the terminal:
+Test your program:
 
 ```bash
 anchor test
 ```
 
-You should get an output as shown below:
+The output should confirm successful tests:
 
 ```bash
 spl-token-minter
-Your transaction signature 5KzehPTbYCuUtwQzbigvTnwnkiuNcWuXPtuWSMGMVc914xcV8ddFLV3BqEr3hMsbS9ga6SJjzEDcjRMZhGi6KgvJ
-✔ Is initialized! (4616ms)
-Your transaction signature ePvkJFcHdgjbWnYh1e5nab57bv32TyviXgrfNi1QQFsHytXgcJvuneD9BzmrEv4rcMu1KXQSr2hpJ2Gsqzf2TAm
-✔ Create an SPL Token! (1466ms)
-Your transaction signature 4qdXPTQArZTyFq5mCtdyJVx2Hu1NxeYnY1wwGCVpHy91SZjdkngvRYVWDJvmaTigUEshACFbKMULojfChMxcNp85
-minted token amounts **156**
-✔ Mint some tokens to your wallet! (6090ms)
+...
 3 passing (12s)
 ```
 
-If all tests are passed, we should be able to see minted tokens in Solana Explorer. For this, get the workspace program wallet address running this command in the terminal:
+To see your minted tokens on Solana Explorer, get your wallet address:
 
 ```bash
 solana address
 ```
 
-Now navigate to this link: [Solana_Explorer](https://explorer.solana.com/?cluster=devnet). Copy and paste your wallet address in the search explorer. The result should be as shown below:
+Visit [Solana Explorer](https://explorer.solana.com/?cluster=devnet) and search with your wallet address. You'll see an overview of your wallet:
 
-![wallet overviews](/moduleimages/w-overview.jpeg)
+![wallet overview](/moduleimages/w-overview.jpeg)
 
-The Solana explorer provides us with important information about the deployed program and the wallet like balance transactions and token holdings. To see our minted tokens, click on Tokens, then the result should be as shown below:
+For token details, click on Tokens:
 
 ![token listing](/moduleimages/token_list.jpeg)
 
-Search and find out the minted tokens with the title Solana Pro that have ***159 GM*** supply. Clicking on it will a result as shown below:
+Find the "Solana Pro" tokens with a supply of ***159 GM***:
 
 ![minted tokens listing](/moduleimages/g_token.jpeg)
 
-All the information related to minted tokens is here. 
+This section displays all information about your minted tokens.
 
-We have successfully build and minted tokens on Solana using Solidity and Solang.
+You have now successfully built, deployed, and tested tokens on Solana using Solidity and Solang. This completes the lesson on creating and managing a fungible token program on the Solana blockchain. With these steps, you've gained hands-on experience in the key aspects of blockchain development, including program deployment and token minting.

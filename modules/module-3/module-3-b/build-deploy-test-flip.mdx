@@ -1,44 +1,46 @@
 ---
-title: Build Deploy And Test Cpi Flip Program
-author: shivam
+title: Build, Deploy, and Test CPI Flip Program
+author: Shivam
 moduleNumber: module-3
 modulePart: module-3-b
 thisFileName: build-deploy-test-flip
 orderNumber: '2'
-modulePartDescription: In this part of the module, you will delve into code design and develop an actual flip program by utilizing cross-program invocation techniques in Solana using Solidity. The process begins with creating an interface in Solidity. Subsequently, you will write tests for it using `TypeScript` and proceed with building, deploying, and testing this flip program
+modulePartDescription: In this section of Module 3, you'll engage in the practical development of a flip program, harnessing cross-program invocation techniques in Solana using Solidity. The process encompasses creating an interface in Solidity, writing tests in `TypeScript`, and ultimately building, deploying, and testing the flip program.
 ---
 
 ## Objectives
 
-In this lession, you will:
+In this lesson, you will:
 
-- Configure your program to the Solana Devnet.
-- Generate new wallet-keygen and airdrop Solana Devnet tokens.
+- Set up your program for the Solana Devnet.
+- Generate a new wallet keypair and airdrop Solana Devnet tokens.
 - Build and deploy your CPI Flip program to the Devnet.
 
 ## tl;dr
 
-This lession teaches you to build and deploy your CPI Flip program to the Solana Devnet. It involves setting your network cluster to devnet, generating a new wallet-keygen, and finally building and deploying the program.
+This lesson guides you through the steps to build and deploy your CPI Flip program to the Solana Devnet. It includes configuring your network cluster for the devnet, generating a new wallet keypair, and completing the build and deployment processes.
 
 ## Overview
 
-## Building
+### Building the Program
 
-**Building the Program:** Before building the program, navigate to the `anchor.toml` file and switch the cluster to ***devnet***. Open the terminal in the root directory of your project and enter the following command:
+To begin, navigate to your `anchor.toml` file and switch the cluster to ***devnet***. Then, in your project's root directory, execute the following command to build the program:
 
 ```bash
 anchor build
 ```
 
-## Deploying
+This command generates a target folder in the project root and compiles the Solana program, enabling client-side interaction through RPC methods.
 
-This command will generate a target folder in the project root and generate idl and types of our Solana program to interact with the client side using rpc methods. Now, open a new terminal and check our configuration by entering the command shown:
+### Deploying the Program
+
+First, check your configuration:
 
 ```bash
 solana config get
 ```
 
-After execution, you should get an output as shown below:
+You should see an output similar to this:
 
 ```bash
 Config File: ~/.config/solana/cli/config.yml
@@ -48,44 +50,44 @@ Keypair Path: ~/.config/solana/id.json
 Commitment: confirmed
 ```
 
-"Devnet" is the RPC URL, and my wallet's default location is at **keypairpath**. Make sure you generate a wallet keypair for deploying the program. You can set devnet for cluster by executing the command shown below:
+If needed, set your cluster to devnet:
 
 ```bash
 solana config set --url https://api.devnet.solana.com
 ```
 
-Enter this command to generate a new keypair:
+Then, generate a new keypair for your wallet:
 
 ```bash
 solana-keygen new
 ```
 
-Now you have a wallet. You can check the address(pubkey) and balance of this account using these commands:
+Verify your wallet address and balance:
 
 ```bash
 solana address
 solana balance
 ```
 
-If you have some devnet sol then it is okay for deployment, if it is not then airdrop some devnet tokens by entering this command:
+If you need Devnet SOL, airdrop tokens:
 
 ```bash
 solana airdrop 4
 ```
 
-Deploying the program by opening a new terminal and starting network cluster by entering the command shown:
+To deploy, start a devnet cluster:
 
 ```bash
 solana-test-validator
 ```
 
-This will start a devnet cluster in the system. Next, deploy the program by running the command shown:
+Then deploy your program:
 
 ```bash
 anchor deploy
 ```
 
-The output should be as shown below:
+You should see a confirmation like this:
 
 ```bash
 Deploying cluster: https://api.devnet.solana.com
@@ -101,9 +103,9 @@ Program Id: J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh
 Deploy success
 ```
 
-## Testing
+### Testing the Program
 
-Now, both programs are on chain (devnet). We can get the program id of our deployed program on the chain. Copy this program id and change it in our program (solidity file) as well as anchor.toml file. After pasting the new program to both files in **anchor.toml,** write like this:
+After deploying, update the program IDs in both your Solidity file and `anchor.toml` to match the newly deployed programs. The updated `anchor.toml` should look like this:
 
 ```bash
 [features]
@@ -125,26 +127,26 @@ wallet = "~/.config/solana/id.json"
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
 ```
 
-Build the program again with the command:
+Rebuild the program:
 
 ```bash
 anchor build
 ```
 
-Before testing check dependencies and run:
+Ensure all dependencies are installed:
 
 ```bash
 yarn install
 npm install
 ```
 
-Now, run tests by using this command:
+Finally, run tests:
 
 ```bash
 anchor test
 ```
 
-After this, you should see something like this:
+You should see results confirming the successful execution of your tests, indicating the program's correct functioning after CPI calls to toggle the power state.
 
 ```bash
 cross-program-invocation
@@ -162,4 +164,4 @@ State: true
   3 passing (4s)
 ```
 
-And that's it! We've successfully made a CPI call to switch the power status from "on" to "off" and back to "on." This demonstrates how Cross-Program Invocation (CPI) functions in Solang to combine Solana programs.
+This completes the lesson on building, deploying, and testing the CPI Flip program in Solana using Solidity and Solang. In the next lesson, we'll delve into further aspects of Solana development.

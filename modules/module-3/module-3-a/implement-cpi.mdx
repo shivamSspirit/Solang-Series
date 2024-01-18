@@ -1,63 +1,64 @@
 ---
-title: Implementing Cpi Into Solana programs
-author: shivam
+title: Implementing CPI into Solana Programs
+author: Shivam
 moduleNumber: module-3
 modulePart: module-3-a
 thisFileName: implement-cpi
 orderNumber: "2"
-modulePartDescription: In this part of the module, you will explore the composability of programs and how it works in Solana and Ethereum. You will also learn how to implement Cross-Program Invocation techniques.
+modulePartDescription: This segment of Module 3 introduces the implementation of Cross-Program Invocation (CPI) techniques in Solana and Ethereum programs, focusing on how to effectively use these methods.
 ---
 
 ## Objectives
 
-In this lession, you will learn:
+In this lesson, you'll learn about:
 
-- Implementing CPI using the invoke() function.
+- Implementing CPI using the `invoke()` function in Solana.
 
 ## tl;dr
 
-The invoke() function in Solana is used to call programs without needing signers. It involves routing instructions, accounts, and data to the callee program. When creating a CPI, you define the accounts accessed and instruction data. Cross-Program Invocations allow limited depth reentrancy. The code example demonstrates using CPI to call a lever program.
+Solana's `invoke()` function enables program calls without the need for
+
+signers. It is essential for routing instructions, accounts, and data to the callee program. A Cross-Program Invocation (CPI) is created by defining the accessed accounts and the instruction data. CPIs in Solana allow for limited depth reentrancy. We'll demonstrate how to use CPI by calling a lever program in our code example.
 
 ## Overview
 
-The `invoke` function is used when making a CPI that does not need any PDAs to act as signers. **When making CPIs, the Solana runtime extends the original signature passed into a program to the callee program**.
+The `invoke` function is crucial when making a CPI that does not require any Program-Derived Addresses (PDAs) to act as signers. In such CPIs, Solana runtime extends the original signature passed into a program to the callee program.
 
-When you're calling a program, you might find a library with helpful functions to create the Instruction. People and groups often make these libraries available, making it easier to call their programs.
+When calling a program, you often find libraries with useful functions to create the Instruction. These libraries, typically developed by individuals or groups, simplify the process of calling their programs.
 
-The definition of the `Instruction` type required for a CPI includes:
+The definition of the `Instruction` type required for a CPI includes:
 
-- `invoke()` is built into Solana's runtime and handles routing the given instruction to another program via the instruction's `program_id` field.
-- `accounts` - a list of `AccountInfo` corresponding to all the accounts accessed by the other program
-- `data` - instruction data that will be understood by the other program
+- `invoke()` is integrated into Solana's runtime, managing the routing of the given instruction to another program via the instruction's `program_id` field.
+- `accounts` - a list of `AccountInfo` corresponding to all accounts accessed by the callee program.
+- `data` - instruction data formatted to be understood by the callee program.
 
-### Shared data validation
+### Shared Data Validation
 
-The AccountInfo structures given to this function hold data that the runtime uses . This data is copied to and from the memory space of the program being called.
+The AccountInfo structures provided to this function contain data utilized by the runtime. This data is transferred to and from the memory space of the program being called.
 
 ### Call Depth
 
-Cross-program invocations let programs call other programs ,but currently, this is limited to a depth of 4.
+Cross-program invocations allow programs to call other programs, but currently, this capability is limited to a depth of four.
 
 ### Reentrancy
 
-Currently, reentrancy is only allowed in cases of direct self-recursion, and it's limited to a set depth. This limitation is in place to prevent scenarios where a program could call another program from an interim state without knowing it might be called back. Direct recursion ensures that the program has complete control over its state when it's called back.
+Reentrancy is currently permitted only in cases of direct self-recursion and is constrained to a predetermined depth. This restriction aims to prevent scenarios where a program might inadvertently call another program from an intermediary state. Direct recursion ensures that the program has full control over its state when it is re-invoked.
 
-To use `invoke` and `invoke_signed`, a list of `account_infos` is also required. Like the list of `AccountMeta` in the instructions, you need to include all the `AccountInfo` of each account that the program you're calling will read from or write to.
+To effectively use `invoke` and `invoke_signed`, a list of `account_infos` is also necessary. Similar to the list of `AccountMeta` in instructions, it is crucial to include all `AccountInfo` for each account that the callee program will access.
 
-Since programs can only get AccountInfo values from the runtime at the program's entry point, any account that the called program needs must be needed by the calling program and provided by its caller. This also applies to the program ID of the called program.
+Since programs can only receive AccountInfo values from the runtime at the program's entry point, any account required by the callee program must also be needed by the calling program and provided by its caller. This rule also applies to the program ID of the callee program.
 
-In below code block see how cpi are creating to leverProgram by calling their switchPower function
+Below is a code example demonstrating how CPIs are created to interact with a leverProgram by calling their `switchPower` function:
 
 ```solidity
-
 function pullLever(address dataAccount, string name) public {
-// The account required by the switchPower instruction.
-// This is the data account created by the lever program (not this program), which stores the state of the switch.
-AccountMeta[1] metas = [
-AccountMeta({pubkey: dataAccount, is_writable: true, is_signer: false})
-];
+    // Account required by the switchPower instruction.
+    // This is the data account created by the lever program (not this program), storing the state of the switch.
+    AccountMeta[1] metas = [
+        AccountMeta({pubkey: dataAccount, is_writable: true, is_signer: false})
+    ];
 
-    // The data required by the switchPower instruction.
+    // Data required by the switchPower instruction.
     string instructionData = name;
 
     // Invoke the switchPower instruction on the lever program.
@@ -65,16 +66,17 @@ AccountMeta({pubkey: dataAccount, is_writable: true, is_signer: false})
 }
 
 ```
+In this code snippet, we define a `pullLever` function, accepting `dataAccount` and `name` as parameters. The function configures the `AccountMeta` for the lever program's data account, then assigns `name` as the instruction data. Utilizing Cross-Program Invocation (CPI), it calls the `switchPower` method in the lever program. This results in the construction of a CPI, and the Solana runtime generates an `invoke()` call, providing the requisite `accountInfos` and `instructionData`.
 
-In this section of code, we're making a pullLever function that takes dataAccount and name as inputs. This function sets up the accountMeta for the data account of the lever program. It then puts the name into the instruction Data. Finally, we use cpi (cross-program-invocation) to call the switchPower method in the leverProgram(then a CPI is constructed, and the compiler will generate a invoke()), providing the necessary accountInfos and instructionData.
+When defining a CPI, the syntax for
 
-When creating a CPI, use the following syntax to specify the `AccountMeta` for each account:
+specifying the `AccountMeta` for each account includes:
 
-- `AccountMeta::new` - indicates writable
-- `AccountMeta::new_readonly` - indicates not writable
-- `(pubkey, true)` - indicates account is signer
-- `(pubkey, false)` - indicates the account is not signer
+- `AccountMeta::new` - This signifies that the account is writable.
+- `AccountMeta::new_readonly` - This denotes that the account is not writable.
+- `(pubkey, true)` - Indicates that the account is a signer.
+- `(pubkey, false)` - Implies that the account is not a signer.
 
-You usually make the `Instruction` within the calling program, but you can also get it from an external source through deserialization.
+Typically, the `Instruction` is constructed within the calling program. However, it's also possible to source the `Instruction` externally through deserialization.
 
-In the next lesson, we will be writing tests for our CPI Flip program.
+In our upcoming lesson, we will focus on writing tests for the CPI Flip program, demonstrating how to ensure that the CPI integration works correctly and efficiently within the Solana framework.

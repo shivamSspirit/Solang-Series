@@ -1,111 +1,104 @@
 ---
-title: Creating A Dev Space
-author: shivam
+title: Setting Up Your Blockchain Development Area
+author: Shivam
 moduleNumber: module-2
 modulePart: module-2-a
-thisFileName: create-dev-space
+thisFileName: setup-blockchain-dev-area
 orderNumber: "1"
-modulePartDescription: In this part of the module, you will receive a brief introduction to minting tokens and the setup for local development. You will establish a new project directory and utilize the Anchor framework to create an SPL token minter program.
+modulePartDescription: Welcome to the start of your journey into blockchain development! In this section, you'll get a basic introduction to creating tokens and setting up your local development environment. We'll guide you through establishing a new project and using the Anchor framework to build an SPL token minter program.
+
 ---
 
 ## Objectives:
 
-In this lession, you will:
+In this lesson, you'll:
 
-- Create a development workspace for your minter project.
-- Understand the boilerplate code that comes along with installing the Anchor framework.
-- Recognise the difference between a Solana program and an Ethereum smart contract.
+- Set up a development space for your token minter project.
+- Learn about the standard code provided with the Anchor framework.
+- Understand the differences between Solana programs and Ethereum smart contracts.
 
 ## tl;dr
 
-In this lession, we set up the development workspace for our token minter project, which involves setting up the project directory. The boilerplate code of the framework is also explained in this lession. Finally, we wrap up by examining the difference between the Solidity code of a Solana program and an Ethereum smart contract.
+Today, we're setting up the development area for our token minter project, including organizing our project directory and understanding the framework's standard code. We'll also compare Solana programs written in Solidity to Ethereum smart contracts.
 
-# Overview
+# Getting Started
 
-Start off by creating a new folder. This is where all your work will be located. Once you have created the folder, open a terminal in that folder and run the following command.
+First, create a new folder for your project. This is where all your files and work will live. After creating the folder, open a terminal in that folder and run this command:
 
 ```bash
 anchor init spl-token-minter --solidity
 ```
 
-This will take some time. Anchor will be installing all dependencies that are needed for the project.
+This will install necessary components for your project, but it might take a bit of time.
 
-After that, navigate to the project directory by running the following command in the terminal:
+Next, go into your project's folder with this command:
 
 ```bash
 cd spl-token-minter
 ```
 
-Run the following command to open VSCode:
+To start VSCode, enter:
 
 ```bash
 code .
 ```
 
-Once VSCode has started, you will see that the project will have a structure as shown:
+In VSCode, you'll see your project organized like this:
 
 ![project File overviews](/moduleimages/a_generated.png)
 
-By default, this is Anchor organizes newly created project. In building our project, we will focus on these folders/files only. Here's a simplified and concise version of the content:
+Here's a quick guide to the main parts:
 
-- **app**: This folder holds frontend code if you plan to build and host it together with your code.
-- **solidity**: This folder contains your actual Solana smart contract code in ".sol" files.
-- **tests**: Here, you can test how your contract behaves when used, helping you build, deploy, and test Solana programs.
-- **anchor.toml**: Similar to package.json for Node.js, this tracks dependencies and important Anchor settings. You can install the toml VSCode extension to work with it easily.
-- .**gitignore**: This file lists the things to ignore when you share your code on GitHub.
+- **app**: If you're adding a user interface, this folder will contain the frontend code.
+- **solidity**: Your Solana smart contracts in ".sol" files live here.
+- **tests**: Use this space to check your contracts, ensuring they work as expected.
+- **anchor.toml**: This tracks your project's dependencies and settings, like Node.js's package.json. Use the toml extension in VSCode for easier editing.
+- **.gitignore**: This file tells GitHub which files or folders to ignore when you upload your project.
 
-You can ignore these for now: migrations, node_modules, .prettierignore, package.json, tsconfig.json. We'll go over them later.
+For now, you can focus less on these files: migrations, node_modules, .prettierignore, package.json, tsconfig.json. We'll cover them later.
 
-> _Note -:_ If you're used to working with Solidity on Ethereum, you know about Mainnet and Testnet. With Solana, it might be a bit surprising to find out that there are three options instead of two.
+> _Note_: If you've worked with Ethereum and Solidity before, you're probably familiar with Mainnet and Testnet. Solana has an extra option:
 
-Types of Solana Blockchain Cluster:
+Types of Solana Blockchain Clusters:
 
-1. **Mainnet**: This is the actual Solana Blockchain where you use real SOL cryptocurrency. It's for doing real things with Solana programs, and once they're here, they can't be undone.
-2. **Devnet:** When you're building on Solana using Solidity, you'll mostly be working here. It's a place to test your Solana programs before they go live on Mainnet. On Devnet, you get free SOL through airdrops (I'll explain how to get it below). Unlike Mainnet, stuff on Devnet can be reset, which means what you put here might not stay forever.
-3. **Testnet**: This is like Devnet, The Testnet is where Solana's main team carefully tests the newest release features in a live cluster setup. Their main goal is to check network performance, stability, and validator behaviour while also paying attention to good grammar, clear writing, and a smooth flow of information.
+1. **Mainnet**: The real Solana Blockchain, where actual SOL cryptocurrency is used. Once your program is live here, its actions are permanent.
+2. **Devnet**: This is where most of your development will happen. It's a test environment for your Solana programs, where you can get free SOL for testing purposes. Keep in mind, things here can be reset, so they're not permanent.
+3. **Testnet**: Similar to Devnet, Testnet is where Solana's main team tests new features in a live environment. It's primarily for performance and stability checks. Like Devnet, you can get free SOL here, but it's not real money.
 
-You'll only need to worry about Testnet if you're directly dealing with the Solana protocol. The tokens on Testnet aren't real money, and you can get free SOL through airdrops.
+Most of your work will be on Devnet, unless you're directly working with Solana's protocol.
 
-In **_anchor.toml_** file you will need to change cluster: localnet to devnet
+In the **_anchor.toml_** file, you'll need to change the cluster setting from localnet to devnet, like this:
 
-![localnet](/moduleimages/a_local.jpg)
-
-Once changed, the Anchor.toml should look like below:
-
-![localnet](/moduleimages/a_dev.jpg)
+![localnet to devnet](/moduleimages/a_dev.jpg)
 
 ### Checkpoint
 
-> Next Change wallet in ***.toml File*** to your newly generated keypair address in your local system
+> Next, update the wallet in your **.toml file** to your newly generated keypair address.
 
-Next, let’s go over the starter code beginning with the on-chain program itself. Within your project's `./solidity` directory, you’ll find the following contract named spl-token-minter.sol below, which includes:
+Now, let's look at the starter code. Inside the `./solidity` directory of your project, you'll find a contract named `spl-token-minter.sol`, which includes:
 
-- A constructor for state variable initialization.
-- A flip function to update the state variable.
-- A print function for messages in the program logs.
-- A get function to retrieve the current state variable value.
+- A constructor for initializing state variables.
+- A function to update the state variable.
+- A function to log messages in the program.
+- A function to get the current value of the state variable.
 
 ![flip program](/moduleimages/a_flip.png)
 
-## Important Differences 
+## Key Differences Compared to EVM Smart Contracts
 
-***Compared with EVM smart contract***
+When comparing to Ethereum's EVM smart contracts, you'll notice two major differences:
 
-Compared to an EVM smart contract, there are two important differences you might notice:
+The `@program_id` annotation:
 
-The `@program_id` annotation:
-
-On Solana, smart contracts are referred to as ***programs***. The **@program_id** annotation is used to specify the on-chain address of the program.
+In Solana, smart contracts are called **programs**. The **@program_id** annotation specifies the program's on-chain address.
 
 ```Solidity
 @program_id("F1ipperKF9EfD821ZbbYjS319LXYiBmjhzkkf5a26rC")
 ```
 
-on-chain program address.
+The `@payer` annotation:
 
-The **@payer** annotation:
-
-**When storing data on the Solana blockchain, a certain amount of SOL needs to be allocated to cover the storage costs and the rent**(we will discuss this later in further articles). The @payer annotation specifies the user that will pay the SOL required to create the account for storing the state variable.
+In Solana, you need SOL to cover storage costs when storing data. The `@payer` annotation indicates who will pay for creating the account that stores the data.
 
 ```Solidity
 @payer(payer) // payer for the "data account"
@@ -114,14 +107,15 @@ constructor(address payer) {
 }
 ```
 
-**Storing of state data**
+**Storing State Data**
 
-An important distinction between EVM smart contracts and Solana programs is how each store ***state*** variables/data:
+A key difference between EVM smart contracts and Solana programs is in how they store state data:
 
-EVM smart contracts can directly store state variables.
+- EVM smart contracts store state variables directly within the contract.
+- Solana programs, however, use separate accounts, known as **data accounts**, to hold state data. These accounts are managed and owned by the program.
 
-Solana on-chain programs, on the other hand, create separate accounts to hold state data. These are often referred to as **data accounts** and are **owned** by a program.
+For example, when you deploy the contract, it goes to the address specified in `@program_id`. Upon calling the constructor, a separate account is created for storing the state variable, rather than storing it within the contract itself.
 
-In this example, when the contract is deployed, it is deployed to the address specified in @program_id. When the constructor is called after the program is deployed, a separate account with its address is created to store the state variable, instead of being stored within the contract itself.
+This distinction is crucial for understanding how Solana operates differently from Ethereum.
 
-In the next lesson, we explore creating our Solidity program.
+In our next lesson, we'll dive deeper into creating our first Solana program using Solidity. Stay tuned!

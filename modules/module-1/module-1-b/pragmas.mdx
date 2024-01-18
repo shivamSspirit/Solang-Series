@@ -1,46 +1,53 @@
 ---
-title: Solidity pragmas
-author: shivam
+title: Solidity Pragmas Explained
+author: Shivam
 moduleNumber: module-1
 modulePart: module-1-b
 thisFileName: pragmas
 orderNumber: "3"
-modulePartDescription: In this part of the module, you will delve into the basics of the Solidity programming language, which is used for building Solana programs. You will take a deep dive into foundational Solidity for solana concepts.
+modulePartDescription: Learn about the role and importance of pragmas in Solidity, especially in the context of Solana programming.
 ---
 
 # Objective
 
-*************************In this lession, you will:*************************
+In this lesson, you'll:
 
-- Understand what are pragmas in Solidity.
-- Know about the importance of pragma versions in Solidity.
+- Gain an understanding of what pragmas are in Solidity.
+- Discover why pragma versions are crucial in Solidity programming.
 
-## tl;dr
+## Quick Summary
 
-Pragmas are compiler directives in Solidity with a name and value. They are used to specify compiler versions and other settings. Solang ignores most pragma statements, so there's no need for a **`pragma solidity`** statement when using Solang. Unlike Ethereum Solidity, Solang doesn't enforce version matching and views compiler versions as a property of the build environment rather than the source code.
+Pragmas in Solidity are compiler directives, often used to indicate compatible compiler versions or to enable certain compiler features. In the context of Solang, most pragma statements are ignored, as Solang doesn't enforce version matching like Ethereum Solidity.
 
-# Overview
+## Detailed Overview
 
-A pragma value is a special directive to the compiler. It has a name and a value. The name is an identifier and the value is any text terminated by a semicolon ;. Solang parses pragmas but does not recognise any.
+**What are Pragmas?**
 
-Often, Solidity source files start with a pragma solidity which specifies the Ethereum Foundation Solidity compiler version which is permitted to compile this code. Solang does not follow the Ethereum Foundation Solidity compiler version numbering scheme, so these pragma statements are silently ignored. There is no need for a pragma solidity statement when using Solang.
+- Pragmas are special instructions for the compiler, consisting of a name and a value.
+- In Solidity, they're typically used to specify the version of the Solidity compiler that should be used.
 
+Example:
 ```Solidity
-pragma solidity** >=**0.4.0** <**0.4.8**; pragma experimental ABIEncoderV2;
+pragma solidity >=0.4.0 <0.4.8;
 ```
 
-The ABIEncoderV2 pragma is not needed with Solang; structures can always be ABI encoded or decoded. All other pragma statements are ignored, but generate warnings.
+**Solang and Pragma Solidity:**
 
-## About Pragma Solidity Versions
+- Unlike the Ethereum Foundation Solidity compiler, Solang does not follow the same version numbering scheme. Thus, `pragma solidity` statements are silently ignored.
+- With Solang, there's no requirement for a `pragma solidity` statement, as it views compiler versions as a part of the build environment rather than the source code.
 
-In Ethereum, Solidity checks the value of the pragma version against the compiler version and gives an error if they do not match. Solidity is often revising the language in various small ways which make versions incompatible with other. So, the version pragma ensures that the compiler version matches what the author of the contract was using, and ensures the compiler will give no unexpected errors.
+**Pragmas in Ethereum Solidity:**
 
-Solang takes a different view:
+- Ethereum Solidity uses `pragma` to ensure that the compiler version matches what the contract author used.
 
-1. Solang tries to remain compatible with different versions of Ethereum solidity; we cannot publish a version of Solang for every version of the Ethereum solidity compiler.
-2. We also have compatibility issues because we target multiple blockchains, so the version would not be sufficient.
-3. We think that the compiler version should not be a property of the source but of the build environment. No other language sets the compiler version in the source code.
+- This approach is meant to prevent any unexpected errors due to language revisions that may make different versions of the compiler incompatible.
+- The `pragma` directive in Ethereum Solidity is a means to enforce compatibility and ensure that the code behaves as expected under a specific compiler version.
 
-If anything, some languages allow conditional compilation based on the compiler version, which is much more useful.
+**Differences in Solang's Approach:**
 
-In the next lession, you will go through the various data types supported in Solidity.
+1. **Compatibility Across Versions**: Solang aims to maintain compatibility with various versions of Ethereum Solidity, avoiding the need for a new Solang release for each Solidity version.
+2. **Multiple Blockchain Targets**: Solang targets multiple blockchains, which complicates the idea of tying the compiler version to a specific version of Solidity.
+3. **Build Environment vs. Source Code**: Solang treats the compiler version as a part of the build environment, not as a property of the source code. This approach differs from other programming languages, where the source code typically doesn't dictate the compiler version
+4. **Conditional Compilation**:  Rather than setting the compiler version, Solang, like some other languages, may support conditional compilation based on the compiler version, offering a more flexible approach.In summary, while `pragma` directives are an integral part of Ethereum Solidity for specifying compiler versions, Solang adopts a different approach, focusing on broader compatibility and viewing compiler versions as an aspect of the development environment rather than the source code.
+
+Next, we'll explore various data types supported in Solidity, further enhancing your understanding of the language.

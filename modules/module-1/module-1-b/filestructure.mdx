@@ -1,43 +1,47 @@
 ---
-title: File Structure
-author: shivam
+title: Understanding Solidity File Structure
+author: Shivam
 moduleNumber: module-1
 modulePart: module-1-b
 thisFileName: filestructure
 orderNumber: "1"
-modulePartDescription: In this part of the module, you will delve into the basics of the Solidity programming language, which is used for building Solana programs. You will take a deep dive into foundational Solidity for solana concepts.
+modulePartDescription: This part focuses on the basics of Solidity file structure, essential for building Solana programs.
 ---
 
-# Objectives:
+# Objectives
 
-In this lession, you will:
+In this lesson, you will:
 
-- Get to know about the file structure in Solang.
+- Learn about the file structure used in Solidity for Solang.
 
 ## tl;dr
 
-Solidity files can contain multiple contracts, defined using the "contract" keyword. Best practice is to have one contract per file with the same name as the file. Each contract contains functions and data enclosed in curly braces.
+Solidity files, which typically have a `.sol` extension, can contain multiple contracts. However, it's a best practice to define one contract per file and name the file after the contract.
 
-# Overview
+# In-Depth Look
 
-A single file may contain multiple contracts. Solidity files end with .sol extension.
+Solidity files (`.sol`) can include more than one contract, but for clarity and organization, it's recommended to stick to one contract per file. Here's what you need to know:
 
-A contract is defined with the contract keyword, followed by the contract name and then the definition of the contract in between curly braces `{` and `}`.
+- **Defining Contracts**: Use the `contract` keyword followed by the contract name. The contract's body is enclosed in curly braces `{ }`.
 
-```Soldity
-    contract A {
-         /// foo simply returns true
-           function foo() public returns (bool) {
-             return true;
-            }
-         }
+```Solidity
+contract A {
+    /// foo simply returns true
+    function foo() public returns (bool) {
+        return true;
+    }
+}
 
-    contract B {
-         /// bar simply returns false
-           function bar() public returns (bool) {
-                return false;
-         }
-       }
+contract B {
+    /// bar simply returns false
+    function bar() public returns (bool) {
+        return false;
+    }
+}
 ```
 
-For best practices define only a single contract in each file, and keep the contract name the same as the file name.
+- **Best Practices**: 
+   - **Single Contract Per File**: To maintain clarity and manageability, limit each Solidity file to a single contract.
+   - **File Naming**: Name the file after the contract it contains. For example, if your contract is named `MyContract`, the file should be named `MyContract.sol`.
+
+By following these practices, your Solidity code for Solana programs becomes more readable and easier to manage, especially as your projects grow in size and complexity.

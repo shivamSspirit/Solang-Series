@@ -1,51 +1,48 @@
 ---
 title: Introduction to Solidity for Solana
-author: shivam
+author: Shivam
 moduleNumber: module-1
 modulePart: module-1-b
 thisFileName: solidity-for-solana
 orderNumber: '0'
-modulePartDescription: In this part of the module, you will delve into the basics of the Solidity programming language, which is used for building Solana programs. You will take a deep dive into foundational Solidity for solana concepts.
+modulePartDescription: Begin your journey into Solidity programming for Solana with foundational concepts and practical applications.
 ---
-
 
 # Objectives
 
-In this lession, you will:
+In this lesson, you will:
 
-- Become familiar with Solidity for Solana
-- Understand the unique features of Solidity
-- Understand practical applications of programs developed using Solidity.
+- Gain an understanding of Solidity tailored for Solana development.
+- Learn about the unique aspects of Solidity.
+- Discover practical applications for programs developed using Solidity.
 
 # tl;dr
 
-This lession provides a brief introduction to Solidity. It is a programming language developed for Ethereum in 2015. It is high-level, object-oriented, and draws inspiration from Python, C++, and JavaScript. Solidity is the foundation for Ethereum smart contracts and can create various contracts like voting systems, auctions, crowdfunding, and more.
+This lesson introduces you to Solidity, the primary programming language for Ethereum smart contracts, adapted for Solana. Originally developed in 2015, Solidity is high-level, object-oriented, and incorporates elements from Python, C++, and JavaScript. It's a key language for creating diverse blockchain applications, from voting systems to crowdfunding platforms.
 
-# Overview
+# Detailed Overview
 
-Solidity is a recently developed programming language originating from Ethereum, the second-largest cryptocurrency market by capitalization. Introduced in 2015 under the guidance of Christian Reitwiessner, Ethereum's core developer, Solidity possesses a set of significant attributes:
+Solidity, emerging from Ethereum, offers a range of features:
 
-- Solidity serves as a programming language crafted for implementing smart contracts, forming the foundation for most blockchain platforms
-- The design of Solidity draws significant inspiration from programming languages like Python, C++, and JavaScript, all of which function on the Ethereum Virtual Machine (EVM).
-- Solidity boasts support for intricate user-defined programming constructs, libraries, and much more.
-- The capabilities of Solidity extend to creating diverse contracts such as voting systems, blind auctions, crowdfunding mechanisms, multi-signature wallets, and more.
+- **Smart Contract Foundation**: Solidity is specifically designed for creating smart contracts, which are integral to most blockchain platforms.
+- **Inspired by Established Languages**: Its design is influenced by Python, C++, and JavaScript, making it accessible to developers from various backgrounds.
+- **Support for Complex Constructs**: It includes support for user-defined types, libraries, and other advanced features.
+- **Diverse Application Range**: Solidity enables the creation of a variety of contracts, like voting systems, auctions, and multi-signature wallets.
 
-***The brief overview of solidity concepts that we will use in the next examples.***
+**Solidity in Solang Context**:
 
-The Solidity language supported by Solang aims to be compatible with the latest [Ethereum Foundation Solidity Compiler](https://github.com/ethereum/solidity/), version 0.8 with some small exceptions.
+- **Compatibility**: Solang targets compatibility with Ethereum Foundation's Solidity Compiler (version 0.8), with some exceptions.
+- **Differences**:
+  - Outputs WebAssembly or Solana SBF, not EVM bytecode.
+  - Uses little-endian encoding for packed encoding.
+  
+**Key Components in Solang**:
 
-Differences:
-
-- Solang generates WebAssembly or Solana SBF rather than EVM.
-- Packed encoding uses little-endiann encoding, as WASM and SBF are little-endiann virtual machines.
-
-Important components of Solang:
-
-1. File and contract structure
+1. File and Contract Structure
 2. Imports
 3. Pragmas
-4. Data types (like address and some primitives)
-5. Constructor
+4. Data Types (specific to Solana, like address)
+5. Constructors
 6. Functions
 
-In the next lession, we go through the File and Contract Strucures of a typical solang-compiled Solidity program.
+Next, we'll delve into the File and Contract Structures of a Solidity program compiled with Solang, laying the groundwork for your Solana programming skills.
