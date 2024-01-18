@@ -132,7 +132,7 @@ Now, in the constructor body...
         bump = _bump;
 ```
 
-try_find_program_address⇒
+- try_find_program_address:
 This function returns the program derived address for a program address and the provided seeds, along with a seed bump. See the Solana documentation on [program derived addresses](https://edge.docs.solana.com/developing/programming-model/calling-between-programs#program-derived-addresses).
 
 we destructure the pda and bump from this methods
@@ -396,7 +396,7 @@ Then, in the next step, we derive the PDA address from the seeds, bump, and prog
         (address pda, bytes1 _bump) = try_find_program_address(["mint_authority"], type(pda_mint_authority).program_id);
 ```
 
-The function (`try_find_program_address`) returns the program-derived address for a program address and the provided seeds, along with a seed bump. See the Solana documentation on [program-derived addresses](https://edge.docs.solana.com/developing/programming-model/calling-between-programs#program-derived-addresses).
+The function `try_find_program_address` returns the program-derived address for a program address and the provided seeds, along with a seed bump. See the Solana documentation on [program-derived addresses](https://edge.docs.solana.com/developing/programming-model/calling-between-programs#program-derived-addresses).
 
 We can get the program ID for the contract using this: `type(pda_mint_authority).program_id`.
 

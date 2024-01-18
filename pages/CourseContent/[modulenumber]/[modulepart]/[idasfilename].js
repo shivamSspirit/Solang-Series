@@ -202,7 +202,7 @@ const GeneralInfo = ({
         imgBorderColor: "prose-img:border-[#63a4da]",
         link_color: "prose-a:text-[#63a4da]",
       };
-    } else if (lessionNumber === "module-4") {
+    } else if (lessionNumber === "module-5") {
       return {
         blockquote: "prose-blockquote:text-[#63a4da]",
         codeColor: "prose-code:text-[#63a4da]",
