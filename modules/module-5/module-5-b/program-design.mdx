@@ -1,0 +1,43 @@
+# lession 2 solidity program design
+
+1. **Import Required Libraries:**
+    - Start by importing the necessary Solang Solidity libraries for your Solana-compatible smart contract.
+2. **Setup Program ID and Contract Initialization:**
+    - Define the program ID for your Solang contract.
+    - Initialize the contract.
+3. **Set Bump Using Solang Solidity Annotations:**
+    - Utilize Solang Solidity annotation primitives to set the bump.
+4. **Setup Seed with String Literal:**
+    - Set up a seed using a string literal.
+5. **Setup Payer for Constructor Calls and Contract Calls:**
+    - Establish the payer for constructor calls and subsequent contract calls.
+6. **Constructor Body:**
+    - Derive the PDA using the **`try_find_program_address`** method from the Solang Solana documentation.
+    - Destructure the PDA address and bump.
+    - Store the bump in a storage variable.
+    - Check bump equality to ensure consistency between client and contract.
+    - If equal, assign constructor parameters to contract storage variables.
+7. **Mint Account Setup:**
+    - Create a mint account for the token using the Spl Token program library method **`Spltoken.create_mint`**.
+8. **Token Metadata Account Setup:**
+    - Re-implement methods from the Metaplex library for creating a metadata account. Sign these methods with the PDA.
+    - Set basic data related to the token using **`DataV2`** and create an instruction data structure.
+    - Manually write account meta instructions, set the program discriminator value, and ABI-encode instruction data.
+    - Invoke the Metaplex program using seeds, ABI-encoded data, and CPI accounts.
+9. **Mint NFT to User Wallet:**
+    - Create an associated token account for the user using **`Spltoken.create_associated_token_account`**.
+    - Re-implement **`mint_to`** method to sign with PDA.
+    - Derive and check PDA, prepare instruction data, write account meta instructions, and call the external Spl Token program Solang Solidity library.
+10. **Remove Mint Authority:**
+- Re-implement methods to remove the mint authority, ensuring the required mint signer is present.
+1. **User NFT Transfer:**
+- Create an external function containing the Spl Token transfer CPI call.
+- Include three accounts: from token account (NFT sender), to token account (NFT buyer), and owner (signer for the transaction).
+- Pass the amount of tokens (in this case, one for NFTs).
+1. **Conclusion:**
+- With these steps, the program allows minting NFTs with PDA mint authority and enables users to transfer their NFTs to others.
+
+***Difference between frezze auth and mint auth***
+
+- freeze authority - can "freeze" the tokens inside a wallet. So the owner of the tokens would not be able to move/transfer/sell them to a different wallet. think of this sort of like one way to create non-transferable tokens (aka soul-bound tokens)
+- mint authority - is required to sign a transaction that actually creates new tokens (aka mints new token). So if create a fungible token called TokenX, and initially mint 10 tokens for a total supply of 10. You can later come back and mint new additional tokens into the max supply when this mint authority signs the transaction. raising the total supply of your fungible token
