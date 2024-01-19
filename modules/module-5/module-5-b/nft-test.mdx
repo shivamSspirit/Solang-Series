@@ -9,9 +9,9 @@ modulePartDescription: In this part of the module, you will implement a Solidity
 ---
 
 
-# lession 5 : test the program writing anchor client
+**lession 5 : test the program writing anchor client**
 
-# Objectives
+## Objectives
 
 In this lesson, you will:
 
@@ -23,7 +23,7 @@ In this lesson, you will:
 
 In this lesson, you will set up development by installing the required dependencies in the package.json file. We also create the spl tokens for our program in this section and mint them to our wallet. We will also create test cases for our Solidity code.
 
-# Overview
+## Overview
 
 First, go to the package.json file and change this block of code:
 
@@ -57,7 +57,6 @@ Save this go to the terminal and enter the command for installing the required d
 
 ```
 npm install
-
 ```
 
 **The `anchor.toml` file serves as the central driver for our application. It's responsible for both app configuration and running tests**.
@@ -65,7 +64,6 @@ npm install
 ```
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
-
 ```
 
 This script is an anchor.toml file responsible for running tests in test folder
@@ -85,7 +83,6 @@ import {
   getAssociatedTokenAddressSync,
   TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
-
 ```
 
 Here are the imported modules, classes, and tools that are utilized in **test** for creating and sending SPL tokens to a user's associated token account:
@@ -104,7 +101,6 @@ Now describe the test for pda-mint-authority
 ```tsx
 describe("pda-mint-authority", () => {
 });
-
 ```
 
 In this section, we will discuss and thoroughly test the functionality of the "pda-mint-authority" program. Our testing process will include the creation of various test cases, assertions, and expectations to ensure the program's accurate behaviour. These tests will encompass a variety of scenarios, including token creation and minting. For this, you need to first set the requirements for the tests.
@@ -213,7 +209,6 @@ Here, we create an nft spl token named purple lamb which has the title lamb
 
 ```tsx
 const metaplex = Metaplex.make(connection);
-
 ```
 
 Get the metadata address for our token mint:
@@ -224,7 +219,6 @@ const metadataAddress = await metaplex
       .nfts()
       .pdas()
       .metadata({ mint: mintKeypair.publicKey });
-
 ```
 
 Let's look at how we get metadata details for a specific mint. We use **mintKeypair.publicKey** to say which mint we're looking at. When we run this code, we find the metadata address connected to that mint and save it in metadataAddress.
@@ -255,7 +249,6 @@ it("Mint the NFT to your wallet!", async () => {
       .rpc({ skipPreflight: true });
     console.log("Your transaction signature", tx);
   });
-
 ```
 
 Initially, we establish an associated token account by leveraging the token mint and associating it with the user's wallet address. To accomplish this, we employ the getAssociatedTokenAddressSync() method. This method requires several parameters, including mintKeypair.publicKey, wallet.publicKey.
@@ -275,7 +268,6 @@ Lastly, open **anchor.toml** file and add this block of code in the end of the
 ```
 [[test.validator.clone]]
 address = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
-
 ```
 
 This is the metadata program id for Metaplex.

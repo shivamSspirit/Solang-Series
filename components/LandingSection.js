@@ -55,8 +55,9 @@ const timelineData = [
       "In this module, we will develop a program on Solana that allows for the transfer of spl-tokens(minted in Module 2) to other accounts.",
   },
   {
-    heading: "Module 5: How to Mint and sell NFT",
-    content: "Coming Soon",
+    heading: "Module 5: How to Mint and transfer NFT",
+    content:
+     "Coming Soon",
   },
 ];
 

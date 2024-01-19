@@ -1,27 +1,35 @@
 ---
-title: Intro To Mint NFT
+title: Intro To Solang Methods
 author: shivam
 moduleNumber: module-5
 modulePart: module-5-b
-thisFileName: solang-concept-ofthismodule
+thisFileName: solang-review
 orderNumber: '0'
 modulePartDescription: In this part of the module, you will implement a Solidity Solang program for NFT minting and transfer (NFT mint authority is PDA).
 ---
 
 
 
-# lession 1: solang concept related to this module
+**lession 1: Review of solang concept related to this module**
 
-1. contract.
-2. why we re-implement library methods(i think because of signing with pda(also in library methods mint authority is different)).
+## Overview
+
+1. Mint and Token Account.
+2. solang contract
 3. pda-derivation(which method we will use for pda derivation(findprogramsync))
-4. seeds , payer , bump 
+4. Accessing Accounts data
 
-metadata→
+## Mint Accounts
 
-### Metadata[](https://docs.metaplex.com/guides/archived/architecture/deep_dive/overview#metadata)
+When someone wants to create a new token, he uses the `create-token` function to initialize a new *Mint Account*, which contains basic information about the token: The `mint-authority` which is a public-key (*pubkey*) authorized to mint this token, the `freeze-authority` who can freeze token accounts (to be described below), and some additional data as the total `supply` of the token, the number of `decimals`, and the `isInitialized` flag. This account stores general information about the token and who has permissions over it. Observe that there is no data about token holdings of particular individuals. These are stored in *Token Accounts*.
 
-This object can be used to provide basic info about SPL tokens on Solana, which include the name, symbol, URI and seller fees, as well as whether the sale of this metadata has happened yet. Anybody carrying a token from this mint can mark this primary sale as having happened via the `update_primary_sale_happened_via_token` command. There is obviously no incentive for a primary owner to do this as it precludes them from getting full royalties on the first sale, but a secondary owner must do this if they ever want to see fees from selling!
+## Token Accounts
+
+The *token account* holds information about the tokens owned by a *pubkey*. Ownership relationships become a bit confusing, though. The token account itself is owned by the Token program and it is the Token program who controls access to these tokens using the `owner`, `close-authority` and `delegate` fields within the account. The `owner` is the *pubkey* who can spend/transfer the tokens, the `close-authority` can close the account, and the `owner` can give rights to a `delegate` *pubkey* to spend up to a `delegatedAmount` of tokens. Besides these fields, there are also a few flags: `isInitialized`, `isFrozen`, `isNative`. By default, token accounts are initialized upon creation, are not frozen and are not native. Previously, we saw the mint account defines a `freeze-authority`, who has the right to freeze the tokens in a user account. Often times, the `freeze-authority` is null (all zeroes). In that case, no one can freeze the corresponding tokens held in the token account.
+
+## Metadata
+
+[metadata](https://docs.metaplex.com/guides/archived/architecture/deep_dive/overview#metadata) object can be used to provide basic info about SPL tokens on Solana, which include the name, symbol, URI and seller fees, as well as whether the sale of this metadata has happened yet. Anybody carrying a token from this mint can mark this primary sale as having happened via the `update_primary_sale_happened_via_token` command. There is obviously no incentive for a primary owner to do this as it precludes them from getting full royalties on the first sale, but a secondary owner must do this if they ever want to see fees from selling!
 
 Metadata accounts are simply PDA addresses with derived key of `['metadata', token_metadata_program_id, mint_id]`.
 
@@ -31,15 +39,7 @@ and then cpi via invoke would just be like the examples included in the spl toke
 
 here's the one for invoking the token program to mint tokens
 
-![mint_acc.jpeg](https://prod-files-secure.s3.us-west-2.amazonaws.com/521abc81-0300-4b28-afc0-7dbba3b32c10/7d6ece41-7a7b-4b37-9396-5a03064b7cb7/mint_acc.jpeg)
-
-## **Mint Accounts**
-
-When someone wants to create a new token, he uses the `create-token` function to initialize a new *Mint Account*, which contains basic information about the token: The `mint-authority` which is a public-key (*pubkey*) authorized to mint this token, the `freeze-authority` who can freeze token accounts (to be described below), and some additional data as the total `supply` of the token, the number of `decimals`, and the `isInitialized` flag. This account stores general information about the token and who has permissions over it. Observe that there is no data about token holdings of particular individuals. These are stored in *Token Accounts*.
-
-## **Token Accounts**
-
-The *token account* holds information about the tokens owned by a *pubkey*. Ownership relationships become a bit confusing, though. The token account itself is owned by the Token program and it is the Token program who controls access to these tokens using the `owner`, `close-authority` and `delegate` fields within the account. The `owner` is the *pubkey* who can spend/transfer the tokens, the `close-authority` can close the account, and the `owner` can give rights to a `delegate` *pubkey* to spend up to a `delegatedAmount` of tokens. Besides these fields, there are also a few flags: `isInitialized`, `isFrozen`, `isNative`. By default, token accounts are initialized upon creation, are not frozen and are not native. Previously, we saw the mint account defines a `freeze-authority`, who has the right to freeze the tokens in a user account. Often times, the `freeze-authority` is null (all zeroes). In that case, no one can freeze the corresponding tokens held in the token account.
+![mint acc](/moduleimages/mint_acc.jpeg)
 
 ## solang contracts
 
@@ -51,7 +51,7 @@ the data layout from a new contract is compatible with that of an old one, it is
 
 where `<KEYPAIR_FILEPATH>` is the program’s keypair json file and `<PROGRAM_FILEPATH>` is the program binary `.so` file. For more information about redeploying a program, check [Solana’s documentation](https://docs.solana.com/cli/deploy-a-program#redeploy-a-program).
 
-# **Setting the payer, seeds, bump, and space for a contract**
+**_Setting the payer, seeds, bump, and space for a contract_**
 
 When a contract is instantiated, there are two accounts required: the program account to hold the executable code and the data account to save the state variables of the contract. The program account is deployed once and can be reused for updating the contract. When each Solidity contract is instantiated (also known as deployed), the data account has to be created. This can be done by the client-side code, and then the created blank account is passed to the transaction that runs the constructor code.
 
@@ -86,7 +86,7 @@ If the data account is going to be a [program derived address](https://docs.sol
 
 ## PDA derivation
 
-### **Builtin try_find_program_address**
+**Builtin try_find_program_address**
 
 This function returns the program derived address for a program address and the provided seeds, along with a seed bump. See the Solana documentation on [program derived addresses](https://edge.docs.solana.com/developing/programming-model/calling-between-programs#program-derived-addresses).
 
@@ -103,7 +103,7 @@ contract pda {
 }
 ```
 
-### **Accessing accounts’ data**
+## Accessing accounts’ data
 
 Accounts declared on a constructor using the `@payer` annotation are available for access inside it. Likewise, accounts declared on external functions with any of the aforementioned annotations are also available in the `tx.accounts` vector for easy access. For an account declared as `@account(funder)`, the access follows the syntax `tx.accounts.funder`, which returns the [AccountInfo builtin struct](https://solang.readthedocs.io/en/v0.3.3/targets/solana.html#account-info).
 

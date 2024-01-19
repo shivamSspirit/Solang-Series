@@ -81,6 +81,8 @@ const Course1 = ({ filteredParts }) => {
       return "bg-[#CD853F]";
     } else if (moduleNumber === "module-4") {
       return "bg-[#63a4da]";
+    }else if (moduleNumber === "module-5") {
+      return "bg-[#e5acb6]";
     }
   }
 

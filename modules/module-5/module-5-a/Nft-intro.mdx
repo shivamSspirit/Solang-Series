@@ -1,5 +1,5 @@
 ---
-title: Intro To Mint NFT
+title: Introduction To NFT
 author: shivam
 moduleNumber: module-5
 modulePart: module-5-a
@@ -9,10 +9,9 @@ modulePartDescription: In this part of the module, you will receive a brief intr
 ---
 
 
+ **lesssion2: NFT**
 
-# lesssion2: NFT
-
-# **Objective**
+## Objective
 
 In this lession , you will dive into solana nft ecosystem
 
@@ -21,7 +20,7 @@ Then we move to how NFT works in solana
 
 ## Overview
 
-# NFT→
+## NFT→
 
 An NFT, short for non-fungible token, is like a special token that's not like regular ones.
 
@@ -37,9 +36,9 @@ Think of it this way: with regular money, like a dollar bill or Sol, you don't r
 
 **See this diagram for better understanding of blockchain tokens**
 
-![token.jpeg](https://prod-files-secure.s3.us-west-2.amazonaws.com/521abc81-0300-4b28-afc0-7dbba3b32c10/118d90fb-6456-4be9-bd02-59a7e217c283/token.jpeg)
+![spl tokens](/moduleimages/token.jpeg)
 
-## **Applications of NFTs**
+## Applications of NFTs
 
 NFTs serve various purposes, such as:
 
@@ -67,7 +66,7 @@ In NFT terms, ***there's only one NFT, meaning the token supply is limited to ju
 
 First, a user—usually the initial creator—mints an NFT from a marketplace, securing ownership of it. Afterward, the user can list the NFT on a secondary marketplace. Here, other enthusiasts may bid and purchase the NFT. Upon a successful auction, where a potential buyer is identified through bidding, the program will smoothly transfer the amount to the seller and the NFT to the buyer.
 
-## Now we are moving to how nfts works in solana 
+**Now we are moving to how nfts works in solana** 
 
 (In solana everything is account)
 
@@ -118,13 +117,13 @@ That's the process of minting, owning, and potentially selling an NFT on Solana.
 
 **See this diagram for better understanding** 
 
-![nft.jpeg](https://prod-files-secure.s3.us-west-2.amazonaws.com/521abc81-0300-4b28-afc0-7dbba3b32c10/ace74bd9-c359-4b83-8bbb-528bff7de218/nft.jpeg)
+![nft](/moduleimages/nft.jpeg)
 
 ## NFT Metadata
 
 As mentioned in this image, the owner key owe this NFT.
 
-![nftmeta.jpeg](https://prod-files-secure.s3.us-west-2.amazonaws.com/521abc81-0300-4b28-afc0-7dbba3b32c10/25e859e3-6df7-4c8a-b7c0-0fdd631d5ef1/nftmeta.jpeg)
+![nft metadata](/moduleimages/nftmeta.jpeg)
 
 But how do magicEden and opensea figure out what Alien Fungi #2326 looks like? And what about its name and unique attributes?
 
@@ -167,13 +166,13 @@ But how do magicEden and opensea figure out what Alien Fungi #2326 looks like? A
 }
 ```
 
-### The metaplex token metadata program
+## Metaplex metadata program
 
 The Token Metadata program is a fundamental program when dealing NFTs and Fungible assets on the Solana blockchain.
 
 It achieves this using **[Program Derived Addresses](https://developers.metaplex.com/understanding-programs/#program-derived-addresses-pda)** (PDAs) that are *derived* from the address of Mint Accounts. If you’re not familiar with **[Solana’s Token program](https://spl.solana.com/token)**, *Mint Accounts* are responsible for storing the global information of a Token and *Token Accounts* store the relationship between a wallet and a Mint Account.
 
-![diagram.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/521abc81-0300-4b28-afc0-7dbba3b32c10/0ef6d397-3560-4dcf-9156-61b6dd53971d/diagram.png)
+![metaplex metadata](/moduleimages/mpl.png)
 
 Whilst Mint Accounts contain a few data attributes such as its current supply, it doesn't offer the ability to inject standardized data that can be understood by apps and marketplaces.
 

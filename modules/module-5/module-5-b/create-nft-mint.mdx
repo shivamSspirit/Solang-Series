@@ -1,5 +1,5 @@
 ---
-title: Intro To Mint NFT
+title: Create NFT Mint Account And Token MetaData Account
 author: shivam
 moduleNumber: module-5
 modulePart: module-5-b
@@ -9,11 +9,11 @@ modulePartDescription: In this part of the module, you will implement a Solidity
 ---
 
 
-# lession 3:  create token mint and mint to (solidity program Design)
+**lession 3:  create token mint and mint to (solidity program Design)**
 
 In this lesson, you will delve into a Solidity Solang program to mint an NFT with the mint authority designated as PDA.
 
-### So initiate anchor project
+## Initiate anchor project
 
 Start off by creating a new folder. This is where all your work will be located. Once you have created the folder, open a terminal in that folder and run the following command.
 
@@ -39,7 +39,7 @@ Once VSCode has started, you will see that the new project will have a structure
 
 Now 
 
-**Add Libraries:**
+## Add Libraries:
 
 - spl token
 - system instructions
@@ -50,6 +50,9 @@ Next, delete the .sol file in the Solidity folder and create a new file named pd
 
 **Start with Importing Libraries:**
 Begin by importing libraries that exist in our root folder.
+
+
+## Write Program
 
 ```solidity
 import "../libraries/spl_token.sol";
@@ -64,12 +67,11 @@ import "solana";
 
 ```solidity
 @program_id("4Huxs8ujxKqT76qqfmfJXMThmo4WMsvmdiCkqzNKF5kq")
-
 ```
 
 **On Solana, smart contracts are referred to as “programs”. The @program_id annotation is used to specify the on-chain address of the program.**
 
-**Next, write contract program**
+## Write Constructor
 
 ```solidity
 contract pda_mint_authority {
@@ -89,7 +91,6 @@ contract pda_mint_authority {
 
         bump = _bump;
     }
-
 }
 ```
 
@@ -97,7 +98,6 @@ Initialize the contract as:
 
 ```solidity
 contract pda_mint_authority
-
 ```
 
 In the body of the contract, we declare a fixed-length array.
@@ -138,6 +138,10 @@ This function returns the program derived address for a program address and the 
 we destructure the pda and bump from this methods
 
 Then we use a Solidity **`require`** check. If our PDA bump matches with the bump state variable the first time, then we check it again and again when the constructor is called every time, assigning it to the bump.
+
+
+## Create Token Mint
+
 
 Now we move to create the token mint part.
 
@@ -210,7 +214,6 @@ We use all accounts as specified in their names, such as:
 @account(mintAuthority) // Mint authority for the mint account
 @account(rentAddress) // Address of the entity paying for the rent
 @account(metaplexId) // Metaplex program ID for creating the metadata account
-
 ```
 
 now see here
@@ -274,10 +277,11 @@ Here, **`SplToken.create_mint()`** is responsible for invoking the system and to
 
 By providing necessary instructions for this CPI, we are creating a token mint account. (Here, we made CPI using `invoke()` methods in Solana Rust.)
 
+## Re-implement Method
+
 Now we built a method of our own named `_createMetadataAccount`. We can use the MPL library methods, but in this example:
 
 > Note: We want to build a Solana SPL NFT minter program with mint authority as PDA.
-> 
 
 So, yes, we are using a Solana PDA that we talked about in our previous modules. Here, we are implementing the Solana PDA (as invoked signed in Rust). However, for this, we can use MPL library methods as a reference and provide mint authority as PDA.
 
@@ -377,7 +381,6 @@ Here, these arguments mainly use address and string types.
 
 > Note → Address
 The `address` type holds the address of an account. The length of an `address` type depends on the target being compiled for. On EVM, an address is 20 bytes. Solana and Polkadot have an address length of 32 bytes. The format of an address literal depends on what target you are building for.
-> 
 
 > Note → string
 
@@ -385,7 +388,7 @@ Strings can be initialized with a string literal or a hex literal. Strings can b
 > 
 
 > Strings can be cast to bytes. This cast has no runtime cost, since both types use the same underlying data structure.
-> 
+
 
 Then, in the next step, we derive the PDA address from the seeds, bump, and program ID.
 
@@ -417,9 +420,9 @@ require(mintAuthority == pda, 'INVALID_PDA');
 
 This function is used to check that a condition holds true, or it aborts execution otherwise.
 
-Now here we are setting metadata struct 
+## Create Solidity Strcuts
 
- 
+Now here we are setting metadata struct 
 
 ```solidity
 DataV2 data = DataV2({
@@ -441,7 +444,7 @@ DataV2 data = DataV2({
 
 the struct looks like 
 
-```
+```solidity
 struct CreateMetadataAccountArgsV3 {
         DataV2 data;
         bool isMutable;
@@ -467,6 +470,8 @@ Here, we are creating a struct named:
 - **`CreateMetadataAccountArgsV3`**: Creating metadata arguments.
 
 Then, from these types, we create new Solang Solidity variables and save token metadata into struct-type variables.
+
+## Write Account Meta
 
 Next, we write the account metas for our instruction.
 
@@ -505,20 +510,21 @@ Example:
 // An eight-byte selector (discriminator) is exclusive for Solana.
 // On Polkadot, the selector contains four bytes. hex"01020304" is an example.
 bytes foo = abi.encodeWithSelector(hex"0102030405060708", uint16(0xff00));
-
 ```
 
 On Solana, `foo` will be `hex"080706050403020100ff"`. In addition, a discriminator for a Solidity function on Solana is the first eight bytes of the SHA-256 hash of its name converted to camel case and preceded by the prefix `global:`, as follows:
 
 Next, we are making a CPI using `invoke_signed` (in Solana Rust).
 
-## **Passing accounts with external calls on Solana**
+**Passing accounts with external calls on Solana**
 
 The Solana runtime allows you the specify the accounts to be passed for an **external** call. This is specified in an array of the struct `AccountMeta`, see the section on [Builtin AccountMeta](https://solang.readthedocs.io/en/v0.3.3/targets/solana.html#account-meta).
 
 If `{accounts}` is not specified, all accounts passed to the current transaction are forwarded to the call.
 
-# **Passing seeds with external calls on Solana**
+## CPI To Metaplex
+
+**Passing seeds with external calls on Solana**
 
 The Solana runtime allows you to specify the seeds to be passed for an **external** call. This is used for program derived addresses: the seeds are hashed with the calling program id to create program derived addresses. They will automatically have the signer bit set, which allows a contract to sign without using any private keys.
 

@@ -1,5 +1,5 @@
 ---
-title: Intro To Mint NFT
+title: Mint NFT And Transfer To Another User
 author: shivam
 moduleNumber: module-5
 modulePart: module-5-b
@@ -8,7 +8,7 @@ orderNumber: '3'
 modulePartDescription: In this part of the module, you will implement a Solidity Solang program for NFT minting and transfer (NFT mint authority is PDA).
 ---
 
-## Now we want to mint token into user wallet for this
+**Now we want to mint token into user wallet for this**
 
 We need to create an external function that looks like this:
 
@@ -62,11 +62,14 @@ by using these accounts
     @mutableAccount(pdaAccount)
 ```
 
-Privileges of annotations:
+## Privileges of annotations:
 
 - **`@mutableSigner(name)`**: Signer for this transaction (the signer of this transaction).
 - **`@mutableAccount(name)`**: An account that will mutate (change its state) in this transaction.
 - **`@account(name)`**: General account used in this transaction.
+
+
+## Write MintTo instructions
 
 Create a **`mintTo`** **external** function with no params.
 
@@ -110,6 +113,9 @@ next we move to mint token into user account
         );
 ```
 
+
+## Re-implement MintTO
+
 For this, we need to reimplement the **`mintTo`** method again because we are signing with PDA.
 
 The re-implemented method looks like this:
@@ -150,6 +156,8 @@ Next, we manually write account metas.
 
 Then, we invoke a cross-program invocation to the SPLToken program to mint NFT to the user's token account.
 
+## Remove Mint Auth
+
 Next, we remove the mint authority from the mint account.
 
 For this, we need the same re-implemented methods to remove the mint authority (because we are signing with PDA).
@@ -162,6 +170,8 @@ _removeMintAuthority(
 );
 
 ```
+
+## Re-implement Remove
 
 The `_removeMintAuthority` method looks like this:
 
@@ -194,7 +204,7 @@ That's it for creating a mint account and metadata account for the minted token.
 
 now we are moving to 
 
-## spl token transfer
+## Spl Token Transfer
 
 Next, we write a method for transferring the minted NFT to another account.
 

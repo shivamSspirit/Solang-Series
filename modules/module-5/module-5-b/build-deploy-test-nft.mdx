@@ -1,5 +1,5 @@
 ---
-title: Intro To Mint NFT
+title: Build, Deploy And Test NFT Program
 author: shivam
 moduleNumber: module-5
 modulePart: module-5-b
@@ -8,11 +8,9 @@ orderNumber: '5'
 modulePartDescription: In this part of the module, you will implement a Solidity Solang program for NFT minting and transfer (NFT mint authority is PDA).
 ---
 
+**lession 6: build deploy and test**
 
-
-# lession 6: build deploy and test
-
-# Objectives
+## Objectives
 
 In this lesson, you will:
 
@@ -23,7 +21,7 @@ In this lesson, you will:
 
 In this lesson, you go through the process of building, deploying and testing your spl-token-minter program. Once the program has been built successfully, the process of connecting your wallet to your devnet and airdropping testnet tokens is explained. After building, we start up a new Solana devnet cluster and deploy our spl-token-minter program to the devnet. The, we will test our deployed program and ensure it has been built and deployed successfully by searching for the transaction signature in Solana Explorer.
 
-# Overview
+## Overview
 
 To build your project, navigate to the terminal in project root directory and enter the following command:
 
@@ -60,7 +58,6 @@ By entering the following command you can generate a new keypair:
 
 ```
 solana-keygen new
-
 ```
 
 Now you have a wallet. You can check the address (pubkey) and balance of this account using these commands:
@@ -80,7 +77,6 @@ Once you have recieved the devnet sol tokens in your wallets, you can move on to
 
 ```
 solana-test-validator
-
 ```
 
 This will start a devnet cluster in the system. Next, deploy the program by entering the command:
@@ -98,7 +94,6 @@ Deploying program "spl_token_minter"...
 Program path: ~/Desktop/demo/spl-token-minter/target/deploy/spl_token_minter.so...
 Program Id: 3iCbv94ivHb4of8NEeikMbk2kckLVSDmUEprpQZ1cBUw
 Deploy success
-
 ```
 
 Our program is now deployed on the **Devnet** cluster. It possesses program upgrade authority, which is granted to our **wallet**. To proceed, we need to obtain the **program ID** of our deployed program on-chain.
@@ -109,7 +104,6 @@ Build the program again with the command:
 
 ```jsx
 anchor build
-
 ```
 
 You are now ready for testing.
@@ -118,7 +112,6 @@ Before testing, check whether testing dependencies are installed. If not, then r
 
 ```
 yarn install
-
 ```
 
 After installing the required testing dependencies, we can test our Solidity program by running the following command in the terminal:
@@ -139,14 +132,12 @@ Your transaction signature 4qdXPTQArZTyFq5mCtdyJVx2Hu1NxeYnY1wwGCVpHy91SZjdkngvR
 minted token amounts **156**
 ✔ Mint some tokens to your wallet! (6090ms)
 3 passing (12s)
-
 ```
 
 If all tests are passed, we should be able to see minted tokens in Solana Explorer. For this, get the workspace program wallet address running this command in the terminal:
 
 ```
 solana address
-
 ```
 
 Now navigate to this link: https://explorer.solana.com/?cluster=devnet. Copy and paste your wallet address in the search explorer. The result should be as shown below:

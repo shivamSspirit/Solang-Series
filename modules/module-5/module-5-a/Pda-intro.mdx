@@ -1,5 +1,5 @@
 ---
-title: Intro To Mint NFT
+title: Intro To Solana PDA
 author: shivam
 moduleNumber: module-5
 modulePart: module-5-a
@@ -9,14 +9,12 @@ modulePartDescription: In this part of the module, you will receive a brief intr
 ---
 
 
-# lession 3 : what is pda in solana
+**lession 3 : what is program derived address(PDA) in solana**
 
 ## Objective
 
 In this lession, you will dive into solana program derived address
-
-so first we will learn about solana pda and cross program invocation using invoke_signed
-
+so first we will learn about solana pda and cross program invocation using `invoke_signed`
 then we move further different use cases of solana pda 
 
 ## Overview
@@ -24,15 +22,14 @@ then we move further different use cases of solana pda
 Account address→
 
 > accounts are buffers. i dont know why they call them accounts it confuses the shit out of everyone.
-> 
 
-# **Addresses on Solana**
+## Addresses on Solana
 
 There are actually two “types” of addresses on Solana. Solana uses **ed25519**, an EdDSA signature scheme using **[SHA-512 (SHA-2)](https://en.wikipedia.org/wiki/SHA-2)** and the **[Curve22519](https://en.wikipedia.org/wiki/Curve25519)** elliptic curve, for address creation. This leads to 32-byte public keys, which act as the primary address format. They can be used directly as they are not hashed.
 
 For an address to be valid, it must be a point on the **ed25519** curve. However, not all addresses need to be derived from this curve. Program Derived Addresses (PDAs) are generated off-curve, meaning they do not have a corresponding private key and cannot be used for signing. PDAs are created via the **System Program** and are used when programs need to manage accounts. This is only meant as an aside to make you, the reader, aware of the different types of addresses on Solana. We’ll cover PDAs in this lession.
 
-## Solana program derived address
+## Solana PDA
 
 Program derived address as implies from name 
 an address that derived from program(use by program).
@@ -44,11 +41,11 @@ Facts about pda
 - Accounts have a max size of 10MB (10 Mega Bytes)
 - PDA accounts have a max size of 10KB (10 Kilo Bytes)
 
-# Putting address off curve
+## **Putting address off curve**
 
-### **Seeds and Bumps**
+## Seeds and Bumps
 
-PDAs are derived from a program id (in our case, `[6a2GdmttJdanBkoHt7f4Kon4hfadx4UTUgJeRkCaiL3U](https://explorer.solana.com/address/6a2GdmttJdanBkoHt7f4Kon4hfadx4UTUgJeRkCaiL3U)`) and a collection of seeds such as the string `"transfer_pda"`. This combination of seeds and a program id is then run through a sha256 hash function to see whether or not they generate a public key that lies on the elliptic curve.
+PDAs are derived from a program id (in our case, [6a2GdmttJdanBkoHt7f4Kon4hfadx4UTUgJeRkCaiL3U](https://explorer.solana.com/address/6a2GdmttJdanBkoHt7f4Kon4hfadx4UTUgJeRkCaiL3U)) and a collection of seeds such as the string `"transfer_pda"`. This combination of seeds and a program id is then run through a sha256 hash function to see whether or not they generate a public key that lies on the elliptic curve.
 
 It may be helpful to consider that PDAs are not technically *created*, but rather *found*. In running our program id and seeds through a hash function, there is a ~50% chance that we actually end up with a valid public key that does lie on the elliptic curve. In this case, we simply add something to fudge our input a little bit and try again. The technical term for this fudge factor is a `bump`. In Solana, we start with `bump = 255` and simply iterate down through `bump = 254`, `bump = 253`, etc. until we get an address that is not on the elliptic curve. This may seem rudimentary, but once found it gives us a deterministic way of deriving the same PDA over and over again. This also allows our program to now sign for an account using [Solana’s `invoke_signed` function](https://docs.solana.com/developing/programming-model/calling-between-programs#program-signed-accounts).
 
@@ -56,7 +53,7 @@ It’s important to note that our seed does not have to be static. In fact, a co
 
 You can see all thing around pda in this diagram
 
-![pda.jpeg](https://prod-files-secure.s3.us-west-2.amazonaws.com/521abc81-0300-4b28-afc0-7dbba3b32c10/e5556d28-de9d-419a-80fe-0e582aa2fa7e/pda.jpeg)
+![PDA](/moduleimages/pda.jpeg)
 
 Now we move to our main purpose 
 to build a solana program that utilize these concepts we learn.

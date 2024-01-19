@@ -1,5 +1,5 @@
 ---
-title: Intro To Mint NFT
+title: Design Algo For Program
 author: shivam
 moduleNumber: module-5
 modulePart: module-5-b
@@ -9,9 +9,11 @@ modulePartDescription: In this part of the module, you will implement a Solidity
 ---
 
 
+**lession 2 solidity program design**
 
+## Program Algorithm (steps)
 
-# lession 2 solidity program design
+ **Create Token Mint and MetaData Account**
 
 1. **Import Required Libraries:**
     - Start by importing the necessary Solang Solidity libraries for your Solana-compatible smart contract.
@@ -43,11 +45,17 @@ modulePartDescription: In this part of the module, you will implement a Solidity
     - Derive and check PDA, prepare instruction data, write account meta instructions, and call the external Spl Token program Solang Solidity library.
 10. **Remove Mint Authority:**
 - Re-implement methods to remove the mint authority, ensuring the required mint signer is present.
-1. **User NFT Transfer:**
+
+## Transfer NFT
+
+**User NFT Transfer:**
 - Create an external function containing the Spl Token transfer CPI call.
 - Include three accounts: from token account (NFT sender), to token account (NFT buyer), and owner (signer for the transaction).
 - Pass the amount of tokens (in this case, one for NFTs).
-1. **Conclusion:**
+
+
+## Conclusion:
+
 - With these steps, the program allows minting NFTs with PDA mint authority and enables users to transfer their NFTs to others.
 
 ***Difference between frezze auth and mint auth***
