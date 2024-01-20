@@ -1,85 +1,80 @@
 ---
-title: How To Transfer Spl Tokens In Solana
-author: shivam
+title: How To Transfer SPL Tokens in Solana
+author: Shivam
 moduleNumber: module-4
 modulePart: module-4-a
 thisFileName: transferspltokens
 orderNumber: '1'
-modulePartDescription: In this part of the module, you will receive a brief introduction to transferring various tokens within the Solana ecosystem and gain an understanding of associated token accounts. Following this, we will delve deeper into the concept of composability.
+modulePartDescription: This section of Module 4 offers insights into transferring various tokens within the Solana ecosystem, emphasizing the understanding of Associated Token Accounts (ATAs) and their role in composability.
 ---
-
 
 ## Objective
 
-In this lession, you will:
+In this lesson, you will:
 
-- Understand the underlying logic of transferring tokens in Solana.
-- Get to know about Associated Token Accounts in Solana.
+- Gain an understanding of the process for transferring tokens in Solana.
+- Learn about Associated Token Accounts (ATAs) in Solana.
 
 ## tl;dr
 
-In this lession, you are introduced to ATAs in Solana. To understand token transfers, consider an example where want to send gold tokens minted using the spl-token-minter program to your friend. Both of you need token accounts linked to the same gold token mint. Associated Token Accounts (ATAs) simplify managing token transfers and offer a way to create primary token accounts for each token owned. ATAs map user wallet addresses to their associated token accounts, streamlining the process.
+This lesson introduces you to the concept of ATAs in Solana. To grasp the idea of token transfers, let's consider a scenario where you want to send gold tokens (minted using the spl-token-minter program) to a friend. Both you and your friend require token accounts connected to the same gold token mint. ATAs simplify token transfer management, serving as primary token accounts for each token type a user owns. They effectively link user wallet addresses to their respective token accounts, streamlining the transfer process.
 
 ## Overview
 
-To understand the analogy behind transferring tokens, lets us consider the following example:
+To illustrate token transfer, consider this example:
 
-I am Shivam, and I want to send some of the gold tokens we minted (in spl-token-minter program) to my friend, Justin.
+I, Shivam, wish to send some gold tokens (minted in our spl-token-minter program) to my friend, Justin. We both need token accounts associated with the gold token mint. The transfer occurs from my account to Justin's. For this transfer, we create a new associated token account for Justin, ensuring a smooth transaction from my account to his.
 
-To get started, we need token accounts linked to the same mint, specifically the gold token mint. The actual token transfer happens from my account to Justin's. To make this transfer smoother, we need to create a brand-new associated token account for Justin. This step ensures that the transfer takes place seamlessly from my account to Justin's.
+This transfer differs from standard Sol transfers because the system program handles the transaction, eliminating the need for creating another associated token account for the Sol transfer.
 
-But here's the twist - this isn't your typical wallet-to-wallet transfer. It stands apart from the usual Sol transfer process. Why? Because in this case, the system program takes charge of the transaction, eliminating the need to create another associated token account to hold the Sol that's being transferred.
+Visualize this process in the image below:
 
-You can see this analogy in below image
+![Solana Token Transfer](/moduleimages/all_token.jpeg)
 
-![solana token transfer](/moduleimages/all_token.jpeg)
+Next, let's discuss interacting with the Associated Token Account.
 
-We will now proceed to interact with the Associated Token Account.
+## Associated Token Accounts
 
-## Associated token accounts
+ATAs offer an efficient method to locate the token account tied to a specific public key and token mint. This simplification is beneficial for managing token transfers and program interactions.
 
-Associated Token Accounts (ATAs) provide a simple and reliable way to find the token account associated with a specific public key and token mint. This makes it easier to manage token transfers and interactions within programs.
+Managing multiple token accounts under one mint can be cumbersome. The Token program provides a solution by generating token account keys based on a user's main System account address and the token mint address. This approach allows users to easily create a primary token account for each token they own.
 
-Managing multiple token accounts under the same mint can be complex and confusing.
+These specific accounts are called Associated Token Accounts (ATAs).
 
-Token program offers a way to generate token account keys based on a user's main System account address and the token mint address. This makes it easier for users to create a primary token account for each token they own, for simplifying management.
+This mechanism standardizes and maps a user's wallet address to their associated token accounts.
 
-These specialized accounts are called Associated Token Accounts (ATAs).
+![ATA to PDA](/moduleimages/ataTopda.jpeg)
 
-This program establishes a standard and provides a mechanism to map a user's wallet address with their associated token accounts.
+In this illustration, we create two linked token accounts for the Gold Token using The Gold Token Mint and the owners' addresses. The process essentially generates a Program Derived Address (PDA) from the user's wallet and the Gold Token Mint. We will delve into PDAs in the next article.
 
-![ata to pda](/moduleimages/ataTopda.jpeg)
+**Key Points about ATA:**
 
-In this image, we're creating two linked token accounts for the Gold Token. We do this by using The Gold Token Mint and the owners' addresses. This process is essentially about generating a Program Derived Address (PDA) from the user's wallet and the Gold Token Mint. We will learn about PDA in next article
-
-**Some key take-away for ATA**
-
-Each Associated Token Account (ATA) is also a Program Derived Address (PDA) and every Associated Token Account (ATA) is also a Token Account.
-
-We can create associate token account in typescript  using `getOrCreateAssociatedTokenAccount` method provided by spl-token the module.
+- Each ATA is also a Program Derived Address (PDA).
+- Every ATA is a Token Account.
+- The `getOrCreateAssociatedTokenAccount` function in TypeScript, provided by the spl-token module, facilitates ATA creation.
 
 ```ts
 const tokenAccount = await getOrCreateAssociatedTokenAccount(
-    connection,// web3 connection
-    wallet.payer, // payer for the account
-    mintKeypair.publicKey, // mint for the gold token
-    wallet.publicKey // owner(shivam)
+    connection, // web3 connection
+    wallet.payer, // account payer
+    mintKeypair.publicKey, // gold token mint
+    wallet.publicKey // owner (Shivam)
   );
 ```
 
-The getOrCreateAssociatedTokenAccount() function is used to get the Token Account associated with a given address or create it if it doesn't exist and return a public key for gold token account.
+This function retrieves or creates a Token Account associated with a given address, returning a public key for the gold token account.
 
-to hold some gold token we need to change owner and create brand new ATA as shown below:
+To hold gold tokens for a different owner, we modify the owner and create a new ATA:
 
 ```ts
 const recipient = anchor.web3.Keypair.generate(); // Random key generator
 
 const recipientTokenAccount = await getOrCreateAssociatedTokenAccount(
     connection,   // web3 connection
-    wallet.payer, // payer for the account
-    mintKeypair.publicKey, // mint for the gold token
-    receipient.publicKey // owner
+    wallet.payer, // account payer
+    mintKeypair.publicKey, // gold token mint
+    recipient.publicKey // new owner
   );
 ```
 
-In the next lession, we upgrade the spl-token-minter program to facilitate transfer of tokens.
+In the next lesson, we'll enhance the spl-token-minter program to enable the transfer of tokens.
