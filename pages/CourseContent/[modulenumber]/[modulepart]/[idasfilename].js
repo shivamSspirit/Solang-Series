@@ -40,10 +40,13 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const filteredParts = allDocuments.filter((lession) => {
+    console.log("lession",lession)
     return (
       lession.moduleNumber === `${context.params.modulenumber}` &&
       lession.modulePart === `${context.params.modulepart}`
     );
+
+    
   });
 
   // Extracting total files to get its length
@@ -141,10 +144,13 @@ const GeneralInfo = ({
       return "bg-[#CD853F]";
     } else if (moduleNumber === "module-4") {
       return "bg-[#63a4da]";
+    } else if (moduleNumber === "module-5") {
+      return "bg-[#e5acb6]";
     }
   };
 
   const returnLessionColors = (lessionNumber) => {
+    console.log("lessionNumber",lessionNumber)
     if (lessionNumber === "module-0") {
       return {
         blockquote: "prose-blockquote:text-[#bfbfff]",
@@ -199,6 +205,18 @@ const GeneralInfo = ({
         border_color: "border-[#63a4da]",
         imgBorderColor: "prose-img:border-[#63a4da]",
         link_color: "prose-a:text-[#63a4da]",
+      };
+    } else if (lessionNumber === "module-5") {
+      console.log("module-555")
+      return {
+        blockquote: "prose-blockquote:text-[#e5acb6]",
+        codeColor: "prose-code:text-[#e5acb6]",
+        text_color: "text-[#e5acb6]",
+        link_hover: "hover:prose-a:decoration-[#e5acb6]",
+        headingsColor: "prose-strong:text-[#e5acb6]",
+        border_color: "border-[#e5acb6]",
+        imgBorderColor: "prose-img:border-[#e5acb6]",
+        link_color: "prose-a:text-[#e5acb6]",
       };
     }
   };

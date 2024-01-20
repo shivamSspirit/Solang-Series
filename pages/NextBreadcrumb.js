@@ -12,13 +12,11 @@ const NextBreadcrumb = ({ capitalizeLinks, currentpath }) => {
     return path;
   });
 
-  // console.log("pathNames from bread:")
-
   return (
     <div>
       <ul id='breadcrumbs-one' className='hidden lg:flex'>
         {pathNames?.map((link, index) => {
-          //  console.log("trimmedPat",trimmedPath?.slice(2, index + 2)?.join("/"))
+           console.log("trimmedPat",trimmedPath?.slice(2, index + 2)?.join("/"))
           let href =
             index <= 1
               ? `/CourseContent`
@@ -27,9 +25,7 @@ const NextBreadcrumb = ({ capitalizeLinks, currentpath }) => {
           let itemLink = capitalizeLinks
             ? link[0]?.toUpperCase() + link?.slice(1, link.length)
             : link;
-          {
-            /* {console.log("router.query.idasfilename==itemLink",router.query.idasfilename[0].toUpperCase() + router.query.idasfilename?.slice(1, router.query.idasfilename.length)===itemLink)} */
-          }
+          
           return (
             <React.Fragment key={index}>
               <li>

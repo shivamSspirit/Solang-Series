@@ -4,7 +4,6 @@ import Course2 from "../assets/Course2.png";
 import Course3 from "../assets/Course3.png";
 import Course4 from "../assets/Course4.png";
 import Course5 from "../assets/Course5.png";
-import Course6 from "../assets/Course6.png";
 import { Button } from "flowbite-react";
 import Image from "next/image";
 import Box from "@mui/material/Box";
@@ -23,7 +22,7 @@ import Layout from "../components/Layout";
 
 export async function getStaticProps() {
   const allModuleNumbers = await getModules();
-  //console.log("allModuleNumbers", allModuleNumbers);
+  console.log("allModuleNumbers", allModuleNumbers);
   const allModules = allModuleNumbers.map((post) =>
     post.substring("modules/".length)
   );
@@ -62,34 +61,36 @@ export const announcementData = [
   {
     img: Course5,
     head: "Module Name",
-    desc: "How to Transfer Solana Tokens with Solidity",
+    desc: "How to Transfer Spl Tokens with Solidity",
     module_color: "#63a4da",
   },
+  {
+    img: Course3,
+    head: "Module Name",
+    desc: "Mint And Transfer NFT",
+    module_color: "#e5acb6",
+  },
+  // {
+  //   img: Course7,
+  //   head: "Module Name",
+  //   desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
+  // },
   // {
   //   img: Course6,
   //   head: "Module Name",
   //   desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
+  //   module_color: "#E6BE8A",
   // },
-  {
-    img: Course6,
-    head: "Module Name",
-    desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
-    module_color: "#E6BE8A",
-  },
-  {
-    img: Course6,
-    head: "Module Name",
-    desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
-    module_color: "#E6BE8A",
-  },
 ];
 
 const CourseContent = ({ allModules }) => {
-  // console.log("allDocsfdfssd", allDocuments);
+  console.log("allModules", allModules);
   const mergedArray = allModules.map((moduleName, index) => ({
     module: moduleName,
     ...announcementData[index],
   }));
+
+  console.log("mergedArray", mergedArray);
   const router = useRouter();
 
   //   const moduleColors={
@@ -116,6 +117,9 @@ const CourseContent = ({ allModules }) => {
       return "hover:bg-[#CD853F]";
     } else if (colors === "#63a4da") {
       return "hover:bg-[#63a4da]";
+    }else if (colors === "#e5acb6") {
+      console.log("colors",colors)
+      return "hover:bg-[#e5acb6]";
     }
   };
   // console.log(mergedArray);
