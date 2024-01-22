@@ -1,275 +1,199 @@
 ---
 title: Intro To Mint NFT
-author: shivam
+author: Shivam
 moduleNumber: module-5
 modulePart: module-5-b
 thisFileName: nft-test
-orderNumber: '4'
-modulePartDescription: In this part of the module, you will implement a Solidity Solang program for NFT minting and transfer (NFT mint authority is PDA).
+orderNumber: "4"
+modulePartDescription: This section teaches you to set up, configure, and test an NFT minting Solana program using Solidity and Anchor.
 ---
-
-
-**lession 5 : test the program writing anchor client**
 
 ## Objectives
 
-In this lesson, you will:
+- Set up and configure the testing environment for the NFT minting program.
+- Create and mint SPL-tokens (NFTs) using Solidity.
+- Write and execute test cases for the Solidity code.
 
-- Set up deployment for your project.
-- Configure and initiate tests for your project.
-- Create and mint the spl-tokens(NFT) using Solidity.
+## Setting Up the Development Environment
 
-## tl;dr
+### Updating `package.json`
 
-In this lesson, you will set up development by installing the required dependencies in the package.json file. We also create the spl tokens for our program in this section and mint them to our wallet. We will also create test cases for our Solidity code.
+1. **Modify `package.json`**:
 
-## Overview
+   - Navigate to the `package.json` file and update the dependencies:
+     ```json
+     "dependencies": {
+         "@coral-xyz/anchor": "^0.28.0",
+         "@metaplex-foundation/js": "^0.19.4",
+         "@solana/spl-token": "^0.3.8",
+         "@solana/web3.js": "^1.78.4",
+         // other dependencies
+     }
+     ```
 
-First, go to the package.json file and change this block of code:
+2. **Install Dependencies**:
+   - Run `npm install` in the terminal to install the necessary dependencies.
 
-```json
-{
-    "scripts": {
-        "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
-        "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check"
-    },
-    "dependencies": {
-        "@coral-xyz/anchor": "^0.28.0",
-        "@metaplex-foundation/js": "^0.19.4",
-        "@solana/spl-token": "^0.3.8",
-        "@solana/web3.js": "^1.78.4",
-    },
-    "devDependencies": {
-        "@types/bn.js": "^5.1.0",
-        "@types/chai": "^4.3.0",
-        "@types/mocha": "^9.0.0",
-        "chai": "^4.3.4",
-        "mocha": "^9.0.3",
-        "prettier": "^2.6.2",
-        "ts-mocha": "^10.0.0",
-        "typescript": "^4.3.5"
-    }
-}
+### Setting Up `anchor.toml`
 
-```
+1. **Update `anchor.toml` for Testing**:
+   - Add a script for running tests:
+     ```toml
+     [scripts]
+     test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+     ```
+   - This script is responsible for executing tests located in the test folder.
 
-Save this go to the terminal and enter the command for installing the required dependencies:
+## Writing Test Scripts
 
-```
-npm install
-```
+1. **Import Dependencies**:
 
-**The `anchor.toml` file serves as the central driver for our application. It's responsible for both app configuration and running tests**.
+   - Begin by importing required modules and classes at the top of your test file:
+     ```typescript
+     import * as anchor from "@coral-xyz/anchor";
+     import { Program } from "@coral-xyz/anchor";
+     import { PdaMintAuthority } from "../target/types/pda_mint_authority";
+     import {
+       Keypair,
+       PublicKey,
+       SystemProgram,
+       SYSVAR_RENT_PUBKEY,
+     } from "@solana/web3.js";
+     import { Metaplex } from "@metaplex-foundation/js";
+     import {
+       ASSOCIATED_TOKEN_PROGRAM_ID,
+       getAssociatedTokenAddressSync,
+       TOKEN_PROGRAM_ID,
+     } from "@solana/spl-token";
+     ```
 
-```
-[scripts]
-test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
-```
+2. **Initialize Testing Framework**:
 
-This script is an anchor.toml file responsible for running tests in test folder
+   - Set up the testing framework:
+     ```typescript
+     describe("pda-mint-authority", () => {
+       // Test cases will go here
+     });
+     ```
 
-Now, let's proceed with writing a test script for pda_mint_authority. To do this, navigate to the test folder and open the  pda_mint_authority`.ts` file. Remove all existing code in that file.
+3. **Configuring the Provider**:
 
-Start with importing these programs and dependencies at the top of the file
+   - Set up provider and key pairs:
+     ```typescript
+     const provider = anchor.AnchorProvider.env();
+     anchor.setProvider(provider);
+     const mintKeypair = anchor.web3.Keypair.generate();
+     const wallet = provider.wallet;
+     const connection = provider.connection;
+     const program = anchor.workspace
+       .PdaMintAuthority as Program<PdaMintAuthority>;
+     ```
 
-```tsx
-import * as anchor from "@coral-xyz/anchor";
-import { Program } from "@coral-xyz/anchor";
-import { PdaMintAuthority } from "../target/types/pda_mint_authority";
-import { Keypair, PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } from "@solana/web3.js";
-import { Metaplex } from "@metaplex-foundation/js";
-import {
-  ASSOCIATED_TOKEN_PROGRAM_ID,
-  getAssociatedTokenAddressSync,
-  TOKEN_PROGRAM_ID,
-} from "@solana/spl-token";
-```
+4. **Deriving PDA for Data Account**:
 
-Here are the imported modules, classes, and tools that are utilized in **test** for creating and sending SPL tokens to a user's associated token account:
+   - Derive the Program Derived Address (PDA):
+     ```typescript
+     const [dataAccountPDA, bump] = PublicKey.findProgramAddressSync(
+       [Buffer.from("mint_authority")],
+       program.programId
+     );
+     ```
 
-1. `import * as anchor from "@coral-xyz/anchor";`: This line brings in the entire Anchor library, enabling us to reference it as "anchor." Anchor is a valuable tool for developing Solana programs.
-2. `import { Program } from "@coral-xyz/anchor";`: This import specifically fetches the Program class from the Anchor library. The Program class facilitates the creation and interaction with Solana programs.
-3. `import { PdaMintAuthority } from "../target/types/pda_mint_authority"`;`: This import statement obtains the PdaMintAuthority class from the pda_mint_authority module, which will be explored further during the building process.
-4. `import {` Keypair, PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY `} from "@solana/web3.js";`: In this line, we import classes such as PublicKey, SystemProgram, and others from the `@solana/web3.js` library. These classes are valuable for managing Solana's public keys, system program, and rent-related aspects.
-5. `import { Metaplex } from "@metaplex-foundation/js";`: This import statement brings in the Metaplex class from the `@metaplex-foundation/js` library. Metaplex is likely used for tasks related to NFTs and metadata.
-6. `import {`  ASSOCIATED_TOKEN_PROGRAM_ID,
-  getAssociatedTokenAddressSync,
-  TOKEN_PROGRAM_ID, `} from "@solana/spl-token";`: These imports originate from the `@solana/spl-token` library, which is dedicated to Solana's token standard (SPL tokens). They are instrumental in managing associated token accounts and handling various token-related tasks.
+5. **Defining NFT Metadata**:
 
-Now describe the test for pda-mint-authority
+   - Specify metadata for the NFT:
+     ```typescript
+     const nftTitle = "purple lamb";
+     const nftSymbol = "lamb";
+     const nftUri = "https://example.com/nft.json";
+     ```
 
-```tsx
-describe("pda-mint-authority", () => {
-});
-```
+6. **Initializing Data Account**:
 
-In this section, we will discuss and thoroughly test the functionality of the "pda-mint-authority" program. Our testing process will include the creation of various test cases, assertions, and expectations to ensure the program's accurate behaviour. These tests will encompass a variety of scenarios, including token creation and minting. For this, you need to first set the requirements for the tests.
+   - Write a test to initialize the data account:
+     ```typescript
+     it("Is initialized!", async () => {
+       const tx = await program.methods
+         .new([bump])
+         .accounts({ dataAccount: dataAccountPDA })
+         .rpc();
+       console.log("Transaction signature", tx);
+     });
+     ```
 
-```tsx
-// Configure the client to use the local cluster.
-  const provider = anchor.AnchorProvider.env();
-  anchor.setProvider(provider);
+7. **Creating and Minting NFT Token**:
 
-// Generate a mint keypair
-  const mintKeypair = anchor.web3.Keypair.generate();
-  const wallet = provider.wallet;
-  const connection = provider.connection;
+   - Implement a test case for creating and minting the NFT:
+   - the `createTokenMint` is from our `pda-mint-auth` program
+     ```typescript
+     it("Create an NFT!", async () => {
+       const metaplex = Metaplex.make(connection);
+       const metadataAddress = await metaplex
+         .nfts()
+         .pdas()
+         .metadata({ mint: mintKeypair.publicKey });
 
-  const program = anchor.workspace
-    .PdaMintAuthority as Program<PdaMintAuthority>;
+       const tx = await program.methods
+         .createTokenMint(
+           dataAccountPDA, //the freeze authority
+           0, // 0 decimals for NFT
+           nftTitle, // NFT name
+           nftSymbol, // NFT symbol
+           nftUri // NFT URI
+         )
+         .accounts({
+           payer: wallet.publicKey,
+           mint: mintKeypair.publicKey,
+           metadata: metadataAddress,
+           mintAuthority: dataAccountPDA,
+           rentAddress: SYSVAR_RENT_PUBKEY,
+           metaplexId: new PublicKey(
+             "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
+           ),
+         })
+         .signers([mintKeypair])
+         .rpc({ skipPreflight: true });
+       console.log("Your transaction signature", tx);
+     });
+     ```
 
-  
-// Derive the PDA that will be used to initialize the dataAccount.
-  const [dataAccountPDA, bump] = PublicKey.findProgramAddressSync(
-    [Buffer.from("mint_authority")],
-    program.programId
-  );
+8. **Minting NFT to Wallet**:
 
-  const nftTitle = "purple lamb";
-  const nftSymbol = "lamb";
-  const nftUri =
-    "https://raw.githubusercontent.com/solana-developers/program-examples/new-examples/tokens/tokens/.assets/nft.json";
+   - Write a test to mint NFT to a wallet:
+   - the `mintTo` is from our `pda-mint-auth` program
+     ```typescript
+     it("Mint the NFT to your wallet!", async () => {
+       // Derive wallet's associated token account address for mint
+       const tokenAccount = getAssociatedTokenAddressSync(
+         mintKeypair.publicKey,
+         wallet.publicKey
+       );
+       const tx = await program.methods
+         .mintTo()
+         .accounts({
+           pdaAccount: dataAccountPDA,
+           payer: wallet.publicKey,
+           tokenAccount: tokenAccount,
+           owner: wallet.publicKey,
+           mint: mintKeypair.publicKey,
+         })
+         .rpc({ skipPreflight: true });
+       console.log("Your transaction signature", tx);
+     });
+     ```
 
-```
+### Finalizing Test Script
 
-Here we are configuring and initiating the setup for testing our pda-mint-authority Solana program.
+- **Add Metadata Program ID**:
+  - Add the following code to `anchor.toml`:
+    ```toml
+    [[test.validator.clone]]
+    address = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
+    ```
 
-- **Configuration and Provider Setup**: First, we connect to the local cluster and set up the provider using AnchorProvider.env(). This provider is then assigned with anchor.setProvider(provider) The Provider is an abstraction of a connection to the Solana network, typically consisting of a Connection, Wallet, and a preflight commitment.
-- **Finding and deriving pda on client side using anchor client:**
-To store the program's state, we need a new data account using a pda. 
-we derive same pda using same seeds
+- This configures the Metaplex Metadata program ID for the tests.
 
-### findProgramAddressSync
+## Conclusion
 
-- findProgramAddressSync(seeds, programId): [*[PublicKey](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html)*, *number*]
-- Find a valid program address
-    
-    Valid program addresses must fall off the ed25519 curve. This function iterates a nonce until it finds one that when combined with the seeds results in a valid program address.
-    
-    ### Parameters
-    
-    - seeds: (*Uint8Array* | *Buffer*)[]
-    - programId: *[PublicKey](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html)*
-    
-    ### Returns [*[PublicKey](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html)*, *number*]
-    
-- **Generating Key Pairs**: We also generate a mintKeypair, likely for the minting process. We set up wallet and connection variables too.
-- **Initializing the Program**: We use anchor.workspace.PdaMintAuthority to make an instance of the program as Program. This prepares the PdaMintAuthority program from the workspace, The program is an abstraction that combines the Provider, idl, and the programID (which is generated when the program is built) and allows us to call RPC methods against our program.
-- **Defining Metadata**: We provide info about the token's metadata. This means giving the token a title, symbol, and URI. These metadata bits are super important for describing what the token is all about.
+With these steps, you'll have set up the development environment, configured the test script, and written tests to ensure your NFT minting program functions correctly. The next lesson will cover building, deploying, and testing the program in detail.
 
-Now to initialize the data account, write the following code:
-
-```tsx
-it("Is initialized!", async () => {
-    // Add your test here.
-    const tx = await program.methods
-      .new([bump])
-      .accounts({ dataAccount: dataAccountPDA })
-      .rpc();
-    console.log("Your transaction signature", tx);
-  });
-```
-
-Here, we initialise the data account for the program, a crucial requirement for Solang. The initialization process is conducted using the new([bump]) (here bump ensure that this is valid off curve pda) method from the program.methods object. We specify the dataAccountPDA as an account parameter . This ensures that the transaction possesses the necessary authorization and input parameters for the initialization operation.
-
-Now create spl token nft by entering the following code:
-
-```solidity
-it("Create an NFT!", async () => {
-    const metaplex = Metaplex.make(connection);
-    const metadataAddress = await metaplex
-      .nfts()
-      .pdas()
-      .metadata({ mint: mintKeypair.publicKey });
-
-    // Add your test here.
-    const tx = await program.methods
-      .createTokenMint(
-        dataAccountPDA, // freeze authority
-        0, // 0 decimals for NFT
-        nftTitle, // NFT name
-        nftSymbol, // NFT symbol
-        nftUri // NFT URI
-      )
-      .accounts({ 
-        payer: wallet.publicKey,
-        mint: mintKeypair.publicKey,
-        metadata: metadataAddress,
-        mintAuthority: dataAccountPDA,
-        rentAddress: SYSVAR_RENT_PUBKEY,
-        metaplexId: new PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"),
-      })
-      .signers([mintKeypair])
-      .rpc({ skipPreflight: true });
-    console.log("Your transaction signature", tx);
-  });
-```
-
-Here, we create an nft spl token named purple lamb which has the title lamb***.*** For this first, we create the Metaplex connection using this:
-
-```tsx
-const metaplex = Metaplex.make(connection);
-```
-
-Get the metadata address for our token mint:
-
-```tsx
-// Get the metadata address for the mint
-const metadataAddress = await metaplex
-      .nfts()
-      .pdas()
-      .metadata({ mint: mintKeypair.publicKey });
-```
-
-Let's look at how we get metadata details for a specific mint. We use **mintKeypair.publicKey** to say which mint we're looking at. When we run this code, we find the metadata address connected to that mint and save it in metadataAddress.
-
-Next, we use the createTokenMint method from our PdaMintAuthority program to make a token mint. We give it necessary accounts, pda address, data, and a decimal of 0 to make sure we create a nft mint. We also give accounts or signers for the methods.
-
-After that, we execute the transaction using **.rpc()** and set skipPreflight to true for an async process. We get the transaction signature (tx) for reference, and the results show up in the console.
-
-Now mint nft token to user wallet:
-
-```tsx
-it("Mint the NFT to your wallet!", async () => {
-    // Derive wallet's associated token account address for mint
-    const tokenAccount = getAssociatedTokenAddressSync(
-      mintKeypair.publicKey,
-      wallet.publicKey
-    );
-
-    const tx = await program.methods
-      .mintTo()
-      .accounts({ 
-        pdaAccount: dataAccountPDA,
-        payer: wallet.publicKey,
-        tokenAccount: tokenAccount,
-        owner: wallet.publicKey,
-        mint: mintKeypair.publicKey
-     })
-      .rpc({ skipPreflight: true });
-    console.log("Your transaction signature", tx);
-  });
-```
-
-Initially, we establish an associated token account by leveraging the token mint and associating it with the user's wallet address. To accomplish this, we employ the getAssociatedTokenAddressSync() method. This method requires several parameters, including mintKeypair.publicKey, wallet.publicKey.
-
-Next, we make a transaction by using the **mintTo** method from our pda-mint-auth program. We give it important stuff like the wallet, the address of the associated token account, the mint key pair. We also include the accounts, making sure we provide all the accounts needed to mint nft to the user's wallet.
-
-Now let’s test if our tokens are minted or not by getting the token amount balance:
-
-```tsx
-// Get the minted token amount on the associated token account
-    const tokenAmount = (await getAccount(connection, tokenAccount)).amount;
-    console.log("tokenAmount", tokenAmount);
-```
-
-Lastly, open **anchor.toml** file and add this block of code in the end of the file.
-
-```
-[[test.validator.clone]]
-address = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
-```
-
-This is the metadata program id for Metaplex.
-
-Now we can move forward to build our program to generate program types and idl. Building, deployment and testing of the program will be explored deeply in the next lesson.

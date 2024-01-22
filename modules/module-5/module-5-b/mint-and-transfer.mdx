@@ -1,131 +1,70 @@
 ---
 title: Mint NFT And Transfer To Another User
-author: shivam
+author: Shivam
 moduleNumber: module-5
 modulePart: module-5-b
 thisFileName: mint-and-transfer
 orderNumber: '3'
-modulePartDescription: In this part of the module, you will implement a Solidity Solang program for NFT minting and transfer (NFT mint authority is PDA).
+modulePartDescription: Comprehensive instructions for minting and transferring NFTs using a Solidity Solang program with PDAs as mint authorities.
 ---
 
-**Now we want to mint token into user wallet for this**
+**Lesson 4: Minting and Transferring NFTs in Solidity Solang with PDAs**
 
-We need to create an external function that looks like this:
+## Step-by-Step Process for Minting and Transferring NFTs
 
-- **`external`** functions can exclusively be called by other contracts or directly by an RPC. They are also present in the contract’s ABI or IDL.
+### Setting Up the Minting Function
 
-If the function has a single return value, this can be assigned to a variable. If the function has multiple return values, these can be assigned using the [Destructuring Statement](https://solang.readthedocs.io/en/v0.3.3/language/statements.html#destructuring) assignment statement.
+1. **Creating the `mintTo` Function**:
+   - Define an external function to mint NFTs:
+     ```solidity
+     @mutableSigner(payer)
+     @mutableAccount(tokenAccount)
+     @account(owner)
+     @mutableAccount(mint)
+     @mutableAccount(pdaAccount)
+     function mintTo() external {
+         // Function body
+     }
+     ```
 
-It is also possible to call functions on other contracts, which is known as calling **external** functions. The called function must be declared public. Calling **external** functions requires ABI encoding the arguments and ABI decoding the return values. This is much more costly than an internal function call.
+2. **Creating an Associated Token Account (ATA)**:
+   - Implement ATA creation for receiving the minted token:
+     ```solidity
+     SplToken.create_associated_token_account(
+         tx.accounts.payer.key, // Payer's account
+         tx.accounts.tokenAccount.key, // Token account address
+         tx.accounts.mint.key, // Mint account
+         tx.accounts.owner.key // Owner's account
+     );
+     ```
 
-```solidity
-    @mutableSigner(payer)
-    @mutableAccount(tokenAccount)
-    @account(owner)
-    @mutableAccount(mint)
-    @mutableAccount(pdaAccount)
-    function mintTo() external {
-        // Create an associated token account for the owner to receive the minted token
-        SplToken.create_associated_token_account(
-            tx.accounts.payer.key, // payer account
-            tx.accounts.tokenAccount.key, // associated token account address
-            tx.accounts.mint.key, // mint account
-            tx.accounts.owner.key // owner account
-        );
+3. **Minting the Token**:
+   - Use a custom `_mintTo` method for minting:
+     ```solidity
+     _mintTo(
+         tx.accounts.mint.key, // Mint account
+         tx.accounts.tokenAccount.key, // Token account
+         1, // Amount to mint
+         tx.accounts.pdaAccount.key // PDA account
+     );
+     ```
 
-        // Mint 1 token to the associated token account
-        _mintTo(
-            tx.accounts.mint.key, // mint account
-            tx.accounts.tokenAccount.key, // token account
-            1, // amount
-            tx.accounts.pdaAccount.key
-        );
+4. **Removing Mint Authority**:
+   - Call `_removeMintAuthority` to revoke minting rights:
+     ```solidity
+     _removeMintAuthority(
+         tx.accounts.mint.key, // Mint account
+         tx.accounts.pdaAccount.key // PDA account
+     );
+     ```
 
-        // // Remove mint authority from mint account
-        _removeMintAuthority(
-            tx.accounts.mint.key, // mint
-            tx.accounts.pdaAccount.key
-        );
-    }
-```
+### Reimplementing Mint and Authority Removal Functions
 
-let’s break this down
-
-by using these accounts
-
-```solidity
-
-    @mutableSigner(payer)
-    @mutableAccount(tokenAccount)
-    @account(owner)
-    @mutableAccount(mint)
-    @mutableAccount(pdaAccount)
-```
-
-## Privileges of annotations:
-
-- **`@mutableSigner(name)`**: Signer for this transaction (the signer of this transaction).
-- **`@mutableAccount(name)`**: An account that will mutate (change its state) in this transaction.
-- **`@account(name)`**: General account used in this transaction.
-
-
-## Write MintTo instructions
-
-Create a **`mintTo`** **external** function with no params.
-
-In the function body:
-
-We create an Associated Token Account (ATA), which we learned about in previous lectures.
-
-You already know why we need ATA, but here we are creating an ATA for the NFT owner who mints the NFT. For this, we are making a CPI to the SPL library and using the **`SplToken.create_associated_token_account`** method to create an ATA account for the owner.
-
-For this, we need to provide these four accounts.
-
-```solidity
-  // Create an associated token account for the owner to receive the minted token
-        SplToken.create_associated_token_account(
-            tx.accounts.payer.key, // payer account
-            tx.accounts.tokenAccount.key, // associated token account address
-            tx.accounts.mint.key, // mint account
-            tx.accounts.owner.key // owner account
-        );
-```
-
-Here, these four accounts are obtained from **`tx.accounts`**. This is how we can access accounts that we provide in annotations.
-           
-
-```solidity
-tx.accounts.payer.key, // payer account (who pay for transaction)
-             tx.accounts.tokenAccount.key, // associated token account address
-            tx.accounts.mint.key, // mint account
-            tx.accounts.owner.key // owner account(owner of this ata)
-```
-
-next we move to mint token into user account 
-
-```solidity
-// Mint 1 token to the associated token account
-        _mintTo(
-            tx.accounts.mint.key, // mint account
-            tx.accounts.tokenAccount.key, // token account
-            1, // amount
-            tx.accounts.pdaAccount.key
-        );
-```
-
-
-## Re-implement MintTO
-
-For this, we need to reimplement the **`mintTo`** method again because we are signing with PDA.
-
-The re-implemented method looks like this:
-
-In this **`_mintTo`** method, we get some parameters. Then, we are invoking the SPL token program to mint tokens to the user's token account using PDA as the mint authority.
-
-```solidity
-// Invoke the token program to mint tokens to a token account, using a PDA as the mint authority
-    function _mintTo(address mint, address account, uint64 amount, address pdaAccount) private {
-        // Independently derive the PDA address from the seeds, bump, and programId
+1. **Custom `_mintTo` Function**:
+   - Define a private method to handle minting with PDA:
+     ```solidity
+     function _mintTo(address mint, address account, uint64 amount, address pdaAccount) private {
+     // Independently derive the PDA address from the seeds, bump, and programId
         (address pda, bytes1 _bump) = try_find_program_address(["mint_authority"], type(pda_mint_authority).program_id);
         require(pdaAccount == pda, 'INVALID_PDA');
 
@@ -143,45 +82,14 @@ In this **`_mintTo`** method, we get some parameters. Then, we are invoking the 
 
         // Invoke the token program with prepared accounts and instruction data
         SplToken.tokenProgramId.call{accounts: metas, seeds: [["mint_authority", abi.encode(_bump)]]}(instructionData);
-    }
-```
+     }
+     ```
 
-Steps breakdown:
-
-First, we derive the PDA using the same seed. Then, we check the validity of the PDA.
-
-Now, we prepare the instruction data to send.
-
-Next, we manually write account metas.
-
-Then, we invoke a cross-program invocation to the SPLToken program to mint NFT to the user's token account.
-
-## Remove Mint Auth
-
-Next, we remove the mint authority from the mint account.
-
-For this, we need the same re-implemented methods to remove the mint authority (because we are signing with PDA).
-
-```solidity
-// Remove mint authority from mint account
-_removeMintAuthority(
-    tx.accounts.mint.key, // mint
-    tx.accounts.pdaAccount.key
-);
-
-```
-
-## Re-implement Remove
-
-The `_removeMintAuthority` method looks like this:
-
-This is a cross-program invocation to the SPLToken program to remove the mint authority.
-
-We are doing the same steps like deriving PDA, preparing account meta, building instruction data, and then invoking the SPLToken program.
-
-```solidity
-function _removeMintAuthority(address mintAccount, address pdaAccount) private {
-        // Independently derive the PDA address from the seeds, bump, and programId
+2. **Custom `_removeMintAuthority` Function**:
+   - Implement a private method to remove mint authority:
+     ```solidity
+     function _removeMintAuthority(address mintAccount, address pdaAccount) private {
+         // Independently derive the PDA address from the seeds, bump, and programId
         (address pda, bytes1 _bump) = try_find_program_address(["mint_authority"], type(pda_mint_authority).program_id);
         require(pdaAccount == pda, 'INVALID_PDA');
 
@@ -198,46 +106,37 @@ function _removeMintAuthority(address mintAccount, address pdaAccount) private {
         // Invoke the token program with prepared accounts and instruction data
         SplToken.tokenProgramId.call{accounts: metas, seeds: [["mint_authority", abi.encode(_bump)]]}(instructionData);
 	}
-```
+     }
+     ```
 
-That's it for creating a mint account and metadata account for the minted token. Then, mint the token into the minter's wallet and remove the mint authority.
+### Transferring the Minted NFT
 
-now we are moving to 
+1. **Creating the Transfer Function**:
+   - Define a method for NFT transfer:
+     ```solidity
+     @mutableAccount(from)
+     @mutableAccount(to)
+     @signer(owner)
+     function transferNft() external {
+         // Transfer logic
+     }
+     ```
 
-## Spl Token Transfer
+2. **Using SPL Token Transfer**:
+   - Implement the transfer using SPL token library:
+     ```solidity
+     SplToken.transfer(
+         tx.accounts.from.key, // From token account
+         tx.accounts.to.key, // To token account
+         tx.accounts.owner.key, // Owner account
+         1 // Number of tokens to transfer
+     );
+     ```
 
-Next, we write a method for transferring the minted NFT to another account.
+### Understanding Each Step
 
-For this, we need to create an external function that will contain a SPLToken.transfer CPI.
+- **Minting Process**: The `mintTo` function creates an ATA for the NFT owner, mints the NFT to this account, and then removes the mint authority to prevent further minting.
+- **Reimplemented Methods**: `_mintTo` and `_removeMintAuthority` are tailored to use a PDA as the mint authority, aligning with Solana's security model.
+- **NFT Transfer**: The `transferNft` function facilitates the transfer of the minted NFT to another user, employing standard SPL token operations.
 
-This library call method contains three accounts:
-
-- From token account
-- To token account
-- Owner of NFT (signer)
-
-And one more argument:
-
-- The token amount (in our case, one).
-
-Write this below **`_removeMintAuthority`**.
-
-```solidity
-// transfer NFT TO another user
-@mutableAccount(from) // token account to transfer from
-@mutableAccount(to) // token account to transfer to
-@signer(owner)
-function transferNft() external {
-
-   SplToken.transfer(
-            tx.accounts.from.key, // from associated token account address
-            tx.accounts.to.key, // to associated token account address
-            tx.accounts.owner.key, // owner account
-            1
-        );
-    }
-```
-
-That's it. This is all about the Solidity program for NFT minting and transferring, where the mint authority is set as PDA.
-
-Now we are moving to set up for testing.
+By integrating these methods, the Solidity Solang program achieves a secure and efficient process for minting and transferring NFTs on the Solana blockchain, utilizing PDAs for enhanced control and security.

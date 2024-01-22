@@ -1,112 +1,97 @@
 ---
 title: Intro To Solang Methods
-author: shivam
+author: Shivam
 moduleNumber: module-5
 modulePart: module-5-b
 thisFileName: solang-review
 orderNumber: '0'
-modulePartDescription: In this part of the module, you will implement a Solidity Solang program for NFT minting and transfer (NFT mint authority is PDA).
+modulePartDescription: This part provides an in-depth exploration of key Solang Solidity concepts for implementing NFT minting and transfer on Solana, with a focus on Program Derived Addresses (PDAs).
 ---
-
-
-
-**lession 1: Review of solang concept related to this module**
 
 ## Overview
 
-1. Mint and Token Account.
-2. solang contract
-3. pda-derivation(which method we will use for pda derivation(findprogramsync))
-4. Accessing Accounts data
+Embark on a detailed exploration of Solang, a tool that adapts Solidity for Solana, and understand its unique approaches to NFT minting and transfer. We'll cover crucial concepts including Mint and Token Accounts, Solang contracts, PDA derivation, and accessing account data.
 
-## Mint Accounts
+### 1. Mint and Token Accounts
 
-When someone wants to create a new token, he uses the `create-token` function to initialize a new *Mint Account*, which contains basic information about the token: The `mint-authority` which is a public-key (*pubkey*) authorized to mint this token, the `freeze-authority` who can freeze token accounts (to be described below), and some additional data as the total `supply` of the token, the number of `decimals`, and the `isInitialized` flag. This account stores general information about the token and who has permissions over it. Observe that there is no data about token holdings of particular individuals. These are stored in *Token Accounts*.
+- **Mint Accounts**: These are initialized when creating new tokens on Solana. They hold information like the mint authority (who can create more of this token), the freeze authority (who can freeze token accounts), the total supply, and the number of decimals.
 
-## Token Accounts
+- **Token Accounts**: Each token account stores the tokens owned by a specific public key. These accounts are managed by the Token program and control access to the tokens through fields like owner, close authority, and delegate. 
 
-The *token account* holds information about the tokens owned by a *pubkey*. Ownership relationships become a bit confusing, though. The token account itself is owned by the Token program and it is the Token program who controls access to these tokens using the `owner`, `close-authority` and `delegate` fields within the account. The `owner` is the *pubkey* who can spend/transfer the tokens, the `close-authority` can close the account, and the `owner` can give rights to a `delegate` *pubkey* to spend up to a `delegatedAmount` of tokens. Besides these fields, there are also a few flags: `isInitialized`, `isFrozen`, `isNative`. By default, token accounts are initialized upon creation, are not frozen and are not native. Previously, we saw the mint account defines a `freeze-authority`, who has the right to freeze the tokens in a user account. Often times, the `freeze-authority` is null (all zeroes). In that case, no one can freeze the corresponding tokens held in the token account.
+### 2. Solang Contracts
 
-## Metadata
+Solang alters Solidity's functionality to suit Solana's environment. Key differences include:
 
-[metadata](https://docs.metaplex.com/guides/archived/architecture/deep_dive/overview#metadata) object can be used to provide basic info about SPL tokens on Solana, which include the name, symbol, URI and seller fees, as well as whether the sale of this metadata has happened yet. Anybody carrying a token from this mint can mark this primary sale as having happened via the `update_primary_sale_happened_via_token` command. There is obviously no incentive for a primary owner to do this as it precludes them from getting full royalties on the first sale, but a secondary owner must do this if they ever want to see fees from selling!
+- **Dual Account System**: In Solana, a Solang contract uses two accounts - one for data storage and another for the executable code.
+- **Contract Upgrades**: Solang's structure allows for updating the executable code while retaining the same data account, simplifying the upgrade process.
 
-Metadata accounts are simply PDA addresses with derived key of `['metadata', token_metadata_program_id, mint_id]`.
+### 3. PDA Derivation
 
-its possible to do the equivalent of invoke_signed in solang, but you have to manually write out the instruction and have to know the implementation of the program you're invoking to get the instruction data correct. Here's an example of invoking the token program using a PDA as the mint authority
+Program Derived Addresses (PDAs) are central to Solang's operation in Solana, especially for cross-program interactions. They are created using:
 
-and then cpi via invoke would just be like the examples included in the spl token library,
+- **Seeds and Bumps**: Seeds (such as strings or user public keys) and a bump value are combined to create PDAs. The bump is adjusted until a valid off-curve address is generated. 
 
-here's the one for invoking the token program to mint tokens
+- **try_find_program_address Method**: This Solang function returns the PDA and the seed bump. It's crucial for creating addresses that programs can control.
 
+{/* here's the one for invoking the token program to mint tokens */}
+Here's an example of invoking the token program to mint tokens:
 ![mint acc](/moduleimages/mint_acc.jpeg)
 
-## solang contracts
+### 4. Accessing Account Data
 
-As the underlying Solana environment is different than that of Ethereum, Solidity inner workings have been modified to function properly. For example, A Solidity contract on Solana utilizes two accounts: a data account and a program account. The program account stores the contract’s executable binary and owns the data account, which holds all the storage variables. On Ethereum a single account can store executable code and data.
+In Solang, account data can be accessed in different ways:
 
-the data layout from a new contract is compatible with that of an old one, it is possible to update the binary in the program account and retain the same data, rendering contract upgrades implemented in Solidity unnecessary. Solana’s CLI tool provides a command to both do an initial deploy of a program, and redeploy it later.:
+- **Using Annotations in Constructors**: Annotations are used to specify the payer, account size, seeds, and bump for PDAs. They can refer to constructor arguments and are essential for creating accounts on-chain.
 
-`solana program deploy --program-id <KEYPAIR_FILEPATH> <PROGRAM_FILEPATH>`
+- **Account Management**: Solang provides functionalities to manage accounts within a contract, such as declaring and accessing them.
 
-where `<KEYPAIR_FILEPATH>` is the program’s keypair json file and `<PROGRAM_FILEPATH>` is the program binary `.so` file. For more information about redeploying a program, check [Solana’s documentation](https://docs.solana.com/cli/deploy-a-program#redeploy-a-program).
+Understanding the concepts of space, seeds, payer, and bump is crucial in Solang Solidity, especially when working with Solana's blockchain. Here are the key points for each:
 
-**_Setting the payer, seeds, bump, and space for a contract_**
+### Space
+1. **Definition**: Space refers to the amount of storage allocated for a Solana account.
+2. **Usage in Solang**: In Solang, the `@space` annotation specifies the size of the data account for a contract.
+3. **Determining Size**: The required space size can be estimated using Solang's verbose compilation output. It should at least cover the minimum bytes required by the contract.
 
-When a contract is instantiated, there are two accounts required: the program account to hold the executable code and the data account to save the state variables of the contract. The program account is deployed once and can be reused for updating the contract. When each Solidity contract is instantiated (also known as deployed), the data account has to be created. This can be done by the client-side code, and then the created blank account is passed to the transaction that runs the constructor code.
+### Seeds
+1. **Role in PDAs**: Seeds are used in generating Program Derived Addresses (PDAs). They are inputs combined with a program ID to create unique PDAs.
+2. **Variability**: Seeds can be static (like strings) or dynamic (like user public keys).
+3. **Solang Implementation**: In Solang, seeds are defined using the `@seed` annotation in contract constructors or functions.
 
-Alternatively, the data account can be created by the constructor, on chain. When this method is used, some parameters must be specified for the account using annotations. Annotations placed above a constructor can only contain literals or constant expressions, as is the case for first `@seed` and `@space` in the following example. Annotations can also refer to constructor arguments when placed next to them, as the second `@seed` and the `@bump` examples below. The `@payer` annotation is a special annotation that [declares an account](https://solang.readthedocs.io/en/v0.3.3/targets/solana.html#account-management).
+### Payer
+1. **Functionality**: The payer is the Solana account responsible for paying the transaction fees and creating new accounts.
+2. **Annotation in Solang**: The `@payer` annotation is used to specify which account will cover the transaction and storage costs.
+3. **Requirement**: A payer is mandatory for account creation and transaction execution on Solana.
 
-If the contract has no constructor, annotations can be paired with an empty constructor.
+### Bump
+1. **Purpose**: The bump is used to adjust the seed combination for generating a valid off-curve PDA.
+2. **Process**: Solang starts with a high bump value and iteratively decreases it until an off-curve address is found.
+3. **Incorporation in Solang**: The bump is often included in the seed array in the `try_find_program_address` function to ensure unique PDA generation.
 
-```Solidity
-@program_id("Foo5mMfYo5RhRcWa4NZ2bwFn4Kdhe8rNK5jchxsKrivA")
-contract Foo {
+### Specifics of Solang Methods and Metadata
 
-    @space(500 + 12)
-    @seed("Foo")
-    @payer(payer)
-    constructor(@seed bytes seed_val, @bump bytes1 bump_val) {
-        // ...
-    }
-}
-```
+- **Metadata Handling**: In Solang, metadata objects describe SPL tokens, including essential information like names, symbols, and URI. These accounts are PDAs, created using specific seed formats.
 
+- **Contract Annotations and Constructors**: Solang uses special annotations for constructors, defining the space, seeds, payer, and bump. These annotations control the creation and management of accounts associated with a contract.
 
-Creating an account needs a payer, so at a minimum the `@payer` annotation must be specified. If it is missing, then the data account must be created client-side. The `@payer` annotation [declares a Solana account](https://solang.readthedocs.io/en/v0.3.3/targets/solana.html#account-management) that must be passed in the transaction.
+  ```Solidity
+  @program_id("Foo5mMfYo5RhRcWa4NZ2bwFn4Kdhe8rNK5jchxsKrivA")
+  contract Example {
+      @space(500 + 12)
+      @seed("ExampleSeed")
+      constructor(@seed bytes seed_val,@bump bytes1 bump_val) {
+          // ...
+      }
+  }
+  ```
 
-The size of the data account can be specified with `@space`. This is a `uint64` expression which can either be a constant or use one of the constructor arguments. The `@space` should at least be the size given when you run `solang -v`:
+- **Creating PDAs for Minting and Transferring NFTs**: Utilizing the `try_find_program_address` function in Solang allows for the generation of PDAs, which are crucial for minting and transferring NFTs.
 
-`$ solang compile --target solana -v examples/solana/flipper.sol
-...
-info: contract flipper uses at least 17 bytes account data
-...`
+  ```solidity
+  contract pda {
+      function create_pda(bytes seed2) public returns (address, bytes1) {
+          return try_find_program_address(["seed", seed2], program_id);
+      }
+  }
+  ```
 
-If the data account is going to be a [program derived address](https://docs.solana.com/developing/programming-model/calling-between-programs#program-derived-addresses), then the seeds and bump have to be provided. There can be multiple seeds, and an optional single bump. If the bump is not provided, then the seeds must not create an account that falls on the curve. When placed above the constructor, the `@seed` can be a string literal, or a hex string with the format `hex"4142"`. If before an argument, the seed annotation must refer to an argument of type `bytes`, `address`, or fixed length byte array of `bytesN`. The `@bump` must a single byte of type `bytes1`.
-
-## PDA derivation
-
-**Builtin try_find_program_address**
-
-This function returns the program derived address for a program address and the provided seeds, along with a seed bump. See the Solana documentation on [program derived addresses](https://edge.docs.solana.com/developing/programming-model/calling-between-programs#program-derived-addresses).
-
-**import** `try_find_program_address` **from** 'solana';
-
-
-```solidity
-contract pda {
-    address token = address"TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA";
-
-    function create_pda(bytes seed2) public returns (address, bytes1) {
-        **return** try_find_program_address(["kabang", seed2], token);
-    }
-}
-```
-
-## Accessing accounts’ data
-
-Accounts declared on a constructor using the `@payer` annotation are available for access inside it. Likewise, accounts declared on external functions with any of the aforementioned annotations are also available in the `tx.accounts` vector for easy access. For an account declared as `@account(funder)`, the access follows the syntax `tx.accounts.funder`, which returns the [AccountInfo builtin struct](https://solang.readthedocs.io/en/v0.3.3/targets/solana.html#account-info).
-
-## Annotations And Constructor
-
-Annotations placed above a constructor can only contain literals or constant expressions, as is the case for first `@seed` and `@space` in the following example. Annotations can also refer to constructor arguments when placed next to them, as the second `@seed` and the `@bump` examples below. The `@payer` annotation is a special annotation that [declares an account](https://solang.readthedocs.io/en/v0.3.3/targets/solana.html#account-management).
+Understanding these aspects of Solang Solidity is key to developing effective NFT minting and transfer programs on Solana. Each element—from contract structure to PDA creation—plays a vital role in leveraging Solana's capabilities through Solidity.

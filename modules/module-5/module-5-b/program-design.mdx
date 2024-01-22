@@ -1,64 +1,68 @@
 ---
 title: Design Algo For Program
-author: shivam
+author: Shivam
 moduleNumber: module-5
 modulePart: module-5-b
 thisFileName: program-design
 orderNumber: '1'
-modulePartDescription: In this part of the module, you will implement a Solidity Solang program for NFT minting and transfer (NFT mint authority is PDA).
+modulePartDescription: This part details the step-by-step algorithm for implementing a Solidity Solang program for NFT minting and transfer, where the NFT mint authority is a Program Derived Address (PDA).
 ---
 
+## Program Algorithm (Steps)
 
-**lession 2 solidity program design**
-
-## Program Algorithm (steps)
-
- **Create Token Mint and MetaData Account**
+### Creating Token Mint and Metadata Account
 
 1. **Import Required Libraries:**
-    - Start by importing the necessary Solang Solidity libraries for your Solana-compatible smart contract.
+   - Incorporate essential Solang Solidity libraries to make your smart contract compatible with Solana's blockchain.
+
 2. **Setup Program ID and Contract Initialization:**
-    - Define the program ID for your Solang contract.
-    - Initialize the contract.
+   - Define a unique program ID to identify your Solang contract.
+   - Initialize the contract with necessary parameters and settings.
+
 3. **Set Bump Using Solang Solidity Annotations:**
-    - Utilize Solang Solidity annotation primitives to set the bump.
+   - Employ Solang's annotation feature to assign a 'bump' value. This value is crucial for generating off-curve Program Derived Addresses (PDAs).
+
 4. **Setup Seed with String Literal:**
-    - Set up a seed using a string literal.
+   - Define a seed using a string literal. This seed will be used in conjunction with the program ID to create a PDA.
+
 5. **Setup Payer for Constructor Calls and Contract Calls:**
-    - Establish the payer for constructor calls and subsequent contract calls.
+   - Designate the payer account responsible for transaction fees and creating new accounts in both constructor and subsequent contract calls.
+
 6. **Constructor Body:**
-    - Derive the PDA using the `try_find_program_address` method from the Solang Solana documentation.
-    - Destructure the PDA address and bump.
-    - Store the bump in a storage variable.
-    - Check bump equality to ensure consistency between client and contract.
-    - If equal, assign constructor parameters to contract storage variables.
+   - Utilize the `try_find_program_address` method from Solang documentation to derive a PDA.
+   - Destructure the returned values to get the PDA address and bump.
+   - Store the bump in a contract storage variable.
+   - Verify the bump value for consistency and assign constructor parameters to contract storage variables appropriately.
+
 7. **Mint Account Setup:**
-    - Create a mint account for the token using the Spl Token program library method **`Spltoken.create_mint`**.
+   - Establish a mint account for your NFT using methods provided by the Spl Token program library, like `Spltoken.create_mint`.
+
 8. **Token Metadata Account Setup:**
-    - Re-implement methods from the Metaplex library for creating a metadata account. Sign these methods with the PDA.
-    - Set basic data related to the token using **`DataV2`** and create an instruction data structure.
-    - Manually write account meta instructions, set the program discriminator value, and ABI-encode instruction data.
-    - Invoke the Metaplex program using seeds, ABI-encoded data, and CPI accounts.
+   - Implement methods from the Metaplex library to create a metadata account. Ensure these methods are signed with the PDA.
+   - Populate the token's basic data and create a structured instruction.
+   - Manually prepare the account meta instructions, set the program discriminator, and encode the instruction data for the Metaplex program call.
+
 9. **Mint NFT to User Wallet:**
-    - Create an associated token account for the user using **`Spltoken.create_associated_token_account`**.
-    - Re-implement **`mint_to`** method to sign with PDA.
-    - Derive and check PDA, prepare instruction data, write account meta instructions, and call the external Spl Token program Solang Solidity library.
+   - Generate an associated token account for the user using `Spltoken.create_associated_token_account`.
+   - Implement a modified `mint_to` method to enable signing with the PDA.
+   - Derive and validate the PDA, prepare the instruction data, write account meta instructions, and invoke the external Spl Token program.
+
 10. **Remove Mint Authority:**
-- Re-implement methods to remove the mint authority, ensuring the required mint signer is present.
+    - Implement methods to revoke the mint authority. Ensure these methods require the mint signer's presence to validate the process.
 
-## Transfer NFT
+### Transferring NFT
 
-**User NFT Transfer:**
-- Create an external function containing the Spl Token transfer CPI call.
-- Include three accounts: from token account (NFT sender), to token account (NFT buyer), and owner (signer for the transaction).
-- Pass the amount of tokens (in this case, one for NFTs).
-
+**User NFT Transfer Process:**
+- Develop an external function to facilitate NFT transfers. This function should contain the Spl Token transfer CPI (Cross-Program Invocation) call.
+- Include three key accounts in the function: the sender's token account (NFT sender), the receiver's token account (NFT buyer), and the owner account (transaction signer).
+- The transfer amount should be set to one for NFTs, signifying the transfer of a single, unique token.
 
 ## Conclusion:
 
-- With these steps, the program allows minting NFTs with PDA mint authority and enables users to transfer their NFTs to others.
+- The algorithm outlines the creation and transfer of NFTs, where the minting authority is a PDA. This approach allows for secure and controlled minting of NFTs and their subsequent transfer between users.
 
-***Difference between frezze auth and mint auth***
+### Understanding Freeze Authority vs. Mint Authority:
 
-- freeze authority - can "freeze" the tokens inside a wallet. So the owner of the tokens would not be able to move/transfer/sell them to a different wallet. think of this sort of like one way to create non-transferable tokens (aka soul-bound tokens)
-- mint authority - is required to sign a transaction that actually creates new tokens (aka mints new token). So if create a fungible token called TokenX, and initially mint 10 tokens for a total supply of 10. You can later come back and mint new additional tokens into the max supply when this mint authority signs the transaction. raising the total supply of your fungible token
+- **Freeze Authority**: This authority can freeze tokens within a wallet, preventing the owner from moving, transferring, or selling them. This is akin to creating non-transferable or 'soul-bound' tokens.
+  
+- **Mint Authority**: The mint authority is required to endorse transactions that generate (mint) new tokens. For example, if you initially mint 10 tokens of 'TokenX', the mint authority can later approve the creation of additional tokens, thus increasing the total supply of 'TokenX'.
