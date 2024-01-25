@@ -1,0 +1,118 @@
+---
+title: Setup wallet, provider and program Api to send tx
+author: shivam
+moduleNumber: module-6
+modulePart: module-6-a
+thisFileName: contract-integration
+orderNumber: '2'
+modulePartDescription: IN this part you will delve into another side of solana dapp and understand client side foundation to integrate solana contract.
+---
+
+
+## Contract Integration:
+
+Upon running **`anchor build`** for the contract, Anchor generates a "target" folder for our Solana program. Within this target folder, we obtain the deploy script, as well as the IDL (Interface Description Language) and types directory.
+
+***IDL (Interface Description Language) is a file that serves as a general description of our program.***
+
+Now, the objective is to establish a connection between DApp functionality in the blockchain system (which operates in a different ecosystem of language and processes) and the frontend (utilizing different frameworks and languages). `The IDL file serves as a bridge between these two distinct ecosystems, primarily employing RPC protocols`.
+
+***RPC (Remote Procedure Call) refers to a set of methods that operate concurrently when we send requests to the Solana cluster.***
+
+The IDL encompasses all instructions and the program ID, while the "types" provide us with Anchor types for sending RPC calls on the Program API.
+
+## cluster and wallet
+
+***To integrate the contract, the following components are required:***
+
+1. A cluster to send transactions, representing a blockchain network instance with a described state database ledger.
+2. A wallet to interact with the DApp, responsible for signing transactions and providing a public key (pubkey).
+
+A wallet is necessary for interacting with the DApp, handling the signing of transactions and providing a public key (pubkey).
+
+With these two components combined, we can set up an Anchor provider. The Anchor provider, in turn, provides straightforward steps to seamlessly integrate the contract.
+
+### wallet and contexts
+
+Now, within our context directory, we define specific contexts and export them as hooks for the purpose of reusing states in child components. For this, we require the network (representing the cluster) and the wallet (utilizing Solana Wallet Adapter). Both are preconfigured, with their setups for endpoints and wallet configurations defined in their respective files.
+
+***nextjs _app***
+
+We employ the parent context provider in our Next.js main `_app` file. With the wallet and connection setups in place, we can now proceed to the next step.
+
+## Acquiring the Program API:
+
+To achieve this, navigate to our "`create mint`" component and direct your focus here.
+
+In this instance, we are importing our contract's IDL.
+
+```tsx
+ import idl *from* "../../idl.json";
+```
+
+Establishing a connection, configuring the wallet, and importing specific methods from SPL Token, Metaplex package, and Coral Anchor itself.
+
+```tsx
+import { Program, Idl, AnchorProvider, BN, utils, web3 } from "@coral-xyz/anchor";
+import { Metaplex } from "@metaplex-foundation/js";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { getMint } from "@solana/spl-token";
+```
+
+Setup the `program id`(our deployed solang solana program id)
+
+```tsx
+const programId = new PublicKey(idl.metadata.address);
+```
+
+In this section, we utilize these `hooks` to retrieve the state of the `connection` and `wallet`.
+
+```tsx
+const { connection } = useConnection();
+    const wallet = useWallet();
+    const { publicKey, sendTransaction } = useWallet();
+```
+
+## Get Program Api:
+
+Now, within this function, we initiate a provider using the syntax `new AnchorProvider(connection, wallet as any, opts);` by supplying the wallet and connection. Subsequently, we leverage the Anchor Program API to create an API instance for our Solana program, utilizing the IDL, program ID, and the provider. This process synchronizes our IDL to the cluster and wallet within a single provider, which is employed for building API instances for our program's RPC calls.
+
+```tsx
+const getProgram = () => {
+        /* create the provider and return it to the caller */
+
+        const provider = new AnchorProvider(connection, wallet as any, opts);
+        /* create the program interface combining the idl, program ID, and provider */
+        const program = new Program(idl as Idl, programId, provider);
+        return program;
+    };
+```
+
+### generate rpc call
+
+Now, we can generate an RPC call from that program, as demonstrated below:
+
+```
+          const tx = await program.methods
+            .new()
+            .accounts({ dataAccount: dataAccount.publicKey })
+            .signers([dataAccount])
+            .rpc();
+```
+
+This is the equivalent call to this in Solidity.
+
+```Solidity
+@payer(payer)
+    constructor() {}
+```
+
+Here, all operations are asynchronous, given that we are using Solana Web3 JS.
+
+Breaking down the transaction:
+
+1. `program.methods.new()`: This is a call to our Solang program constructor after deploying our program.
+2. An account array is involved where we need to provide data accounts for our contract. Subsequently, we sign this account array using the `dataAcc` keypair.
+3. The `.rpc()` function is invoked to define that this call is an RPC call to the cluster.
+
+This is the process of  setting up a client to interact with the contract.
