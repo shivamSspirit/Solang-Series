@@ -111,7 +111,7 @@ const LandingSection = ({ allModules }) => {
                 onClick={() => {
                   returnModulePath(announcement.module);
                 }}
-                src={announcement.img}
+                src={announcement?.img}
                 alt='med'
                 className={`cursor-pointer ${
                   "module-5" === announcement.module ? "hover:opacity-10" : " "

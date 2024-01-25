@@ -1,0 +1,80 @@
+---
+title: Create token mintTo transaction for minting tokens to minter wallet
+author: shivam
+moduleNumber: module-6
+modulePart: module-6-b
+thisFileName: dapp-mint-to
+orderNumber: '1'
+modulePartDescription: IN this part you will Edit and create some components to integrate solana contract on frontend side.
+---
+
+## Mint token
+
+Now We are  minting tokens to the Minter Wallet. To accomplish this, please follow the steps outlined below:
+
+1. Navigate to the "MintTo" component.
+2. Within the "MintTo" component, you will observe the same importing and IDL setup for creating the Program API.
+3. Utilize this setup for RPC calls to facilitate the token minting process seamlessly.
+
+In the "`mintTo`" function, we acquire a mint key from the user via a form input.
+
+This mint key is obtained from the user-minted token. Yes, you heard it right...
+
+Additionally, we retrieve the token amount specified by the user and configure it with lmports fractions using this value.
+
+```tsx
+let amount = event.target.amount.value;
+amount = amount * 10 ** 9;(10 to power 9 lmports(fractions(because of fungible) of that token)
+```
+
+
+## Create Ata
+
+In the next step, we generate Ata(associatedToken) for the minter utilizing the user's wallet key, which is their public key.
+
+```tsx
+const associatedToken = await getAssociatedTokenAddress(
+            mintPubKey,
+            publicKey,
+            false,
+            TOKEN_PROGRAM_ID,
+            ASSOCIATED_TOKEN_PROGRAM_ID
+        );
+```
+
+## Set up Rpc call
+
+Next we setup rpc call to mint tokens into user’s ata
+
+```tsx
+const createMint = await program.methods
+            .mintTo(amount)
+            .accounts({
+                mint: mintPubKey,
+                tokenAccount: associatedToken,
+                mintAuthority: publicKey,
+            })
+            .rpc({ skipPreflight: true });
+```
+
+in this phase, we are making use of the contract's "mintTo" method. These are concrete contract methods written in Solidity, specifically designed for minting tokens.
+
+equalliy this:
+
+```solidity
+@mutableAccount(mint)
+    @mutableAccount(tokenAccount)
+    @mutableSigner(mintAuthority)
+    function mintTo(uint64 amount) external {
+        // Mint tokens to the token account
+        SplToken.mint_to(
+            tx.accounts.mint.key, // mint account
+            tx.accounts.tokenAccount.key, // token account
+            tx.accounts.mintAuthority.key, // mint authority
+            amount // amount
+        );
+    }
+```
+
+Now user get their tokens 
+in their wallet.
