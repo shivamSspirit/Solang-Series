@@ -8,7 +8,7 @@ orderNumber: '0'
 modulePartDescription: IN this part you will Edit and create some components to integrate solana contract on frontend side.
 ---
 
-## Create spl token Mint Account
+## Create token Mint
 
 Now, let's proceed to minting tokens on the client side. To do this, navigate to the "components" folder and access the "`createTokenMint`" directory. In this directory, import the necessary elements. Next, see here is  a component named "`CreateMintForm`." Within this component, you see here are three distinct states using the `useState` hook.
 
@@ -20,7 +20,7 @@ Now, let's proceed to minting tokens on the client side. To do this, navigate to
 
 The first one is for storing the current `transaction` `signature`, the second one for the `mint account`, and the third for tracking the ***loading state***.
 
-## Setup connection and wallets
+## Connection and wallets
 
 in current component
 fetch current state from hooks
@@ -68,7 +68,7 @@ const dataAccount = anchor.web3.Keypair.generate();
 const mintKeypair = anchor.web3.Keypair.generate();
 ```
 
-## set up token metadata
+## Set up token metadata
 
 Next, we proceed to set up metadata for the token.
 
@@ -80,9 +80,7 @@ const tokenTitle = "Temp Token";
 
 ## Create token mint account
 
-```solidity
-creating token mint account and metaplex metdata account 
-```
+> creating token mint account and metaplex metdata account 
 
 Next, we construct the `createMint` function to execute the transaction.
 

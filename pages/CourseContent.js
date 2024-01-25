@@ -70,6 +70,12 @@ export const announcementData = [
     desc: "Mint And Transfer NFT",
     module_color: "#e5acb6",
   },
+{
+    img: Course2,
+    head: "Module Name",
+    desc: "full-stack-dapp(token mint,transfer)",
+    module_color: "#efc070",
+  },
   // {
   //   img: Course7,
   //   head: "Module Name",
@@ -120,6 +126,9 @@ const CourseContent = ({ allModules }) => {
     }else if (colors === "#e5acb6") {
       console.log("colors",colors)
       return "hover:bg-[#e5acb6]";
+    }else if (colors === "#efc070") {
+      console.log("colors",colors)
+      return "hover:bg-[#efc070]";
     }
   };
   // console.log(mergedArray);
@@ -148,7 +157,7 @@ const CourseContent = ({ allModules }) => {
                     }}
                 >
                   <Image
-                    src={announcement.img.src}
+                    src={announcement?.img?.src}
                     alt='med'
                     width={400}
                     height={220}

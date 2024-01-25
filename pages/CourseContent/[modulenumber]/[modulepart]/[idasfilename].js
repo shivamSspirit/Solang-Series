@@ -146,6 +146,8 @@ const GeneralInfo = ({
       return "bg-[#63a4da]";
     } else if (moduleNumber === "module-5") {
       return "bg-[#e5acb6]";
+    } else if (moduleNumber === "module-6") {
+      return "bg-[#efc070]";
     }
   };
 
@@ -218,7 +220,20 @@ const GeneralInfo = ({
         imgBorderColor: "prose-img:border-[#e5acb6]",
         link_color: "prose-a:text-[#e5acb6]",
       };
+    } else if (lessionNumber === "module-6") {
+      console.log("module-666")
+      return {
+        blockquote: "prose-blockquote:text-[#efc070]",
+        codeColor: "prose-code:text-[#efc070]",
+        text_color: "text-[#efc070]",
+        link_hover: "hover:prose-a:decoration-[#efc070]",
+        headingsColor: "prose-strong:text-[#efc070]",
+        border_color: "border-[#efc070]",
+        imgBorderColor: "prose-img:border-[#efc070]",
+        link_color: "prose-a:text-[#efc070]",
+      };
     }
+
   };
 
   return (

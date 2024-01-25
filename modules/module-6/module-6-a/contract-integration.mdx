@@ -21,7 +21,7 @@ Now, the objective is to establish a connection between DApp functionality in th
 
 The IDL encompasses all instructions and the program ID, while the "types" provide us with Anchor types for sending RPC calls on the Program API.
 
-## cluster and wallet
+## Cluster and Wallet
 
 ***To integrate the contract, the following components are required:***
 
@@ -32,7 +32,7 @@ A wallet is necessary for interacting with the DApp, handling the signing of tra
 
 With these two components combined, we can set up an Anchor provider. The Anchor provider, in turn, provides straightforward steps to seamlessly integrate the contract.
 
-### wallet and contexts
+## Wallet and Contexts
 
 Now, within our context directory, we define specific contexts and export them as hooks for the purpose of reusing states in child components. For this, we require the network (representing the cluster) and the wallet (utilizing Solana Wallet Adapter). Both are preconfigured, with their setups for endpoints and wallet configurations defined in their respective files.
 
@@ -88,11 +88,11 @@ const getProgram = () => {
     };
 ```
 
-### generate rpc call
+## Generate rpc call
 
 Now, we can generate an RPC call from that program, as demonstrated below:
 
-```
+```tsx
           const tx = await program.methods
             .new()
             .accounts({ dataAccount: dataAccount.publicKey })
