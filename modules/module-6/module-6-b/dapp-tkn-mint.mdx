@@ -1,31 +1,28 @@
 ---
-title: Create token mint and metaplex metadata account
-author: shivam
+title: Creating Token Mint and Metaplex Metadata Account
+author: Shivam
 moduleNumber: module-6
 modulePart: module-6-b
 thisFileName: dapp-tkn-mint
-orderNumber: '0'
-modulePartDescription: IN this part you will Edit and create some components to integrate solana contract on frontend side.
+orderNumber: "0"
+modulePartDescription: In this part, you will learn how to edit and create components to integrate the Solana contract on the frontend side of your DApp.
 ---
 
-## Create token Mint
+## Creating a Token Mint
 
-Now, let's proceed to minting tokens on the client side. To do this, navigate to the "components" folder and access the "`createTokenMint`" directory. In this directory, import the necessary elements. Next, see here is  a component named "`CreateMintForm`." Within this component, you see here are three distinct states using the `useState` hook.
+Let's start with minting tokens in our DApp. Head over to the "components" folder and find the "`createTokenMint`" directory. Inside, you'll see a component named "`CreateMintForm`." Here, we use the `useState` hook to manage three different states:
 
 ```tsx
-    const [txSig, setTxSig] = useState("");
-    const [mint, setMint] = useState("");
-    const [loading, setLoading] = useState(false);
+const [txSig, setTxSig] = useState("");
+const [mint, setMint] = useState("");
+const [loading, setLoading] = useState(false);
 ```
 
-The first one is for storing the current `transaction` `signature`, the second one for the `mint account`, and the third for tracking the ***loading state***.
+We use these states to keep track of the `transaction signature`, the `mint account`, and the **_loading status_** of our actions.
 
-## Connection and wallets
+## Establishing Connection and Wallets
 
-in current component
-fetch current state from hooks
-
-Now, we are in the process of setting up the connection and wallet.
+In this component, we retrieve the current state from hooks:
 
 ```tsx
 const { connection } = useConnection();
@@ -33,125 +30,128 @@ const wallet = useWallet();
 const { publicKey, sendTransaction } = useWallet();
 ```
 
-Next, we return the signature to Solana Explorer. 
+We also have a function to link the transaction signature to the Solana Explorer.
 
 ```tsx
-    const link = () => {
-        return txSig ? `https://explorer.solana.com/tx/${txSig}?cluster=devnet` : "";
-    };
+const link = () => {
+  return txSig ? `https://explorer.solana.com/tx/${txSig}?cluster=devnet` : "";
+};
 ```
 
-## Setup new anchor provider
+## Setting Up a New Anchor Provider
 
-using wallet and connection
-Next, we set up the provider, connection, and program API to execute RPC calls.
+We then set up the provider, connection, and program API for executing RPC calls.
 
 ```tsx
 const getProgram = () => {
-        /* create the provider and return it to the caller */
+  const provider = new AnchorProvider(connection, wallet as any, opts);
+  const program = new Program(idl as Idl, programId, provider);
+  return program;
+};
 
-        const provider = new AnchorProvider(connection, wallet as any, opts);
-        /* create the program interface combining the idl, program ID, and provider */
-        const program = new Program(idl as Idl, programId, provider);
-        return program;
-    };
-
-    const program = getProgram();
+const program = getProgram();
 ```
 
-## Setup accounts
+## Preparing Accounts
 
-Next, we create data accounts and mint accounts using a random keypair.
+We create data and mint accounts using random keypairs.
 
 ```tsx
 const dataAccount = anchor.web3.Keypair.generate();
 const mintKeypair = anchor.web3.Keypair.generate();
 ```
 
-## Set up token metadata
+## Setting Up Token Metadata
 
-Next, we proceed to set up metadata for the token.
+We proceed to define the metadata for our token.
 
 ```tsx
 const tokenTitle = "Temp Token";
-    const tokenSymbol = "TEMP";
-    const tokenUri = "imag.............png";
+const tokenSymbol = "TEMP";
+const tokenUri = "image_url.png";
 ```
 
-## Create token mint account
+## Creating the Token Mint Account
 
-> creating token mint account and metaplex metdata account 
-
-Next, we construct the `createMint` function to execute the transaction.
+Now, let's build the `createMint` function to execute our transaction.
 
 ```tsx
 const createMint = async (event) => {
-        event.preventDefault();
+  event.preventDefault();
 
-        setLoading(true);
+  setLoading(true);
 
-        if (!publicKey) {
-            notify({ type: "error", message: `Wallet not connected!` });
-            console.log("error", `Send Transaction: Wallet not connected!`);
-            return;
-        }
+  if (!publicKey) {
+    notify({ type: "error", message: `Wallet not connected!` });
+    console.log("error", `Send Transaction: Wallet not connected!`);
+    return;
+  }
 
-        const createDataAccountTransaction = await program.methods
-            .new()
-            .accounts({ dataAccount: dataAccount.publicKey })
-            .signers([dataAccount])
-            .rpc();
-        console.log("Your transaction signature", createDataAccountTransaction);
-        console.log("Your transaction dataAccount", dataAccount.publicKey.toBase58());
+  const createDataAccountTransaction = await program.methods
+    .new()
+    .accounts({ dataAccount: dataAccount.publicKey })
+    .signers([dataAccount])
+    .rpc();
+  console.log("Your transaction signature", createDataAccountTransaction);
+  console.log("Your transaction dataAccount", dataAccount.publicKey.toBase58());
 
-        // creating metadata address
-        const metaplex = Metaplex.make(connection);
-        const metadataAddress = await metaplex.nfts().pdas().metadata({ mint: mintKeypair.publicKey });
+  // creating metadata address
+  const metaplex = Metaplex.make(connection);
+  const metadataAddress = await metaplex
+    .nfts()
+    .pdas()
+    .metadata({ mint: mintKeypair.publicKey });
 
-        // create mint transaction
-        try {
-            const createMintTransaction = await program.methods
-                .createTokenMint(
-                    wallet.publicKey, // freeze authority
-                    9, // 0 decimals for NFT
-                    tokenTitle, // NFT name
-                    tokenSymbol, // NFT symbol
-                    tokenUri // NFT URI
-                )
-                .accounts({
-                    payer: wallet.publicKey,
-                    mint: mintKeypair.publicKey,
-                    metadata: metadataAddress,
-                    mintAuthority: wallet.publicKey,
-                    rentAddress: SYSVAR_RENT_PUBKEY,
-                    metadataProgramId: new PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"),
-                })
-                .signers([mintKeypair])
-                .rpc({ skipPreflight: true });
-            console.log("Your transaction signature", createMintTransaction);
+  // create mint transaction
+  try {
+    const createMintTransaction = await program.methods
+      .createTokenMint(
+        wallet.publicKey, // freeze authority
+        9, // 0 decimals for NFT
+        tokenTitle, // NFT name
+        tokenSymbol, // NFT symbol
+        tokenUri // NFT URI
+      )
+      .accounts({
+        payer: wallet.publicKey,
+        mint: mintKeypair.publicKey,
+        metadata: metadataAddress,
+        mintAuthority: wallet.publicKey,
+        rentAddress: SYSVAR_RENT_PUBKEY,
+        metadataProgramId: new PublicKey(
+          "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
+        ),
+      })
+      .signers([mintKeypair])
+      .rpc({ skipPreflight: true });
+    console.log("Your transaction signature", createMintTransaction);
 
-            let mintAccount = await getMint(connection, mintKeypair.publicKey);
+    let mintAccount = await getMint(connection, mintKeypair.publicKey);
 
-            console.info("mintAccount", mintAccount.address.toString());
+    console.info("mintAccount", mintAccount.address.toString());
 
-            setMint(mintAccount.address.toString());
-            setTxSig(createMintTransaction);
-        } catch (error) {
-            notify({ type: "error", message: `Transaction failed!`, description: error?.message });
-            console.log("error", `Transaction failed! ${error?.message}`);
-            return;
-        }
+    setMint(mintAccount.address.toString());
+    setTxSig(createMintTransaction);
+  } catch (error) {
+    notify({
+      type: "error",
+      message: `Transaction failed!`,
+      description: error?.message,
+    });
+    console.log("error", `Transaction failed! ${error?.message}`);
+    return;
+  }
 
-        setLoading(false);
-    };
+  setLoading(false);
+};
 ```
 
-### Breakdown:
+### Explaining the Process:
 
-Firstly, we set the state of the loader when the call starts. Then, we verify if the wallet key is connected to our DApp.
+1. We start by setting the loading state at the beginning of the function.
+2. Then, we check if the wallet is connected.
+3. We create a data account for our Solang Solana program using an RPC call.
+4. We establish a connection with Metaplex.
+5. In the `createTokenMint` method, we specify the necessary arguments, accounts, and signers. This is to create the mint account and a metadata account for it.
 
-Next, we create a data account for the Solang Solana program because it is not created from the Solang contract. This is achieved through an RPC call.
-
-Following that, we establish a connection with Metaplex and proceed to the `createTokenMint` method. Here, we pass the required arguments, accounts, and signers to create the mint account and metadata account for the mint account.
-
-that’s it
+And that's how you create a token mint and a metadata account in your DApp!

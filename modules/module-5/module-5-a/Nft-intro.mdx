@@ -1,181 +1,108 @@
 ---
 title: Introduction To NFT
-author: shivam
+author: Shivam
 moduleNumber: module-5
 modulePart: module-5-a
 thisFileName: Nft-intro
-orderNumber: '1'
-modulePartDescription: In this part of the module, you will receive a brief introduction to minting solana NFT. Following this, we will delve deeper into the concept of composability.
+orderNumber: "1"
+modulePartDescription: This section provides a foundational introduction to the Solana NFT ecosystem, paving the way for a deeper dive into the intricacies of NFT minting and composability.
 ---
-
-
- **lesssion2: NFT**
 
 ## Objective
 
-In this lession , you will dive into solana nft ecosystem
-
-So first we are learning about NFT
-Then we move to how NFT works in solana
+In this lesson, we will immerse ourselves in the Solana NFT ecosystem. We'll start by understanding what NFTs are, and then explore how they function specifically within the Solana blockchain.
 
 ## Overview
 
-## NFT→
+### NFTs Explained
 
-An NFT, short for non-fungible token, is like a special token that's not like regular ones.
+Non-Fungible Tokens (NFTs) represent unique digital assets on the blockchain. Unlike fungible tokens like Solana or USDC, which are interchangeable, each NFT is distinct and irreplaceable. They are often used to represent items such as digital art, collectibles, and other forms of creative work.
 
-Regular tokens mainly care about money, but NFTs are cool because they represent unique digital things.
+To understand NFTs, consider the concept of [fungibility](https://en.wikipedia.org/wiki/Fungibility). Fungible items can be exchanged with identical items of the same value, like currency notes. In contrast, non-fungible items are unique and can't be exchanged on a like-for-like basis.
 
-They're not just about ownership; they make sure the digital stuff they stand for is the real deal.
-
-When people talk about non-fungible tokens (NFTs), they usually start with the idea of [fungibility](https://en.wikipedia.org/wiki/Fungibility), which means something can be replaced by an identical item. But that's a bit complex. To understand NFTs better, Think about your stuff – your chair, phone, laptop. Anything you could sell on eBay is like a non-fungible thing.
-
-NFTs are special tokens, each one totally unique. They have different features (non-fungible) and are proven to be rare. Unlike tokens like Solana or USDC, where each one is the same (fungible), NFTs are not.
-
-Think of it this way: with regular money, like a dollar bill or Sol, you don't really care which one you have because they're all the same and worth the same. But with NFTs, you do care because each one is special and different from the others. They're like individual treasures.
-
-**See this diagram for better understanding of blockchain tokens**
+NFTs stand out because of their uniqueness and the verification of authenticity and ownership they provide. Each NFT has distinct characteristics and is verified on the blockchain, ensuring its rarity and originality.
 
 ![spl tokens](/moduleimages/token.jpeg)
 
-## Applications of NFTs
+### Applications of NFTs
 
-NFTs serve various purposes, such as:
+NFTs have diverse applications across various fields:
 
-- Verification of event attendance
-- Certification of course completion
-- Ownership of in-game items
-- Display of digital art
-- Tokenization of real-world assets
-- Verification of online identity
-- Restriction of access to content
+- Event attendance verification
+- Course completion certification
+- In-game item ownership
+- Digital art display
+- Real-world asset tokenization
+- Online identity verification
+- Restricted content access
 
-## How NFT works
+### How NFTs Work
 
-NFTs work based on how they're create and put onto the blockchain(***This process refers to minting***). Different blockchains have their own ways of doing this.
+The process of creating and adding NFTs to the blockchain is known as minting. Different blockchains have unique methods for this process. In the Solana ecosystem, creators mint NFTs using marketplaces and frameworks, while users can mint, buy, and participate in NFT projects.
 
-We use NFTs in various ways, tailoring their use to the specific needs and preferences of different individuals.
+In Solana, NFTs are typically represented as Mint Accounts with specific characteristics:
 
-***Creators***, such as digital artists, video producers, and music creators, craft digital art and upload it onto the blockchain using NFT marketplaces and frameworks.
+- **Supply of 1**: Only one token exists.
+- **Zero decimals**: No fractional tokens.
+- **No mint authority**: No additional tokens can be minted.
 
-On the other hand, ***regular users***, like you and me, whether we're enthusiasts or simply curious onlookers, have the opportunity to ***mint and buy*** NFTs by participating in various collection projects.
-
-There are many nft markeplaces(where you can mint and buy nfts) as you want.
-
-In NFT terms, ***there's only one NFT, meaning the token supply is limited to just one***. ***NFT minting occurs only once***, and after that, the NFT can be transferred to different accounts.
-
-First, a user—usually the initial creator—mints an NFT from a marketplace, securing ownership of it. Afterward, the user can list the NFT on a secondary marketplace. Here, other enthusiasts may bid and purchase the NFT. Upon a successful auction, where a potential buyer is identified through bidding, the program will smoothly transfer the amount to the seller and the NFT to the buyer.
-
-**Now we are moving to how nfts works in solana** 
-
-(In solana everything is account)
-
-For NFT, we use the SPL Token program, which provides a shared system for handling both Fungible and Non-Fungible tokens.
-
-More precisely, NFTs in Solana are ***Mint Accounts*** with the following characteristics:
-
-- It has **a supply of 1**, meaning only one token is in circulation.
-- It has **zero decimals**, meaning there cannot be such a thing as 0.5 tokens.
-- It has **no mint authority**, meaning no one can ever mint additional tokens.
-
-**In Solana, as a regular web3 user, here's a simple process for minting NFTs**:
-
-1. Visit any marketplace of your choice.
-2. Explore a project launchpad within the marketplace.
-3. Mint the desired NFTs(Here minting refers to creating and putting NFT onto the blockchain).
-4. Receive the minted NFTs in your designated wallet.
-5. List the NFTs for sale on the marketplace.
-
-That's all!
-
-**In technical terms, let's break down how this happens:**
-
-As a user with a Solana account (my wallet's public key), I request to mint an NFT from the NFT marketplace program. This program, crafted by various on-chain programs, utilizes Solana's SPL token tooling.
-
-The NFT marketplace program employs Solana's SPL token tools to mint a new token. This involves placing the token (along with associated metadata) on the chain and setting the supply (token supply) to one.
-
-After minting, the program freezes all further minting of that specific token. No one else can create this token, making it uniquely stored on the chain in a one-time process.
-
-In terms of programming, there can only be one - just a single instance of this token.
-
-And that's how the NFT minting process works in Solana.
-
-Let's follow the journey of the minted NFT:
-
-1. **Minting NFT:**
-After minting, the user now possesses the NFT.
-2. **Understanding NFT Details:**
-The NFT, or token, has an owner—the user or original minter. It comes with associated metadata like image artwork, music, or video.
-3. **NFT Metadata Storage:**
-The metadata is stored in a separate account. Metaplex plays a key role in creating and storing this metadata on the chain. The token references this account.
-4. **Ownership and Transfer:**
-Once minted, the NFT belongs to the account that created it. The owner can then transfer it to any Solana account through a straightforward transfer transaction.
-5. **Selling on Marketplace (e.g., Tensor):**
-If the owner decides to sell the NFT on a marketplace like Tensor, and let's say the asking price is 51 SOL, the marketplace program handles the transaction. It transfers 51 SOL from the purchaser to the owner and then transfers the NFT from the owner to the purchaser.
-
-That's the process of minting, owning, and potentially selling an NFT on Solana.
-
-**See this diagram for better understanding** 
+The minting process on Solana involves visiting a marketplace, selecting an NFT project, and minting the NFT to your wallet. After minting, the NFT can be listed for sale on the marketplace.
 
 ![nft](/moduleimages/nft.jpeg)
 
-## NFT Metadata
+### NFT Metadata
 
-As mentioned in this image, the owner key owe this NFT.
+NFTs come with metadata that includes details like the owner's key, artwork, and unique attributes. This metadata is crucial for platforms like MagicEden and OpenSea to display and identify NFTs.
 
-![nft metadata](/moduleimages/nftmeta.jpeg)
+Metaplex plays a significant role in the Solana NFT ecosystem, providing a standard for token metadata. The metadata includes information such as the name, symbol, URI, and creator details of the NFT.
 
-But how do magicEden and opensea figure out what Alien Fungi #2326 looks like? And what about its name and unique attributes?
-
-***This is where metaplex play key role in token metadata standard within solana NFT ecosystem***. Metadata provides descriptive information for a specific Mint account. In the case of the Alien Fungi, the metadata is the name of the Alien Fungi #2326, the picture of the Alien Fungi, a description, and any additional traits . In the case of an event ticket, the metadata might include the date of the event and the type of ticket, in addition to a name and description. The metadata for the above Alien Fungi might look something like this:
+Example Metadata:
 
 ```jsx
 // metaplex metadata
 {
-"key": 4,
-"updateAuthority": "B3t6mbeLux4P38ZCHdvDRJ1SWAyhuZq8imTsM4Jfno3F",
-"mint": "HrdjhMMUEuuAg7DQwzpSirGU2MJW8qXmi8QWrqzowJVb",
-"data": {
-"name": "Alien Fungi #2326",
-"symbol": "AF",
-"uri": "https://bafybeid6skis5l225j7gwhpd3vdmaonj7mrgtqu4lekkqin3sb7zezkwom.ipfs.nftstorage.link/2326.json",
-"sellerFeeBasisPoints": 690,
-"creators": [
-{
-"address": "47eMZaC4aeELVj9M2BXvfFN7pfv4YBrM8saMjb93qdHZ",
-"verified": 1,
-"share": 0
-},
-{
-"address": "HfuPPqcwrDAT7Zkq2VEb9EZxyGWW9dwXYVbroBaPRAhj",
-"verified": 0,
-"share": 100
-}
-]
-},
-"primarySaleHappened": 1,
-"isMutable": 1,
-"editionNonce": 251,
-"tokenStandard": 4,
-"type": "metaplex",
-"edition": {
-"type": "MasterEdition",
-"maxSupply": "0",
-"supply": "0"
-}
+   "key":4,
+   "updateAuthority":"B3t6mbeLux4P38ZCHdvDRJ1SWAyhuZq8imTsM4Jfno3F",
+   "mint":"HrdjhMMUEuuAg7DQwzpSirGU2MJW8qXmi8QWrqzowJVb",
+   "data":{
+      "name":"Alien Fungi #2326",
+      "symbol":"AF",
+      "uri":"https://bafybeid6skis5l225j7gwhpd3vdmaonj7mrgtqu4lekkqin3sb7zezkwom.ipfs.nftstorage.link/2326.json",
+      "sellerFeeBasisPoints":690,
+      "creators":[
+         {
+            "address":"47eMZaC4aeELVj9M2BXvfFN7pfv4YBrM8saMjb93qdHZ",
+            "verified":1,
+            "share":0
+         },
+         {
+            "address":"HfuPPqcwrDAT7Zkq2VEb9EZxyGWW9dwXYVbroBaPRAhj",
+            "verified":0,
+            "share":100
+         }
+      ]
+   },
+   "primarySaleHappened":1,
+   "isMutable":1,
+   "editionNonce":251,
+   "tokenStandard":4,
+   "type":"metaplex",
+   "edition":{
+      "type":"MasterEdition",
+      "maxSupply":"0",
+      "supply":"0"
+   }
 }
 ```
 
-## Metaplex metadata program
+![nft metadata](/moduleimages/nftmeta.jpeg)
 
-The Token Metadata program is a fundamental program when dealing NFTs and Fungible assets on the Solana blockchain.
+### Metaplex Metadata Program
 
-It achieves this using **[Program Derived Addresses](https://developers.metaplex.com/understanding-programs/#program-derived-addresses-pda)** (PDAs) that are *derived* from the address of Mint Accounts. If you’re not familiar with **[Solana’s Token program](https://spl.solana.com/token)**, *Mint Accounts* are responsible for storing the global information of a Token and *Token Accounts* store the relationship between a wallet and a Mint Account.
+The Metaplex Metadata program is essential for dealing with NFTs and fungible assets on Solana. It uses **[Program Derived Addresses](https://developers.metaplex.com/understanding-programs/#program-derived-addresses-pda)** (PDAs) linked to Mint Accounts to attach standardized data, making tokens recognizable by apps and marketplaces.
 
 ![metaplex metadata](/moduleimages/mpl.png)
 
-Whilst Mint Accounts contain a few data attributes such as its current supply, it doesn't offer the ability to inject standardized data that can be understood by apps and marketplaces.
+The Metadata Account holds critical information like a list of creators, their verification status, and share attributes for royalty distribution. This additional data turns regular on-chain tokens into digital assets with significant value and utility.
 
-That Metadata Account holds a lot of valuable information that can be used throughout the ecosystem. For instance, it maintains a list of creators for the token. Each creator has a **`Verified`** attribute that, when **`True`**, guarantees the token was signed by that creator. Each creator also has a **`Share`** attribute that can be used by marketplaces to distribute royalties.
-
-By attaching more data to the Mint Account, **the Token Metadata program is able to make Digital Assets** of regular on-chain Tokens.
+By understanding these fundamental concepts, you're now ready to delve deeper into the world of Solana NFTs and explore how to mint, transfer, and utilize them effectively. Let's continue our learning journey!

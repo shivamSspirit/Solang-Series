@@ -1,38 +1,48 @@
 ---
-title: Requirments and similarity
-author: shivam
+title: Understanding Requirements and Similarities
+author: Shivam
 moduleNumber: module-6
 modulePart: module-6-a
 thisFileName: Requirments
 orderNumber: '1'
-modulePartDescription: IN this part you will delve into another side of solana dapp and understand client side foundation to integrate solana contract.
+modulePartDescription: In this section, you will explore another aspect of Solana DApp development, focusing on integrating the Solana contract with the client side.
+
 ---
 
-## Similarity with anchor test
+## How It's Similar to Anchor Tests
 
-Are you familiar with Anchor tests? We have detailed certain tests in Anchor for creating token mints and transferring tokens, utilizing the same RPC calls here.
+Remember the Anchor tests we discussed? They involved creating and transferring tokens using specific commands (RPC calls). We're going to use these same types of commands here.
 
-## Extra state management
+## Adding More Layers to Our DApp
 
-We are incorporating an additional layer of state and DApp scaffold to display the DApp state in the UI.
+We're enhancing our DApp by adding an extra layer. This isn't just for show – it helps display the current state of the DApp in the user interface.
 
-## Checkpoint-0
+## First Steps: Setting Up
 
-Verify your environment by checking the Node version. Install the Phantom extension and create a wallet. Access the settings and choose the development setting to switch the cluster to the Devnet.
+Before we dive in, let's make sure everything is ready:
 
-## The App Dir.
+1. Check your computer's Node version.
+2. Install the Phantom extension and set up a new wallet.
+3. Go to the settings in your wallet and switch the cluster to Devnet – this is our playground for development.
 
-Let's move on to our Next.js setup, we are utilizing the Solana DApp scaffold provided by Solana Labs. Navigate to the "app" directory within our fullstak application.
+## Exploring the App Directory
 
-Let's delve into the "app" directory, where the DApp stack consists of Solidity, Solang, Next.js, Tailwind, Anchor, Zustand, and Solana Wallet Adapter. Our focus is on the following files:
+Now, let's get to the heart of our setup – the Next.js framework we're using. It's based on a template provided by Solana Labs. In our project, you'll see a folder named "app" – this is where the magic happens.
 
-- Contract integration
-    - [idl]
-    - [contracttypes]
-- DApp parent state runner
-    - [_app.tsx]
-    - [context]
-- DApp helper and user interface
-    - [ui view]
-    - [component]
+Inside the "app" directory, our DApp combines several technologies:
 
+- Solidity and Solang for the contract logic
+- Next.js and Tailwind for the website part
+- Anchor, Zustand, and Solana Wallet Adapter for connecting everything together
+
+We'll be focusing on specific files in this directory:
+
+- For integrating the contract:
+    - [idl] – This file describes the interface of our contract.
+    - [contracttypes] – Here, we define the types used in our contract.
+- For running the DApp state:
+    - [_app.tsx] – The main file that runs our DApp.
+    - [context] – This manages the shared data within our app.
+- For the user interface and helper functions:
+    - [ui view] – The visual part of our DApp.
+    - [component] – These are the building blocks of our user interface.

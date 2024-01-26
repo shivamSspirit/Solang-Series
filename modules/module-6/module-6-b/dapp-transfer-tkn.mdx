@@ -1,115 +1,108 @@
 ---
-title: Transfer minted tokens to another wallet
-author: shivam
+title: Transferring Minted Tokens to Another Wallet
+author: Shivam
 moduleNumber: module-6
 modulePart: module-6-b
 thisFileName: dapp-transfer-tkn
 orderNumber: '2'
-modulePartDescription: IN this part you will Edit and create some components to integrate solana contract on frontend side.
+modulePartDescription: In this part, you'll learn about editing and creating components to enable the transfer of Solana tokens within your DApp.
 ---
 
+## Transferring SPL Tokens
 
-## Transfer spl tokens
+We'll now explore how to transfer SPL tokens to another user. Start by opening the `TransferToken.tsx` component file in your project.
 
-We're now going to learn how to transfer SPL tokens to another user. To do this, navigate to the `TransferToken.tsx` component file.
+As before, you'll see steps for importing necessary elements and setting up the Interface Definition Language (IDL) for creating the Program API. This setup is crucial for making RPC (Remote Procedure Call) transfers.
 
-Here, we observe the same process of importing and setting up the Interface Definition Language (IDL) to create the Program API for making RPC calls.
+## Initiating a Web3 Transaction
 
-now in transferTo 
-first we create a transaction instruction here
-
-## Initiate web3 transaction
+First, we start a new transaction using Solana's Web3.js:
 
 ```tsx
 const transaction = new web3.Transaction();
 ```
 
-## Get client Data
+## Gathering User Input
 
-now getting user input for
+Next, we collect user input for the following:
 
-`mint account` 
-and `recipientPubKey` to transfertoken
+- `mint account`: The account of the token to be transferred.
+- `recipientPubKey`: The public key of the recipient.
+- `amount`: The amount of tokens to be transferred.
 
-amount to transfer tokens 
+We adjust the amount to account for the smallest token divisions (lmports):
 
 ```tsx
 const mintPubKey = new web3.PublicKey(event.target.mint.value);
-        const recipientPubKey = new web3.PublicKey(event.target.recipient.value);
-        let amount = event.target.amount.value;
-        amount = amount * 10 ** 9;
+const recipientPubKey = new web3.PublicKey(event.target.recipient.value);
+let amount = event.target.amount.value;
+amount = amount * 10 ** 9; // Adjusting for lmports
 ```
 
-## Create ATA
+## Creating Associated Token Accounts (ATAs)
 
-Now we create `two ata`
-for both `sender` and `recipient`
-
-using `same token mint`
+We need to create ATAs for both the sender and the recipient, using the same token mint:
 
 ```tsx
 const senderAta = await getAssociatedTokenAddress(
-            mintPubKey,
-            publicKey,
-            false,
-            TOKEN_PROGRAM_ID,
-            ASSOCIATED_TOKEN_PROGRAM_ID
-        );
+    mintPubKey,
+    publicKey,
+    false,
+    TOKEN_PROGRAM_ID,
+    ASSOCIATED_TOKEN_PROGRAM_ID
+);
 
-        const receiverAta = await getAssociatedTokenAddress(
-            mintPubKey,
-            recipientPubKey,
-            false,
-            TOKEN_PROGRAM_ID,
-            ASSOCIATED_TOKEN_PROGRAM_ID
-        );
+const receiverAta = await getAssociatedTokenAddress(
+    mintPubKey,
+    recipientPubKey,
+    false,
+    TOKEN_PROGRAM_ID,
+    ASSOCIATED_TOKEN_PROGRAM_ID
+);
 ```
 
-## ATA Transaction
+## Handling the ATA Transaction
 
-here next block of code
-sending ata creation tx into blockchain (using solana web3js)
+Next, we check if the receiver's ATA exists and, if not, add an instruction to create it:
 
 ```tsx
 try {
-            await getAccount(connection, receiverAta);
-        } catch (e) {
-            transaction.add(
-                createAssociatedTokenAccountInstruction(
-                    publicKey,
-                    receiverAta,
-                    recipientPubKey,
-                    mintPubKey,
-                    TOKEN_PROGRAM_ID,
-                    ASSOCIATED_TOKEN_PROGRAM_ID
-                )
-            );
-        }
+    await getAccount(connection, receiverAta);
+} catch (e) {
+    transaction.add(
+        createAssociatedTokenAccountInstruction(
+            publicKey,
+            receiverAta,
+            recipientPubKey,
+            mintPubKey,
+            TOKEN_PROGRAM_ID,
+            ASSOCIATED_TOKEN_PROGRAM_ID
+        )
+    );
+}
 ```
 
-## Transfer Rpc Call
+## Making the Transfer RPC Call
 
-Next we create a rpc call to transfer spl token contract methods
+Finally, we set up the RPC call to transfer tokens using the contract's methods:
 
 ```tsx
 const transferTx = await program.methods
-            .transferTokens(amount)
-            .accounts({
-                from: senderAta,
-                to: receiverAta,
-                owner: publicKey,
-            })
-            .instruction();
+    .transferTokens(amount)
+    .accounts({
+        from: senderAta,
+        to: receiverAta,
+        owner: publicKey,
+    })
+    .instruction();
 
-        transaction.add(transferTx);
+transaction.add(transferTx);
 
-        const signature = await sendTransaction(transaction, connection);
+const signature = await sendTransaction(transaction, connection);
 
-        await connection.confirmTransaction(signature, "confirmed");
+await connection.confirmTransaction(signature, "confirmed");
 ```
 
-that’s all about spl minting and transferring dapp(from frontend to backend)
+And that wraps up our module on minting and transferring SPL tokens in a DApp—from the frontend to the backend.
 
-we will deep dive more into client contract interaction in next module
-
-stay tune………..
+Stay tuned for more on client-contract interactions in the next module!

@@ -1,64 +1,58 @@
 ---
-title: Explore the Another side of dapp
-author: shivam
+title: Discovering Another Aspect of DApp Development
+author: Shivam
 moduleNumber: module-6
 modulePart: module-6-a
 thisFileName: the-front-side
 orderNumber: '0'
-modulePartDescription: IN this part you will delve into another side of solana dapp and understand client side foundation to integrate solana contract.
+modulePartDescription: In this section, you'll learn about another aspect of Solana DApp development – the client side. This involves connecting the Solana contract to a user-friendly interface.
+
 ---
 
-**lession 1: Explore the Another side of dapp**
+**Lesson 1: Discovering Another Aspect of DApp Development**
 
 ## Overview
 
-Let's explore the other side of Solana DApp, where our DApp users will engage with the smart contract. Here, we'll be configuring wallet providers on the client side using anchor and nextjs framework.
+Welcome to a new side of Solana DApps! Here, we'll focus on how users interact with the smart contract. We'll set up wallet connections on the user's side using two tools: Anchor and Next.js.
 
-Are you familiar with Anchor?
+Remember Anchor? We've covered it in earlier lessons.
 
-Certainly, we have acquired knowledge about it in the preceding modules.
+We've already learned about using Solang Solidity, which lets us create and send Solana tokens. Now, we're going to build a complete setup – we'll connect a user interface (UI) to our contract, so people can easily use it.
 
-We are now equipped with Solang Solidity skills, enabling us to mint and transfer Solana fungible tokens using the Solang contract.
+`Learn more about setting this up with some examples here → [link]`
 
-Now, we are in the process of building a full-stack environment to understand how to integrate a client-side UI to interact with the contract.
+## Understanding the Client Side
 
-`Now here how to do it 
-you can deep dive here→ some examples …`
+Just like a regular website needs a user interface, we need a way for users to interact with the Solana blockchain.
 
-## The Another side
+**How to Connect with the Blockchain** →
 
-Much like traditional web server we need to client to interact with solana blockchain
+Solana uses something called JSON RPC, which is like a special set of commands, to talk with the blockchain. We use a library called `solana-web3js` to send these commands easily.
 
-**How to interact with blockchain** →
+In this library, there's a `Connection` object. Think of it as a messenger that knows where to send your commands. It needs a `Cluster` – a kind of Solana network – to work.
 
-Solana offers JSON RPC functionality for engaging with the Solana blockchain. Essentially, it's an API. To interact with JSON RPC, we send requests, and Solana facilitates this through the `solana-web3js` library. This library comprises various methods to interact seamlessly with JSON RPC.
-
-All of these methods live inside a `Connection` object that requires a `Cluster` for it to know where to send its requests. 
-
-> solana clusters→ devnet, testnet, mainnet(we learned in previous modules)
-Cluster encapsulated by Connection Object
-> 
+> Remember, we've learned about Solana clusters like devnet, testnet, and mainnet in previous lessons. The Connection Object uses these clusters.
 
 <aside>
-💡 Now we know about how to interact with solana blockchain
+💡 Now you know how we connect with the Solana blockchain.
 
 </aside>
 
 <aside>
-💡 But we need a crypto wallet keypair to verify transaction that we are sending from client side to blockchain
+💡 But to make transactions, we need a crypto wallet keypair for verification.
 
 </aside>
 
-Anchor’s library provides us with a `Wallet` object that requires a key pair and allows us to sign transactions. But that’s not it, it also provides us with a `Provider` object that wraps both the `Connection` and the `Wallet` and automatically adds the wallet’s signature to outgoing transactions. The `Provider` object makes interacting with the Solana blockchain on behalf of a wallet seamless.
+Anchor provides a `Wallet` object, which needs a key pair (like a secure ID) to sign off transactions. But there's more – it also has a `Provider` object. This combines the Connection and the Wallet, and it automatically signs your transactions with your wallet. This makes it easy to use the Solana blockchain with a wallet.
 
-`Program`, `Provider`, `Wallet`(The foundation of Contract integration)
+`Program`, `Provider`, `Wallet` - these are key to integrating contracts.
 
-## What we will do
+## What We'll Do
 
-**we will setup,  customize and edit solana dapp-scallfold as our rquirement**
+**Setting up and customizing our Solana DApp**
 
-In this module, we have set up our DApp's full-stack environment. We will customize and edit the Solana DApp scaffold to meet our specific requirements. Additionally, we will guide you on how to configure the frontend DApp scaffold with Next.js.
+We've set up the full environment for our DApp. Now, we'll tweak the Solana DApp scaffold (a basic framework) to fit our needs. We'll also show you how to configure the frontend with Next.js.
 
-We will proceed to edit and create various components to establish token minting and metadata account functionality. The process involves minting tokens to the minter's wallet and subsequently transferring these tokens to another wallet, belonging to the minter's friend.
+Next, we'll modify and create parts of our DApp for token minting and managing token accounts. This includes creating tokens in your wallet and then sending them to a friend's wallet.
 
-We will delve into the foundational elements of Solana programs on the frontend, including the integration of the cluster and wallet through the Anchor provider. This involves working with the program object, executing RPC calls, and sending instructions and transactions to our deployed Solana program on the cluster.
+Finally, we'll explore the essential parts of frontend Solana programs, like connecting to the cluster and wallet through Anchor, handling program objects, making RPC calls, and sending instructions and transactions to our Solana program on the cluster.

@@ -1,46 +1,43 @@
 ---
-title: Building Deploying And Testing Transfer Program
-author: shivam
+title: Building, Deploying, and Testing Transfer Program
+author: Shivam
 moduleNumber: module-4
 modulePart: module-4-b
 thisFileName: build-deploy-test-transfer
 orderNumber: '1'
-modulePartDescription: In this part of the module, we will enhance our previous token minter program by enabling the transfer of minted tokens to another account through cross-program invocation. Subsequently, we will proceed to build, deploy, and test the program.
+modulePartDescription: In this section of Module 4, we will focus on enhancing the previously developed token minter program by incorporating the functionality to transfer minted tokens to another account through Cross-Program Invocation (CPI). This will include steps to build, deploy, and test the updated program.
 ---
 
 ## Objectives
 
 In this lesson, you will:
 
-- Build your upgraded spl-token-minter program.
-- Deploy and test your upgraded program.
+- Build the enhanced spl-token-minter program.
+- Deploy and test the upgraded program.
 
 ## tl;dr
 
-In this lesson, you go through the process of building the upgraded spl-token-minter program. Once the program has been built successfully, the process of connecting your wallet to your devnet and airdropping testnet tokens is explained. 
-
-After building, we start up a new Solana devnet cluster and deploy our upgraded spl-token-minter program to the devnet. After deployment, we run tests for our deployed program
+This lesson covers the process of building the upgraded spl-token-minter program. After successfully building the program, it guides you through the steps of connecting your wallet to the devnet, airdropping testnet tokens, and deploying the program. Subsequently, we test the deployed program to ensure its functionality.
 
 ## Overview
 
-## Building
+### Building the Program
 
-To start off, open the terminal in the root directory of your project and enter the following command.
+Start by opening your project's root directory in the terminal and enter:
 
 ```bash
 anchor build
 ```
 
-This command will generate a target folder in the project root and generate idl and types of our solana program to interact with the client side using rpc methods. Now, open a new terminal and check our configuration by executing this command:
+This command generates a target folder in the project root and compiles idl and types of our Solana program for client-side interaction using RPC methods. Next, verify your configuration:
 
-
-## Deploying
+### Deploying the Program
 
 ```bash
 solana config get
 ```
 
-After execution, you should get an output similar as shown below:
+The expected output should be:
 
 ```bash
 Config File: ~/.config/solana/cli/config.yml
@@ -50,77 +47,77 @@ Keypair Path: ~/.config/solana/id.json
 Commitment: confirmed
 ```
 
-Devnet is the RPC URL, and my wallet's default location is at keypairpath. Make sure you Generate a wallet keypair for deploying the program. You can set devnet for cluster by entering this command:
+Set your cluster to devnet:
 
 ```bash
 solana config set --url https://api.devnet.solana.com
 ```
 
-Enter this command to generate a new keypair
+Generate a new wallet keypair:
 
 ```bash
 solana-keygen new
 ```
 
-Now you have a wallet. You can check the address (pubkey) and balance of this account entering these commands
+Check your wallet address and balance:
 
 ```bash
 solana address
 solana balance
 ```
 
-If you have some devnet sol then it is okay for deployment. If not, then get some devnet airdrop in your wallet by entering this command:
+If necessary, airdrop Devnet SOL:
 
 ```bash
 solana airdrop 4
 ```
 
-Up next, start off deployment by opening a new terminal and starting network cluster by executing this command:
+Begin the deployment process:
 
 ```bash
 solana-test-validator
 ```
 
-This will start a devnet cluster in the system. To deploy the program, enter the following command:
+Deploy your program:
 
 ```bash
 anchor deploy
 ```
 
-You should get an output similar to as shown below:
+You should see a deployment confirmation:
 
 ```bash
 Deploying cluster: https://api.devnet.solana.com
 Upgrade authority: ~/.config/solana/id.json
 Deploying program "spl_token_minter"...
-Program path: /Users/shivamsoni/Desktop/composability/transfergold/transfergold/target/deploy/spl_token_minter.so...
-Program Id: EhJE9AUd8ybeRoTz79QHrxG6j3Z2hWX22g4SCSCKmGwE
+Program path: /path/to/your/project/target/deploy/spl_token_minter.so...
+Program Id: <Your Program ID>
 
 Deploy success
 ```
 
-Now our both program is on chain (devnet). Next, we get the program id of our deployed program on the chain. For this, grab this program id and change it in our program (solidity file) as well as anchor.toml file. After pasting the new program id to both files, build the program again with the command:
+Update the program IDs in both your Solidity file and `anchor.toml` file with the new IDs. Rebuild the program:
 
 ```bash
 anchor build
 ```
 
-Next, to test the program, we first check the required dependencies and run the following command:
+### Testing the Program
+
+Ensure all dependencies are installed:
 
 ```bash
 yarn install
 npm install
 ```
 
-## Testing
-
-Now, run tests by entering this command:
+Run the tests:
 
 ```bash
 anchor test
 ```
 
-After this, you should get an output as shown below:
+The output should indicate the success of the tests:
 
 ```bash
 spl-token-minter
@@ -139,9 +136,8 @@ recipienttokenAmount 54000000000n
 ✨  Done in 12.26s.
 ```
 
-Here is the Solana Explorer demo:
-
 ![solana explorer](https://res.cloudinary.com/practicaldev/image/fetch/s---qpHijrX--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/7payu357k0z7hj3j5wed.jpeg)
 
+This completes the process of building, deploying, and testing the upgraded spl-token-minter program. The successful tests confirm the program's ability to transfer tokens effectively within the Solana ecosystem.
 
-And that's it! We've successfully made a CPI call to transfer gold token from our account to the recipient’s account.
+In the next lesson, we will explore additional aspects of Solana development, further enhancing our understanding and skills.
