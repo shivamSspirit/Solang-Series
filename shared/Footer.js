@@ -33,7 +33,7 @@ const FooterComp = () => {
             <Discord className='mr-3' />
           </Link>
 
-          <Link href={'https://github.com/shivamsoni00'} >
+          <Link href={'https://github.com/shivamSspirit'} >
             <Github className='mr-3' />
           </Link>
 
@@ -46,9 +46,13 @@ const FooterComp = () => {
           <CCFooter />
         </div>
         <div className='text-gray-400'>
-          <span>The material is powered by</span>
-          <Link className="ml-3 mr-3 underline" href={'https://solidityonsolana.one/'}>
-            solidityonsolana.one
+          <span>The material is supported by</span>
+          <Link className="ml-3 mr-3 underline" href={'https://in.superteam.fun/'}>
+            superteamDao
+          </Link>
+          And 
+          <Link className="ml-3 mr-3 underline" href={'https://solana.org/'}>
+            Solana-Foundation
           </Link>
         </div>
       </div>

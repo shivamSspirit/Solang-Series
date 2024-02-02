@@ -22,8 +22,8 @@ const announcementData = [
   },
   {
     img: landingPg1,
-    head: "Mint and Sell NFT",
-    desc: "In this module, we will develop a program on Solana that allows for the mint and sell nft",
+    head: "Mint and Transfer NFT",
+    desc: "In this module, we will develop a program on Solana that allows for the mint and transfer nft",
   },
 ];
 
@@ -57,7 +57,22 @@ const timelineData = [
   {
     heading: "Module 5: How to Mint and transfer NFT",
     content:
-     "Coming Soon",
+     "In this module, we will develop a program on Solana that allows for the Mint(Mint-Authority is PDA) and transfer NFT to other accounts.",
+  },
+  {
+    heading: "Module 6: Full-stack Dapp(fungible-token)",
+    content:
+     "In this module, we will develop a full-stack Solana DApp using solana-labs dapp-scaffold (Next.js) and combine SPL Fungible Token mint and transfer Solidity programs.",
+  },
+  {
+    heading: "Module 7: Full-stack Dapp(Non-fungible-token)",
+    content:
+     "In this module, we will develop a full-stack Solana DApp using solana-labs dapp-scaffold (Next.js) and combine NFT Mint and transfer Solidity programs.",
+  },
+  {
+    heading: "Module 8: Full-stack Dapp(Final Project)",
+    content:
+     "Coming-sooon",
   },
 ];
 
@@ -78,13 +93,9 @@ const LandingSection = ({ allModules }) => {
   }));
 
   const returnModulePath = (announcement) => {
-    if (announcement === "module-5") {
-      setDisable(true);
-    } else {
       router.push({
         pathname: `/CourseContent/${announcement}/${announcement}-a`,
       });
-    }
   };
 
   // console.log("disable", disable);
@@ -113,17 +124,11 @@ const LandingSection = ({ allModules }) => {
                 }}
                 src={announcement?.img}
                 alt='med'
-                className={`cursor-pointer ${
-                  "module-5" === announcement.module ? "hover:opacity-10" : " "
-                }`}
+                className={`cursor-pointer`}
               />
               <div className='px-3 rounded-b-2xl max-w-[416px] ml-2'>
                 <div
-                  className={`text-2xl font-semibold pt-6 pb-1 cursor-pointer ${
-                    "module-5" === announcement.module
-                      ? "hover:opacity-10"
-                      : " "
-                  }`}
+                  className={`text-2xl font-semibold pt-6 pb-1 cursor-pointer`}
                   onClick={() => {
                     returnModulePath(announcement.module);
                   }}
@@ -131,11 +136,7 @@ const LandingSection = ({ allModules }) => {
                   {announcement.head}
                 </div>
                 <div
-                  className={`text-secondaryGrey pb-6 font-bodyFamily ${
-                    "module-5" === announcement.module
-                      ? "hover:opacity-10"
-                      : " "
-                  }`}
+                  className={`text-secondaryGrey pb-6 font-bodyFamily`}
                 >
                   {announcement.desc}
                 </div>

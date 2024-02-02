@@ -73,7 +73,7 @@ export const announcementData = [
 {
     img: Course2,
     head: "Module Name",
-    desc: "full-stack-dapp(token mint,transfer)",
+    desc: "Full-stack-dapp (fungible-token)",
     module_color: "#efc070",
   },
   // {
