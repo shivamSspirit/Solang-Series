@@ -83,15 +83,12 @@ anchor deploy
 You should see a confirmation like this:
 
 ```bash
+cpiinvokesigned git:(master) ✗ anchor deploy
 Deploying cluster: https://api.devnet.solana.com
-Upgrade authority: ~/.config/solana/id.json
-Deploying program "hand"...
-Program path: ~/composability/cpi/target/deploy/hand.so...
-Program Id: 7zJ7E8uZccmCH89eykH8yZsB6G685nbz7sSq8N9sZTtq
-
-Deploying program "lever"...
-Program path: ~/composability/cpi/target/deploy/lever.so...
-Program Id: J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh
+Upgrade authority: /Users/shivamsoni/.config/solana/id.json
+Deploying program "pda_mint_authority"...
+Program path: /Users/shivamsoni/Desktop/superteam/grant-program/solidityForsolana/content/module-5-pda/pda/cpitransferpda/cpiinvokesigned/target/deploy/pda_mint_authority.so...
+Program Id: CEsT9vBsrx3GcYPpVPk9EaRKZpvLRs2iWbyUWy6fu1zo
 
 Deploy success
 ```
@@ -106,8 +103,7 @@ seeds = false
 skip-lint = false
 
 [programs.devnet]
-hand = "7zJ7E8uZccmCH89eykH8yZsB6G685nbz7sSq8N9sZTtq"
-lever="J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh"
+pda_mint_authority = "CEsT9vBsrx3GcYPpVPk9EaRKZpvLRs2iWbyUWy6fu1zo"
 
 [registry]
 url = "https://api.apr.dev"
@@ -118,6 +114,9 @@ wallet = "~/.config/solana/id.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+
+[[test.validator.clone]]
+address = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
 ```
 
 Rebuild the program:
@@ -139,33 +138,109 @@ Finally, run tests:
 anchor test
 ```
 
-You should see results confirming the successful execution of your tests, indicating the program's correct functioning after CPI calls to toggle the power state.
-
-```bash
-spl-token-minter
-Your transaction signature 5KzehPTbYCuUtwQzbigvTnwnkiuNcWuXPtuWSMGMVc914xcV8ddFLV3BqEr3hMsbS9ga6SJjzEDcjRMZhGi6KgvJ
-✔ Is initialized! (4616ms)
-Your transaction signature ePvkJFcHdgjbWnYh1e5nab57bv32TyviXgrfNi1QQFsHytXgcJvuneD9BzmrEv4rcMu1KXQSr2hpJ2Gsqzf2TAm
-✔ Create an SPL Token! (1466ms)
-Your transaction signature 4qdXPTQArZTyFq5mCtdyJVx2Hu1NxeYnY1wwGCVpHy91SZjdkngvRYVWDJvmaTigUEshACFbKMULojfChMxcNp85
-minted token amounts **156**
-✔ Mint some tokens to your wallet! (6090ms)
-3 passing (12s)
-```
 
 ### Inspect on Solana explorer
 
 Find your program's wallet address using solana address and view its details on [Solana Explorer](https://explorer.solana.com/?cluster=devnet)
 
-![](https://res.cloudinary.com/practicaldev/image/fetch/s--YELKB4Oa--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/buuie3dbo3tkrh9406cr.jpeg)
 
-The Solana explorer provides us with important information about the deployed program and the wallet like balance transactions and token holdings. To see our minted tokens, click on Tokens, then the result should be as shown below:
+- Find your Minted NFT by create nft tx signature
 
-![](https://res.cloudinary.com/practicaldev/image/fetch/s--hJI6Keww--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6l3spdtdb7getrtzxbb3.jpeg)
+![nft-mint](/moduleimages/g-nft.jpeg)
 
-Search and find out the minted tokens with the title Solana Pro that have 159 GM supply. Clicking on it will a result as shown below:
+***Now we are moving to tranfer the nft to another user or buyer
+ for this*** 
 
-![](https://res.cloudinary.com/practicaldev/image/fetch/s--4tgV-zJS--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/7fty68gardii3m3t21ll.jpeg)
+> Add this test case
+
+ Here mint is our minted nft mint account,
+ buyer is cli-generated file system wallet.
+
+ Here we are getting a public key of buyer 
+ using this created method
+
+```typescript
+import * as anchor from "@coral-xyz/anchor"
+import fs from 'mz/fs'
+
+export async function createKeypairFromFile(
+    filePath: string,
+): Promise<anchor.web3.Keypair> {
+    const secretKeyString = await fs.readFile(filePath, {encoding: 'utf8'});
+    const secretKey = Uint8Array.from(JSON.parse(secretKeyString));
+    return anchor.web3.Keypair.fromSecretKey(secretKey);
+}
+```
+
+### Test Case
+
+ ```typescript
+  it("transfer the NFT to another wallet!", async () => {
+
+    const mint: anchor.web3.PublicKey = new anchor.web3.PublicKey(
+      "EgKQwGsYksnD5GuAkdUozmMi692iFHFEJUfZuTr5uMjq"
+    );
+
+    const buyer: anchor.web3.Keypair = await createKeypairFromFile(__dirname + "/keypairs/newowner.json");
+    console.log(`Buyer public key: ${buyer.publicKey}`);
+
+    const sellerTokenAccount = await getOrCreateAssociatedTokenAccount(
+      connection,
+      wallet.payer, // payer
+      mint, // mint account
+      wallet.publicKey // owner account
+    );
+
+
+    console.log("seller token  account", sellerTokenAccount);
+
+    // Derive wallet's associated token account address for mint
+    const buyerTokenAccount = await getOrCreateAssociatedTokenAccount(
+      connection,
+      wallet.payer, // payer
+      mint, // mint account
+      buyer.publicKey // owner account
+    );
+
+    console.log("buyerTokenAccount", buyerTokenAccount)
+
+    const tx = await program.methods
+      .transferNft()
+      .accounts({
+        owner: wallet.publicKey,
+        from: sellerTokenAccount.address,
+        to: buyerTokenAccount.address,
+      }).signers([wallet.payer])
+      .rpc();
+    console.log("Your transaction signature", tx);
+
+    const buyerTokenAccountAmount = ((await getAccount(connection, buyerTokenAccount.address)).amount);
+    console.log("buyerTokenAccountAmount", buyerTokenAccountAmount);
+  });
+ ```
+
+## Breakdown
+
+> In this test case we are fetching mint account and buyer account 
+> next we create seller and buyer token account with this mint
+> then transfer the nft using cpi to spl token program
+
+- Now comment the mint test case and run transfer nft test case(because a pda is derived only once for a program)
+
+```bash
+anchor test
+```
+
+```bash
+Your transaction signature 4eNJrw3zqFBUaL7hw2TQZ79Xt5mhzSpqggzHA2GSWh5oBkxUC6CXELAvvsTFto4urN3UuBiSraVEGPUAjE2PWrwb
+buyerTokenAccountAmount 1n
+    ✔ transfer the NFT to another wallet! (5384ms)
+
+
+  1 passing (5s)
+  ```
+
+- Search this tx signature in [Solana Explorer](https://explorer.solana.com/?cluster=devnet)
 
 ### Conclusion
 

@@ -12,20 +12,24 @@ modulePartDescription: This part provides an in-depth exploration of key Solang 
 
 Embark on a detailed exploration of Solang, a tool that adapts Solidity for Solana, and understand its unique approaches to NFT minting and transfer. We'll cover crucial concepts including Mint and Token Accounts, Solang contracts, PDA derivation, and accessing account data.
 
-### 1. Mint and Token Accounts
+### Mint and Token Accounts
 
 - **Mint Accounts**: These are initialized when creating new tokens on Solana. They hold information like the mint authority (who can create more of this token), the freeze authority (who can freeze token accounts), the total supply, and the number of decimals.
 
 - **Token Accounts**: Each token account stores the tokens owned by a specific public key. These accounts are managed by the Token program and control access to the tokens through fields like owner, close authority, and delegate. 
 
-### 2. Solang Contracts
+{/* here's the one for invoking the token program to mint tokens */}
+Here's an example of invoking the token program to mint tokens:
+![mint acc](/moduleimages/mint_acc.jpeg)
+
+### Solang Contracts
 
 Solang alters Solidity's functionality to suit Solana's environment. Key differences include:
 
 - **Dual Account System**: In Solana, a Solang contract uses two accounts - one for data storage and another for the executable code.
 - **Contract Upgrades**: Solang's structure allows for updating the executable code while retaining the same data account, simplifying the upgrade process.
 
-### 3. PDA Derivation
+### PDA Derivation
 
 Program Derived Addresses (PDAs) are central to Solang's operation in Solana, especially for cross-program interactions. They are created using:
 
@@ -33,11 +37,7 @@ Program Derived Addresses (PDAs) are central to Solang's operation in Solana, es
 
 - **try_find_program_address Method**: This Solang function returns the PDA and the seed bump. It's crucial for creating addresses that programs can control.
 
-{/* here's the one for invoking the token program to mint tokens */}
-Here's an example of invoking the token program to mint tokens:
-![mint acc](/moduleimages/mint_acc.jpeg)
-
-### 4. Accessing Account Data
+### Accessing Account Data
 
 In Solang, account data can be accessed in different ways:
 

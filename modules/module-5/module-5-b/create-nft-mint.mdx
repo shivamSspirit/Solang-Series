@@ -8,9 +8,9 @@ orderNumber: "2"
 modulePartDescription: In this part of the module, you will implement a Solidity Solang program for NFT minting and transfer (NFT mint authority is PDA).
 ---
 
-## Step-by-Step Guide to Setting Up the Program and Writing the Constructor
+**Step-by-Step Guide to Setting Up the Program and Writing the Constructor**
 
-### Initiating the Anchor Project
+## Initiating the Anchor Project
 
 1. **Create a New Project Folder**:
 
@@ -28,7 +28,7 @@ modulePartDescription: In this part of the module, you will implement a Solidity
 4. **Open the Project in Visual Studio Code (VSCode)**:
    - Use the command `code .` to open your project in VSCode.
 
-### Adding Libraries and Setting Up the Project
+## Import Essential Libraries
 
 1. **Incorporate Essential Libraries**:
 
@@ -91,7 +91,7 @@ contract pda_mint_authority {
      }
      ```
 
-### Understanding Key Components
+### The Key Components
 
 1. **`try_find_program_address` Function**:
 
@@ -123,15 +123,16 @@ contract pda_mint_authority {
 2. **Setting Up Accounts and Parameters**:
 
    - The function uses several annotated accounts, each with specific roles and privileges:
-     - `@mutableSigner(payer)`: The account that pays for the transaction.
-     - `@mutableSigner(mint)`: The account where the minted token will be created.
-     - `@mutableAccount(metadata)`: The account for storing token metadata.
+   - `@mutableSigner(payer)`: The account that pays for the transaction.
+   - `@mutableSigner(mint)`: The account where the minted token will be created.
+   - `@mutableAccount(metadata)`: The account for storing token metadata.
 
 3. **Defining Function Arguments**:
+
    - `createTokenMint` accepts parameters for setting up the mint account:
-     - `address freezeAuthority`: The authority that can freeze the mint account.
-     - `uint8 decimals`: The decimal precision for the token.
-     - `string name`, `symbol`, `uri`: Attributes for the metadata account.
+   - `address freezeAuthority`: The authority that can freeze the mint account.
+   - `uint8 decimals`: The decimal precision for the token.
+   - `string name`, `symbol`, `uri`: Attributes for the metadata account.
 
 ### Implementing the Function Logic
 
@@ -152,6 +153,7 @@ contract pda_mint_authority {
 2. **Invoke Metadata Program**:
 
    - Use a custom function `_createMetadataAccount` to create the metadata account:
+
      ```solidity
      _createMetadataAccount(
          tx.accounts.metadata.key,       // Metadata account
@@ -204,20 +206,19 @@ The `createTokenMint` function should look like this:
     }
 ```
 
-### Understanding the Role of Annotations
+### The Role of Annotations
 
 - `@mutableSigner` and `@mutableAccount`: Indicate accounts that will be mutated or changed during the transaction.
 - `@account`: Used for accounts that are part of the transaction but not necessarily mutated.
 
-## Custom Implementation of Metadata Account Creation
+## Re-Implementation 
 
 ### The Need for a Custom Method
 
 - **Objective**: To build a Solana SPL NFT minter program using Program Derived Addresses (PDAs) as mint authorities.
-- **Approach**: Implementing PDAs requires customizing certain library methods, particularly from the MPL (Metaplex) library.
+- **Approach**: Implementing PDAs requires customizing certain library methods, particularly from the MPL (Metaplex) and SPL (solana token program) library.
 
-### Defining the `_createMetadataAccount` Method
-
+- Defining the `_createMetadataAccount` Method
 - **Function Purpose**: To create a metadata account for the minted token, signed with a PDA as the mint authority.
 - **Method Declaration**: The method is defined as a private function within the contract:
 
@@ -239,7 +240,7 @@ The `createTokenMint` function should look like this:
   }
   ```
 
-### Breakdown of the Function Implementation
+### just Breakdown 
 
 1. **Arguments of the Method**:
 
@@ -283,7 +284,7 @@ The `createTokenMint` function should look like this:
 
    - Configures `AccountMeta` array with necessary accounts for the transaction:
 
-     - Accounts include metadata, mint, mintAuthority, payer, updateAuthority, system program, and rent account.
+   - Accounts include metadata, mint, mintAuthority, payer, updateAuthority, system program, and rent account.
 
      ```solidity
      AccountMeta[7] metas = [
@@ -312,19 +313,21 @@ The `createTokenMint` function should look like this:
      metaplexId.call{accounts: metas, seeds: [["mint_authority", abi.encode(_bump)]]}(instructionData);
      ```
 
-### Understanding Key Components
+### Key Components
 
 - **`try_find_program_address` Function**: Generates a PDA from given seeds and the program ID.
 - **Data Structuring**: Essential for organizing the metadata attributes and CPI arguments.
 - **ABI Encoding**: Translates function arguments into a format compatible with Solana's program calls.
 - **CPI to Metaplex**: Executes the logic to create the metadata account, utilizing the PDA for authorization.
 
-## Formulating Solidity Structs and Metadata Account Creation Process
+**Formulating Solidity Structs and Metadata Account Creation Process**
 
-### Creating Solidity Structs for NFT Metadata
+**Creating Solidity Structs for NFT Metadata**
 
 1. **Defining Structs**:
+
    - Implement two key structs, `DataV2` and `CreateMetadataAccountArgsV3`, to organize NFT metadata and account creation arguments:
+
      ```solidity
      struct CreateMetadataAccountArgsV3 {
          DataV2 data;
@@ -344,7 +347,9 @@ The `createTokenMint` function should look like this:
      ```
 
 2. **Initializing Structs**:
+
    - Initialize these structs with the required data for the NFT:
+
      ```solidity
      DataV2 data = DataV2({
          name: name,
@@ -363,10 +368,12 @@ The `createTokenMint` function should look like this:
      });
      ```
 
-### Writing Account Metadata for the Instruction
+**Account Metadata for the Instruction**
 
 1. **Configuring Account Metadata**:
+
    - Set up `AccountMeta` array to define accounts involved in the transaction:
+
      ```solidity
      AccountMeta[7] metas = [
          AccountMeta({pubkey: metadata, is_writable: true, is_signer: false}),
@@ -375,24 +382,29 @@ The `createTokenMint` function should look like this:
      ```
 
 2. **Role of Mint Authority (PDA)**:
+
    - The `mintAuthority` account, represented by a PDA, plays a crucial role in signing the transaction.
 
-### ABI Encoding and Cross-Program Invocation
+### ABI Encoding and CPI
 
 1. **Encoding Instruction Data**:
+
    - Use ABI encoding to format the instruction data, including a discriminator for Solana:
+
      ```solidity
      bytes1 discriminator = 33;
      bytes instructionData = abi.encode(discriminator, args);
      ```
 
 2. **Cross-Program Invocation to Metaplex**:
+
    - Perform a Cross-Program Invocation (CPI) to the Metaplex program, passing in the encoded data and account metadata:
+
      ```solidity
      metaplexId.call{accounts: metas, seeds: [["mint_authority", abi.encode(_bump)]]}(instructionData);
      ```
 
-### Key Components and Their Functions
+### Some useful Keywords
 
 - **Structs `DataV2` and `CreateMetadataAccountArgsV3`**: Used to structure and manage NFT metadata information.
 - **Account Metadata (`AccountMeta`) Configuration**: Determines the roles and permissions of each account in the transaction.

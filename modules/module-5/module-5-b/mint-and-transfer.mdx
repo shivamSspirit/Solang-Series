@@ -10,7 +10,7 @@ modulePartDescription: Comprehensive instructions for minting and transferring N
 
 **Lesson 4: Minting and Transferring NFTs in Solidity Solang with PDAs**
 
-## Step-by-Step Process for Minting and Transferring NFTs
+***Step-by-Step Process for Minting and Transferring NFTs***
 
 ### Setting Up the Minting Function
 
@@ -58,7 +58,7 @@ modulePartDescription: Comprehensive instructions for minting and transferring N
      );
      ```
 
-### Reimplementing Mint and Authority Removal Functions
+### Reimplementing Functions
 
 1. **Custom `_mintTo` Function**:
    - Define a private method to handle minting with PDA:
@@ -85,8 +85,10 @@ modulePartDescription: Comprehensive instructions for minting and transferring N
      }
      ```
 
-2. **Custom `_removeMintAuthority` Function**:
+2. Custom `_removeMintAuthority` Function:
+
    - Implement a private method to remove mint authority:
+
      ```solidity
      function _removeMintAuthority(address mintAccount, address pdaAccount) private {
          // Independently derive the PDA address from the seeds, bump, and programId
@@ -105,8 +107,7 @@ modulePartDescription: Comprehensive instructions for minting and transferring N
 
         // Invoke the token program with prepared accounts and instruction data
         SplToken.tokenProgramId.call{accounts: metas, seeds: [["mint_authority", abi.encode(_bump)]]}(instructionData);
-	}
-     }
+        }
      ```
 
 ### Transferring the Minted NFT
