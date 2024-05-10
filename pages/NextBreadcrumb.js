@@ -12,6 +12,14 @@ const NextBreadcrumb = ({ capitalizeLinks, currentpath }) => {
     return path;
   });
 
+  console.log("trimmedPath", trimmedPath);
+  console.log("pathNames",pathNames)
+
+  
+
+
+
+
   return (
     <div>
       <ul id='breadcrumbs-one' className='hidden lg:flex'>
@@ -31,8 +39,7 @@ const NextBreadcrumb = ({ capitalizeLinks, currentpath }) => {
               <li>
                 <Link
                   className={`${
-                    router?.query?.idasfilename?.[0]?.toUpperCase() +
-                      router?.query?.idasfilename?.slice(1, link.length) ===
+                    router?.query?.idasfilename?.[0]?.toUpperCase() + router?.query?.idasfilename?.slice(1, link.length) ===
                     itemLink
                       ? "active"
                       : ""

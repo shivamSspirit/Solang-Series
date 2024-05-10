@@ -61,7 +61,7 @@ const nextConfig = {
   // assetPrefix: process.env.PRODUCTION_API_URL ? 'https://cdn.solidityonsolana.one' : undefined,
 
   env: {
-    LOCAL_API_URL: process.env.LOCAL_API_URL,
+    // LOCAL_API_URL: process.env.LOCAL_API_URL,
     PRODUCTION_API_URL: process.env.PRODUCTION_API_URL,
   },
 };

@@ -231,10 +231,23 @@ const GeneralInfo = ({
         border_color: "border-[#efc070]",
         imgBorderColor: "prose-img:border-[#efc070]",
         link_color: "prose-a:text-[#efc070]",
-      };
-    }
+      }; 
 
-  };
+  } else if (lessionNumber === "module-7") {
+    console.log("module-777")
+    return {
+      blockquote: "prose-blockquote:text-[#F8C794]",
+      codeColor: "prose-code:text-[#F8C794]",
+      text_color: "text-[#F8C794]",
+      link_hover: "hover:prose-a:decoration-[#F8C794]",
+      headingsColor: "prose-strong:text-[#F8C794]",
+      border_color: "border-[#F8C794]",
+      imgBorderColor: "prose-img:border-[#F8C794]",
+      link_color: "prose-a:text-[#F8C794]",
+    };
+}
+
+}
 
   return (
     <Layout>

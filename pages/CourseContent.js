@@ -76,11 +76,12 @@ export const announcementData = [
     desc: "Full-stack-dapp (fungible-token)",
     module_color: "#efc070",
   },
-  // {
-  //   img: Course7,
-  //   head: "Module Name",
-  //   desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
-  // },
+  {
+    img: Course3,
+    head: "Module Name",
+    desc: "Full-stack-dapp (NFT)",
+    module_color: "#F8C794",
+  },
   // {
   //   img: Course6,
   //   head: "Module Name",
@@ -129,6 +130,9 @@ const CourseContent = ({ allModules }) => {
     }else if (colors === "#efc070") {
       console.log("colors",colors)
       return "hover:bg-[#efc070]";
+    }else if (colors === "#F8C794") {
+      console.log("colors",colors)
+      return "hover:bg-[#F8C794]";
     }
   };
   // console.log(mergedArray);

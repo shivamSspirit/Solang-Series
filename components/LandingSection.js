@@ -179,7 +179,7 @@ const LandingSection = ({ allModules }) => {
                     return (
                       <span
                         key={index}
-                        className=' hover:text-funPinkDark hover:mb-3 transition-all duration-500 hover:duration-100 click:goodbyeLetterAnim text-3xl md:text-5xl mb-2 leading-loose subpixel-antialiased'
+                        className='hover:text-funPinkDark hover:mb-3 transition-all duration-500 hover:duration-100 click:goodbyeLetterAnim text-3xl md:text-5xl mb-2 leading-loose subpixel-antialiased'
                       >
                         {letter}
                       </span>
@@ -204,7 +204,7 @@ const LandingSection = ({ allModules }) => {
                     onMouseEnter={() => setSvgHoverColor("black")}
                     onMouseLeave={() => setSvgHoverColor("white")}
                     onClick={startBtnOnClick}
-                    className={`border border-white flex justify-center items-center py-4 px-4 rounded-sm hover:bg-white hover:text-black`}
+                    className="border border-white flex justify-center items-center py-4 px-4 rounded-sm hover:bg-white hover:text-black"
                     style={{ boxShadow: "-5px 5px 2px white" }}
                   >
                     <svg

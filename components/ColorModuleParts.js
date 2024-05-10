@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image'
 
 function ColorModuleParts({moduleColor,currentpath, orderedLessions,activeFileName}) {
-  // console.log("currentpath",currentpath)
+   console.log("currentpath",currentpath)
   return (
     <div className={`${moduleColor} p-10 rounded-[0.99rem]`}>
     <div>
@@ -27,7 +27,7 @@ function ColorModuleParts({moduleColor,currentpath, orderedLessions,activeFileNa
         <div className='mt-10'>
           <div>
             {orderedLessions?.map((lession, idx) => (
-              <div key={idx} id='breadcrumbs-one' className='mb-1'>
+              <div key={idx} id='breadcrumbs-one' className ='mb-1'>
               {/* {console.log("lession",lession)} */}
                 <li>
                   {/* {console.log("filename",lession)} */}
