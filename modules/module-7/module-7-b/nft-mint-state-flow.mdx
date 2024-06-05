@@ -1,0 +1,31 @@
+---
+title: Mint-state-flow
+author: Shivam
+moduleNumber: module-7
+modulePart: module-7-b
+thisFileName: nft-mint-state-flow
+orderNumber: '0'
+modulePartDescription: In this section, You'll dive more into Creating NFT Mint and Related operations
+---
+
+DApp states go through context level to mini React components.
+
+Starting from dapp root → src→ views → home → index
+
+```tsx
+ const mintKeypair = anchor.web3.Keypair.generate();
+```
+
+Generate a mint account for the NFT token and pass it to a lower-level component named `MintNFTButton`. In this component, we receive the ***mintAccount*** as a prop and we use it to set up the mint NFT account and metadata account for nft.
+
+Then, mint the NFT to the minter's wallet by creating two consecutive transactions: `createTokenMint` and `mintTo`. After these transactions, the minter will have the NFT in their desired wallet or account.
+
+The second functionality of the DApp is transferring the minted NFT to another user. To do this:
+
+1. Go to `root → src → component → nft → NftCard`.
+2. Get the buyer's public key from the UI input and create an ATA for the buyer.
+3. Use the same mint key when transferring the NFT.
+
+This will successfully transfer the NFT to the other user.
+
+This is just overview of dapp’s mint state and flow for transactions.

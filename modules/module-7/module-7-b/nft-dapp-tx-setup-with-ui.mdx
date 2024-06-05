@@ -1,0 +1,269 @@
+---
+title: Setup tx or RPC calls
+author: Shivam
+moduleNumber: module-7
+modulePart: module-7-b
+thisFileName: nft-dapp-tx-setup-with-ui
+orderNumber: '1'
+modulePartDescription: In this section, You'll dive more into Creating NFT Mint and Related operations
+---
+
+## Setup tx and Rpc calls
+
+1. Create token mint account and mint nft into minter wallet
+2. Transfer nft into another wallet
+
+## Create token mint
+
+Run the DApp on your local system.
+
+when you run 
+
+```bash
+npm run dev
+```
+
+you will lend here
+
+![lending.jpeg](/moduleimages/lending.jpeg)
+
+First, connect your desired Solana wallet (Phantom is recommended).
+
+After connecting your wallet, you will see a screen like this.
+
+![MintNft.jpeg](/moduleimages/mintnftbutton.jpeg)
+
+Now, when we click the Mint NFT button, we are using two consecutive transactions.
+
+The tx’s setup is here
+
+## Process of transactions
+
+Go again into 
+dapp’s root → src → components → MintNFTButton
+and look at this file 
+
+[MintNFTButton](https://github.com/shivamSspirit/solang-Nft-mint-transfer/blob/main/src/components/MintNFTButton.tsx)
+
+Process of first transaction
+
+- Import the required dependencies
+- Get the program ID from the IDL
+- Set up transaction commitment levels (you can learn more about commitment levels [here](https://www.notion.so/Solana-quest-9ddf77eef0054f42930789c62a3930df?pvs=21))
+
+```ts
+const opts: { preflightCommitment: Commitment } = {
+    preflightCommitment: "processed",
+};
+```
+
+- Create the MintNFTButton React component and get mintAccount as a prop argument
+- Set up the state for loading, transaction signature, and NFT details
+
+```ts
+    const [txSig, setTxSig] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [nftDetails, setNftDetails] = useState<Sft | Nft | null>(null);
+    const [allNftByWallet, setAllNftByWallet] = useState<any>();
+```
+
+- Fetch the connection and wallet for creating the provider and setting up the cluster.
+
+```ts
+    const { connection } = useConnection();
+    const wallet = useWallet();
+    const { publicKey, sendTransaction } = useWallet();
+```
+
+- Now, we need to set up the program API for sending transactions on the Solana cluster. To do this, we create an Anchor provider using the connection and wallet instances.
+
+```ts
+  const getProgram = () => {
+        /* create the provider and return it to the caller */
+        const provider = new AnchorProvider(connection, wallet as any, opts);
+        /* create the program interface combining the idl, program ID, and provider */
+        const program = new Program(idl as Idl, programId, provider);
+        return program;
+    };
+```
+
+- After setting up the program, we need to create an ATA for the minter to hold the minted token.
+- Create metadata for the token, including its name, symbol, and other metadata URI.
+
+```ts
+const MetaData = {
+        name: "oggggg",
+        symbol: "Oggy",
+        uri: "https://raw.githubusercontent.com/solana-developers/program-examples/new-examples/tokens/tokens/.assets/nft.json",
+    };
+```
+
+- Next, we need to derive the PDA using the seeds "mint-authority" and the program ID.
+
+```ts
+const [dataAccountPDA, bump] = PublicKey.findProgramAddressSync([Buffer.from("mint_authority")], program.programId);
+```
+
+- Now we are all set to send tx to solana cluster
+- Setup an async verison of fn like this (when we are clicking on mint nft button , we are actucally calling this fn)
+
+```ts
+const mintNft = async (e) => {
+        setLoading(true);
+        try {
+            e.preventDefault();
+
+            ...
+           }
+           catch (err) {
+            console.log(err);
+            notify({ message: err.message });
+        }
+        setLoading(false);
+    };
+
+```
+
+- Next , Create your first rpc call (tx) for createTokenMint , this instruction create a token mint acc(which have mint authority  as pda) and set a reference for metaplex metadata account for storing metadata for mint account.
+
+```ts
+// create a metaplex connection and fetch metadata address for our token mint account
+
+const metaplex = Metaplex.make(connection);
+const metadataAddress = await metaplex.nfts().pdas().metadata({ mint: mintKeypair.publicKey });
+// build rpc call by providing required arguments and accounts that we used in this tx
+
+            const createTx = await program.methods
+                .createTokenMint(
+                    dataAccountPDA,
+                    0, // 0 decimals for NFT
+                    MetaData.name, // NFT name
+                    MetaData.symbol, // NFT symbol
+                    MetaData.uri // NFT URI
+                )
+                .accounts({
+                    payer: wallet.publicKey,
+                    mint: mintKeypair.publicKey,
+                    metadata: metadataAddress,
+                    mintAuthority: dataAccountPDA,
+                    rentAddress: SYSVAR_RENT_PUBKEY,
+                    metaplexId: new PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"),
+                })
+                .signers([mintKeypair])
+                .rpc({ skipPreflight: true });
+```
+
+- Now we need to mint nft to minter account for this we need to call mintTo() methods from program api and provide required accounts. the tx look like this
+
+```ts
+const tx = await program.methods
+                .mintTo()
+                .accounts({
+                    pdaAccount: dataAccountPDA,
+                    payer: wallet.publicKey,
+                    tokenAccount: tokenAccount,
+                    owner: wallet.publicKey,
+                    mint: mintKeypair.publicKey,
+                })
+                .rpc({ skipPreflight: true });
+```
+
+after this transaction minter have nft in their wallet and our dapp’s screen looks like this 
+
+![minted_nft.jpeg](/moduleimages/minted.jpeg)
+
+congratulation you minted your first nft.
+
+## Transfer NFT
+
+Go into 
+```bash
+root→ src→ components→ nft→ nftcard
+```
+and look at the file 
+
+[NFT_CARD](https://github.com/shivamSspirit/solang-Nft-mint-transfer/blob/main/src/components/nft/NFTCard.tsx)
+
+Process of second transaction→
+
+- Overall process is same for up to setup program api instance
+
+Next look at transferNFT __fn__ 
+
+``Purpose→ fetch seller(minter) token account , create buyer token account and create a rpc call on program api for transfer nft to buyer.``
+
+**Process→** 
+
+- Create a new tx instance
+
+```ts
+ const transaction = new Transaction();
+```
+
+- Create and fetch ata for minter(seller)
+
+```ts
+const sellerTokenAccount = await getAssociatedTokenAddress(
+                mint.publicKey,
+                publicKey,
+                false,
+                TOKEN_PROGRAM_ID,
+                ASSOCIATED_TOKEN_PROGRAM_ID
+            );
+```
+
+- Get buyer public key as string from ui  card input and converting it to web3 public key
+
+![minted_nft_transfer.jpeg](/moduleimages/transfer.jpeg)
+
+```ts
+const [buyer, setBuyer] = useState("");
+const buyerPublicKey = new anchor.web3.PublicKey(buyer);
+```
+
+- Derive the buyer token account
+
+```ts
+ const buyerTokenAccount = await getAssociatedTokenAddress(
+                mint.publicKey,
+                buyerPublicKey,
+                false,
+                TOKEN_PROGRAM_ID,
+                ASSOCIATED_TOKEN_PROGRAM_ID
+            );
+```
+
+- IF buyer ata not created yet then we create a tx to create an ata for buyer
+
+```ts
+try {
+                await getAccount(connection, buyerTokenAccount);
+            } catch (e) {
+                transaction.add(
+                    createAssociatedTokenAccountInstruction(
+                        publicKey,
+                        buyerTokenAccount,
+                        buyerPublicKey,
+                        mint.publicKey,
+                        TOKEN_PROGRAM_ID,
+                        ASSOCIATED_TOKEN_PROGRAM_ID
+                    )
+                );
+                // transaction.add(instruction);
+                transaction.feePayer = wallet.publicKey;
+
+                const tx1 = await sendTransaction(transaction, connection);
+            }
+```
+
+- Next we call the program’s transferNft method to send minted nft to buyer
+```ts
+  const tx = await program.methods
+                .transferNft()
+                .accounts({
+                    owner: wallet.publicKey,
+                    from: sellerTokenAccount,
+                    to: buyerTokenAccount,
+                })
+                .rpc({ skipPreflight: true });
+        ```
