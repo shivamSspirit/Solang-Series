@@ -263,3 +263,12 @@ html {
 .hover-mb-3:hover {
   margin-bottom: 0.75rem !important; /* You can adjust the margin value as needed */
 }
+
+/* scroll to top override */
+
+/* .scroll-to-top{
+  left: 0 !important;
+  position: relative !important;
+  background-color:rgb(46, 44, 44) !important;
+  bottom: 0 !important;
+} */

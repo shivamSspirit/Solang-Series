@@ -12,7 +12,7 @@ export default function curPageNumber({ modulenumber }) {
       }-a`;
     const nextPg =
       // 8 is the last module
-      moduleNumberNumeric < 4 &&
+      moduleNumberNumeric < 7 &&
       `/CourseContent/module-${moduleNumberNumeric + 1}/module-${
         moduleNumberNumeric + 1
       }-a`;

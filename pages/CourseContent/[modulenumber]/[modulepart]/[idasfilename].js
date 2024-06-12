@@ -7,6 +7,7 @@ import NewSideBar from "../../../../components/NewSideBar";
 import { NextSeo } from "next-seo";
 import ColorModuleParts from "../../../../components/ColorModuleParts";
 import Prism from "prismjs";
+import ScrollToTop from "react-scroll-to-top";
 
 require("prismjs/components/prism-solidity");
 require("prismjs/components/prism-typescript");
@@ -133,6 +134,11 @@ const GeneralInfo = ({
     totalParts,
   });
 
+  console.log("ooooks", {
+    prevPg, nextPg, prevPgText, nextPgText
+  });
+
+
   const returnModuleColor = (moduleNumber) => {
     if (moduleNumber === "module-0") {
       return "bg-[#bfbfff]";
@@ -254,6 +260,7 @@ const GeneralInfo = ({
   return (
     <Layout>
       <div className='my-12'>
+        <ScrollToTop smooth color="#6f00ff" />
       <NextSeo
             title="Soldity On Solana"
             titleTemplate="Soldity On Solana"

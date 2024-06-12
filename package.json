@@ -41,6 +41,7 @@
     "react-dom": "18.2.0",
     "react-markdown": "^9.0.0",
     "react-router-dom": "^6.17.0",
+    "react-scroll-to-top": "^3.0.0",
     "react-select-search": "^4.1.7",
     "react-vertical-timeline-component": "^3.6.0",
     "rehype-autolink-headings": "^7.0.0",
