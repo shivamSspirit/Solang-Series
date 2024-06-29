@@ -3,7 +3,7 @@
 
 # Solidity On Solana
 
-[Solidity_on_solana](https://solidityonsolana.one) is THE ultimate crash course on how to build on **solana** using **solidity**.
-Deep dive into modern world of web3 by building on world fastest blockchain aka solana 
+[Solidity_on_solana](https://solidityonsolana.one) is THE ultimate crash course on how to build on **Solana** using **solidity**.
+Deep dive into the modern world of web3 by building on the world's fastest blockchain aka Solana 
 
 ![landing_page](/moduleimages/landpage.jpeg)
