@@ -122,24 +122,24 @@ Next, we set up the Program API by creating a new Anchor provider (using connect
 This is what an RPC transaction looks like from the client side. 
 
 ```ts
-             const createTx = await program.methods
-                .createTokenMint(
- dataAccountPDA,
-                    0, // 0 decimals for NFT
- MetaData.name, // NFT name
- MetaData.symbol, // NFT symbol
- MetaData.uri // NFT URI
-                )
-                .accounts({
- payer: wallet.publicKey,
- mint: mintKeypair.publicKey,
- metadata: metadataAddress,
- mintAuthority: dataAccountPDA,
- rentAddress: SYSVAR_RENT_PUBKEY,
- metaplexId: new PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"),
-                })
-                .signers([mintKeypair])
-                .rpc({ skipPreflight: true });
+const createTx = await program.methods
+  .createTokenMint(
+    dataAccountPDA,
+    0, // 0 decimals for NFT
+    MetaData.name, // NFT name
+    MetaData.symbol, // NFT symbol
+    MetaData.uri // NFT URI
+  )
+  .accounts({
+    payer: wallet.publicKey,
+    mint: mintKeypair.publicKey,
+    metadata: metadataAddress,
+    mintAuthority: dataAccountPDA,
+    rentAddress: SYSVAR_RENT_PUBKEY,
+    metaplexId: new PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"),
+  })
+  .signers([mintKeypair])
+  .rpc({ skipPreflight: true });
 ```
 
 Calling the `createTokenMint` method means providing the necessary arguments, instruction-related accounts and signers for this transaction.
