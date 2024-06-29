@@ -4,7 +4,7 @@ author: Shivam
 moduleNumber: module-3
 modulePart: module-3-b
 thisFileName: designcode
-orderNumber: "0"
+orderNumber: "3"
 modulePartDescription: In this section of Module 3, you'll delve into the practical aspects of coding, focusing on the development of a flip program using Cross-Program Invocation (CPI) techniques in Solana, leveraging Solidity. The process begins with creating an interface in Solidity, followed by writing tests in `TypeScript`, and then proceeding to build, deploy, and test the flip program.
 ---
 
@@ -56,32 +56,32 @@ Create `lever.sol` in the solidity directory and input the following code:
 ```Solidity
 @program_id("J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh")
 contract lever {
-    // Switch state
-    bool private isOn = true;
+ // Switch state
+ bool private isOn = true;
 
-    @payer(payer)
-    constructor() {}
+ @payer(payer)
+ constructor() {}
 
-    // Switch power on or off
-    function switchPower(string name) public {
-        // Toggling the switch
-        isOn = !isOn;
+ // Switch power on or off
+ function switchPower(string name) public {
+ // Toggling the switch
+ isOn = !isOn;
 
-        // Announcing the switch action
-        print("{:} is pulling the power switch!".format(name));
+ // Announcing the switch action
+ print("{:} is pulling the power switch!".format(name));
 
-        // Displaying current state
-        if (isOn){
-            print("The power is now on.");
-        } else {
-            print("The power is now off!");
-        }
-    }
+ // Displaying current state
+ if (isOn){
+ print("The power is now on.");
+ } else {
+ print("The power is now off!");
+ }
+ }
 
-    // Returning the switch state
-    function get() public view returns (bool) {
-        return isOn;
-    }
+ // Returning the switch state
+ function get() public view returns (bool) {
+ return isOn;
+ }
 }
 ```
 
@@ -97,23 +97,23 @@ import "solana";
 // Lever program interface
 leverInterface constant leverProgram = leverInterface(address'J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh');
 interface leverInterface {
-    function switchPower(string name) external;
+ function switchPower(string name) external;
 }
 
 @program_id("7zJ7E8uZccmCH89eykH8yZsB6G685nbz7sSq8N9sZTtq")
 contract hand {
-    @payer(payer)
-    constructor() {}
+ @payer(payer)
+ constructor() {}
 
-    function pullLever(address dataAccount, string name) public {
-        AccountMeta[1] metas = [
-            AccountMeta({pubkey: dataAccount, is_writable: true, is_signer: false})
-        ];
+ function pullLever(address dataAccount, string name) public {
+ AccountMeta[1] metas = [
+ AccountMeta({pubkey: dataAccount, is_writable: true, is_signer: false})
+ ];
 
-        string instructionData = name;
+ string instructionData = name;
 
-        leverProgram.switchPower{accounts: metas}(instructionData);
-    }
+ leverProgram.switchPower{accounts: metas}(instructionData);
+ }
 }
 ```
 
@@ -123,7 +123,7 @@ contract hand {
 
 In Solang, CPI is simpler than in Anchor Rust. Using
 
- the syntax `<address>.call()`, a CPI is automatically constructed, and Solang takes care of `invoke` or `invoke_signed`.
+ The syntax `<address>.call()`, a CPI is automatically constructed, and Solang takes care of `invoke` or `invoke_signed`.
 
 ### Up Next
 

@@ -4,7 +4,7 @@ author: Shivam
 moduleNumber: module-6
 modulePart: module-6-b
 thisFileName: dapp-mint-to
-orderNumber: "1"
+orderNumber: "4"
 modulePartDescription: In this part, you will learn how to edit and create components for minting tokens directly to the minter's wallet on the frontend side of your DApp.
 ---
 
@@ -17,11 +17,11 @@ Let's mint tokens directly to the Minter's Wallet. Here's how you can do it:
 
 When you use the "`mintTo`" function, it starts by getting a mint key from the user through a form. This mint key comes from the token the user minted.
 
-Additionally, you take the token amount the user enters and adjust it for the smallest fractions of the token (called lmports). For example:
+Additionally, you take the token amount the user enters and adjust it for the smallest fractions of the token (called lamports). For example:
 
 ```tsx
 let amount = event.target.amount.value;
-amount = amount * 10 ** 9; // 10^9 lmports (fractions) of that token
+amount = amount * 10 ** 9; // 10^9 lamports (fractions) of that token
 ```
 
 ## Creating an Associated Token Account (ATA)
@@ -30,11 +30,11 @@ Next, we create an Associated Token Account (ATA) for the minter using their wal
 
 ```tsx
 const associatedToken = await getAssociatedTokenAddress(
-    mintPubKey,
-    publicKey,
+ mintPubKey,
+ publicKey,
     false,
-    TOKEN_PROGRAM_ID,
-    ASSOCIATED_TOKEN_PROGRAM_ID
+ TOKEN_PROGRAM_ID,
+ ASSOCIATED_TOKEN_PROGRAM_ID
 );
 ```
 
@@ -46,9 +46,9 @@ Now, we set up the RPC call to mint tokens into the user’s ATA.
 const createMint = await program.methods
     .mintTo(amount)
     .accounts({
-        mint: mintPubKey,
-        tokenAccount: associatedToken,
-        mintAuthority: publicKey,
+ mint: mintPubKey,
+ tokenAccount: associatedToken,
+ mintAuthority: publicKey,
     })
     .rpc({ skipPreflight: true });
 ```
@@ -62,13 +62,13 @@ It's equivalent to this Solidity function:
 @mutableAccount(tokenAccount)
 @mutableSigner(mintAuthority)
 function mintTo(uint64 amount) external {
-    // Mint tokens to the token account
-    SplToken.mint_to(
-        tx.accounts.mint.key, // mint account
-        tx.accounts.tokenAccount.key, // token account
-        tx.accounts.mintAuthority.key, // mint authority
-        amount // amount
-    );
+ // Mint tokens to the token account
+ SplToken.mint_to(
+ tx.accounts.mint.key, // mint account
+ tx.accounts.tokenAccount.key, // token account
+ tx.accounts.mintAuthority.key, // mint authority
+ amount // amount
+ );
 }
 ```
 

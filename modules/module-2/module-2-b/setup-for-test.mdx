@@ -3,8 +3,8 @@ title: Setting Up Tests for Minting Program
 author: Shivam
 moduleNumber: module-2
 modulePart: module-2-b
-thisFileName: setup-for-testing-mint-program
-orderNumber: "1"
+thisFileName: setup-for-test
+orderNumber: "3"
 modulePartDescription: This section focuses on creating a minting program using Solidity. You'll learn how to set up and run tests for your project, create and mint SPL tokens using Solidity, and write test cases for your Solidity code.
 ---
 
@@ -18,7 +18,7 @@ In this lesson, you will:
 
 ## Quick Overview
 
-We'll set up the development environment by installing necessary dependencies in the package.json file. We'll also create and mint SPL tokens for our program and write test cases for our Solidity code.
+We'll set up the development environment by installing the necessary dependencies in the package.json file. We'll also create and mint SPL tokens for our program and write test cases for our Solidity code.
 
 ## Setting Up
 
@@ -73,18 +73,18 @@ import * as anchor from "@coral-xyz/anchor";
 import { Program } from "@coral-xyz/anchor";
 import { SplTokenMinter } from "../target/types/spl_token_minter";
 import {
-  PublicKey,
-  SystemProgram,
-  SYSVAR_RENT_PUBKEY,
-  LAMPORTS_PER_SOL,
+ PublicKey,
+ SystemProgram,
+ SYSVAR_RENT_PUBKEY,
+ LAMPORTS_PER_SOL,
 } from "@solana/web3.js";
 import { Metaplex } from "@metaplex-foundation/js";
 import { assert } from "chai";
 import {
-  ASSOCIATED_TOKEN_PROGRAM_ID,
-  getOrCreateAssociatedTokenAccount,
-  TOKEN_PROGRAM_ID,
-  getAccount,
+ ASSOCIATED_TOKEN_PROGRAM_ID,
+ getOrCreateAssociatedTokenAccount,
+ TOKEN_PROGRAM_ID,
+ getAccount,
 } from "@solana/spl-token";
 ```
 
@@ -131,40 +131,40 @@ it("Create an SPL Token!", async () => {
   // Crafting the token mint
   const tx = await program.methods
     .createTokenMint(
-      wallet.publicKey, // payer
-      mintKeypair.publicKey, // mint
-      wallet.publicKey, // mint authority
-      wallet.publicKey, // freeze authority
-      metadataAddress, // metadata address
+ wallet.publicKey, // payer
+ mintKeypair.publicKey, // mint
+ wallet.publicKey, // mint authority
+ wallet.publicKey, // freeze authority
+ metadataAddress, // metadata address
       9, // decimals
-      tokenTitle, // token name
-      tokenSymbol, // token symbol
-      tokenUri // token uri
+ tokenTitle, // token name
+ tokenSymbol, // token symbol
+ tokenUri // token uri
     )
     .accounts({ dataAccount: dataAccount.publicKey })
     .remainingAccounts([
       {
-        pubkey: wallet.publicKey,
-        isWritable: true,
-        isSigner: true,
+ pubkey: wallet.publicKey,
+ isWritable: true,
+ isSigner: true,
       },
       { pubkey: tokenAccount.address, isWritable: true, isSigner: false },
       { pubkey: mintKeypair.publicKey, isWritable: true, isSigner: false },
       {
-        pubkey: SystemProgram.programId,
-        isWritable: false,
-        isSigner: false,
+ pubkey: SystemProgram.programId,
+ isWritable: false,
+ isSigner: false,
       },
       { pubkey: TOKEN_PROGRAM_ID, isWritable: false, isSigner: false },
       {
-        pubkey: ASSOCIATED_TOKEN_PROGRAM_ID,
-        isWritable: false,
-        isSigner: false,
+ pubkey: ASSOCIATED_TOKEN_PROGRAM_ID,
+ isWritable: false,
+ isSigner: false,
       },
     ])
     .signers([mintKeypair])
     .rpc({ skipPreflight: true });
-  console.log("Your transaction signature", tx);
+ console.log("Your transaction signature", tx);
 });
 ```
 
@@ -176,49 +176,49 @@ To mint "Solana Pro" tokens to your wallet, follow this script:
 it("Mint some tokens to your wallet!", async () => {
   // Preparing the wallet's associated token account
   const tokenAccount = await getOrCreateAssociatedTokenAccount(
-    connection,
-    wallet.payer, // payer
-    mintKeypair.publicKey, // mint
-    wallet.publicKey // owner
+ connection,
+ wallet.payer, // payer
+ mintKeypair.publicKey, // mint
+ wallet.publicKey // owner
   );
 
   // Executing the minting process
   const tx = await program.methods
     .mintTo(
-      wallet.publicKey, // payer
-      tokenAccount.address, // associated token account address
-      mintKeypair.publicKey, // mint
+ wallet.publicKey, // payer
+ tokenAccount.address, // associated token account address
+ mintKeypair.publicKey, // mint
       new anchor.BN(15900000000) // amount to mint
     )
     .accounts({ dataAccount: dataAccount.publicKey })
     .remainingAccounts([
       {
-        pubkey: wallet.publicKey,
-        isWritable: true,
-        isSigner: true,
+ pubkey: wallet.publicKey,
+ isWritable: true,
+ isSigner: true,
       },
       { pubkey: tokenAccount.address, isWritable: true, isSigner: false },
       { pubkey: mintKeypair.publicKey, isWritable: true, isSigner: false },
       {
-        pubkey: SystemProgram.programId,
-        isWritable: false,
-        isSigner: false,
+ pubkey: SystemProgram.programId,
+ isWritable: false,
+ isSigner: false,
       },
       { pubkey: TOKEN_PROGRAM_ID, isWritable: false, isSigner: false },
       {
-        pubkey: ASSOCIATED_TOKEN_PROGRAM_ID,
-        isWritable: false,
-        isSigner: false,
+ pubkey: ASSOCIATED_TOKEN_PROGRAM_ID,
+ isWritable: false,
+ isSigner: false,
       },
     ])
     .rpc({ skipPreflight: true });
-  console.log("Your transaction signature", tx);
+ console.log("Your transaction signature", tx);
 });
 ```
 
-In this part, we first establish an associated token account that connects the token mint to the user's wallet address. This is done using the `getOrCreateAssociatedTokenAccount()` function, which takes the connection, payer (associated with the wallet), mint, and owner (wallet's owner) as parameters.
+In this part, we first establish an associated token account that connects the token mint to the user's wallet address. This is done using the `getOrCreateAssociatedTokenAccount()` function, which takes the connection, payer (associated with the wallet), mint, and the owner (wallet's owner) as parameters.
 
-After setting up the token account, we proceed to mint tokens using the `mintTo` method from our `spl-token-minter` program. This method requires important parameters like the wallet, the address of the associated token account, the mint keypair, and the quantity of tokens to mint. It also includes all necessary accounts and signers to facilitate the minting process.
+After setting up the token account, we proceed to mint tokens using the `mintTo` method from our `spl-token-minter` program. This method requires important parameters like the wallet, the address of the associated token account, the mint keypair, and the number of tokens to mint. It also includes all necessary accounts and signers to facilitate the minting process.
 
 Finally, to confirm that our tokens have been successfully minted, we check the token balance:
 

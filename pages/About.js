@@ -1,12 +1,10 @@
 import { React } from "react";
-import illustration from "../assets/illustration.png";
 import Image from "next/image";
 import { NextSeo } from "next-seo";
 import Layout from "../components/Layout";
 import Link from "next/link";
 
-
-{/* <Link className="underline decoration-[#3f6212] decoration-wavy hover:bg-blue-300 hover:text-black" href={'https://ethereum.org/en/'}>EVM</Link> */}
+import illustration from "../assets/illustration.png";
 
 const About = () => {
   return (

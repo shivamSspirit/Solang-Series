@@ -5,8 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image'
 
 function ColorModuleParts({moduleColor,currentpath, orderedLessions,activeFileName}) {
-   console.log("currentpath",currentpath)
-  return (
+    return (
     <div className={`${moduleColor} p-10 rounded-[0.99rem]`}>
     <div>
       <NextBreadcrumb
@@ -28,9 +27,7 @@ function ColorModuleParts({moduleColor,currentpath, orderedLessions,activeFileNa
           <div>
             {orderedLessions?.map((lession, idx) => (
               <div key={idx} id='breadcrumbs-one' className ='mb-1'>
-              {/* {console.log("lession",lession)} */}
                 <li>
-                  {/* {console.log("filename",lession)} */}
                   <Link className={`${activeFileName===lession.thisFileName?"active":""}`}  href={`/CourseContent${lession.slug}`}>
                     {lession?._raw?.sourceFileName?.replace(/\.mdx$/, "")}
                   </Link>
@@ -50,7 +47,6 @@ function ColorModuleParts({moduleColor,currentpath, orderedLessions,activeFileNa
         </div>
       </div>
     </div>
-  
   </div>
   )
 }

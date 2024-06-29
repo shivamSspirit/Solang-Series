@@ -1,30 +1,23 @@
-import React, { ReactNode } from "react";
-import { usePathname } from "next/navigation";
+import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 const NextBreadcrumb = ({ capitalizeLinks, currentpath }) => {
   const router = useRouter();
-  // console.log("router",router)
   const trimmedPath = currentpath?.split("/");
 
   const pathNames = trimmedPath?.filter((path) => {
     return path;
   });
 
-  console.log("trimmedPath", trimmedPath);
-  console.log("pathNames",pathNames)
-
-  
-
-
+  console.log("pathNames;",pathNames);
+  console.log("trimmedPath;",trimmedPath);
 
 
   return (
     <div>
       <ul id='breadcrumbs-one' className='hidden lg:flex'>
         {pathNames?.map((link, index) => {
-           console.log("trimmedPat",trimmedPath?.slice(2, index + 2)?.join("/"))
           let href =
             index <= 1
               ? `/CourseContent`

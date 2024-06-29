@@ -4,7 +4,7 @@ author: Shivam
 moduleNumber: module-1
 modulePart: module-1-b
 thisFileName: datatype
-orderNumber: "4"
+orderNumber: "8"
 modulePartDescription: This part of the module dives into the basic data types in Solidity used for building Solana programs.
 ---
 
@@ -33,7 +33,7 @@ Here's a rundown of the primary data types in Solidity:
 
 3. **Fixed-Length Byte Arrays**: Unique to Solidity, these are arrays of 1 to 32 bytes, like bytes32, bytes24, bytes8, or bytes1. `byte` is an alias for `bytes1`. Initialize these arrays with a hex string (e.g., hex"414243"), a text string ("ABC"), or a hex value (0x414243).
    ```Solidity
-   bytes4 foo = "ABCD"; bytes4 bar = hex"41_42_43_44";
+ bytes4 foo = "ABCD"; bytes4 bar = hex"41_42_43_44";
    ```
 4. **Address Types**:
    - **Regular Address**: Holds a 20-byte EVM account address or a 32-byte Solana account address.
@@ -41,26 +41,26 @@ Here's a rundown of the primary data types in Solidity:
 
 5. **Fixed-Length Arrays**: Created with `[length]` after the type name. They can contain any data type, including other arrays.
 
-6. **Function Types**: Refer to functions and come in two flavors: internal and external. Internal functions are within the same contract or its base contracts. External functions reference public or external functions on any contract. Function types specify parameter types, return types, and mutability.
+6. **Function Types**: Refer to functions and come in two flavours: internal and external. Internal functions are within the same contract or its base contracts. External functions reference public or external functions on any contract. Function types specify parameter types, return types, and mutability.
 
 ```Solidity
 contract ft {
-  function test() public {
-    function(int32, bool) internal returns(bool) x;
-    x
+ function test() public {
+ function(int32, bool) internal returns(bool) x;
+ x
 
  = func1;
 
-    // Call func1 via x
-    bool res = x(102, false);
+ // Call func1 via x
+ bool res = x(102, false);
 
-    // Define a function type with no return values, must be pure
-    function(int32, bool) internal pure y;
-  }
+ // Define a function type with no return values, must be pure
+ function(int32, bool) internal pure y;
+ }
 
-  function func1(int32 arg, bool arg2) internal view returns(bool) {
-    return false;
-  }
+ function func1(int32 arg, bool arg2) internal view returns(bool) {
+ return false;
+ }
 }
 ```
 
@@ -68,25 +68,25 @@ External function types store both the contract address and function selector. A
 
 ```Solidity
 contract ft {
-  function test(address p) external {
-    paffling.set_callback{ program_id: p } (this.callback);
-  }
+ function test(address p) external {
+ paffling.set_callback{ program_id: p } (this.callback);
+ }
 
-  function callback(int32 count, string foo) public {
-    // ...
-  }
+ function callback(int32 count, string foo) public {
+ // ...
+ }
 }
 
 contract paffling {
-  function(int32, string) external internal callback;
+ function(int32, string) external internal callback;
 
-  function set_callback(function(int32, string) external c) public {
-    callback = c;
-  }
+ function set_callback(function(int32, string) external c) public {
+ callback = c;
+ }
 
-  function piffle() public {
-    callback{ accounts: [] } (1, "paffled");
-  }
+ function piffle() public {
+ callback{ accounts: [] } (1, "paffled");
+ }
 }
 ```
 
@@ -94,7 +94,7 @@ On Solana, for calls from variables of external function types, you must use the
 
 ```Solidity
 function test(function(int32, string) external myFunc) public {
-  myFunc{accounts: []}(24, "accounts");
+ myFunc{accounts: []}(24, "accounts");
 }
 ```
 

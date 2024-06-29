@@ -266,9 +266,13 @@ html {
 
 /* scroll to top override */
 
-/* .scroll-to-top{
-  left: 0 !important;
+.scroll-to-top{
+  right: 20px !important;
+  border-radius: 48% !important;
+  /* background: none !important;
+ display: none !important; */
+  /* left: 0 !important;
   position: relative !important;
   background-color:rgb(46, 44, 44) !important;
-  bottom: 0 !important;
-} */
+  bottom: 0 !important; */
+}

@@ -4,11 +4,13 @@ author: Shivam
 moduleNumber: module-5
 modulePart: module-5-b
 thisFileName: solang-review
-orderNumber: "0"
+orderNumber: "3"
 modulePartDescription: This part provides an in-depth exploration of key Solang Solidity concepts for implementing NFT minting and transfer on Solana, with a focus on Program Derived Addresses (PDAs).
 ---
 
 ## Overview
+
+Embark on a detailed exploration of Solang, a tool that adapts Solidity for Solana, and understand its unique approaches to NFT minting and transfer. We'll cover crucial concepts including Mint and Token Accounts, Solang contracts, PDA derivation, and accessing account data.
 
 Embark on a detailed exploration of Solang, a tool that adapts Solidity for Solana, and understand its unique approaches to NFT minting and transfer. We'll cover crucial concepts including Mint and Token Accounts, Solang contracts, PDA derivation, and accessing account data.
 
@@ -18,7 +20,7 @@ Embark on a detailed exploration of Solang, a tool that adapts Solidity for Sola
 
 - **Token Accounts**: Each token account stores the tokens owned by a specific public key. These accounts are managed by the Token program and control access to the tokens through fields like owner, close authority, and delegate. 
 
-{/* here's the one for invoking the token program to mint tokens */}
+
 Here's an example of invoking the token program to mint tokens:
 ![mint acc](/moduleimages/mint_acc.jpeg)
 
@@ -35,7 +37,7 @@ Program Derived Addresses (PDAs) are central to Solang's operation in Solana, es
 
 - **Seeds and Bumps**: Seeds (such as strings or user public keys) and a bump value are combined to create PDAs. The bump is adjusted until a valid off-curve address is generated. 
 
-- **try_find_program_address Method**: This Solang function returns the PDA and the seed bump. It's crucial for creating addresses that programs can control.
+- **try_find_program_address Method**: This Solang function returns the PDA and the seed bump. It's crucial to create addresses that programs can control.
 
 ### Accessing Account Data
 
@@ -73,25 +75,25 @@ Understanding the concepts of space, seeds, payer, and bump is crucial in Solang
 
 - **Contract Annotations and Constructors**: Solang uses special annotations for constructors, defining the space, seeds, payer, and bump. These annotations control the creation and management of accounts associated with a contract.
 
-  ```Solidity
-  @program_id("Foo5mMfYo5RhRcWa4NZ2bwFn4Kdhe8rNK5jchxsKrivA")
-  contract Example {
-      @space(500 + 12)
-      @seed("ExampleSeed")
-      constructor(@seed bytes seed_val,@bump bytes1 bump_val) {
-          // ...
-      }
-  }
+```Solidity
+ @program_id("Foo5mMfYo5RhRcWa4NZ2bwFn4Kdhe8rNK5jchxsKrivA")
+ contract Example {
+ @space(500 + 12)
+ @seed("ExampleSeed")
+ constructor(@seed bytes seed_val,@bump bytes1 bump_val) {
+ // ...
+ }
+ }
   ```
 
 - **Creating PDAs for Minting and Transferring NFTs**: Utilizing the `try_find_program_address` function in Solang allows for the generation of PDAs, which are crucial for minting and transferring NFTs.
 
-  ```solidity
-  contract pda {
-      function create_pda(bytes seed2) public returns (address, bytes1) {
-          return try_find_program_address(["seed", seed2], program_id);
-      }
-  }
+```solidity
+ contract pda {
+ function create_pda(bytes seed2) public returns (address, bytes1) {
+ return try_find_program_address(["seed", seed2], program_id);
+ }
+ }
   ```
 
 Understanding these aspects of Solang Solidity is key to developing effective NFT minting and transfer programs on Solana. Each element—from contract structure to PDA creation—plays a vital role in leveraging Solana's capabilities through Solidity.

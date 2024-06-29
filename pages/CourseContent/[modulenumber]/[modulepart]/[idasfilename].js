@@ -8,6 +8,7 @@ import { NextSeo } from "next-seo";
 import ColorModuleParts from "../../../../components/ColorModuleParts";
 import Prism from "prismjs";
 import ScrollToTop from "react-scroll-to-top";
+import {findNavs} from '../../../../shared/navtoroute'
 
 require("prismjs/components/prism-solidity");
 require("prismjs/components/prism-typescript");
@@ -22,11 +23,11 @@ import {
   MdxH5,
   MdxH6,
 } from "../../../../components/Mdxheadings";
+import Link  from "next/link";
 
 export async function getStaticPaths() {
   // Get a list of valid post paths.
   const paths = allDocuments.map((lession) => {
-    // console.log("lessions",lession)
     return {
       params: {
         modulenumber: lession?.moduleNumber,
@@ -41,13 +42,10 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const filteredParts = allDocuments.filter((lession) => {
-    console.log("lession",lession)
     return (
       lession.moduleNumber === `${context.params.modulenumber}` &&
       lession.modulePart === `${context.params.modulepart}`
     );
-
-    
   });
 
   // Extracting total files to get its length
@@ -57,10 +55,7 @@ export async function getStaticProps(context) {
 
   const totalLessionsortedbymoduleparts = totallessions
     ?.sort((a, b) => a.moduleParts - b.moduleParts)
-    .map((item, index) => {
-      // Use 'item' as the current object with orderNumber
-      // 'index' is the current position from 0 to n
-      // Add your logic here
+    .map((item) => {
       return item; // or transform 'item' if needed
     });
 
@@ -77,10 +72,6 @@ export async function getStaticProps(context) {
       ? lastLetter.charCodeAt(0) - "a".charCodeAt(0) + 2
       : lastLetter.charCodeAt(0) - "a".charCodeAt(0) + 1;
 
-  // console.log("titalpartsss", totalParts);
-
-  // console.log(totalParts, " Total Parts");
-
   const lession = allDocuments?.find(
     (lession) =>
       lession?._raw?.flattenedPath ===
@@ -89,11 +80,129 @@ export async function getStaticProps(context) {
 
   if (!lession) return { notFound: true };
 
-  // Return the post as page props.
   return {
     props: { lession, totalParts, filteredParts, totallessions, lastLetter },
   };
 }
+
+
+const returnModuleBGColor = (moduleNumber) => {
+  if (moduleNumber === "module-0") {
+    return "bg-[#bfbfff]";
+  } else if (moduleNumber === "module-1") {
+    return "bg-[#A3B86C]";
+  } else if (moduleNumber === "module-2") {
+    return "bg-[#CFB53B]";
+  } else if (moduleNumber === "module-3") {
+    return "bg-[#CD853F]";
+  } else if (moduleNumber === "module-4") {
+    return "bg-[#63a4da]";
+  } else if (moduleNumber === "module-5") {
+    return "bg-[#e5acb6]";
+  } else if (moduleNumber === "module-6") {
+    return "bg-[#efc070]";
+  } else if (moduleNumber === "module-7") {
+    return "bg-[#F8C794]";
+  }
+};
+
+const returnLessionColors = (lessionNumber) => {
+  console.log("lessionNumber", lessionNumber);
+  if (lessionNumber === "module-0") {
+    return {
+      blockquote: "prose-blockquote:text-[#bfbfff]",
+      codeColor: "prose-code:text-[#bfbfff]",
+      text_color: "text-[#bfbfff]",
+      link_hover: "hover:prose-a:decoration-[#bfbfff]",
+      headingsColor: "prose-strong:text-[#bfbfff]",
+      border_color: "border-[#bfbfff]",
+      imgBorderColor: "prose-img:border-[#bfbfff]",
+      link_color: "prose-a:text-[#bfbfff]",
+    };
+  } else if (lessionNumber === "module-1") {
+    return {
+      blockquote: "prose-blockquote:text-[#A3B86C]",
+      codeColor: "prose-code:text-[#A3B86C]",
+      text_color: "text-[#A3B86C]",
+      link_hover: "hover:prose-a:decoration-[#A3B86C]",
+      headingsColor: "prose-strong:text-[#A3B86C]",
+      border_color: "border-[#A3B86C]",
+      imgBorderColor: "prose-img:border-[#A3B86C]",
+      link_color: "prose-a:text-[#A3B86C]",
+    };
+  } else if (lessionNumber === "module-2") {
+    return {
+      blockquote: "prose-blockquote:text-[#CFB53B]",
+      codeColor: "prose-code:text-[#CFB53B]",
+      text_color: "text-[#CFB53B]",
+      link_hover: "hover:prose-a:decoration-[#CFB53B]",
+      headingsColor: "prose-strong:text-[#CFB53B]",
+      border_color: "border-[#CFB53B]",
+      imgBorderColor: "prose-img:border-[#CFB53B]",
+      link_color: "prose-a:text-[#CFB53B]",
+    };
+  } else if (lessionNumber === "module-3") {
+    return {
+      blockquote: "prose-blockquote:text-[#CD853F]",
+      codeColor: "prose-code:text-[#CD853F]",
+      text_color: "text-[#CD853F]",
+      link_hover: "hover:prose-a:decoration-[#CD853F]",
+      headingsColor: "prose-strong:text-[#CD853F]",
+      border_color: "border-[#CD853F]",
+      imgBorderColor: "prose-img:border-[#CD853F]",
+      link_color: "prose-a:text-[#CD853F]",
+    };
+  } else if (lessionNumber === "module-4") {
+    return {
+      blockquote: "prose-blockquote:text-[#63a4da]",
+      codeColor: "prose-code:text-[#63a4da]",
+      text_color: "text-[#63a4da]",
+      link_hover: "hover:prose-a:decoration-[#63a4da]",
+      headingsColor: "prose-strong:text-[#63a4da]",
+      border_color: "border-[#63a4da]",
+      imgBorderColor: "prose-img:border-[#63a4da]",
+      link_color: "prose-a:text-[#63a4da]",
+    };
+  } else if (lessionNumber === "module-5") {
+    console.log("module-555");
+    return {
+      blockquote: "prose-blockquote:text-[#e5acb6]",
+      codeColor: "prose-code:text-[#e5acb6]",
+      text_color: "text-[#e5acb6]",
+      link_hover: "hover:prose-a:decoration-[#e5acb6]",
+      headingsColor: "prose-strong:text-[#e5acb6]",
+      border_color: "border-[#e5acb6]",
+      imgBorderColor: "prose-img:border-[#e5acb6]",
+      link_color: "prose-a:text-[#e5acb6]",
+    };
+  } else if (lessionNumber === "module-6") {
+    console.log("module-666");
+    return {
+      blockquote: "prose-blockquote:text-[#efc070]",
+      codeColor: "prose-code:text-[#efc070]",
+      text_color: "text-[#efc070]",
+      link_hover: "hover:prose-a:decoration-[#efc070]",
+      headingsColor: "prose-strong:text-[#efc070]",
+      border_color: "border-[#efc070]",
+      imgBorderColor: "prose-img:border-[#efc070]",
+      link_color: "prose-a:text-[#efc070]",
+    };
+  } else if (lessionNumber === "module-7") {
+    console.log("module-777");
+    return {
+      blockquote: "prose-blockquote:text-[#F8C794]",
+      codeColor: "prose-code:text-[#F8C794]",
+      text_color: "text-[#F8C794]",
+      link_hover: "hover:prose-a:decoration-[#F8C794]",
+      headingsColor: "prose-strong:text-[#F8C794]",
+      border_color: "border-[#F8C794]",
+      imgBorderColor: "prose-img:border-[#F8C794]",
+      link_color: "prose-a:text-[#F8C794]",
+    };
+  }
+};
+
+
 
 const GeneralInfo = ({
   lession,
@@ -103,9 +212,6 @@ const GeneralInfo = ({
   const MDXContent = useMDXComponent(lession.body.code);
   const router = useRouter();
 
-  // console.log(lession.body.raw, " RAW DATA");
-
-  // console.log("filtered Parts:",filteredParts)
   const mdxComponents = {
     h1: MdxH1,
     h2: MdxH2,
@@ -126,6 +232,8 @@ const GeneralInfo = ({
     });
 
   const { modulenumber, modulepart, idasfilename } = router.query;
+
+
   const currentpath = `/CourseContent/${modulenumber}/${modulepart}/${idasfilename}`;
 
   const [prevPg, nextPg, prevPgText, nextPgText] = changePartFunction({
@@ -134,133 +242,27 @@ const GeneralInfo = ({
     totalParts,
   });
 
-  console.log("ooooks", {
-    prevPg, nextPg, prevPgText, nextPgText
-  });
+    /** new routes start  */
+    const {prevPG,nextPG,currentModuleNumber,
+      currentModuleNumberforPrev,
+      moduleChar, NextFile, prevFile, moduleCharNext} = findNavs(allDocuments, modulenumber,modulepart,totalParts,idasfilename, lession);
+
+    // console.log("routes",{
+    //   prevPage,NextPage,lession
+    // })
+  
+    /** new routes end here */
 
 
-  const returnModuleColor = (moduleNumber) => {
-    if (moduleNumber === "module-0") {
-      return "bg-[#bfbfff]";
-    } else if (moduleNumber === "module-1") {
-      return "bg-[#A3B86C]";
-    } else if (moduleNumber === "module-2") {
-      return "bg-[#CFB53B]";
-    } else if (moduleNumber === "module-3") {
-      return "bg-[#CD853F]";
-    } else if (moduleNumber === "module-4") {
-      return "bg-[#63a4da]";
-    } else if (moduleNumber === "module-5") {
-      return "bg-[#e5acb6]";
-    } else if (moduleNumber === "module-6") {
-      return "bg-[#efc070]";
-    } else if(moduleNumber === "module-7"){
-      return "bg-[#F8C794]";
-    }
-  };
 
-  const returnLessionColors = (lessionNumber) => {
-    console.log("lessionNumber",lessionNumber)
-    if (lessionNumber === "module-0") {
-      return {
-        blockquote: "prose-blockquote:text-[#bfbfff]",
-        codeColor: "prose-code:text-[#bfbfff]",
-        text_color: "text-[#bfbfff]",
-        link_hover: "hover:prose-a:decoration-[#bfbfff]",
-        headingsColor: "prose-strong:text-[#bfbfff]",
-        border_color: "border-[#bfbfff]",
-        imgBorderColor: "prose-img:border-[#bfbfff]",
-        link_color: "prose-a:text-[#bfbfff]",
-      };
-    } else if (lessionNumber === "module-1") {
-      return {
-        blockquote: "prose-blockquote:text-[#A3B86C]",
-        codeColor: "prose-code:text-[#A3B86C]",
-        text_color: "text-[#A3B86C]",
-        link_hover: "hover:prose-a:decoration-[#A3B86C]",
-        headingsColor: "prose-strong:text-[#A3B86C]",
-        border_color: "border-[#A3B86C]",
-        imgBorderColor: "prose-img:border-[#A3B86C]",
-        link_color: "prose-a:text-[#A3B86C]",
-      };
-    } else if (lessionNumber === "module-2") {
-      return {
-        blockquote: "prose-blockquote:text-[#CFB53B]",
-        codeColor: "prose-code:text-[#CFB53B]",
-        text_color: "text-[#CFB53B]",
-        link_hover: "hover:prose-a:decoration-[#CFB53B]",
-        headingsColor: "prose-strong:text-[#CFB53B]",
-        border_color: "border-[#CFB53B]",
-        imgBorderColor: "prose-img:border-[#CFB53B]",
-        link_color: "prose-a:text-[#CFB53B]",
-      };
-    } else if (lessionNumber === "module-3") {
-      return {
-        blockquote: "prose-blockquote:text-[#CD853F]",
-        codeColor: "prose-code:text-[#CD853F]",
-        text_color: "text-[#CD853F]",
-        link_hover: "hover:prose-a:decoration-[#CD853F]",
-        headingsColor: "prose-strong:text-[#CD853F]",
-        border_color: "border-[#CD853F]",
-        imgBorderColor: "prose-img:border-[#CD853F]",
-        link_color: "prose-a:text-[#CD853F]",
-      };
-    } else if (lessionNumber === "module-4") {
-      return {
-        blockquote: "prose-blockquote:text-[#63a4da]",
-        codeColor: "prose-code:text-[#63a4da]",
-        text_color: "text-[#63a4da]",
-        link_hover: "hover:prose-a:decoration-[#63a4da]",
-        headingsColor: "prose-strong:text-[#63a4da]",
-        border_color: "border-[#63a4da]",
-        imgBorderColor: "prose-img:border-[#63a4da]",
-        link_color: "prose-a:text-[#63a4da]",
-      };
-    } else if (lessionNumber === "module-5") {
-      console.log("module-555")
-      return {
-        blockquote: "prose-blockquote:text-[#e5acb6]",
-        codeColor: "prose-code:text-[#e5acb6]",
-        text_color: "text-[#e5acb6]",
-        link_hover: "hover:prose-a:decoration-[#e5acb6]",
-        headingsColor: "prose-strong:text-[#e5acb6]",
-        border_color: "border-[#e5acb6]",
-        imgBorderColor: "prose-img:border-[#e5acb6]",
-        link_color: "prose-a:text-[#e5acb6]",
-      };
-    } else if (lessionNumber === "module-6") {
-      console.log("module-666")
-      return {
-        blockquote: "prose-blockquote:text-[#efc070]",
-        codeColor: "prose-code:text-[#efc070]",
-        text_color: "text-[#efc070]",
-        link_hover: "hover:prose-a:decoration-[#efc070]",
-        headingsColor: "prose-strong:text-[#efc070]",
-        border_color: "border-[#efc070]",
-        imgBorderColor: "prose-img:border-[#efc070]",
-        link_color: "prose-a:text-[#efc070]",
-      }; 
-
-  } else if (lessionNumber === "module-7") {
-    console.log("module-777")
-    return {
-      blockquote: "prose-blockquote:text-[#F8C794]",
-      codeColor: "prose-code:text-[#F8C794]",
-      text_color: "text-[#F8C794]",
-      link_hover: "hover:prose-a:decoration-[#F8C794]",
-      headingsColor: "prose-strong:text-[#F8C794]",
-      border_color: "border-[#F8C794]",
-      imgBorderColor: "prose-img:border-[#F8C794]",
-      link_color: "prose-a:text-[#F8C794]",
-    };
-}
-
-}
 
   return (
     <Layout>
+
+     {/* /**to do */}
+     {/* <ScrollToTop smooth component={<MyArrow/>} /> */}
       <div className='my-12'>
-        <ScrollToTop smooth color="#6f00ff" />
+      
       <NextSeo
             title="Soldity On Solana"
             titleTemplate="Soldity On Solana"
@@ -286,10 +288,10 @@ const GeneralInfo = ({
               cardType: "summary_large_image",
             }}
           />
-
+        
         <div className='flex sm:flex-col justify-between'>
           <ColorModuleParts
-            moduleColor={returnModuleColor(lession?.moduleNumber)}
+            moduleColor={returnModuleBGColor(lession?.moduleNumber)}
             currentpath={currentpath}
             orderedLessions={orderedLessions}
             activeFileName={idasfilename}
@@ -351,20 +353,24 @@ const GeneralInfo = ({
 
         <div className='mt-20 w-full flex justify-between text-white'>
           <div className=''>
-            {prevPg && (
-              <a href={prevPg} className='flex flex-col'>
-                <span>Part {prevPgText}</span>
-                <span>Previous Part</span>
-              </a>
+            {prevPG!==null ? (
+              <Link href={`/${prevPG}`} className='flex flex-col hover:underline'>
+                <span>{`module-${currentModuleNumberforPrev}-${moduleChar}`}</span>
+                 <span>{`${prevFile}...`}</span>
+              </Link>
+            ):(
+              ''
             )}
           </div>
 
           <div className=''>
-            {nextPg && (
-              <a href={nextPg} className='flex flex-col justify-end'>
-                <span>Part {nextPgText}</span>
-                <span>Next Part</span>
-              </a>
+            {nextPG!==null ? (
+              <Link href={`/${nextPG}`} className='flex flex-col justify-end hover:underline'>
+                <span>{`module-${currentModuleNumber}-${moduleCharNext}`}</span>
+                <span>{`${NextFile}...`}</span>
+              </Link>
+            ):(
+              ''
             )}
           </div>
         </div>

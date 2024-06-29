@@ -4,7 +4,7 @@ author: Shivam
 moduleNumber: module-6
 modulePart: module-6-b
 thisFileName: dapp-transfer-tkn
-orderNumber: "2"
+orderNumber: "5"
 modulePartDescription: In this part, you'll learn about editing and creating components to enable the transfer of Solana tokens within your DApp.
 ---
 
@@ -30,13 +30,13 @@ Next, we collect user input for the following:
 - `recipientPubKey`: The public key of the recipient.
 - `amount`: The amount of tokens to be transferred.
 
-We adjust the amount to account for the smallest token divisions (lmports):
+We adjust the amount to account for the smallest token divisions (lamports):
 
 ```tsx
 const mintPubKey = new web3.PublicKey(event.target.mint.value);
 const recipientPubKey = new web3.PublicKey(event.target.recipient.value);
 let amount = event.target.amount.value;
-amount = amount * 10 ** 9; // Adjusting for lmports
+amount = amount * 10 ** 9; // Adjusting for lamports
 ```
 
 ## Creating Associated Token Accounts (ATAs)
@@ -45,19 +45,19 @@ We need to create ATAs for both the sender and the recipient, using the same tok
 
 ```tsx
 const senderAta = await getAssociatedTokenAddress(
-    mintPubKey,
-    publicKey,
+ mintPubKey,
+ publicKey,
     false,
-    TOKEN_PROGRAM_ID,
-    ASSOCIATED_TOKEN_PROGRAM_ID
+ TOKEN_PROGRAM_ID,
+ ASSOCIATED_TOKEN_PROGRAM_ID
 );
 
 const receiverAta = await getAssociatedTokenAddress(
-    mintPubKey,
-    recipientPubKey,
+ mintPubKey,
+ recipientPubKey,
     false,
-    TOKEN_PROGRAM_ID,
-    ASSOCIATED_TOKEN_PROGRAM_ID
+ TOKEN_PROGRAM_ID,
+ ASSOCIATED_TOKEN_PROGRAM_ID
 );
 ```
 
@@ -69,14 +69,14 @@ Next, we check if the receiver's ATA exists and, if not, add an instruction to c
 try {
     await getAccount(connection, receiverAta);
 } catch (e) {
-    transaction.add(
+ transaction.add(
         createAssociatedTokenAccountInstruction(
-            publicKey,
-            receiverAta,
-            recipientPubKey,
-            mintPubKey,
-            TOKEN_PROGRAM_ID,
-            ASSOCIATED_TOKEN_PROGRAM_ID
+ publicKey,
+ receiverAta,
+ recipientPubKey,
+ mintPubKey,
+ TOKEN_PROGRAM_ID,
+ ASSOCIATED_TOKEN_PROGRAM_ID
         )
     );
 }
@@ -90,9 +90,9 @@ Finally, we set up the RPC call to transfer tokens using the contract's methods:
 const transferTx = await program.methods
     .transferTokens(amount)
     .accounts({
-        from: senderAta,
-        to: receiverAta,
-        owner: publicKey,
+ from: senderAta,
+ to: receiverAta,
+ owner: publicKey,
     })
     .instruction();
 
@@ -103,6 +103,6 @@ const signature = await sendTransaction(transaction, connection);
 await connection.confirmTransaction(signature, "confirmed");
 ```
 
-And that wraps up our module on minting and transferring SPL tokens in a DApp—from the frontend to the backend.
+And that wraps up our module on minting and transferring SPL tokens in a DApp—from the front end to the backend.
 
 Stay tuned for more on client-contract interactions in the next module!

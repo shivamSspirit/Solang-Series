@@ -10,6 +10,9 @@ module.exports = function (webpackEnv) {
         os: false,
         path: false,
       },
+
+      // test: /\.svg$/,
+      // use: ['@svgr/webpack'],
     },
   };
 };

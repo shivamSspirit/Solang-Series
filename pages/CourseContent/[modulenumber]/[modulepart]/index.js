@@ -7,32 +7,17 @@ import ColorModuleParts from "../../../../components/ColorModuleParts";
 import Layout from "../../../../components/Layout";
 
 export async function getStaticProps(context) {
-  //  console.log("Running static props",context);
-
   const filteredParts = allDocuments.filter((lession) => {
-    // console.log("lessiosnsss",lession)
     return (
       lession?.moduleNumber === `${context?.params?.modulenumber}` &&
       lession?.modulePart === `${context?.params?.modulepart}`
     );
   });
-
-  //  console.log("FilteredParts",filteredParts);
-  // console.log("lessions for a part", lession);
-  // Return notFound if the post does not exist.
-  // if (!lession) return { notFound: true }
-
-  // console.log(lession, " Lession from static props");
-
-  // Return the post as page props.
   return { props: { filteredParts } };
 }
 
 export async function getStaticPaths() {
-  // console.log("Static paths runnning");
-  // Get a list of valid post paths.
   const paths = allDocuments?.map((lession) => {
-    // console.log("lessions", lession);
     return {
       params: {
         modulenumber: lession?.moduleNumber,
@@ -40,20 +25,35 @@ export async function getStaticPaths() {
       },
     };
   });
-
   return { paths, fallback: true };
 }
 
-const Course1 = ({ filteredParts }) => {
-  // console.log("allDocuments",allDocuments)
-  // console.log("Filtered parts",filteredParts)
+const returnModuleBGColor = (moduleNumber) => {
+  if (moduleNumber === "module-0") {
+    return "bg-[#bfbfff]";
+  } else if (moduleNumber === "module-1") {
+    return "bg-[#A3B86C]";
+  } else if (moduleNumber === "module-2") {
+    return "bg-[#CFB53B]";
+  } else if (moduleNumber === "module-3") {
+    return "bg-[#CD853F]";
+  } else if (moduleNumber === "module-4") {
+    return "bg-[#63a4da]";
+  } else if (moduleNumber === "module-5") {
+    return "bg-[#e5acb6]";
+  } else if (moduleNumber === "module-6") {
+    return "bg-[#efc070]";
+  } else if (moduleNumber === "module-7") {
+    return "bg-[#F8C794]";
+  }
+};
 
+const Course1 = ({ filteredParts }) => {
   const orderedLessions = filteredParts?.sort((a, b) => a.orderNumber - b.orderNumber)
-    .map((item, index) => {
+    .map((item) => {
       return item; // or transform 'item' if needed
     });
 
-  // console.log("fockiiii",orderedLessions)
   const router = useRouter();
   const { modulenumber, modulepart } = router.query;
 
@@ -63,39 +63,13 @@ const Course1 = ({ filteredParts }) => {
   }
 
   const currentpath = `/CourseContent/${modulenumber}/${modulepart}`;
-  // console.log(" all docs",router.query);
-
   const modNum = modulenumber?.split("-")[1];
 
-
   const [prevPg, nextPg, prevPgNumber, nextPgNumber] = curPageNumber({ modulenumber });
-
-  const returnModuleColor = (moduleNumber) => {
-    if (moduleNumber === "module-0") {
-      return "bg-[#bfbfff]";
-    } else if (moduleNumber === "module-1") {
-      return "bg-[#A3B86C]";
-    } else if (moduleNumber === "module-2") {
-      return "bg-[#CFB53B]";
-    } else if (moduleNumber === "module-3") {
-      return "bg-[#CD853F]";
-    } else if (moduleNumber === "module-4") {
-      return "bg-[#63a4da]";
-    }else if (moduleNumber === "module-5") {
-      return "bg-[#e5acb6]";
-    }else if (moduleNumber === "module-6") {
-      return "bg-[#efc070]";
-    }else if (moduleNumber === "module-7") {
-      return "bg-[#F8C794]";
-    }
-   
-  }
-
+  
   return (
     <Layout>
       <div className='my-20'>
-        
-
         <NextSeo
             title={`Module ${modNum}`}
             titleTemplate="Soldity On Solana"
@@ -124,7 +98,7 @@ const Course1 = ({ filteredParts }) => {
 
         <div className='flex sm:flex-col justify-between'>
           <ColorModuleParts
-            moduleColor={returnModuleColor(modulenumber)}
+            moduleColor={returnModuleBGColor(modulenumber)}
             currentpath={currentpath}
             orderedLessions={orderedLessions}
           />

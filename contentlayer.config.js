@@ -7,7 +7,6 @@ import GithubSlugger from "github-slugger";
 
 // import rehypeToc from "@jsdevtools/rehype-toc";
 
-
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields = {
   slug: {

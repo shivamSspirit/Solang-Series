@@ -4,7 +4,7 @@ author: Shivam
 moduleNumber: module-4
 modulePart: module-4-b
 thisFileName: upgrade-minter-program
-orderNumber: "0"
+orderNumber: "2"
 modulePartDescription: This section of Module focuses on enhancing the previously developed token minter program, incorporating the ability to transfer minted tokens to another account using Cross-Program Invocation (CPI). This will be followed by building, deploying, and testing the enhanced program.
 ---
 
@@ -32,19 +32,19 @@ In the `transfergold.sol` file, add a `transferTokens` function below the `mintT
 ```Solidity
 // Transfer tokens from one token account to another via Cross-Program Invocation to Token Program
 function transferTokens(
-  address from, // token account to transfer from
-  address to, // token account to transfer to
-  uint64 amount // amount of gold to transfer
+ address from, // token account to transfer from
+ address to, // token account to transfer to
+ uint64 amount // amount of gold to transfer
 ) public {
-  SplToken.TokenAccountData from_data = SplToken.get_token_account_data(from);
-  SplToken.transfer(from, to, from_data.owner, amount);
+ SplToken.TokenAccountData from_data = SplToken.get_token_account_data(from);
+ SplToken.transfer(from, to, from_data.owner, amount);
 }
 ```
 
 This function, `transferTokens`, requires three inputs:
 
 1. `from`: The sender's token account containing Gold Tokens.
-2. `to`: The recipient's account linked to the Gold Token Mint.
+2. `to`: The recipient's account is linked to the Gold Token Mint.
 3. `amount`: The quantity of Gold Tokens to transfer.
 
 The function retrieves the sender's token account data and then uses the `SplToken.transfer` function to perform the actual gold token transfer between the specified ATAs. This transfer is executed as a Cross-Program Invocation (CPI) to the SPL Token Library.
@@ -64,61 +64,61 @@ Now, let's write a test for transferring Gold Tokens in the `transfersol.ts` tes
 it("Transfer some tokens to another wallet!", async () => {
   // Wallet's associated token account address for mint
   const tokenAccount = await getOrCreateAssociatedTokenAccount(
-    connection,
-    wallet.payer, // payer
-    mintKeypair.publicKey, // mint
-    wallet.publicKey // owner(shivam)
+ connection,
+ wallet.payer, // payer
+ mintKeypair.publicKey, // mint
+ wallet.publicKey // owner(shivam)
   );
 
   const receipient = anchor.web3.Keypair.generate();
   const receipientTokenAccount = await getOrCreateAssociatedTokenAccount(
-    connection,
-    wallet.payer, // payer
-    mintKeypair.publicKey, // mint account
-    receipient.publicKey // owner(justin) account
+ connection,
+ wallet.payer, // payer
+ mintKeypair.publicKey, // mint account
+ receipient.publicKey // owner(justin) account
   );
 
-  console.log("receipientTokenAccount", receipientTokenAccount);
+ console.log("receipientTokenAccount", receipientTokenAccount);
 
   const tx = await program.methods
     .transferTokens(
-      tokenAccount.address,
-      receipientTokenAccount.address,
+ tokenAccount.address,
+ receipientTokenAccount.address,
       new anchor.BN(54000000000)
     )
     .accounts({ dataAccount: dataAccount.publicKey })
     .remainingAccounts([
       {
-        pubkey: wallet.publicKey,
-        isWritable: true,
-        isSigner: true,
+ pubkey: wallet.publicKey,
+ isWritable: true,
+ isSigner: true,
       },
       {
-        pubkey: mintKeypair.publicKey,
-        isWritable: false,
-        isSigner: false,
+ pubkey: mintKeypair.publicKey,
+ isWritable: false,
+ isSigner: false,
       },
       {
-        pubkey: tokenAccount.address,
-        isWritable: true,
-        isSigner: false,
+ pubkey: tokenAccount.address,
+ isWritable: true,
+ isSigner: false,
       },
       {
-        pubkey: receipientTokenAccount.address,
-        isWritable: true,
-        isSigner: false,
+ pubkey: receipientTokenAccount.address,
+ isWritable: true,
+ isSigner: false,
       },
     ])
     .rpc();
-  console.log("Your transaction signature", tx);
+ console.log("Your transaction signature", tx);
 
   const recepienttokenAmount = (
     await getAccount(connection, receipientTokenAccount.address)
   ).amount;
-  console.log("recipienttokenAmount", recepienttokenAmount);
+ console.log("recipienttokenAmount", recepienttokenAmount);
   let tokens = Number(recepienttokenAmount);
 
-  assert.equal(tokens / LAMPORTS_PER_SOL, 54);
+ assert.equal(tokens / LAMPORTS_PER_SOL, 54);
 });
 ```
 

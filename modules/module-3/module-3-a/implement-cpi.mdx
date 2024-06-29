@@ -18,7 +18,7 @@ In this lesson, you'll learn about:
 
 Solana's `invoke()` function enables program calls without the need for
 
-signers. It is essential for routing instructions, accounts, and data to the callee program. A Cross-Program Invocation (CPI) is created by defining the accessed accounts and the instruction data. CPIs in Solana allow for limited depth reentrancy. We'll demonstrate how to use CPI by calling a lever program in our code example.
+Signers. It is essential for routing instructions, accounts, and data to the callee program. A Cross-Program Invocation (CPI) is created by defining the accessed accounts and the instruction data. CPIs in Solana allow for limited depth reentrancy. We'll demonstrate how to use CPI by calling a lever program in our code example.
 
 ## Overview
 
@@ -44,7 +44,7 @@ Cross-program invocations allow programs to call other programs, but currently, 
 
 Reentrancy is currently permitted only in cases of direct self-recursion and is constrained to a predetermined depth. This restriction aims to prevent scenarios where a program might inadvertently call another program from an intermediary state. Direct recursion ensures that the program has full control over its state when it is re-invoked.
 
-To effectively use `invoke` and `invoke_signed`, a list of `account_infos` is also necessary. Similar to the list of `AccountMeta` in instructions, it is crucial to include all `AccountInfo` for each account that the callee program will access.
+To effectively use `invoke` and `invoke_signed`, a list of `account_infos` is also necessary. Similar to the list of `AccountMeta` in the instructions, it is crucial to include all `AccountInfo` for each account that the callee program will access.
 
 Since programs can only receive AccountInfo values from the runtime at the program's entry point, any account required by the callee program must also be needed by the calling program and provided by its caller. This rule also applies to the program ID of the callee program.
 
@@ -52,17 +52,17 @@ Below is a code example demonstrating how CPIs are created to interact with a le
 
 ```solidity
 function pullLever(address dataAccount, string name) public {
-    // Account required by the switchPower instruction.
-    // This is the data account created by the lever program (not this program), storing the state of the switch.
-    AccountMeta[1] metas = [
-        AccountMeta({pubkey: dataAccount, is_writable: true, is_signer: false})
-    ];
+ // Account required by the switchPower instruction.
+ // This is the data account created by the lever program (not this program), storing the state of the switch.
+ AccountMeta[1] metas = [
+ AccountMeta({pubkey: dataAccount, is_writable: true, is_signer: false})
+ ];
 
-    // Data required by the switchPower instruction.
-    string instructionData = name;
+ // Data required by the switchPower instruction.
+ string instructionData = name;
 
-    // Invoke the switchPower instruction on the lever program.
-    leverProgram.switchPower{accounts: metas}(instructionData);
+ // Invoke the switchPower instruction on the lever program.
+ leverProgram.switchPower{accounts: metas}(instructionData);
 }
 
 ```
@@ -70,7 +70,7 @@ In this code snippet, we define a `pullLever` function, accepting `dataAccount` 
 
 When defining a CPI, the syntax for
 
-specifying the `AccountMeta` for each account includes:
+Specifying the `AccountMeta` for each account includes:
 
 - `AccountMeta::new` - This signifies that the account is writable.
 - `AccountMeta::new_readonly` - This denotes that the account is not writable.

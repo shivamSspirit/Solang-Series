@@ -4,7 +4,7 @@ author: Shivam
 moduleNumber: module-5
 modulePart: module-5-b
 thisFileName: create-nft-mint
-orderNumber: "2"
+orderNumber: "5"
 modulePartDescription: In this part of the module, you will implement a Solidity Solang program for NFT minting and transfer (NFT mint authority is PDA).
 ---
 
@@ -41,8 +41,8 @@ modulePartDescription: In this part of the module, you will implement a Solidity
 3. **Importing Required Libraries**:
    - Start your Solidity file (e.g., `pda-mint-authority.sol`) by importing necessary libraries from the root folder:
      ```solidity
-     import "../libraries/spl_token.sol";
-     import "solana";
+ import "../libraries/spl_token.sol";
+ import "solana";
      ```
 
 ### Writing the Solidity Program
@@ -51,7 +51,7 @@ modulePartDescription: In this part of the module, you will implement a Solidity
 
    - Use the `@program_id` annotation to specify your contract's on-chain address:
      ```solidity
-     @program_id("4Huxs8ujxKqT76qqfmfJXMThmo4WMsvmdiCkqzNKF5kq")
+ @program_id("4Huxs8ujxKqT76qqfmfJXMThmo4WMsvmdiCkqzNKF5kq")
      ```
 
 2. **Initializing the Contract**:
@@ -59,18 +59,18 @@ modulePartDescription: In this part of the module, you will implement a Solidity
 
 ```solidity
 contract pda_mint_authority {
-    bytes1 bump; // stores the bump for the pda address
+ bytes1 bump; // stores the bump for the pda address
 
-    @payer(payer)
-    @seed("mint_authority") // hard-coded seed
-    constructor(
-        @bump bytes1 _bump  // bump for the pda address
-    ) {
-        (address pda, bytes1 pdaBump) = try_find_program_address(["mint_authority"], type(pda_mint_authority).program_id);
-        require(pdaBump == _bump, 'INVALID_BUMP');
+ @payer(payer)
+ @seed("mint_authority") // hard-coded seed
+ constructor(
+ @bump bytes1 _bump  // bump for the pda address
+ ) {
+ (address pda, bytes1 pdaBump) = try_find_program_address(["mint_authority"], type(pda_mint_authority).program_id);
+ require(pdaBump == _bump, 'INVALID_BUMP');
 
-        bump = _bump;
-    }
+ bump = _bump;
+ }
 }
 ```
 
@@ -83,13 +83,14 @@ contract pda_mint_authority {
 2. **PDA Derivation and Verification**:
    - Use `try_find_program_address` to derive the PDA address and bump from the specified seed and program ID.
    - Ensure the provided bump in the constructor matches the derived bump for address validity:
-     ```solidity
-     constructor(@bump bytes1 _bump) {
-         (address pda, bytes1 pdaBump) = try_find_program_address(["mint_authority"], type(pda_mint_authority).program_id);
-         require(pdaBump == _bump, 'INVALID_BUMP');
-         bump = _bump;
-     }
-     ```
+
+```solidity
+ constructor(@bump bytes1 _bump) {
+ (address pda, bytes1 pdaBump) = try_find_program_address(["mint_authority"], type(pda_mint_authority).program_id);
+ require(pdaBump == _bump, 'INVALID_BUMP');
+ bump = _bump;
+ }
+```
 
 ### The Key Components
 
@@ -111,13 +112,13 @@ contract pda_mint_authority {
 
    - After the constructor, define the `createTokenMint` function to handle mint creation:
      ```solidity
-     @mutableSigner(payer)
-     @mutableSigner(mint)
-     @mutableAccount(metadata)
-     // Additional account annotations
-     function createTokenMint(/* parameters */) external {
-         // Function logic
-     }
+ @mutableSigner(payer)
+ @mutableSigner(mint)
+ @mutableAccount(metadata)
+ // Additional account annotations
+ function createTokenMint(/* parameters */) external {
+ // Function logic
+ }
      ```
 
 2. **Setting Up Accounts and Parameters**:
@@ -141,13 +142,13 @@ contract pda_mint_authority {
    - Utilize the `SplToken.create_mint` function to establish the mint account and set attributes like mint authority, freeze authority, and decimals.
    - Example of invoking this function:
      ```solidity
-     SplToken.create_mint(
-         tx.accounts.payer.key, // Payer account
-         tx.accounts.mint.key,  // Mint account
-         tx.accounts.mintAuthority.key, // Mint authority
-         freezeAuthority,       // Freeze authority
-         decimals               // Decimals
-     );
+ SplToken.create_mint(
+ tx.accounts.payer.key, // Payer account
+ tx.accounts.mint.key,  // Mint account
+ tx.accounts.mintAuthority.key, // Mint authority
+ freezeAuthority,       // Freeze authority
+ decimals               // Decimals
+ );
      ```
 
 2. **Invoke Metadata Program**:
@@ -155,12 +156,12 @@ contract pda_mint_authority {
    - Use a custom function `_createMetadataAccount` to create the metadata account:
 
      ```solidity
-     _createMetadataAccount(
-         tx.accounts.metadata.key,       // Metadata account
-         tx.accounts.mint.key,           // Mint account
-         tx.accounts.mintAuthority.key,  // Mint authority
-         // Additional parameters
-     );
+ _createMetadataAccount(
+ tx.accounts.metadata.key,       // Metadata account
+ tx.accounts.mint.key,           // Mint account
+ tx.accounts.mintAuthority.key,  // Mint authority
+ // Additional parameters
+ );
      ```
 
 3. **Breaking Down the Function Logic**:
@@ -171,39 +172,39 @@ The `createTokenMint` function should look like this:
 
 ```solidity
  @mutableSigner(payer)
-    @mutableSigner(mint)
-    @mutableAccount(metadata)
-    @account(mintAuthority)
-    @account(rentAddress)
-    @account(metaplexId)
-    function createTokenMint(
-        address freezeAuthority,
-        uint8 decimals,
-        string name,
-        string symbol,
-        string uri
-    ) external {
-        SplToken.create_mint(
-            tx.accounts.payer.key,
-            tx.accounts.mint.key,
-            tx.accounts.mintAuthority.key,
-            freezeAuthority,
-            decimals
-        );
+ @mutableSigner(mint)
+ @mutableAccount(metadata)
+ @account(mintAuthority)
+ @account(rentAddress)
+ @account(metaplexId)
+ function createTokenMint(
+ address freezeAuthority,
+ uint8 decimals,
+ string name,
+ string symbol,
+ string uri
+ ) external {
+ SplToken.create_mint(
+ tx.accounts.payer.key,
+ tx.accounts.mint.key,
+ tx.accounts.mintAuthority.key,
+ freezeAuthority,
+ decimals
+ );
 
-        _createMetadataAccount(
-            tx.accounts.metadata.key,
-            tx.accounts.mint.key,
-            tx.accounts.mintAuthority.key,
-            tx.accounts.payer.key,
-            tx.accounts.payer.key,
-            name,
-            symbol,
-            uri,
-            tx.accounts.rentAddress.key,
-            tx.accounts.metaplexId.key
-        );
-    }
+ _createMetadataAccount(
+ tx.accounts.metadata.key,
+ tx.accounts.mint.key,
+ tx.accounts.mintAuthority.key,
+ tx.accounts.payer.key,
+ tx.accounts.payer.key,
+ name,
+ symbol,
+ uri,
+ tx.accounts.rentAddress.key,
+ tx.accounts.metaplexId.key
+ );
+ }
 ```
 
 ### The Role of Annotations
@@ -216,28 +217,28 @@ The `createTokenMint` function should look like this:
 ### The Need for a Custom Method
 
 - **Objective**: To build a Solana SPL NFT minter program using Program Derived Addresses (PDAs) as mint authorities.
-- **Approach**: Implementing PDAs requires customizing certain library methods, particularly from the MPL (Metaplex) and SPL (solana token program) library.
+- **Approach**: Implementing PDAs requires customizing certain library methods, particularly from the MPL (Metaplex) and SPL (Solana token program) library.
 
 - Defining the `_createMetadataAccount` Method
 - **Function Purpose**: To create a metadata account for the minted token, signed with a PDA as the mint authority.
 - **Method Declaration**: The method is defined as a private function within the contract:
 
   ```solidity
-  // Create metadata account, must reimplement manually to sign with PDA
-  function _createMetadataAccount(
-      address metadata,
-      address mint,
-      address mintAuthority,
-      address payer,
-      address updateAuthority,
-      string name,
-      string symbol,
-      string uri,
-      address rentAddress,
-      address metaplexId
-  ) private {
-      // Implementation details
-  }
+ // Create metadata account, must reimplement manually to sign with PDA
+ function _createMetadataAccount(
+ address metadata,
+ address mint,
+ address mintAuthority,
+ address payer,
+ address updateAuthority,
+ string name,
+ string symbol,
+ string uri,
+ address rentAddress,
+ address metaplexId
+ ) private {
+ // Implementation details
+ }
   ```
 
 ### just Breakdown 
@@ -248,37 +249,37 @@ The `createTokenMint` function should look like this:
      - `address metadata`: Address for the token's metadata account.
      - `address mint`: Address of the mint account for the token.
      - `address mintAuthority`: The mint authority, represented by a PDA.
-     - Additional parameters for payer, update authority, name, symbol, uri, rent address, and metaplexId.
+     - Additional parameters for the payer, update authority, name, symbol, uri, rent address, and metaplexId.
 
 2. **Deriving the PDA**:
 
    - Utilizes `try_find_program_address` to derive the PDA from seeds and the program ID:
      ```solidity
-     (address pda, bytes1 _bump) = try_find_program_address(["mint_authority"], type(pda_mint_authority).program_id);
-     require(mintAuthority == pda, 'INVALID_PDA');
+ (address pda, bytes1 _bump) = try_find_program_address(["mint_authority"], type(pda_mint_authority).program_id);
+ require(mintAuthority == pda, 'INVALID_PDA');
      ```
 
 3. **Setting Up Data Structures**:
 
    - Initializes `DataV2` and `CreateMetadataAccountArgsV3` structs with the provided token attributes.
 
-   ```solidity
-   DataV2 data = DataV2({
-            name: name,
-            symbol: symbol,
-            uri: uri,
-            sellerFeeBasisPoints: 0,
-            creatorsPresent: false,
-            collectionPresent: false,
-            usesPresent: false
-        });
+```solidity
+ DataV2 data = DataV2({
+ name: name,
+ symbol: symbol,
+ uri: uri,
+ sellerFeeBasisPoints: 0,
+ creatorsPresent: false,
+ collectionPresent: false,
+ usesPresent: false
+ });
 
-    CreateMetadataAccountArgsV3 args = CreateMetadataAccountArgsV3({
-            data: data,
-            isMutable: true,
-            collectionDetailsPresent: false
-        });
-   ```
+ CreateMetadataAccountArgsV3 args = CreateMetadataAccountArgsV3({
+ data: data,
+ isMutable: true,
+ collectionDetailsPresent: false
+ });
+```
 
 4. **Account Metadata Configuration**:
 
@@ -286,31 +287,31 @@ The `createTokenMint` function should look like this:
 
    - Accounts include metadata, mint, mintAuthority, payer, updateAuthority, system program, and rent account.
 
-     ```solidity
-     AccountMeta[7] metas = [
-        AccountMeta({pubkey: metadata, is_writable: true, is_signer: false}),
-        AccountMeta({pubkey: mint, is_writable: false, is_signer: false}),
-        AccountMeta({pubkey: mintAuthority, is_writable: false, is_signer: true}),
-        AccountMeta({pubkey: payer, is_writable: true, is_signer: true}),
-        AccountMeta({pubkey: updateAuthority, is_writable: false, is_signer: false}),
-        AccountMeta({pubkey: address"11111111111111111111111111111111", is_writable: false, is_signer: false}),
-        AccountMeta({pubkey: rentAddress, is_writable: false, is_signer: false})
-     ];
-     ```
+```solidity
+ AccountMeta[7] metas = [
+ AccountMeta({pubkey: metadata, is_writable: true, is_signer: false}),
+ AccountMeta({pubkey: mint, is_writable: false, is_signer: false}),
+ AccountMeta({pubkey: mintAuthority, is_writable: false, is_signer: true}),
+ AccountMeta({pubkey: payer, is_writable: true, is_signer: true}),
+ AccountMeta({pubkey: updateAuthority, is_writable: false, is_signer: false}),
+ AccountMeta({pubkey: address"11111111111111111111111111111111", is_writable: false, is_signer: false}),
+ AccountMeta({pubkey: rentAddress, is_writable: false, is_signer: false})
+ ];
+```
 
 5. **Encoding Instruction Data**:
 
    - Encodes the instruction data using `abi.encode`, including the discriminator and arguments.
 
         ```solidity
-        bytes1 discriminator = 33;
-        bytes instructionData = abi.encode(discriminator, args);
+ bytes1 discriminator = 33;
+ bytes instructionData = abi.encode(discriminator, args);
         ```
 
 6. **Cross-Program Invocation (CPI)**:
    - Performs a CPI to the Metaplex program, passing in the encoded instruction data and account metadata:
      ```solidity
-     metaplexId.call{accounts: metas, seeds: [["mint_authority", abi.encode(_bump)]]}(instructionData);
+ metaplexId.call{accounts: metas, seeds: [["mint_authority", abi.encode(_bump)]]}(instructionData);
      ```
 
 ### Key Components
@@ -328,45 +329,45 @@ The `createTokenMint` function should look like this:
 
    - Implement two key structs, `DataV2` and `CreateMetadataAccountArgsV3`, to organize NFT metadata and account creation arguments:
 
-     ```solidity
-     struct CreateMetadataAccountArgsV3 {
-         DataV2 data;
-         bool isMutable;
-         bool collectionDetailsPresent;
-     }
+```solidity
+ struct CreateMetadataAccountArgsV3 {
+ DataV2 data;
+ bool isMutable;
+ bool collectionDetailsPresent;
+ }
 
-     struct DataV2 {
-         string name;
-         string symbol;
-         string uri;
-         uint16 sellerFeeBasisPoints;
-         bool creatorsPresent;
-         bool collectionPresent;
-         bool usesPresent;
-     }
-     ```
+ struct DataV2 {
+ string name;
+ string symbol;
+ string uri;
+ uint16 sellerFeeBasisPoints;
+ bool creatorsPresent;
+ bool collectionPresent;
+ bool usesPresent;
+ }
+```
 
 2. **Initializing Structs**:
 
    - Initialize these structs with the required data for the NFT:
 
-     ```solidity
-     DataV2 data = DataV2({
-         name: name,
-         symbol: symbol,
-         uri: uri,
-         sellerFeeBasisPoints: 0,
-         creatorsPresent: false,
-         collectionPresent: false,
-         usesPresent: false
-     });
+```solidity
+ DataV2 data = DataV2({
+ name: name,
+ symbol: symbol,
+ uri: uri,
+ sellerFeeBasisPoints: 0,
+ creatorsPresent: false,
+ collectionPresent: false,
+ usesPresent: false
+ });
 
-     CreateMetadataAccountArgsV3 args = CreateMetadataAccountArgsV3({
-         data: data,
-         isMutable: true,
-         collectionDetailsPresent: false
-     });
-     ```
+ CreateMetadataAccountArgsV3 args = CreateMetadataAccountArgsV3({
+ data: data,
+ isMutable: true,
+ collectionDetailsPresent: false
+ });
+```
 
 **Account Metadata for the Instruction**
 
@@ -374,12 +375,12 @@ The `createTokenMint` function should look like this:
 
    - Set up `AccountMeta` array to define accounts involved in the transaction:
 
-     ```solidity
-     AccountMeta[7] metas = [
-         AccountMeta({pubkey: metadata, is_writable: true, is_signer: false}),
-         // Additional AccountMeta configurations
-     ];
-     ```
+```solidity
+ AccountMeta[7] metas = [
+ AccountMeta({pubkey: metadata, is_writable: true, is_signer: false}),
+ // Additional AccountMeta configurations
+ ];
+```
 
 2. **Role of Mint Authority (PDA)**:
 
@@ -391,18 +392,18 @@ The `createTokenMint` function should look like this:
 
    - Use ABI encoding to format the instruction data, including a discriminator for Solana:
 
-     ```solidity
-     bytes1 discriminator = 33;
-     bytes instructionData = abi.encode(discriminator, args);
-     ```
+```solidity
+ bytes1 discriminator = 33;
+ bytes instructionData = abi.encode(discriminator, args);
+```
 
 2. **Cross-Program Invocation to Metaplex**:
 
    - Perform a Cross-Program Invocation (CPI) to the Metaplex program, passing in the encoded data and account metadata:
 
-     ```solidity
-     metaplexId.call{accounts: metas, seeds: [["mint_authority", abi.encode(_bump)]]}(instructionData);
-     ```
+```solidity
+ metaplexId.call{accounts: metas, seeds: [["mint_authority", abi.encode(_bump)]]}(instructionData);
+```
 
 ### Some useful Keywords
 

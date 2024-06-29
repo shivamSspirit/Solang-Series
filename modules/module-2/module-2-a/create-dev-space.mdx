@@ -3,7 +3,7 @@ title: Setting Up Your Blockchain Development Area
 author: Shivam
 moduleNumber: module-2
 modulePart: module-2-a
-thisFileName: setup-blockchain-dev-area
+thisFileName: create-dev-space
 orderNumber: "1"
 modulePartDescription: Welcome to the start of your journey into blockchain development! In this section, you'll get a basic introduction to creating tokens and setting up your local development environment. We'll guide you through establishing a new project and using the Anchor framework to build an SPL token minter program.
 
@@ -29,7 +29,7 @@ First, create a new folder for your project. This is where all your files and wo
 anchor init spl-token-minter --solidity
 ```
 
-This will install necessary components for your project, but it might take a bit of time.
+This will install the necessary components for your project, but it might take a bit of time.
 
 Next, go into your project's folder with this command:
 
@@ -62,10 +62,10 @@ For now, you can focus less on these files: migrations, node_modules, .prettieri
 Types of Solana Blockchain Clusters:
 
 1. **Mainnet**: The real Solana Blockchain, where actual SOL cryptocurrency is used. Once your program is live here, its actions are permanent.
-2. **Devnet**: This is where most of your development will happen. It's a test environment for your Solana programs, where you can get free SOL for testing purposes. Keep in mind, things here can be reset, so they're not permanent.
+2. **Devnet**: This is where most of your development will happen. It's a test environment for your Solana programs, where you can get free SOL for testing purposes. Keep in mind, that things here can be reset, so they're not permanent.
 3. **Testnet**: Similar to Devnet, Testnet is where Solana's main team tests new features in a live environment. It's primarily for performance and stability checks. Like Devnet, you can get free SOL here, but it's not real money.
 
-Most of your work will be on Devnet, unless you're directly working with Solana's protocol.
+Most of your work will be on Devnet unless you're directly working with Solana's protocol.
 
 In the **_anchor.toml_** file, you'll need to change the cluster setting from localnet to devnet, like this:
 
@@ -103,7 +103,7 @@ In Solana, you need SOL to cover storage costs when storing data. The `@payer` a
 ```Solidity
 @payer(payer) // payer for the "data account"
 constructor(address payer) {
-    print("Hello, World!");
+ print("Hello, World!");
 }
 ```
 

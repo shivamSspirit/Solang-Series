@@ -4,7 +4,7 @@ author: Shivam
 moduleNumber: module-1
 modulePart: module-1-b
 thisFileName: functions
-orderNumber: "6"
+orderNumber: "11"
 modulePartDescription: Explore the fundamentals of Solidity functions for Solana program development, covering declarations, visibility, state mutability, and overloading.
 ---
 
@@ -30,19 +30,19 @@ Example:
 
 ```Solidity
 function get_initial_bound() returns (uint256 value) {
-    value = 102;
+ value = 102;
 }
 
 contract foo {
-    uint256 bound = get_initial_bound();
+ uint256 bound = get_initial_bound();
 
-    function set_bound(uint256 _bound) public {
-        bound = _bound;
-    }
+ function set_bound(uint256 _bound) public {
+ bound = _bound;
+ }
 
-    function get_with_bound(uint256 value) public view returns (uint256) {
-        return (value < bound) ? value : bound;
-    }
+ function get_with_bound(uint256 value) public view returns (uint256) {
+ return (value < bound) ? value : bound;
+ }
 }
 ```
 
@@ -65,18 +65,18 @@ Example:
 
 ```Solidity
 contract foo {
-    function bar1(uint32 x, bool y) public returns (address, bytes32) {
-        return (address(3), hex"01020304");
-    }
+ function bar1(uint32 x, bool y) public returns (address, bytes32) {
+ return (address(3), hex"01020304");
+ }
 
-    function bar2(uint32 x, bool y) public returns (bool) {
-        return !y;
-    }
+ function bar2(uint32 x, bool y) public returns (bool) {
+ return !y;
+ }
 
-    function test() public {
-        (address f1, bytes32 f2) = bar1(102, false);
-        bool f3 = bar2(255, true);
-    }
+ function test() public {
+ (address f1, bytes32 f2) = bar1(102, false);
+ bool f3 = bar2(255, true);
+ }
 }
 ```
 
@@ -89,13 +89,13 @@ Example:
 
 ```Solidity
 contract Transaction {
-    function transferEther() public payable {
-        // handle Ether transfer
-    }
+ function transferEther() public payable {
+ // handle Ether transfer
+ }
 
-    function readData() public view {
-        // read data from the blockchain
-    }
+ function readData() public view {
+ //Read data from the blockchain
+ }
 }
 ```
 
@@ -107,13 +107,13 @@ Example:
 
 ```Solidity
 contract Calculator {
-    function add(int a, int b) public returns (int) {
-        return a + b;
-    }
+ function add(int a, int b) public returns (int) {
+ return a + b;
+ }
 
-    function add(int a, int b, int c) public returns (int) {
-        return a + b + c;
-    }
+ function add(int a, int b, int c) public returns (int) {
+ return a + b + c;
+ }
 }
 ```
 

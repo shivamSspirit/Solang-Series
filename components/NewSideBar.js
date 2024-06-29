@@ -2,24 +2,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function NewSideBar({ headings }) {
-  const router = useRouter();
-  // console.log("headings",headings)
-
-  // const menuItems = [
-  //   {
-  //     href: "/",
-  //     title: "Homepage",
-  //   },
-  //   {
-  //     href: "/about",
-  //     title: "About",
-  //   },
-  //   {
-  //     href: "/contact",
-  //     title: "Contact",
-  //   },
-  // ];
-
   return (
     <div className='w-ful  px-4 h-[99vh] sticky top-10 overflow-y-auto rounded-lg'>
       <div className='flex flex-col mt-4 md:flex-row flex-1'>

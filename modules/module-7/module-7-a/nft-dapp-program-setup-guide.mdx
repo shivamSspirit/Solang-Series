@@ -89,11 +89,11 @@ const programId = new PublicKey(idl.metadata.address);
 
 You can set the transaction commitment level like this; here, we use **preflightCommitment** as *processed*.
 
-you can learn more about transaction commitments levels [here](https://solana.com/docs/rpc#default-commitment)
+You can learn more about transaction commitment levels [here](https://solana.com/docs/rpc#default-commitment)
 
 ```ts
 const opts: { preflightCommitment: Commitment } = {
-    preflightCommitment: "processed",
+ preflightCommitment: "processed",
 };
 ```
 
@@ -124,19 +124,19 @@ This is what an RPC transaction looks like from the client side.
 ```ts
              const createTx = await program.methods
                 .createTokenMint(
-                    dataAccountPDA,
+ dataAccountPDA,
                     0, // 0 decimals for NFT
-                    MetaData.name, // NFT name
-                    MetaData.symbol, // NFT symbol
-                    MetaData.uri // NFT URI
+ MetaData.name, // NFT name
+ MetaData.symbol, // NFT symbol
+ MetaData.uri // NFT URI
                 )
                 .accounts({
-                    payer: wallet.publicKey,
-                    mint: mintKeypair.publicKey,
-                    metadata: metadataAddress,
-                    mintAuthority: dataAccountPDA,
-                    rentAddress: SYSVAR_RENT_PUBKEY,
-                    metaplexId: new PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"),
+ payer: wallet.publicKey,
+ mint: mintKeypair.publicKey,
+ metadata: metadataAddress,
+ mintAuthority: dataAccountPDA,
+ rentAddress: SYSVAR_RENT_PUBKEY,
+ metaplexId: new PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"),
                 })
                 .signers([mintKeypair])
                 .rpc({ skipPreflight: true });

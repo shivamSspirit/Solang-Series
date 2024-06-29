@@ -1,97 +1,19 @@
+import { React, useState } from "react";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { useRouter } from "next/router";
-
-import { React, useState } from "react";
-import illustration from "../assets/illustration.png";
-import landingPg1 from "../assets/landingPg1.png";
-import landingPg2 from "../assets/landingPg2.png";
-import Layout from "./Layout";
-
 import Link from "next/link";
 
-const announcementData = [
-  {
-    img: landingPg1,
-    head: "Mint spl Tokens",
-    desc: "In this module, we will develop a Solana program that will mint fungible spl tokens. The program should be able to set up and execute the token-minting process.",
-  },
-  {
-    img: landingPg2,
-    head: "Transfer spl tokens",
-    desc: "In this module, we will develop a program on Solana that allows for the transfer of spl-tokens that minted in Module 2 to other accounts.",
-  },
-  {
-    img: landingPg1,
-    head: "Mint and Transfer NFT",
-    desc: "In this module, we will develop a program on Solana that allows for the mint and transfer nft",
-  },
-];
+import illustration from "../assets/illustration.png";
 
-const timelineData = [
-  {
-    navlink:"https://solidityonsolana.one/CourseContent/module-0/module-0-a",
-    heading: "Module 0: Introduction",
-    content:
-      "Here, you will learn the aims and objectives of Solidity for Solana. you, also learn about the structure of the course and the prerequisites required.",
-    
-  },
-  {
-    navlink:"https://solidityonsolana.one/CourseContent/module-1/module-1-a",
-    heading: "Module 1: Overview of Building Solana Programs using Solidity",
-    content:
-      "In this module of Solana with Solidity, you will learn the differences between Solana and EVM and explore brief overview of solidity on solana.",
-  },
-  {
-    navlink:"https://solidityonsolana.one/CourseContent/module-2/module-2-a",
-    heading: "Module 2: Mint fungible(spl) Tokens",
-    content:
-      "In this module, we will develop a Solana program that will mint fungible tokens (spl tokens). The program should be able to set up and execute the token-minting process.",
-  },
-  {
-    navlink:"https://solidityonsolana.one/CourseContent/module-3/module-3-a",
-    heading:
-      "Module 3: Building a CPI-Enabled Flip Program with Solidity on Solana",
-    content:
-      "In this module, we dive you into the concepts of composability and CPI in Solana. We will also develop a hands-on solidity contract: a CPI Enabled Flip program on solana.",
-  },
-  {
-    navlink:"https://solidityonsolana.one/CourseContent/module-4/module-4-a",
-    heading: "Module 4: How to Transfer Solana Tokens with Solidity",
-    content:
-      "In this module, we will develop a program on Solana that allows for the transfer of spl-tokens(minted in Module 2) to other accounts.",
-  },
-  {
-    navlink:"https://solidityonsolana.one/CourseContent/module-5/module-5-a",
-    heading: "Module 5: How to Mint and transfer NFT",
-    content:
-     "In this module, we will develop a program on Solana that allows for the Mint(Mint-Authority is PDA) and transfer NFT to other accounts.",
-  },
-  {
-    navlink:"https://solidityonsolana.one/CourseContent/module-6/module-6-a",
-    heading: "Module 6: Full-stack Dapp(fungible-token)",
-    content:
-     "In this module, we will develop a full-stack Solana DApp using solana-labs dapp-scaffold (Next.js) and combine SPL Fungible Token mint and transfer Solidity programs.",
-  },
-  {
-    navlink:"https://solidityonsolana.one/CourseContent/module-7/module-7-a",
-    heading: "Module 7: Full-stack Dapp(Non-fungible-token)",
-    content:
-     "In this module, we will develop a full-stack Solana DApp using solana-labs dapp-scaffold (Next.js) and combine NFT Mint and transfer Solidity programs.",
-  },
-  {
-    navlink:"#",
-    heading: "Module 8: Full-stack Dapp(Final Project)",
-    content:
-     "Coming-sooon",
-  },
-];
+import Layout from "./Layout";
+import { announcementLandingData, timelineData } from "../utils/general-data";
+
 
 const LandingSection = ({ allModules }) => {
   // console.log("all modes in land", allModules);
   const [svgHoverColor, setSvgHoverColor] = useState("white");
-  const [disable, setDisable] = useState(false);
   const router = useRouter();
   const startBtnOnClick = () => {
     router.push("/CourseContent");
@@ -101,7 +23,7 @@ const LandingSection = ({ allModules }) => {
 
   const mergedArray = trendingModules.map((moduleName, index) => ({
     module: moduleName,
-    ...announcementData[index],
+    ...announcementLandingData[index],
   }));
 
   const returnModulePath = (announcement) => {
@@ -109,8 +31,6 @@ const LandingSection = ({ allModules }) => {
         pathname: `/CourseContent/${announcement}/${announcement}-a`,
       });
   };
-
-  // console.log("disable", disable);
 
   const module = (
     <Box sx={{ flexGrow: 1, color: "white" }}>

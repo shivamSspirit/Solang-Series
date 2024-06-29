@@ -1,28 +1,18 @@
 import React from "react";
-import Course1 from "../assets/Course1.png";
-import Course2 from "../assets/Course2.png";
-import Course3 from "../assets/Course3.png";
-import Course4 from "../assets/Course4.png";
-import Course5 from "../assets/Course5.png";
-import { Button } from "flowbite-react";
 import Image from "next/image";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { useRouter } from "next/router";
+
 import { getModules } from "utils/module-lession";
 import { NextSeo } from "next-seo";
 import Layout from "../components/Layout";
 
-// export async function getStaticProps(context) {
-//   console.log("Running static props",context);
-
-//  return { props: { filteredParts } };
-// }
+import {announcementData} from "../utils/general-data"
+// import { returnModuleHoverColor } from "../utils/modulelvl-color";
 
 export async function getStaticProps() {
   const allModuleNumbers = await getModules();
-  console.log("allModuleNumbers", allModuleNumbers);
   const allModules = allModuleNumbers.map((post) =>
     post.substring("modules/".length)
   );
@@ -33,109 +23,46 @@ export async function getStaticProps() {
   };
 }
 
-export const announcementData = [
-  {
-    img: Course1,
-    head: "Module Name ",
-    desc: "Introduction",
-    module_color: "#bfbfff",
-  },
-  {
-    img: Course2,
-    head: "Module Name",
-    desc: "Building Solana Programs with Solidity",
-    module_color: "#A3B86C",
-  },
-  {
-    img: Course3,
-    head: "Module Name",
-    desc: "Minting Fungible Tokens",
-    module_color: "#CFB53B",
-  },
-  {
-    img: Course4,
-    head: "Module Name ",
-    desc: "Building a CPI-Enabled Flip Program",
-    module_color: "#CD853F",
-  },
-  {
-    img: Course5,
-    head: "Module Name",
-    desc: "How to Transfer Spl Tokens with Solidity",
-    module_color: "#63a4da",
-  },
-  {
-    img: Course3,
-    head: "Module Name",
-    desc: "Mint And Transfer NFT",
-    module_color: "#e5acb6",
-  },
-{
-    img: Course2,
-    head: "Module Name",
-    desc: "Full-stack-dapp (fungible-token)",
-    module_color: "#efc070",
-  },
-  {
-    img: Course3,
-    head: "Module Name",
-    desc: "Full-stack-dapp (NFT)",
-    module_color: "#F8C794",
-  },
-  // {
-  //   img: Course6,
-  //   head: "Module Name",
-  //   desc: "In this part, we will familiarize ourselves with the practicalities of taking the course.",
-  //   module_color: "#E6BE8A",
-  // },
-];
+const returnModuleHoverColor = (colors) => {
+  if (colors === "#bfbfff") {
+    return "hover:bg-[#bfbfff]";
+  } else if (colors === "#A3B86C") {
+    return "hover:bg-[#A3B86C]";
+  } else if (colors === "#CFB53B") {
+    return "hover:bg-[#CFB53B]";
+  } else if (colors === "#CD853F") {
+    return "hover:bg-[#CD853F]";
+  } else if (colors === "#63a4da") {
+    return "hover:bg-[#63a4da]";
+  } else if (colors === "#e5acb6") {
+    console.log("colors", colors);
+    return "hover:bg-[#e5acb6]";
+  } else if (colors === "#efc070") {
+    console.log("colors", colors);
+    return "hover:bg-[#efc070]";
+  } else if (colors === "#F8C794") {
+    console.log("colors", colors);
+    return "hover:bg-[#F8C794]";
+  }
+};
 
 const CourseContent = ({ allModules }) => {
-  console.log("allModules", allModules);
   const mergedArray = allModules.map((moduleName, index) => ({
     module: moduleName,
     ...announcementData[index],
   }));
 
-  console.log("mergedArray", mergedArray);
   const router = useRouter();
-
-  //   const moduleColors={
-  //     "module-0":"#FAFAD2",
-  //     "module-1":"#EEE8AA",
-  //     "module-2":"#C5B358",
-  //     "module-3":"#CD853F",
-  //     "module-4":"#E6BE8A"
-  // }
 
   const returnModuleColor = (moduleNumber) => {
     const findmodule = mergedArray?.find(
       (module) => module?.module === moduleNumber
     );
-    // console.log("findmodule,",findmodule)
     const colors = findmodule?.module_color;
-    if (colors === "#bfbfff") {
-      return "hover:bg-[#bfbfff]";
-    } else if (colors === "#A3B86C") {
-      return "hover:bg-[#A3B86C]";
-    } else if (colors === "#CFB53B") {
-      return "hover:bg-[#CFB53B]";
-    } else if (colors === "#CD853F") {
-      return "hover:bg-[#CD853F]";
-    } else if (colors === "#63a4da") {
-      return "hover:bg-[#63a4da]";
-    }else if (colors === "#e5acb6") {
-      console.log("colors",colors)
-      return "hover:bg-[#e5acb6]";
-    }else if (colors === "#efc070") {
-      console.log("colors",colors)
-      return "hover:bg-[#efc070]";
-    }else if (colors === "#F8C794") {
-      console.log("colors",colors)
-      return "hover:bg-[#F8C794]";
-    }
+    const realbgColor = returnModuleHoverColor(colors);
+    return realbgColor;
   };
-  // console.log(mergedArray);
+
 
   const moduleCard = (
     <div className='text-white'>
@@ -148,10 +75,9 @@ const CourseContent = ({ allModules }) => {
         >
           {mergedArray.map((announcement, index) => (
             <Grid item xs={3} sm={4} md={4} key={index}>
+            {console.log("announcement", returnModuleColor(announcement.module))}
               <div
-                className={`m-1 p-2 cursor-pointer bg-[#858383] rounded-2xl border border-white ${returnModuleColor(
-                  announcement.module
-                )}`}
+                className={`m-1 p-2 cursor-pointer bg-[#858383] ${returnModuleColor(announcement.module)} rounded-2xl border border-white`}
               >
                 <div
                  onClick={() => {

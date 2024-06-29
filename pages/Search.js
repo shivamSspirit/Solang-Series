@@ -1,6 +1,6 @@
 import { NextSeo } from "next-seo";
 import React, { useState } from "react";
-import Layout from "../shared/components/Layout";
+import Layout from "../components/Layout";
 import { allDocuments } from "../.contentlayer/generated";
 import Link from "next/link";
 

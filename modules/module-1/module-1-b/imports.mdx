@@ -4,7 +4,7 @@ author: Shivam
 moduleNumber: module-1
 modulePart: module-1-b
 thisFileName: imports
-orderNumber: "2"
+orderNumber: "6"
 modulePartDescription: This section focuses on understanding the import functionality in Solidity, a crucial aspect for building Solana programs.
 ---
 
@@ -38,21 +38,21 @@ There are several types of imports you can use:
 
 1. **Import Everything from a Library:**
    ```Solidity
-   import "defines.sol";
+ import "defines.sol";
    ```
    This imports all items from "defines.sol", differing from ES6 where such syntax imports nothing.
 
 2. **Select Specific Items from a Library:**
    ```Solidity
-   import { foo, bar } from "defines.sol";
+ import { foo, bar } from "defines.sol";
    ```
    Only imports `foo` and `bar` from "defines.sol".
 
 3. **Using Import Maps:**
    Import maps link a path segment to a specific location on the file system. For example:
    ```Solidity
-   import map @openzeppelin=/opt/openzeppelin-contracts/contracts
-   import "@openzeppelin/interfaces/IERC20.sol";
+ import map @openzeppelin=/opt/openzeppelin-contracts/contracts
+ import "@openzeppelin/interfaces/IERC20.sol";
    ```
    This would link to `/opt/openzeppelin-contracts/contracts/interfaces/IERC20.sol`.
 
@@ -77,4 +77,4 @@ This groups all imports from "defines.sol" under the `defs` namespace.
 
 Next, we'll delve into pragma directives in Solidity,
 
-an essential aspect for setting up your Solidity environment for Solana programming. Pragma directives dictate compiler behavior and compatibility, ensuring your code is interpreted correctly.
+an essential aspect of setting up your Solidity environment for Solana programming. Pragma directives dictate compiler behaviour and compatibility, ensuring your code is interpreted correctly.
