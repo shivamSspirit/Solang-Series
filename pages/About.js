@@ -22,7 +22,7 @@ const About = () => {
               description: "An Ultimate Crash Course on how to build on solana using solidity",
               images: [
                 {
-                  url: "https://res.cloudinary.com/ddwkxn8ak/image/upload/v1699181695/solangsol/land_fjuvyw.jpg",
+                  url: "https://i.postimg.cc/hvvz3KqW/landpage.jpg",
                   width: 600,
                   height: 420,
                   alt: "Soldity For Solana",
