@@ -129,12 +129,8 @@ export const findNavs = (
     return `CourseContent/module-${currentModuleNumberforPrev}/module-${currentModuleNumberforPrev}-${moduleChar}/${files[findCurrrentOrderNumberforprev]?.thisFileName}`;
   }
 
-
   nextPG = NavigateNext();
   prevPG = navigatePrevious();
-
-  console.log("nextPg", nextPG);
-  console.log("prevPG", prevPG);
 
   // Return navigation info
   return {

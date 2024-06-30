@@ -10,10 +10,6 @@ const NextBreadcrumb = ({ capitalizeLinks, currentpath }) => {
     return path;
   });
 
-  console.log("pathNames;",pathNames);
-  console.log("trimmedPath;",trimmedPath);
-
-
   return (
     <div>
       <ul id='breadcrumbs-one' className='hidden lg:flex'>

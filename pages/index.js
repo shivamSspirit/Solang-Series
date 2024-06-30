@@ -4,7 +4,6 @@ import { getModules } from "../utils/module-lession";
 
 export async function getStaticProps() {
   const allModuleNumbers = await getModules();
-  // console.log("allModuleNumbers", allModuleNumbers);
   const allModules = allModuleNumbers.map((post) =>
     post.substring("modules/".length)
   );

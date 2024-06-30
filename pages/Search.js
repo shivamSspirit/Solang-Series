@@ -13,8 +13,6 @@ const Search = () => {
     return findText;
   });
 
-  // console.log(searchedWordData);
-
   return (
     <Layout showFooter={false}>
       <div className=''>

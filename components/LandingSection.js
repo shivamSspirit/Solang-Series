@@ -12,7 +12,6 @@ import { announcementLandingData, timelineData } from "../utils/general-data";
 
 
 const LandingSection = ({ allModules }) => {
-  // console.log("all modes in land", allModules);
   const [svgHoverColor, setSvgHoverColor] = useState("white");
   const router = useRouter();
   const startBtnOnClick = () => {

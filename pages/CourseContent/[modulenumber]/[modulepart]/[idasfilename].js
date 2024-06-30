@@ -104,7 +104,6 @@ const returnModuleBGColor = (moduleNumber) => {
 };
 
 const returnLessionColors = (lessionNumber) => {
-  console.log("lessionNumber", lessionNumber);
   if (lessionNumber === "module-0") {
     return {
       blockquote: "prose-blockquote:text-[#bfbfff]",
@@ -161,7 +160,6 @@ const returnLessionColors = (lessionNumber) => {
       link_color: "prose-a:text-[#63a4da]",
     };
   } else if (lessionNumber === "module-5") {
-    console.log("module-555");
     return {
       blockquote: "prose-blockquote:text-[#e5acb6]",
       codeColor: "prose-code:text-[#e5acb6]",
@@ -173,7 +171,6 @@ const returnLessionColors = (lessionNumber) => {
       link_color: "prose-a:text-[#e5acb6]",
     };
   } else if (lessionNumber === "module-6") {
-    console.log("module-666");
     return {
       blockquote: "prose-blockquote:text-[#efc070]",
       codeColor: "prose-code:text-[#efc070]",
@@ -185,7 +182,6 @@ const returnLessionColors = (lessionNumber) => {
       link_color: "prose-a:text-[#efc070]",
     };
   } else if (lessionNumber === "module-7") {
-    console.log("module-777");
     return {
       blockquote: "prose-blockquote:text-[#F8C794]",
       codeColor: "prose-code:text-[#F8C794]",

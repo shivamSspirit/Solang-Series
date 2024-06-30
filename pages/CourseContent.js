@@ -35,13 +35,10 @@ const returnModuleHoverColor = (colors) => {
   } else if (colors === "#63a4da") {
     return "hover:bg-[#63a4da]";
   } else if (colors === "#e5acb6") {
-    console.log("colors", colors);
     return "hover:bg-[#e5acb6]";
   } else if (colors === "#efc070") {
-    console.log("colors", colors);
     return "hover:bg-[#efc070]";
   } else if (colors === "#F8C794") {
-    console.log("colors", colors);
     return "hover:bg-[#F8C794]";
   }
 };
@@ -75,7 +72,6 @@ const CourseContent = ({ allModules }) => {
         >
           {mergedArray.map((announcement, index) => (
             <Grid item xs={3} sm={4} md={4} key={index}>
-            {console.log("announcement", returnModuleColor(announcement.module))}
               <div
                 className={`m-1 p-2 cursor-pointer bg-[#858383] ${returnModuleColor(announcement.module)} rounded-2xl border border-white`}
               >
