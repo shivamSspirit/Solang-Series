@@ -1,14 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { allDocuments } from "../../../../.contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
-import changePartFunction from "../../../../shared/changePartFunction";
 import NewSideBar from "../../../../components/NewSideBar";
 import { NextSeo } from "next-seo";
 import ColorModuleParts from "../../../../components/ColorModuleParts";
 import Prism from "prismjs";
-import ScrollToTop from "react-scroll-to-top";
-import {findNavs} from '../../../../shared/navtoroute'
+import { findNavs } from "../../../../shared/navtoroute";
 
 require("prismjs/components/prism-solidity");
 require("prismjs/components/prism-typescript");
@@ -23,7 +21,7 @@ import {
   MdxH5,
   MdxH6,
 } from "../../../../components/Mdxheadings";
-import Link  from "next/link";
+import Link from "next/link";
 
 export async function getStaticPaths() {
   // Get a list of valid post paths.
@@ -84,7 +82,6 @@ export async function getStaticProps(context) {
     props: { lession, totalParts, filteredParts, totallessions, lastLetter },
   };
 }
-
 
 const returnModuleBGColor = (moduleNumber) => {
   if (moduleNumber === "module-0") {
@@ -202,15 +199,10 @@ const returnLessionColors = (lessionNumber) => {
   }
 };
 
-
-
-const GeneralInfo = ({
-  lession,
-  totalParts,
-  filteredParts,
-}) => {
+const GeneralInfo = ({ lession, totalParts, filteredParts }) => {
   const MDXContent = useMDXComponent(lession.body.code);
   const router = useRouter();
+  const [showScroll, setShowScroll] = useState();
 
   const mdxComponents = {
     h1: MdxH1,
@@ -220,10 +212,26 @@ const GeneralInfo = ({
     h5: MdxH5,
     h6: MdxH6,
   };
-  
+
   useEffect(() => {
     Prism.highlightAll();
   }, [lession]);
+
+  useEffect(() => {
+    const handleScrollVisible = () => {
+     window.scrollY > 450 ? setShowScroll(true) : setShowScroll(false);
+    };
+
+    window.addEventListener("scroll", handleScrollVisible);
+
+    return () => {
+      window.addEventListener("scroll", handleScrollVisible);
+    };
+  }, []);
+
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const orderedLessions = filteredParts
     ?.sort((a, b) => a.orderNumber - b.orderNumber)
@@ -233,63 +241,59 @@ const GeneralInfo = ({
 
   const { modulenumber, modulepart, idasfilename } = router.query;
 
-
   const currentpath = `/CourseContent/${modulenumber}/${modulepart}/${idasfilename}`;
 
-  const [prevPg, nextPg, prevPgText, nextPgText] = changePartFunction({
+  /** new routes start  */
+  const {
+    prevPG,
+    nextPG,
+    currentModuleNumber,
+    currentModuleNumberforPrev,
+    moduleChar,
+    NextFile,
+    prevFile,
+    moduleCharNext,
+  } = findNavs(
+    allDocuments,
     modulenumber,
     modulepart,
     totalParts,
-  });
-
-    /** new routes start  */
-    const {prevPG,nextPG,currentModuleNumber,
-      currentModuleNumberforPrev,
-      moduleChar, NextFile, prevFile, moduleCharNext} = findNavs(allDocuments, modulenumber,modulepart,totalParts,idasfilename, lession);
-
-    // console.log("routes",{
-    //   prevPage,NextPage,lession
-    // })
-  
-    /** new routes end here */
-
-
-
+    idasfilename,
+    lession
+  );
 
   return (
     <Layout>
+      {/* <ScrollToTop smooth /> */}
+      <div className="my-12">
+        <NextSeo
+          title="Soldity On Solana"
+          titleTemplate="Soldity On Solana"
+          defaultTitle="Soldity On Solana"
+          description="Deep dive into solana development using solidity"
+          canonical="https://solidityonsolana.one/"
+          openGraph={{
+            url: "https://solidityonsolana.one/",
+            title: "Soldity For Solana",
+            description:
+              "An Ultimate Crash Course on how to build on solana using solidity",
+            images: [
+              {
+                url: "https://i.postimg.cc/hvvz3KqW/landpage.jpg",
+                width: 600,
+                height: 420,
+                alt: "Soldity For Solana",
+              },
+            ],
+          }}
+          twitter={{
+            handle: "@shivamSspirit",
+            site: "shivamSspirit",
+            cardType: "summary_large_image",
+          }}
+        />
 
-     {/* /**to do */}
-     {/* <ScrollToTop smooth component={<MyArrow/>} /> */}
-      <div className='my-12'>
-      
-      <NextSeo
-            title="Soldity On Solana"
-            titleTemplate="Soldity On Solana"
-            defaultTitle="Soldity On Solana"
-            description="Deep dive into solana development using solidity"
-            canonical="https://solidityonsolana.one/"
-            openGraph={{
-              url: "https://solidityonsolana.one/",
-              title: "Soldity For Solana",
-              description: "An Ultimate Crash Course on how to build on solana using solidity",
-              images: [
-                {
-                  url: "https://i.postimg.cc/hvvz3KqW/landpage.jpg",
-                  width: 600,
-                  height: 420,
-                  alt: "Soldity For Solana",
-                },
-              ],
-            }}
-            twitter={{
-              handle: "@shivamSspirit",
-              site: "shivamSspirit",
-              cardType: "summary_large_image",
-            }}
-          />
-        
-        <div className='flex sm:flex-col justify-between'>
+        <div className="flex sm:flex-col justify-between">
           <ColorModuleParts
             moduleColor={returnModuleBGColor(lession?.moduleNumber)}
             currentpath={currentpath}
@@ -298,14 +302,29 @@ const GeneralInfo = ({
           />
         </div>
 
-        <div className='mt-20 sm:flex w-full gap-12'>
-          <div className='hidden md:flex w-1/4'>
+        <div className="mt-20 sm:flex w-full gap-12">
+          <div className="hidden md:flex w-1/4">
             <NewSideBar headings={lession.headings} />
           </div>
 
-          <div className='w-full md:w-3/4 lg:w-3/4 xl:w-3/4'>
-            <div className='flex flex-col text-white'>
-              <div className='flex justify-content items-center text-2xl mb-6'>
+          <div className="w-full md:w-3/4 lg:w-3/4 xl:w-3/4">
+            {showScroll && (
+              <div className="flex justify-end">
+                <button
+                  className="fixed top-[47%] right-0 md:right-2 lg:right-8 z-50 cursor-pointer p-3 bg-gray-700 rounded-full hover:bg-gray-800 transition duration-300"
+                  onClick={handleScrollToTop}
+                >
+                  <img
+                    src="/moduleimages/arrowup.png"
+                    alt="scroll"
+                    className="w-4 h-4 md:w-4 md:h-4 lg:w-4 lg:h-4"
+                  />
+                </button>
+              </div>
+            )}
+
+            <div className="flex flex-col text-white">
+              <div className="flex justify-content items-center text-2xl mb-6">
                 <div
                   className={`bg-transparentBg border-[5px] ${
                     returnLessionColors(lession?.moduleNumber).border_color
@@ -319,7 +338,7 @@ const GeneralInfo = ({
                     {lession?.modulePart[lession?.modulePart.length - 1] ?? "a"}
                   </div>
                 </div>
-                <div className='text-2xl md:text-3xl lg:text-4xl xl:text-4xl sm:ml-5 md:ml-0 lg:ml-0 xl:ml-0'>
+                <div className="text-2xl md:text-3xl lg:text-4xl xl:text-4xl sm:ml-5 md:ml-0 lg:ml-0 xl:ml-0">
                   {lession?.title}
                 </div>
               </div>
@@ -351,26 +370,32 @@ const GeneralInfo = ({
           </div>
         </div>
 
-        <div className='mt-20 w-full flex justify-between text-white'>
-          <div className=''>
-            {prevPG!==null ? (
-              <Link href={`/${prevPG}`} className='flex flex-col hover:underline'>
+        <div className="mt-20 w-full flex justify-between text-white">
+          <div className="">
+            {prevPG !== null ? (
+              <Link
+                href={`/${prevPG}`}
+                className="flex flex-col hover:underline"
+              >
                 <span>{`module-${currentModuleNumberforPrev}-${moduleChar}`}</span>
-                 <span>{`${prevFile}...`}</span>
+                <span>{`${prevFile}...`}</span>
               </Link>
-            ):(
-              ''
+            ) : (
+              ""
             )}
           </div>
 
-          <div className=''>
-            {nextPG!==null ? (
-              <Link href={`/${nextPG}`} className='flex flex-col justify-end hover:underline'>
+          <div className="">
+            {nextPG !== null ? (
+              <Link
+                href={`/${nextPG}`}
+                className="flex flex-col justify-end hover:underline"
+              >
                 <span>{`module-${currentModuleNumber}-${moduleCharNext}`}</span>
                 <span>{`${NextFile}...`}</span>
               </Link>
-            ):(
-              ''
+            ) : (
+              ""
             )}
           </div>
         </div>
