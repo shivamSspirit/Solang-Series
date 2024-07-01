@@ -18,7 +18,7 @@ As before, you'll see steps for importing necessary elements and setting up the 
 
 First, we start a new transaction using Solana's Web3.js:
 
-```tsx
+```typescript
 const transaction = new web3.Transaction();
 ```
 
@@ -32,7 +32,7 @@ Next, we collect user input for the following:
 
 We adjust the amount to account for the smallest token divisions (lamports):
 
-```tsx
+```typescript
 const mintPubKey = new web3.PublicKey(event.target.mint.value);
 const recipientPubKey = new web3.PublicKey(event.target.recipient.value);
 let amount = event.target.amount.value;
@@ -43,7 +43,7 @@ amount = amount * 10 ** 9; // Adjusting for lamports
 
 We need to create ATAs for both the sender and the recipient, using the same token mint:
 
-```tsx
+```typescript
 const senderAta = await getAssociatedTokenAddress(
  mintPubKey,
  publicKey,
@@ -65,7 +65,7 @@ const receiverAta = await getAssociatedTokenAddress(
 
 Next, we check if the receiver's ATA exists and, if not, add an instruction to create it:
 
-```tsx
+```typescript
 try {
     await getAccount(connection, receiverAta);
 } catch (e) {
@@ -86,7 +86,7 @@ try {
 
 Finally, we set up the RPC call to transfer tokens using the contract's methods:
 
-```tsx
+```typescript
 const transferTx = await program.methods
     .transferTokens(amount)
     .accounts({

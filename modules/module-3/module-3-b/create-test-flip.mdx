@@ -25,7 +25,7 @@ This lesson guides writing tests for a Solana program that incorporates cross-pr
 
 To start, clear the existing code in the test file and replace it with the following code block:
 
-```tsx
+```typescript
 import * as anchor from "@coral-xyz/anchor";
 import { Program } from "@coral-xyz/anchor";
 import { Lever } from "../target/types/lever";
@@ -34,7 +34,7 @@ import { Hand } from "../target/types/hand";
 describe("cross-program-invocation", () => {
   // Configuration for the local cluster.
   const provider = anchor.AnchorProvider.env();
- anchor.setProvider(provider);
+  anchor.setProvider(provider);
 
   // Generate keypairs for data accounts of each program.
   const dataAccountLever = anchor.web3.Keypair.generate();
@@ -42,8 +42,8 @@ describe("cross-program-invocation", () => {
   const wallet = provider.wallet;
 
   // Lever and Hand programs
-  const leverProgram = anchor.workspace.Lever as Program<Lever>;
-  const handProgram = anchor.workspace.Hand as Program<Hand>;
+   const leverProgram = anchor.workspace.Lever as Program<Lever>;
+   const handProgram = anchor.workspace.Hand as Program<Hand>;
 
   it("Initialize the lever!", async () => {
     // Initialize data account for lever program
@@ -52,14 +52,14 @@ describe("cross-program-invocation", () => {
       .accounts({ dataAccount: dataAccountLever.publicKey })
       .signers([dataAccountLever])
       .rpc();
- console.log("Your transaction signature", tx);
+    console.log("Your transaction signature", tx);
 
     // Fetch and display the state of the data account
     const val = await leverProgram.methods
       .get()
       .accounts({ dataAccount: dataAccountLever.publicKey })
       .view();
- console.log("State:", val);
+    console.log("State:", val);
   });
 
   it("Pull the lever!", async () => {
@@ -69,7 +69,7 @@ describe("cross-program-invocation", () => {
       .accounts({ dataAccount: dataAccountHand.publicKey })
       .signers([dataAccountHand])
       .rpc();
- console.log("Your transaction signature", tx);
+    console.log("Your transaction signature", tx);
 
     // Invoke pullLever in hand program, calling lever program via CPI
     const tx2 = await handProgram.methods
@@ -78,26 +78,26 @@ describe("cross-program-invocation", () => {
       .remainingAccounts([
         // Lever program's data account
         {
- pubkey: dataAccountLever.publicKey,
- isWritable: true,
- isSigner: false,
+          pubkey: dataAccountLever.publicKey,
+          isWritable: true,
+          isSigner: false,
         },
         // Lever program's ID
         {
- pubkey: leverProgram.programId,
- isWritable: false,
- isSigner: false,
+          pubkey: leverProgram.programId,
+          isWritable: false,
+          isSigner: false,
         },
       ])
       .rpc({ skipPreflight: true });
- console.log("Your transaction signature", tx2);
+    console.log("Your transaction signature", tx2);
 
     // Fetch and display updated state
     const val = await leverProgram.methods
       .get()
       .accounts({ dataAccount: dataAccountLever.publicKey })
       .view();
- console.log("State:", val);
+    console.log("State:", val);
   });
 
   it("Pull it again!", async () => {
@@ -108,29 +108,30 @@ describe("cross-program-invocation", () => {
       .remainingAccounts(
         // Lever program's data account
         {
- pubkey: dataAccountLever.publicKey,
- isWritable: true,
- isSigner: false,
+          pubkey: dataAccountLever.publicKey,
+          isWritable: true,
+          isSigner: false,
         },
         // Lever program's ID
         {
- pubkey: leverProgram.programId,
- isWritable: false,
- isSigner: false,
-        },
- ])
+          pubkey: leverProgram.programId,
+          isWritable: false,
+          isSigner: false,
+        }
+      )
       .rpc({ skipPreflight: true });
 
- console.log("Your transaction signature", tx);
+    console.log("Your transaction signature", tx);
 
     // Fetch and display updated state
     const val = await leverProgram.methods
       .get()
       .accounts({ dataAccount: dataAccountLever.publicKey })
       .view();
- console.log("State:", val);
+    console.log("State:", val);
   });
 });
+
 ```
 
 In this code:
@@ -141,14 +142,14 @@ In this code:
 
 ### Test Requirements and Setup
 
-```tsx
+```typescript
 describe("cross-program-invocation", () => {
-}
+})
 ```
 
 In this part, we'll talk about and test how the "CPI" program works. We'll write different test cases, make assertions, and set expectations to make sure the program behaves correctly. For this, you need to first set the Requirements for the test:
 
-```tsx
+```typescript
 // Configure the client to use the local cluster.
  const provider = anchor.AnchorProvider.env();
  anchor.setProvider(provider);
@@ -168,7 +169,7 @@ Now, let's initialize the data account for the lever program:
 
 ### Initializing the Data Account for the Lever Program
 
-```tsx
+```typescript
 it("Initialize the lever!", async () => {
     // Initialize data account for the lever program
     const tx = await leverProgram.methods
@@ -176,7 +177,7 @@ it("Initialize the lever!", async () => {
       .accounts({ dataAccount: dataAccountLever.publicKey })
       .signers([dataAccountLever])
       .rpc();
- console.log("Your transaction signature", tx);
+   console.log("Your transaction signature", tx);
 
     // Fetch the state of the data account
     const val = await leverProgram.methods
@@ -192,70 +193,70 @@ In this test case, we initialize a data account for the lever program and fetch 
 
 ### Testing the Lever Pull Functionality
 
-```tsx
+```typescript
 it("Pull the lever!", async () => {
-    // Initialize data account for the hand program
-    // This is required by Solang, but the account is not used
-    const tx = await handProgram.methods
-      .new()
-      .accounts({ dataAccount: dataAccountHand.publicKey })
-      .signers([dataAccountHand])
-      .rpc();
- console.log("Your transaction signature", tx);
+  // Initialize data account for the hand program
+  // This is required by Solang, but the account is not used
+  const tx = await handProgram.methods
+    .new()
+    .accounts({ dataAccount: dataAccountHand.publicKey })
+    .signers([dataAccountHand])
+    .rpc();
+  console.log("Your transaction signature", tx);
 
-    // Call the pullLever instruction on the hand program, which invokes the lever program via CPI
-    const tx2 = await handProgram.methods
-      .pullLever(dataAccountLever.publicKey, "Chris")
-      .accounts({ dataAccount: dataAccountHand.publicKey })
-      .remainingAccounts([
-        {
- pubkey: dataAccountLever.publicKey, // The lever program's data account, which stores the state
- isWritable: true,
- isSigner: false,
-        },
-        {
- pubkey: leverProgram.programId, // The lever program's program ID
- isWritable: false,
- isSigner: false,
-        },
-      ])
-      .rpc({ skipPreflight: true });
- console.log("Your transaction signature", tx2);
+  // Call the pullLever instruction on the hand program, which invokes the lever program via CPI
+  const tx2 = await handProgram.methods
+    .pullLever(dataAccountLever.publicKey, "Chris")
+    .accounts({ dataAccount: dataAccountHand.publicKey })
+    .remainingAccounts([
+      {
+        pubkey: dataAccountLever.publicKey, // The lever program's data account, which stores the state
+        isWritable: true,
+        isSigner: false,
+      },
+      {
+        pubkey: leverProgram.programId, // The lever program's program ID
+        isWritable: false,
+        isSigner: false,
+      },
+    ])
+    .rpc({ skipPreflight: true });
+  console.log("Your transaction signature", tx2);
 
-    // Fetch the state of the data account
-    const val = await leverProgram.methods
-      .get()
-      .accounts({ dataAccount: dataAccountLever.publicKey })
-      .view();
+  // Fetch the state of the data account
+  const val = await leverProgram.methods
+    .get()
+    .accounts({ dataAccount: dataAccountLever.publicKey })
+    .view();
 
- console.log("State:", val);
-  });
+  console.log("State:", val);
+});
 ```
 
 This test case focuses on the functionality of pulling the lever, where the hand program calls the lever program via CPI. We check the updated state post-CPI execution.
 
 ### Repeating the Lever Pull with Different Arguments
 
-```tsx
-  it("Pull it again!", async () => {
-    // Repeat lever pull with different arguments
-    const tx = await handProgram.methods
-      .pullLever(dataAccountLever.publicKey, "Ashley")
-      .accounts({ dataAccount: dataAccountHand.publicKey })
-      .remainingAccounts([
-        // Account configurations
-      ])
-      .rpc({ skipPreflight: true });
+```typescript
+ it("Pull it again!", async () => {
+  // Repeat lever pull with different arguments
+  const tx = await handProgram.methods
+    .pullLever(dataAccountLever.publicKey, "Ashley")
+    .accounts({ dataAccount: dataAccountHand.publicKey })
+    .remainingAccounts([
+      // Account configurations
+    ])
+    .rpc({ skipPreflight: true });
 
- console.log("Your transaction signature", tx);
+  console.log("Your transaction signature", tx);
 
-    // Fetch the state of the data account
-    const val = await leverProgram.methods
-      .get()
-      .accounts({ dataAccount: dataAccountLever.publicKey })
-      .view();
- console.log("State:", val);
-  });
+  // Fetch the state of the data account
+  const val = await leverProgram.methods
+    .get()
+    .accounts({ dataAccount: dataAccountLever.publicKey })
+    .view();
+  console.log("State:", val);
+});
 ```
 Here, we perform another lever pull with varying arguments to ensure the program responds correctly to different inputs.
 

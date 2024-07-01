@@ -48,7 +48,7 @@ We're creating a Solana program for minting fungible SPL tokens. We'll use speci
 
 3. Now, head over to your `spl-token-minter.sol` file and start by importing these libraries:
 
-```Solidity
+```solidity
 import "../libraries/spl_token.sol";
 import "../libraries/mpl_metadata.sol";
 ```
@@ -57,13 +57,13 @@ These import statements allow your contract to access functions and data from th
 
 4. Define your program with the `@program_id` annotation, which specifies the on-chain address of your Solana program:
 
-```Solidity
+```solidity
 @program_id("4Huxs8ujxKqT76qqfmfJXMThmo4WMsvmdiCkqzNKF5kq")
 ```
 
 5. Write your program's contract structure:
 
-```Solidity
+```solidity
 contract spl_token_minter {
  @payer(payer)
  constructor() {}
@@ -80,7 +80,7 @@ In Solana, storing data on the blockchain requires allocating SOL for storage co
 
 After your constructor, add the `createTokenMint` function:
 
-```Solidity
+```solidity
 function createTokenMint(
  address payer, // payer account
  address mint, // mint account to be created
@@ -105,7 +105,7 @@ This function handles creating a new token mint and its metadata. It involves in
 
 Next, include the `create_mint` function:
 
-```Solidity
+```solidity
 
  // Mint tokens to the token account
  SplToken.create_mint(
@@ -124,7 +124,7 @@ This function mints tokens directly to a user's associated token account. It's a
 
 Finally, add the `create_metadata_account` function:
     
- ```Solidity
+```solidity
 
  MplMetadata.create_metadata_account(
  metadata, // The new metadata account's address
@@ -137,7 +137,7 @@ Finally, add the `create_metadata_account` function:
  uri // The URI where the off-chain metadata JSON is stored
  );
 
-    ```
+```
 
 ### Understanding the Minting Process
 

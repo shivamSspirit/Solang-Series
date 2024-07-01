@@ -26,7 +26,8 @@ Solidity uses the import directive to include code from other files, similar to 
 In Solidity, the import directive is used to integrate other Solidity files into your contract. For instance, importing the Solana library lets you utilize its methods within your Solidity contracts. Solidity's approach to imports is somewhat akin to JavaScript's ES6, with some differences.
 
 Example:
-```Solidity
+
+```solidity
 import { foo, bar } from "defines.sol";
 ```
 
@@ -37,30 +38,34 @@ In Solidity, `import` is hoisted, allowing `foo` and `bar` to be accessible befo
 There are several types of imports you can use:
 
 1. **Import Everything from a Library:**
-   ```Solidity
+
+```solidity
  import "defines.sol";
-   ```
+```
    This imports all items from "defines.sol", differing from ES6 where such syntax imports nothing.
 
 2. **Select Specific Items from a Library:**
-   ```Solidity
+
+```solidity
  import { foo, bar } from "defines.sol";
-   ```
-   Only imports `foo` and `bar` from "defines.sol".
+```
+  Only imports `foo` and `bar` from "defines.sol".
 
 3. **Using Import Maps:**
-   Import maps link a path segment to a specific location on the file system. For example:
-   ```Solidity
+   Import maps link a path segment to a specific location on the file system.
+   For example:
+
+```solidity
  import map @openzeppelin=/opt/openzeppelin-contracts/contracts
  import "@openzeppelin/interfaces/IERC20.sol";
-   ```
+```
    This would link to `/opt/openzeppelin-contracts/contracts/interfaces/IERC20.sol`.
 
 ## Renaming Imports
 
 You can also rename imports for convenience or to avoid name clashes:
 
-```Solidity
+```solidity
 import { bar as baz, foo } from "defines.sol";
 ```
 
@@ -68,7 +73,7 @@ This renames `bar` to `baz` from "defines.sol".
 
 **Grouping Imports Under a Namespace:**
 
-```Solidity
+```solidity
 import "defines.sol" as defs;
 // Now use defs.bar, defs.foo, etc.
 ```

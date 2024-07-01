@@ -12,7 +12,7 @@ modulePartDescription: In this part, you will learn how to edit and create compo
 
 Let's start with minting tokens in our DApp. Head over to the "components" folder and find the "`createTokenMint`" directory. Inside, you'll see a component named "`CreateMintForm`." Here, we use the `useState` hook to manage three different states:
 
-```tsx
+```typescript
 const [txSig, setTxSig] = useState("");
 const [mint, setMint] = useState("");
 const [loading, setLoading] = useState(false);
@@ -24,7 +24,7 @@ We use these states to keep track of the `transaction signature`, the `mint acco
 
 In this component, we retrieve the current state from hooks:
 
-```tsx
+```typescript
 const { connection } = useConnection();
 const wallet = useWallet();
 const { publicKey, sendTransaction } = useWallet();
@@ -32,7 +32,7 @@ const { publicKey, sendTransaction } = useWallet();
 
 We also have a function to link the transaction signature to the Solana Explorer.
 
-```tsx
+```typescript
 const link = () => {
   return txSig ? `https://explorer.solana.com/tx/${txSig}?cluster=devnet` : "";
 };
@@ -42,7 +42,7 @@ const link = () => {
 
 We then set up the provider, connection, and program API for executing RPC calls.
 
-```tsx
+```typescript
 const getProgram = () => {
   const provider = new AnchorProvider(connection, wallet as any, opts);
   const program = new Program(idl as Idl, programId, provider);
@@ -56,7 +56,7 @@ const program = getProgram();
 
 We create data and mint accounts using random keypairs.
 
-```tsx
+```typescript
 const dataAccount = anchor.web3.Keypair.generate();
 const mintKeypair = anchor.web3.Keypair.generate();
 ```
@@ -65,7 +65,7 @@ const mintKeypair = anchor.web3.Keypair.generate();
 
 We proceed to define the metadata for our token.
 
-```tsx
+```typescript
 const tokenTitle = "Temp Token";
 const tokenSymbol = "TEMP";
 const tokenUri = "image_url.png";
@@ -75,7 +75,7 @@ const tokenUri = "image_url.png";
 
 Now, let's build the `createMint` function to execute our transaction.
 
-```tsx
+```typescript
 const createMint = async (event) => {
   event.preventDefault();
 

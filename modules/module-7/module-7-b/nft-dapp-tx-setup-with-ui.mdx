@@ -51,7 +51,7 @@ Process of first transaction
 - Get the program ID from the IDL
 - Set up transaction commitment levels (you can learn more about commitment levels [here](https://www.notion.so/Solana-quest-9ddf77eef0054f42930789c62a3930df?pvs=21))
 
-```ts
+```typescript
 const opts: { preflightCommitment: Commitment } = {
     preflightCommitment: "processed",
 };
@@ -60,7 +60,7 @@ const opts: { preflightCommitment: Commitment } = {
 - Create the MintNFTButton React component and get mintAccount as a prop argument
 - Set up the state for loading, transaction signature, and NFT details
 
-```ts
+```typescript
     const [txSig, setTxSig] = useState("");
     const [loading, setLoading] = useState(false);
     const [nftDetails, setNftDetails] = useState<Sft | Nft | null>(null);
@@ -69,7 +69,7 @@ const opts: { preflightCommitment: Commitment } = {
 
 - Fetch the connection and wallet for creating the provider and setting up the cluster.
 
-```ts
+```typescript
     const { connection } = useConnection();
     const wallet = useWallet();
     const { publicKey, sendTransaction } = useWallet();
@@ -77,7 +77,7 @@ const opts: { preflightCommitment: Commitment } = {
 
 - Now, we need to set up the program API for sending transactions on the Solana cluster. To do this, we create an Anchor provider using the connection and wallet instances.
 
-```ts
+```typescript
   const getProgram = () => {
         /* create the provider and return it to the caller */
         const provider = new AnchorProvider(connection, wallet as any, opts);
@@ -90,7 +90,7 @@ const opts: { preflightCommitment: Commitment } = {
 - After setting up the program, we need to create an ATA for the minter to hold the minted token.
 - Create metadata for the token, including its name, symbol, and other metadata URI.
 
-```ts
+```typescript
 const MetaData = {
         name: "oggggg",
         symbol: "Oggy",
@@ -100,14 +100,14 @@ const MetaData = {
 
 - Next, we need to derive the PDA using the seeds "mint-authority" and the program ID.
 
-```ts
+```typescript
 const [dataAccountPDA, bump] = PublicKey.findProgramAddressSync([Buffer.from("mint_authority")], program.programId);
 ```
 
 - Now we are all set to send tx to solana cluster
 - Setup an async verison of fn like this (when we are clicking on mint nft button , we are actucally calling this fn)
 
-```ts
+```typescript
 const mintNft = async (e) => {
         setLoading(true);
         try {
@@ -126,7 +126,7 @@ const mintNft = async (e) => {
 
 - Next , Create your first rpc call (tx) for createTokenMint , this instruction create a token mint acc(which have mint authority  as pda) and set a reference for metaplex metadata account for storing metadata for mint account.
 
-```ts
+```typescript
 // create a metaplex connection and fetch metadata address for our token mint account
 
 const metaplex = Metaplex.make(connection);
@@ -155,7 +155,7 @@ const metadataAddress = await metaplex.nfts().pdas().metadata({ mint: mintKeypai
 
 - Now we need to mint nft to minter account for this we need to call mintTo() methods from program api and provide required accounts. the tx look like this
 
-```ts
+```typescript
 const tx = await program.methods
                 .mintTo()
                 .accounts({
@@ -196,13 +196,13 @@ Next look at transferNFT __fn__
 
 - Create a new tx instance
 
-```ts
+```typescript
  const transaction = new Transaction();
 ```
 
 - Create and fetch ata for minter(seller)
 
-```ts
+```typescript
 const sellerTokenAccount = await getAssociatedTokenAddress(
                 mint.publicKey,
                 publicKey,
@@ -216,14 +216,14 @@ const sellerTokenAccount = await getAssociatedTokenAddress(
 
 ![minted_nft_transfer.jpeg](/moduleimages/transfer.jpeg)
 
-```ts
+```typescript
 const [buyer, setBuyer] = useState("");
 const buyerPublicKey = new anchor.web3.PublicKey(buyer);
 ```
 
 - Derive the buyer token account
 
-```ts
+```typescript
  const buyerTokenAccount = await getAssociatedTokenAddress(
                 mint.publicKey,
                 buyerPublicKey,
@@ -235,7 +235,7 @@ const buyerPublicKey = new anchor.web3.PublicKey(buyer);
 
 - IF buyer ata not created yet then we create a tx to create an ata for buyer
 
-```ts
+```typescript
 try {
                 await getAccount(connection, buyerTokenAccount);
             } catch (e) {
@@ -257,7 +257,7 @@ try {
 ```
 
 - Next we call the program’s transferNft method to send minted nft to buyer
-```ts
+```typescript
   const tx = await program.methods
                 .transferNft()
                 .accounts({

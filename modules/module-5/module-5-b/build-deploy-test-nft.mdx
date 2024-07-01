@@ -175,48 +175,50 @@ export async function createKeypairFromFile(
 ### Test Case
 
  ```typescript
-  it("transfer the NFT to another wallet!", async () => {
+it("transfer the NFT to another wallet!", async () => {
+  // const mint: anchor.web3.PublicKey = new anchor.web3.PublicKey(
+  //   "EgKQwGsYksnD5GuAkdUozmMi692iFHFEJUfZuTr5uMjq"
+  // );
 
-    const mint: anchor.web3.PublicKey = new anchor.web3.PublicKey(
-      "EgKQwGsYksnD5GuAkdUozmMi692iFHFEJUfZuTr5uMjq"
-    );
+  const buyer: anchor.web3.Keypair = await createKeypairFromFile(__dirname + "/keypairs/newowner.json");
+  console.log(`Buyer public key: ${buyer.publicKey}`);
 
-    const buyer: anchor.web3.Keypair = await createKeypairFromFile(__dirname + "/keypairs/newowner.json");
- console.log(`Buyer public key: ${buyer.publicKey}`);
+  const sellerTokenAccount = await getOrCreateAssociatedTokenAccount(
+    connection,
+    wallet.payer, // payer
+    mint, // mint account
+    wallet.publicKey // owner account
+  );
 
-    const sellerTokenAccount = await getOrCreateAssociatedTokenAccount(
- connection,
- wallet.payer, // payer
- mint, // mint account
- wallet.publicKey // owner account
-    );
+  console.log("seller token  account", sellerTokenAccount);
 
+  // Derive wallet's associated token account address for mint
+  const buyerTokenAccount = await getOrCreateAssociatedTokenAccount(
+    connection,
+    wallet.payer, // payer
+    mint, // mint account
+    buyer.publicKey // owner account
+  );
 
- console.log("seller token  account", sellerTokenAccount);
+  console.log("buyerTokenAccount", buyerTokenAccount);
 
-    // Derive wallet's associated token account address for mint
-    const buyerTokenAccount = await getOrCreateAssociatedTokenAccount(
- connection,
- wallet.payer, // payer
- mint, // mint account
- buyer.publicKey // owner account
-    );
+  const tx = await program.methods
+    .transferNft()
+    .accounts({
+      owner: wallet.publicKey,
+      from: sellerTokenAccount.address,
+      to: buyerTokenAccount.address,
+    })
+    .signers([wallet.payer])
+    .rpc();
+  console.log("Your transaction signature", tx);
 
- console.log("buyerTokenAccount", buyerTokenAccount)
+  const buyerTokenAccountAmount = (
+    await getAccount(connection, buyerTokenAccount.address)
+  ).amount;
+  console.log("buyerTokenAccountAmount", buyerTokenAccountAmount);
+});
 
-    const tx = await program.methods
-      .transferNft()
-      .accounts({
- owner: wallet.publicKey,
- from: sellerTokenAccount.address,
- to: buyerTokenAccount.address,
-      }).signers([wallet.payer])
-      .rpc();
- console.log("Your transaction signature", tx);
-
-    const buyerTokenAccountAmount = ((await getAccount(connection, buyerTokenAccount.address)).amount);
- console.log("buyerTokenAccountAmount", buyerTokenAccountAmount);
-  });
  ```
 
 ## Breakdown

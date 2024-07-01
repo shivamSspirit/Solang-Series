@@ -19,7 +19,7 @@ When you use the "`mintTo`" function, it starts by getting a mint key from the u
 
 Additionally, you take the token amount the user enters and adjust it for the smallest fractions of the token (called lamports). For example:
 
-```tsx
+```typescript
 let amount = event.target.amount.value;
 amount = amount * 10 ** 9; // 10^9 lamports (fractions) of that token
 ```
@@ -28,7 +28,7 @@ amount = amount * 10 ** 9; // 10^9 lamports (fractions) of that token
 
 Next, we create an Associated Token Account (ATA) for the minter using their wallet's public key.
 
-```tsx
+```typescript
 const associatedToken = await getAssociatedTokenAddress(
  mintPubKey,
  publicKey,
@@ -42,7 +42,7 @@ const associatedToken = await getAssociatedTokenAddress(
 
 Now, we set up the RPC call to mint tokens into the user’s ATA.
 
-```tsx
+```typescript
 const createMint = await program.methods
     .mintTo(amount)
     .accounts({

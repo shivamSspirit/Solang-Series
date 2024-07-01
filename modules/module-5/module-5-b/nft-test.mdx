@@ -49,7 +49,7 @@ modulePartDescription: This section teaches you to set up, configure, and test a
 1. **Import Dependencies**:
 
    - Begin by importing required modules and classes at the top of your test file:
-     ```typescript
+```typescript
      import * as anchor from "@coral-xyz/anchor";
      import { Program } from "@coral-xyz/anchor";
      import { PdaMintAuthority } from "../target/types/pda_mint_authority";
@@ -70,7 +70,7 @@ modulePartDescription: This section teaches you to set up, configure, and test a
 2. **Initialize Testing Framework**:
 
    - Set up the testing framework:
-     ```typescript
+```typescript
      describe("pda-mint-authority", () => {
        // Test cases will go here
      });
@@ -79,7 +79,7 @@ modulePartDescription: This section teaches you to set up, configure, and test a
 3. **Configuring the Provider**:
 
    - Set up provider and key pairs:
-     ```typescript
+```typescript
      const provider = anchor.AnchorProvider.env();
      anchor.setProvider(provider);
      const mintKeypair = anchor.web3.Keypair.generate();
@@ -92,7 +92,7 @@ modulePartDescription: This section teaches you to set up, configure, and test a
 4. **Deriving PDA for Data Account**:
 
    - Derive the Program Derived Address (PDA):
-     ```typescript
+```typescript
      const [dataAccountPDA, bump] = PublicKey.findProgramAddressSync(
        [Buffer.from("mint_authority")],
        program.programId
@@ -102,7 +102,7 @@ modulePartDescription: This section teaches you to set up, configure, and test a
 5. **Defining NFT Metadata**:
 
    - Specify metadata for the NFT:
-     ```typescript
+```typescript
      const nftTitle = "purple lamb";
      const nftSymbol = "lamb";
      const nftUri = "https://example.com/nft.json";
@@ -111,7 +111,7 @@ modulePartDescription: This section teaches you to set up, configure, and test a
 6. **Initializing Data Account**:
 
    - Write a test to initialize the data account:
-     ```typescript
+```typescript
      it("Is initialized!", async () => {
        const tx = await program.methods
          .new([bump])
@@ -125,7 +125,7 @@ modulePartDescription: This section teaches you to set up, configure, and test a
 
    - Implement a test case for creating and minting the NFT:
    - the `createTokenMint` is from our `pda-mint-auth` program
-     ```typescript
+```typescript
      it("Create an NFT!", async () => {
        const metaplex = Metaplex.make(connection);
        const metadataAddress = await metaplex
@@ -161,7 +161,7 @@ modulePartDescription: This section teaches you to set up, configure, and test a
 
    - Write a test to mint NFT to a wallet:
    - the `mintTo` is from our `pda-mint-auth` program
-     ```typescript
+```typescript
      it("Mint the NFT to your wallet!", async () => {
        // Derive wallet's associated token account address for mint
        const tokenAccount = getAssociatedTokenAddressSync(

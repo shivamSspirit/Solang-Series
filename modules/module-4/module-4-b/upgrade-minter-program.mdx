@@ -29,7 +29,7 @@ We're using the same project setup for this task. Let's start by adding a transf
 
 In the `transfergold.sol` file, add a `transferTokens` function below the `mintTo` function:
 
-```Solidity
+```solidity
 // Transfer tokens from one token account to another via Cross-Program Invocation to Token Program
 function transferTokens(
  address from, // token account to transfer from
@@ -59,66 +59,66 @@ Here, we transfer Gold Tokens from one ATA to another using CPI.
 
 Now, let's write a test for transferring Gold Tokens in the `transfersol.ts` test file. Add this test following the *mint tokens to our wallet* test:
 
-```ts
+```typescript
 // Transfer token to another wallet via CPI
 it("Transfer some tokens to another wallet!", async () => {
   // Wallet's associated token account address for mint
   const tokenAccount = await getOrCreateAssociatedTokenAccount(
- connection,
- wallet.payer, // payer
- mintKeypair.publicKey, // mint
- wallet.publicKey // owner(shivam)
+    connection,
+    wallet.payer, // payer
+    mintKeypair.publicKey, // mint
+    wallet.publicKey // owner(shivam)
   );
 
   const receipient = anchor.web3.Keypair.generate();
   const receipientTokenAccount = await getOrCreateAssociatedTokenAccount(
- connection,
- wallet.payer, // payer
- mintKeypair.publicKey, // mint account
- receipient.publicKey // owner(justin) account
+    connection,
+    wallet.payer, // payer
+    mintKeypair.publicKey, // mint account
+    receipient.publicKey // owner(justin) account
   );
 
- console.log("receipientTokenAccount", receipientTokenAccount);
+  console.log("receipientTokenAccount", receipientTokenAccount);
 
   const tx = await program.methods
     .transferTokens(
- tokenAccount.address,
- receipientTokenAccount.address,
+      tokenAccount.address,
+      receipientTokenAccount.address,
       new anchor.BN(54000000000)
     )
     .accounts({ dataAccount: dataAccount.publicKey })
     .remainingAccounts([
       {
- pubkey: wallet.publicKey,
- isWritable: true,
- isSigner: true,
+        pubkey: wallet.publicKey,
+        isWritable: true,
+        isSigner: true,
       },
       {
- pubkey: mintKeypair.publicKey,
- isWritable: false,
- isSigner: false,
+        pubkey: mintKeypair.publicKey,
+        isWritable: false,
+        isSigner: false,
       },
       {
- pubkey: tokenAccount.address,
- isWritable: true,
- isSigner: false,
+        pubkey: tokenAccount.address,
+        isWritable: true,
+        isSigner: false,
       },
       {
- pubkey: receipientTokenAccount.address,
- isWritable: true,
- isSigner: false,
+        pubkey: receipientTokenAccount.address,
+        isWritable: true,
+        isSigner: false,
       },
     ])
     .rpc();
- console.log("Your transaction signature", tx);
+  console.log("Your transaction signature", tx);
 
   const recepienttokenAmount = (
     await getAccount(connection, receipientTokenAccount.address)
   ).amount;
- console.log("recipienttokenAmount", recepienttokenAmount);
+  console.log("recipienttokenAmount", recepienttokenAmount);
   let tokens = Number(recepienttokenAmount);
 
- assert.equal(tokens / LAMPORTS_PER_SOL, 54);
+  assert.equal(tokens / LAMPORTS_PER_SOL, 54);
 });
 ```
 

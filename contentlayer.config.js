@@ -37,15 +37,6 @@ const computedFields = {
       return headings;
     },
   },
-
-  // toc: {
-  //   type: "json",
-  //   resolve: async (doc) => {
-  //     const regularExp = /\n(?<flag>#{1,6})\s+(?<content>.+)/g;
-  //     const headingsArr = Array;
-  //     return true;
-  //   },
-  // },
 };
 
 export const Doc = defineDocumentType(() => ({

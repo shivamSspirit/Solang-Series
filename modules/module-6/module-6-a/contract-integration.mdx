@@ -41,13 +41,13 @@ We use a main context provider in our Next.js `_app` file. Once we have the wall
 
 In the "create mint" component, we start by importing our contract's IDL.
 
-```tsx
+```typescript
 import idl from "../../idl.json";
 ```
 
 We then establish a connection, configure the wallet, and import necessary methods from various packages.
 
-```tsx
+```typescript
 import { Program, Idl, AnchorProvider, BN, utils, web3 } from "@coral-xyz/anchor";
 import { Metaplex } from "@metaplex-foundation/js";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
@@ -56,13 +56,13 @@ import { getMint } from "@solana/spl-token";
 
 Set up the `program id` (the ID of our deployed Solana program).
 
-```tsx
+```typescript
 const programId = new PublicKey(idl.metadata.address);
 ```
 
 Use these `hooks` to access the `connection` and `wallet` states.
 
-```tsx
+```typescript
 const { connection } = useConnection();
 const wallet = useWallet();
 const { publicKey, sendTransaction } = useWallet();
@@ -72,7 +72,7 @@ const { publicKey, sendTransaction } = useWallet();
 
 Create a provider with `new AnchorProvider(connection, wallet as any, opts);` using the wallet and connection. Then use the Anchor Program API to create an instance of our Solana program API.
 
-```tsx
+```typescript
 const getProgram = () => {
     const provider = new AnchorProvider(connection, wallet as any, opts);
     const program = new Program(idl as Idl, programId, provider);
@@ -84,7 +84,7 @@ const getProgram = () => {
 
 Now, you can make an RPC call with the program:
 
-```tsx
+```typescript
 const tx = await program.methods
     .new()
     .accounts({ dataAccount: dataAccount.publicKey })
@@ -94,7 +94,7 @@ const tx = await program.methods
 
 This is similar to a function call in Solidity:
 
-```Solidity
+```solidity
 @payer(payer)
 constructor() {}
 ```

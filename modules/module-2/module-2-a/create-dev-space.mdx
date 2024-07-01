@@ -92,7 +92,7 @@ The `@program_id` annotation:
 
 In Solana, smart contracts are called **programs**. The **@program_id** annotation specifies the program's on-chain address.
 
-```Solidity
+```solidity
 @program_id("F1ipperKF9EfD821ZbbYjS319LXYiBmjhzkkf5a26rC")
 ```
 
@@ -100,7 +100,7 @@ The `@payer` annotation:
 
 In Solana, you need SOL to cover storage costs when storing data. The `@payer` annotation indicates who will pay for creating the account that stores the data.
 
-```Solidity
+```solidity
 @payer(payer) // payer for the "data account"
 constructor(address payer) {
  print("Hello, World!");

@@ -28,7 +28,7 @@ Functions in Solidity can be declared inside contracts (accessing contract stora
 
 Example:
 
-```Solidity
+```solidity
 function get_initial_bound() returns (uint256 value) {
  value = 102;
 }
@@ -63,7 +63,7 @@ Function arguments can be passed by position or by name. For named arguments, th
 
 Example:
 
-```Solidity
+```solidity
 contract foo {
  function bar1(uint32 x, bool y) public returns (address, bytes32) {
  return (address(3), hex"01020304");
@@ -87,7 +87,7 @@ contract foo {
 
 Example:
 
-```Solidity
+```solidity
 contract Transaction {
  function transferEther() public payable {
  // handle Ether transfer
@@ -105,7 +105,7 @@ Functions can have the same name but different argument types or numbers. Overlo
 
 Example:
 
-```Solidity
+```solidity
 contract Calculator {
  function add(int a, int b) public returns (int) {
  return a + b;

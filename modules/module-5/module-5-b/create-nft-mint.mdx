@@ -40,19 +40,21 @@ modulePartDescription: In this part of the module, you will implement a Solidity
 
 3. **Importing Required Libraries**:
    - Start your Solidity file (e.g., `pda-mint-authority.sol`) by importing necessary libraries from the root folder:
-     ```solidity
+
+```solidity
  import "../libraries/spl_token.sol";
  import "solana";
-     ```
+```
 
 ### Writing the Solidity Program
 
 1. **Define the Program ID**:
 
    - Use the `@program_id` annotation to specify your contract's on-chain address:
-     ```solidity
+
+```solidity
  @program_id("4Huxs8ujxKqT76qqfmfJXMThmo4WMsvmdiCkqzNKF5kq")
-     ```
+```
 
 2. **Initializing the Contract**:
    - Declare your contract with the required properties:
@@ -111,7 +113,8 @@ contract pda_mint_authority {
 1. **Adding the Function in Solidity**:
 
    - After the constructor, define the `createTokenMint` function to handle mint creation:
-     ```solidity
+
+```solidity
  @mutableSigner(payer)
  @mutableSigner(mint)
  @mutableAccount(metadata)
@@ -119,7 +122,7 @@ contract pda_mint_authority {
  function createTokenMint(/* parameters */) external {
  // Function logic
  }
-     ```
+```
 
 2. **Setting Up Accounts and Parameters**:
 
@@ -141,7 +144,8 @@ contract pda_mint_authority {
 
    - Utilize the `SplToken.create_mint` function to establish the mint account and set attributes like mint authority, freeze authority, and decimals.
    - Example of invoking this function:
-     ```solidity
+
+```solidity
  SplToken.create_mint(
  tx.accounts.payer.key, // Payer account
  tx.accounts.mint.key,  // Mint account
@@ -149,20 +153,20 @@ contract pda_mint_authority {
  freezeAuthority,       // Freeze authority
  decimals               // Decimals
  );
-     ```
+```
 
 2. **Invoke Metadata Program**:
 
-   - Use a custom function `_createMetadataAccount` to create the metadata account:
+- Use a custom function `_createMetadataAccount` to create the metadata account:
 
-     ```solidity
+```solidity
  _createMetadataAccount(
  tx.accounts.metadata.key,       // Metadata account
  tx.accounts.mint.key,           // Mint account
  tx.accounts.mintAuthority.key,  // Mint authority
  // Additional parameters
  );
-     ```
+```
 
 3. **Breaking Down the Function Logic**:
    - The `createTokenMint` function first sets up the mint account using the SPL token library, then creates the metadata account.
@@ -223,7 +227,7 @@ The `createTokenMint` function should look like this:
 - **Function Purpose**: To create a metadata account for the minted token, signed with a PDA as the mint authority.
 - **Method Declaration**: The method is defined as a private function within the contract:
 
-  ```solidity
+```solidity
  // Create metadata account, must reimplement manually to sign with PDA
  function _createMetadataAccount(
  address metadata,
@@ -239,7 +243,7 @@ The `createTokenMint` function should look like this:
  ) private {
  // Implementation details
  }
-  ```
+```
 
 ### just Breakdown 
 
@@ -253,15 +257,16 @@ The `createTokenMint` function should look like this:
 
 2. **Deriving the PDA**:
 
-   - Utilizes `try_find_program_address` to derive the PDA from seeds and the program ID:
-     ```solidity
+- Utilizes `try_find_program_address` to derive the PDA from seeds and the program ID:
+
+```solidity
  (address pda, bytes1 _bump) = try_find_program_address(["mint_authority"], type(pda_mint_authority).program_id);
  require(mintAuthority == pda, 'INVALID_PDA');
-     ```
+```
 
 3. **Setting Up Data Structures**:
 
-   - Initializes `DataV2` and `CreateMetadataAccountArgsV3` structs with the provided token attributes.
+- Initializes `DataV2` and `CreateMetadataAccountArgsV3` structs with the provided token attributes.
 
 ```solidity
  DataV2 data = DataV2({
@@ -303,16 +308,17 @@ The `createTokenMint` function should look like this:
 
    - Encodes the instruction data using `abi.encode`, including the discriminator and arguments.
 
-        ```solidity
+```solidity
  bytes1 discriminator = 33;
  bytes instructionData = abi.encode(discriminator, args);
-        ```
+```
 
 6. **Cross-Program Invocation (CPI)**:
    - Performs a CPI to the Metaplex program, passing in the encoded instruction data and account metadata:
-     ```solidity
+
+```solidity
  metaplexId.call{accounts: metas, seeds: [["mint_authority", abi.encode(_bump)]]}(instructionData);
-     ```
+```
 
 ### Key Components
 
@@ -399,7 +405,7 @@ The `createTokenMint` function should look like this:
 
 2. **Cross-Program Invocation to Metaplex**:
 
-   - Perform a Cross-Program Invocation (CPI) to the Metaplex program, passing in the encoded data and account metadata:
+- Perform a Cross-Program Invocation (CPI) to the Metaplex program, passing in the encoded data and account metadata:
 
 ```solidity
  metaplexId.call{accounts: metas, seeds: [["mint_authority", abi.encode(_bump)]]}(instructionData);

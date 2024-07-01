@@ -16,7 +16,7 @@ modulePartDescription: Comprehensive instructions for minting and transferring N
 
 1. **Creating the `mintTo` Function**:
    - Define an external function to mint NFTs:
-     ```solidity
+```solidity
      @mutableSigner(payer)
      @mutableAccount(tokenAccount)
      @account(owner)
@@ -29,7 +29,7 @@ modulePartDescription: Comprehensive instructions for minting and transferring N
 
 2. **Creating an Associated Token Account (ATA)**:
    - Implement ATA creation for receiving the minted token:
-     ```solidity
+```solidity
      SplToken.create_associated_token_account(
          tx.accounts.payer.key, // Payer's account
          tx.accounts.tokenAccount.key, // Token account address
@@ -40,29 +40,29 @@ modulePartDescription: Comprehensive instructions for minting and transferring N
 
 3. **Minting the Token**:
    - Use a custom `_mintTo` method for minting:
-     ```solidity
+```solidity
      _mintTo(
          tx.accounts.mint.key, // Mint account
          tx.accounts.tokenAccount.key, // Token account
          1, // Amount to mint
          tx.accounts.pdaAccount.key // PDA account
      );
-     ```
+```
 
 4. **Removing Mint Authority**:
    - Call `_removeMintAuthority` to revoke minting rights:
-     ```solidity
+```solidity
      _removeMintAuthority(
          tx.accounts.mint.key, // Mint account
          tx.accounts.pdaAccount.key // PDA account
      );
-     ```
+```
 
 ### Reimplementing Functions
 
 1. **Custom `_mintTo` Function**:
    - Define a private method to handle minting with PDA:
-     ```solidity
+```solidity
      function _mintTo(address mint, address account, uint64 amount, address pdaAccount) private {
      // Independently derive the PDA address from the seeds, bump, and programId
         (address pda, bytes1 _bump) = try_find_program_address(["mint_authority"], type(pda_mint_authority).program_id);
@@ -83,13 +83,13 @@ modulePartDescription: Comprehensive instructions for minting and transferring N
         // Invoke the token program with prepared accounts and instruction data
         SplToken.tokenProgramId.call{accounts: metas, seeds: [["mint_authority", abi.encode(_bump)]]}(instructionData);
      }
-     ```
+```
 
 2. Custom `_removeMintAuthority` Function:
 
    - Implement a private method to remove mint authority:
 
-     ```solidity
+```solidity
      function _removeMintAuthority(address mintAccount, address pdaAccount) private {
          // Independently derive the PDA address from the seeds, bump, and programId
         (address pda, bytes1 _bump) = try_find_program_address(["mint_authority"], type(pda_mint_authority).program_id);
@@ -108,31 +108,31 @@ modulePartDescription: Comprehensive instructions for minting and transferring N
         // Invoke the token program with prepared accounts and instruction data
         SplToken.tokenProgramId.call{accounts: metas, seeds: [["mint_authority", abi.encode(_bump)]]}(instructionData);
         }
-     ```
+```
 
 ### Transferring the Minted NFT
 
 1. **Creating the Transfer Function**:
    - Define a method for NFT transfer:
-     ```solidity
+```solidity
      @mutableAccount(from)
      @mutableAccount(to)
      @signer(owner)
      function transferNft() external {
          // Transfer logic
      }
-     ```
+```
 
 2. **Using SPL Token Transfer**:
    - Implement the transfer using SPL token library:
-     ```solidity
+```solidity
      SplToken.transfer(
          tx.accounts.from.key, // From token account
          tx.accounts.to.key, // To token account
          tx.accounts.owner.key, // Owner account
          1 // Number of tokens to transfer
-     );
-     ```
+    );
+```
 
 ### Understanding Each Step
 

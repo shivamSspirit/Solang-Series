@@ -53,7 +53,7 @@ In this illustration, we create two linked token accounts for the Gold Token usi
 - Every ATA is a Token Account.
 - The `getOrCreateAssociatedTokenAccount` function in TypeScript, provided by the spl-token module, facilitates ATA creation.
 
-```ts
+```typescript
 const tokenAccount = await getOrCreateAssociatedTokenAccount(
  connection, // web3 connection
  wallet.payer, // account payer
@@ -66,7 +66,7 @@ This function retrieves or creates a Token Account associated with a given addre
 
 To hold gold tokens for a different owner, we modify the owner and create a new ATA:
 
-```ts
+```typescript
 const recipient = anchor.web3.Keypair.generate(); // Random key generator
 
 const recipientTokenAccount = await getOrCreateAssociatedTokenAccount(

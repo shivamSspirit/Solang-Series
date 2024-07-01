@@ -24,7 +24,7 @@ In Solidity, each contract is connected to a data account where its state variab
 
 For example, consider a `hatchling` contract with a constructor that requires a name:
 
-```Solidity
+```solidity
 contract hatchling {
  string name;
 
@@ -49,7 +49,7 @@ When a constructor has no arguments, Solidity can automatically create the requi
 
 For instance, to initialize a contract, you might use the following approach:
 
-```Solidity
+```solidity
 import 'solana';
 
 contract creator {
@@ -57,23 +57,23 @@ contract creator {
  @mutableSigner(payer)
 
  function create_with_metas() external {
- AccountMeta[3] metas = [
- AccountMeta({
- pubkey: tx.accounts.data_account_to_initialize.key,
- is_signer: true,
- is_writable: true
- }),
- AccountMeta({
- pubkey: tx.accounts.payer.key,
- is_signer: true,
- is_writable: true
- }),
- AccountMeta({
- pubkey: address"11111111111111111111111111111111",
- is_writable: false,
- is_signer: false
- })
- ];
+   AccountMeta[3] metas = [
+   AccountMeta({
+   pubkey: tx.accounts.data_account_to_initialize.key,
+   is_signer: true,
+   is_writable: true
+   }),
+   AccountMeta({
+   pubkey: tx.accounts.payer.key,
+   is_signer: true,
+   is_writable: true
+   }),
+   AccountMeta({
+   pubkey: address"11111111111111111111111111111111",
+   is_writable: false,
+   is_signer: false
+  })
+  ];
 
  Child.new{ accounts: metas } ();
  Child.use_metas{ accounts: [] } ();

@@ -53,7 +53,7 @@ We're constructing a flip program with a simple purpose: to toggle power on or o
 
 Create `lever.sol` in the solidity directory and input the following code:
 
-```Solidity
+```solidity
 @program_id("J5J3mD4ABcRtB7YcgrJBgugiQAP3DfcZi5bSAdiMAZWh")
 contract lever {
  // Switch state
@@ -91,7 +91,7 @@ This code sets up a switch mechanism, toggling the `isOn` state with `switchPowe
 
 In `hand.sol`, we create an interface to the lever program and set up the contract:
 
-```Solidity
+```solidity
 import "solana";
 
 // Lever program interface
@@ -123,7 +123,7 @@ contract hand {
 
 In Solang, CPI is simpler than in Anchor Rust. Using
 
- The syntax `<address>.call()`, a CPI is automatically constructed, and Solang takes care of `invoke` or `invoke_signed`.
+The syntax `<address>.call()`, a CPI is automatically constructed, and Solang takes care of `invoke` or `invoke_signed`.
 
 ### Up Next
 

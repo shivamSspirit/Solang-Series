@@ -77,13 +77,13 @@ Dive into the root of the DApp, where we set up and execute transactions:
 
 Import the IDL file into the file where we need to call our instructions
 
-```ts
+```typescript
 import idl *from* "../../idl.json";
 ```
 
 You can fetch the program ID from the IDL like this. Here, we are using the PublicKey instance from the Solana Web3.js.
 
-```ts
+```typescript
 const programId = new PublicKey(idl.metadata.address);
 ```
 
@@ -91,7 +91,7 @@ You can set the transaction commitment level like this; here, we use **preflight
 
 You can learn more about transaction commitment levels [here](https://solana.com/docs/rpc#default-commitment)
 
-```ts
+```typescript
 const opts: { preflightCommitment: Commitment } = {
  preflightCommitment: "processed",
 };
@@ -99,7 +99,7 @@ const opts: { preflightCommitment: Commitment } = {
 
 We can use hooks to get the connection (connecting to the blockchain cluster) object, wallet instance (from the wallet adapter for signing all transactions related to this DApp), and wallet public key for creating and signing accounts.
 
-```ts
+```typescript
 const { connection } = useConnection();
 const wallet = useWallet();
 const { publicKey, sendTransaction } = useWallet();
@@ -107,7 +107,7 @@ const { publicKey, sendTransaction } = useWallet();
 
 Next, we set up the Program API by creating a new Anchor provider (using connection + wallet). Then, we generate a Program API instance to call the RPC methods of our deployed program through the IDL interface.
 
-```ts
+```typescript
  const getProgram = () => {
         /* create the provider and return it to the caller */
         const provider = new AnchorProvider(connection, wallet as any, opts);
@@ -121,7 +121,7 @@ Next, we set up the Program API by creating a new Anchor provider (using connect
 
 This is what an RPC transaction looks like from the client side. 
 
-```ts
+```typescript
 const createTx = await program.methods
   .createTokenMint(
     dataAccountPDA,
