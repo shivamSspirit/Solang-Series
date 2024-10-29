@@ -83,51 +83,51 @@ export const announcementData = [
 
   export const timelineData = [
     {
-      navlink:"https://solidityonsolana.one/CourseContent/module-0/module-0-a",
+      navlink:"https://https://solang-series.vercel.app/CourseContent/module-0/module-0-a",
       heading: "Module 0: Introduction",
       content:
         "Here, you will learn the aims and objectives of Solidity for Solana. you, also learn about the structure of the course and the prerequisites required.",
       
     },
     {
-      navlink:"https://solidityonsolana.one/CourseContent/module-1/module-1-a",
+      navlink:"https://https://solang-series.vercel.app/CourseContent/module-1/module-1-a",
       heading: "Module 1: Overview of Building Solana Programs using Solidity",
       content:
         "In this module of Solana with Solidity, you will learn the differences between Solana and EVM and explore brief overview of solidity on solana.",
     },
     {
-      navlink:"https://solidityonsolana.one/CourseContent/module-2/module-2-a",
+      navlink:"https://https://solang-series.vercel.app/CourseContent/module-2/module-2-a",
       heading: "Module 2: Mint fungible(spl) Tokens",
       content:
         "In this module, we will develop a Solana program that will mint fungible tokens (spl tokens). The program should be able to set up and execute the token-minting process.",
     },
     {
-      navlink:"https://solidityonsolana.one/CourseContent/module-3/module-3-a",
+      navlink:"https://https://solang-series.vercel.app/CourseContent/module-3/module-3-a",
       heading:
         "Module 3: Building a CPI-Enabled Flip Program with Solidity on Solana",
       content:
         "In this module, we dive you into the concepts of composability and CPI in Solana. We will also develop a hands-on solidity contract: a CPI Enabled Flip program on solana.",
     },
     {
-      navlink:"https://solidityonsolana.one/CourseContent/module-4/module-4-a",
+      navlink:"https://https://solang-series.vercel.app/CourseContent/module-4/module-4-a",
       heading: "Module 4: How to Transfer Solana Tokens with Solidity",
       content:
         "In this module, we will develop a program on Solana that allows for the transfer of spl-tokens(minted in Module 2) to other accounts.",
     },
     {
-      navlink:"https://solidityonsolana.one/CourseContent/module-5/module-5-a",
+      navlink:"https://https://solang-series.vercel.app/CourseContent/module-5/module-5-a",
       heading: "Module 5: How to Mint and transfer NFT",
       content:
        "In this module, we will develop a program on Solana that allows for the Mint(Mint-Authority is PDA) and transfer NFT to other accounts.",
     },
     {
-      navlink:"https://solidityonsolana.one/CourseContent/module-6/module-6-a",
+      navlink:"https://https://solang-series.vercel.app/CourseContent/module-6/module-6-a",
       heading: "Module 6: Full-stack Dapp(fungible-token)",
       content:
        "In this module, we will develop a full-stack Solana DApp using solana-labs dapp-scaffold (Next.js) and combine SPL Fungible Token mint and transfer Solidity programs.",
     },
     {
-      navlink:"https://solidityonsolana.one/CourseContent/module-7/module-7-a",
+      navlink:"https://https://solang-series.vercel.app/CourseContent/module-7/module-7-a",
       heading: "Module 7: Full-stack Dapp(Non-fungible-token)",
       content:
        "In this module, we will develop a full-stack Solana DApp using solana-labs dapp-scaffold (Next.js) and combine NFT Mint and transfer Solidity programs.",
