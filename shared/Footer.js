@@ -22,7 +22,7 @@ const FooterComp = () => {
           Dive into the world of blockchain development with our Solidity On
           Solana course.
         </div>
-        <div className='text-gray-400'> <Link className="ml-3 mr-3 underline" href={'https://solidityonsolana.one/'}>
+        <div className='text-gray-400'> <Link className="ml-3 mr-3 underline" href={'https://solang-series.vercel.app/'}>
           solidityOnsolana.one
         </Link>   </div>
       </div>
